@@ -33,6 +33,29 @@
         #home{background-color:var(--bg-color);position:relative;overflow:hidden}
         .section{width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;padding:80px 0;background-color:var(--bg-color);color:#111}
         .container{width:90%;max-width:1200px;height:100%;margin:0 auto;padding:0 20px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative}
+
+        /* Essential above-the-fold styles */
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #ecf0f1;
+            color: #111;
+        }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            z-index: 9999;
+        }
     </style>
     
     <!-- Google Fonts with display=swap for better performance -->
@@ -45,6 +68,11 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="main.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="main.css" as="style">
+    <link rel="preload" href="main.js" as="script">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
 </head>
 <body class="hidden">
     <!-- Loader -->
@@ -111,12 +139,12 @@
         <section id="home" class="section">
             <div class="container">
                 <div class="hero-text">
-                    <h1 class="hero__name animated" data-animation="fadeInUp">Welcome to Mrs. Ramirez's Hub!</h1>
-                    <p class="hero__subtitle animated" data-animation="fadeInUp" data-delay="200ms">Game Design & Web Development Pathway</p>
+                    <h1 class="hero__name">Welcome to Mrs. Ramirez's Hub!</h1>
+                    <p class="hero__subtitle">Game Design & Web Development Pathway</p>
                 </div>
                 <div class="person animated" data-animation="fadeInRight">
                     <!-- Mrs. Ramirez's image -->
-                    <img src="person.png" alt="Mrs. Ramirez" class="rounded-lg shadow-lg" loading="lazy" width="400" height="600">
+                    <img data-src="person.png" alt="Mrs. Ramirez" class="rounded-lg shadow-lg lazy" width="400" height="600">
                 </div>
                 <i class="fa fa-angle-down arrow animated" data-animation="bounce infinite" aria-hidden="true" onclick="$.scrollify.next()"></i>
             </div>
@@ -142,7 +170,13 @@
                 <h2 class="works__title animated" data-animation="fadeInUp">Our Curriculum: Courses & Focus Areas</h2>
                 <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
                     <div class="curriculum-header">
-                        <img src="python.png" alt="Python" class="curriculum-icon" width="40" height="40">
+                        <img src="images/python-logo.png" 
+                             alt="Python" 
+                             loading="lazy" 
+                             decoding="async"
+                             width="64" 
+                             height="64"
+                             style="aspect-ratio: 1/1;">
                         <h3>10th Grade: CS Fundamentals with Python</h3>
                     </div>
                     <div class="table-wrapper">
@@ -478,15 +512,15 @@
     <script>
         // Register Service Worker for better performance
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('ServiceWorker registration successful');
-                    })
-                    .catch(error => {
-                        console.log('ServiceWorker registration failed');
-                    });
-            });
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('ServiceWorker registration successful:', registration);
+                })
+                .catch((error) => {
+                    console.error('ServiceWorker registration failed:', error);
+                });
+        } else {
+            console.warn('ServiceWorker not supported in this browser.');
         }
         
         // Optimize images with Intersection Observer
@@ -530,13 +564,33 @@
         // Performance monitoring
         if ('performance' in window) {
             window.addEventListener('load', function() {
+                const timing = performance.timing;
+                const loadTime = timing.loadEventEnd - timing.navigationStart;
                 setTimeout(() => {
-                    const timing = performance.timing;
-                    const loadTime = timing.loadEventEnd - timing.navigationStart;
                     console.log('Page load time:', loadTime + 'ms');
                 }, 0);
             });
         }
+        
+        // particles.js integration
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS.load('particles-js', 'particles.json', function() {
+                console.log('callback - particles.js config loaded');
+            });
+        } else {
+            const script = document.createElement('script');
+            script.onload = function() {
+                particlesJS.load('particles-js', 'particles.json', function() {
+                    console.log('callback - particles.js config loaded');
+                });
+            };
+            script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+            document.head.appendChild(script);
+        }
     </script>
+    
+    <noscript>
+        <p>This site requires JavaScript to function properly. Please enable JavaScript in your browser settings.</p>
+    </noscript>
 </body>
 </html>

@@ -37,27 +37,16 @@ const animationObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const element = entry.target;
-            element.classList.add('animating');
-            
-            // Add animation class based on data attribute
-            const animation = element.dataset.animation;
+            const animation = element.dataset.animation || 'fadeIn';
             const delay = element.dataset.delay || '0ms';
-            
-            if (animation) {
-                element.style.animationDelay = delay;
-                element.style.animation = `${animation} 0.8s ease-out forwards`;
-            }
-            
-            // Remove will-change after animation
-            setTimeout(() => {
-                element.classList.remove('animating');
-                element.style.willChange = 'auto';
-            }, 1000);
-            
+
+            element.style.animation = `${animation} 0.8s ease-out ${delay} forwards`;
             animationObserver.unobserve(element);
         }
     });
-}, observerOptions);
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.animated').forEach(el => animationObserver.observe(el));
 
 // --- Loader Logic ---
 window.addEventListener('load', function() {
@@ -83,13 +72,13 @@ window.addEventListener('load', function() {
 
 // Initialize all components
 function initializeComponents() {
-    // Initialize components asynchronously for better performance
-    requestAnimationFrame(() => {
+    try {
         initScrollify();
         initParticles();
-        initPerformanceOptimizations();
-        initMobileNavigation();
-    });
+        initLazyLoading();
+    } catch (error) {
+        console.error('Error initializing components:', error);
+    }
 }
 
 // Mobile navigation functionality
@@ -102,17 +91,15 @@ function initMobileNavigation() {
             navLinks.classList.toggle('nav__links--active');
             navToggle.classList.toggle('nav__toggle--active');
             
-            // Change icon
             const icon = navToggle.querySelector('i');
             if (icon) {
                 icon.classList.toggle('fa-bars');
                 icon.classList.toggle('fa-times');
             }
         });
-        
-        // Close menu when clicking on a link
-        navLinks.addEventListener('click', function(e) {
-            if (e.target.tagName === 'A') {
+
+        document.addEventListener('click', function(e) {
+            if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) {
                 navLinks.classList.remove('nav__links--active');
                 navToggle.classList.remove('nav__toggle--active');
                 
@@ -123,8 +110,7 @@ function initMobileNavigation() {
                 }
             }
         });
-        
-        // Close menu on escape key
+
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && navLinks.classList.contains('nav__links--active')) {
                 navLinks.classList.remove('nav__links--active');
@@ -153,6 +139,8 @@ function initPerformanceOptimizations() {
                         img.classList.remove('lazy');
                         img.classList.add('loaded');
                         imageObserver.unobserve(img);
+                    } else {
+                        console.error('Missing data-src attribute for lazy-loaded image:', img);
                     }
                 }
             });
@@ -172,12 +160,17 @@ function initPerformanceOptimizations() {
     
     // Optimize resize handling
     const resizeHandler = debounce(() => {
-        if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS) {
+        if (window.pJSDom && window.pJSDom[0]) {
             window.pJSDom[0].pJS.fn.particlesRefresh();
         }
     }, 250);
     
     window.addEventListener('resize', resizeHandler, { passive: true });
+    
+    window.addEventListener('unload', () => {
+        window.removeEventListener('scroll', updateScrollProgress);
+        window.removeEventListener('resize', debounce);
+    });
 }
 
 // Update scroll progress
@@ -275,186 +268,53 @@ async function pass() {
 
 // --- Scrollify Initialization ---
 function initScrollify() {
-    if ($.scrollify) {
-        $.scrollify.destroy(); // Destroy previous instance if any
-
-        $.scrollify({
-            section: ".section",
-            sectionName: "section-name",
-            interstitialSection: "", // If you have non-full-height sections
-            easing: "easeOutExpo",
-            scrollSpeed: 1100,
-            offset: 0,
-            scrollbars: false, // Hide native scrollbars
-            before: function(i, sections) {
-                // Update active navigation link
-                const currentSectionId = sections[i].id;
-                document.querySelectorAll('.nav__links li a').forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${currentSectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-
-                // Update scroll dots
-                document.querySelectorAll('.dots__circle').forEach((dot, index) => {
-                    if (index === i) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-
-                // Update scroll line height
-                const scrollLine = document.querySelector('.bar__line');
-                const totalSections = sections.length;
-                const progress = (i / (totalSections - 1)) * 100;
-                scrollLine.style.height = `${progress}%`;
-            },
-            afterRender: function() {
-                // Set initial active state for first section
-                const firstSectionId = $('.section').first().attr('id');
-                document.querySelector(`.nav__links li a[href="#${firstSectionId}"]`).classList.add('active');
-                document.querySelector('.dots__circle').classList.add('active');
-            }
-        });
-
-        // Event listener for navigation links to use scrollify
-        document.querySelectorAll('.nav__links a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                $.scrollify.move(targetId);
-            });
-        });
-
-        // Event listener for arrow to scroll to next section
-        document.querySelector('.arrow').addEventListener('click', function() {
-            $.scrollify.next();
-        });
-
-    } else {
-        console.error("Scrollify not loaded.");
-    }
+    $.scrollify({
+        section: '.section',
+        easing: 'easeOutExpo',
+        scrollSpeed: 600, // Reduced for better responsiveness
+        updateHash: false,
+        touchScroll: true
+    });
 }
 
 
 // --- Particles.js Initialization - Optimized ---
 function initParticles() {
-    if (typeof particlesJS === 'undefined') {
-        console.warn("particlesJS is not defined. Make sure particles.min.js is loaded.");
-        return;
-    }
+    const isMobile = window.innerWidth <= 768;
+    const isLowEnd = navigator.hardwareConcurrency <= 4;
 
-    // Check if device supports good performance
-    const isHighPerformance = window.navigator.hardwareConcurrency > 4 && 
-                             window.devicePixelRatio <= 2 && 
-                             window.innerWidth >= 768;
+    const particleCount = isMobile ? 30 : isLowEnd ? 20 : 80;
 
-    const particleConfig = {
-        "particles": {
-            "number": {
-                "value": isHighPerformance ? 80 : 40, // Reduce particles on low-performance devices
-                "density": {
-                    "enable": true,
-                    "value_area": 800
-                }
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: particleCount },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.3, random: true },
+            size: { value: 2, random: true },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#ffffff',
+                opacity: 0.2,
+                width: 1
             },
-            "color": {
-                "value": "#ffffff"
-            },
-            "shape": {
-                "type": "circle",
-                "stroke": {
-                    "width": 0,
-                    "color": "#000000"
-                }
-            },
-            "opacity": {
-                "value": 0.5,
-                "random": false,
-                "anim": {
-                    "enable": false,
-                    "speed": 1,
-                    "opacity_min": 0.1,
-                    "sync": false
-                }
-            },
-            "size": {
-                "value": 3,
-                "random": true,
-                "anim": {
-                    "enable": false,
-                    "speed": 40,
-                    "size_min": 0.1,
-                    "sync": false
-                }
-            },
-            "line_linked": {
-                "enable": true,
-                "distance": 150,
-                "color": "#ffffff",
-                "opacity": 0.4,
-                "width": 1
-            },
-            "move": {
-                "enable": true,
-                "speed": isHighPerformance ? 6 : 3, // Reduce speed on low-performance devices
-                "direction": "none",
-                "random": false,
-                "straight": false,
-                "out_mode": "out",
-                "bounce": false,
-                "attract": {
-                    "enable": false,
-                    "rotateX": 600,
-                    "rotateY": 1200
-                }
+            move: {
+                enable: true,
+                speed: 1,
+                direction: 'none',
+                out_mode: 'out'
             }
         },
-        "interactivity": {
-            "detect_on": "canvas",
-            "events": {
-                "onhover": {
-                    "enable": isHighPerformance, // Disable hover effects on low-performance devices
-                    "mode": "grab"
-                },
-                "onclick": {
-                    "enable": true,
-                    "mode": "push"
-                },
-                "resize": true
-            },
-            "modes": {
-                "grab": {
-                    "distance": 140,
-                    "line_linked": {
-                        "opacity": 1
-                    }
-                },
-                "bubble": {
-                    "distance": 400,
-                    "size": 40,
-                    "duration": 2,
-                    "opacity": 8,
-                    "speed": 3
-                },
-                "repulse": {
-                    "distance": 200,
-                    "duration": 0.4
-                },
-                "push": {
-                    "particles_nb": 4
-                },
-                "remove": {
-                    "particles_nb": 2
-                }
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: { enable: false },
+                onclick: { enable: false }
             }
         },
-        "retina_detect": true
-    };
-
-    particlesJS('particles-js', particleConfig);
+        retina_detect: true // Enable retina detection for better visual quality
+    });
     
     // Pause particles when page is not visible for better performance
     document.addEventListener('visibilitychange', function() {
@@ -468,42 +328,17 @@ function initParticles() {
     });
 }
 
-// --- Original changeSlide function (if needed for a specific element, but Scrollify handles main sections) ---
-// This function seems to be for a specific image/content slider, not the main page sections.
-// If the user intends to have a separate slider within a section, this can be used.
-// For now, it's commented out as Scrollify handles full-page scrolling.
-/*
-const totalTime = 12 * 1000;
-let canChange = false;
-let currentSlide = 1;
-let wrapInt;
-let wrapper = document.getElementById('wrapper'); // This wrapper is for the main sections now
-
-function changeSlide() {
-    if (!wrapper) {
-        console.warn("Wrapper element not found for changeSlide function.");
-        return;
+// Performance monitoring
+function monitorPerformance() {
+    if ('performance' in window) {
+        window.addEventListener('load', () => {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            if (perfData && perfData.loadEventEnd > 3000) {
+                console.warn('Page load time is slow:', perfData.loadEventEnd + 'ms');
+            }
+        });
     }
-
-    if (currentSlide == 1 && canChange == true) {
-        wrapper.style.setProperty('transition', 'left 0.75s ease');
-        wrapper.style.setProperty('left', '0');
-        currentSlide++;
-    } else if (currentSlide == 2) {
-        wrapper.style.setProperty('left', '-50vw');
-        currentSlide++;
-    } else if (currentSlide == 3) {
-        wrapper.style.setProperty('left', '-100vw');
-        currentSlide++;
-    } else if (currentSlide == 4) {
-        wrapper.style.setProperty('transition', 'none');
-        wrapper.style.setProperty('left', '50vw');
-        currentSlide = 1;
-    } else {
-        canChange = true;
-    }
-    wrapInt = setTimeout(changeSlide, totalTime / 4);
 }
-// Call changeSlide if this specific slider is intended for a section
-// window.addEventListener('load', changeSlide);
-*/
+
+// Initialize performance monitoring
+monitorPerformance();
