@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mrs. Ramirez's Game Design & Web Development Hub</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Work+Sans:300,400,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="animate.css">
+    <link rel="stylesheet" href="loader.css">
+</head>
+<body class="hidden">
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-container">
+            <svg width="200" height="200">
+                <rect class="animate" x="0" y="0" width="200" height="200" />
+            </svg>
+            <div class="box">
+                <div class="box__1"></div>
+                <div class="box__2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particles.js Background -->
+    <div id="particles-js" class="animated" data-animation="fadeIn"></div>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav__logo">
+            <h1 class="animated" data-animation="fadeInDown">Mrs. Ramirez</h1>
+            <p class="animated" data-animation="fadeInDown" data-delay="200ms">Game Dev & Web Design</p>
+        </div>
+        <ul class="nav__links">
+            <li class="animated" data-animation="fadeInDown" data-delay="400ms"><a href="#home">Home</a></li>
+            <li class="animated" data-animation="fadeInDown" data-delay="500ms"><a href="#about">About</a></li>
+            <li class="animated" data-animation="fadeInDown" data-delay="600ms"><a href="#curriculum">Curriculum</a></li>
+            <li class="animated" data-animation="fadeInDown" data-delay="700ms"><a href="#certifications">Certifications</a></li>
+            <li class="animated" data-animation="fadeInDown" data-delay="800ms"><a href="#competitions">Competitions</a></li>
+            <li class="animated" data-animation="fadeInDown" data-delay="900ms"><a href="#strategies">Strategies</a></li>
+            <li class="animated" data-animation="fadeInDown" data-delay="1000ms"><a href="#portfolio">Portfolio</a></li>
+            <li class="animated" data-animation="fadeInDown" data-delay="1100ms"><a href="#grading">Grading</a></li>
+            <li class="animated" data-animation="fadeInDown" data-delay="1200ms"><a href="#resources">Resources</a></li>
+            <li class="animated" data-animation="fadeInDown" data-delay="1300ms"><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Scroll Bar -->
+    <div class="scroll-bar animated" data-animation="fadeIn">
+        <div class="scroll-wrap">
+            <div class="bar__dots">
+                <span class="dots__circle"></span>
+                <span class="dots__circle"></span>
+                <span class="dots__circle"></span>
+                <span class="dots__circle"></span>
+                <span class="dots__circle"></span>
+                <span class="dots__circle"></span>
+                <span class="dots__circle"></span>
+                <span class="dots__circle"></span>
+                <span class="dots__circle"></span>
+                <span class="dots__circle"></span>
+            </div>
+            <div class="bar__line"></div>
+        </div>
+    </div>
+
+    <!-- Main Content Sections -->
+    <div id="wrapper">
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <div class="container">
+                <div class="hero-text">
+                    <h1 class="hero__name animated" data-animation="fadeInUp">Welcome to Mrs. Ramirez's Hub!</h1>
+                    <p class="hero__subtitle animated" data-animation="fadeInUp" data-delay="200ms">Game Design & Web Development Pathway</p>
+                </div>
+                <div class="person animated" data-animation="fadeInRight">
+                    <!-- Placeholder for Mrs. Ramirez's image/illustration -->
+                    <img src="https://placehold.co/400x600/01627f/ffffff?text=Mrs.+Ramirez" alt="Mrs. Ramirez" class="rounded-lg shadow-lg">
+                </div>
+                <i class="fa fa-angle-down arrow animated" data-animation="bounce infinite" aria-hidden="true" onclick="$.scrollify.next()"></i>
+            </div>
+        </section>
+
+        <!-- About Mrs. Ramirez Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="works__title animated" data-animation="fadeInUp">About Mrs. Ramirez</h2>
+                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
+                    <p>Hello! I'm Mrs. Ramirez, and I'm passionate about empowering students through technology. With years of experience in both education and the tech industry, I'm thrilled to guide you through the exciting world of game design and web development.</p>
+                    <p><strong>Email:</strong> mramirez@example.com</p>
+                    <p><strong>Office Hours:</strong> Monday & Wednesday, 3:00 PM - 4:00 PM</p>
+                    <p><strong>Phone:</strong> (555) 123-4567</p>
+                    <p>Outside of teaching, I enjoy playing strategy games, exploring new programming languages, and hiking with my family.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Curriculum Section -->
+        <section id="curriculum" class="section">
+            <div class="container">
+                <h2 class="works__title animated" data-animation="fadeInUp">Our Curriculum: Courses & Focus Areas</h2>
+                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
+                    <h3>10th Grade: CS Fundamentals with Python</h3>
+                    <table class="curriculum-table">
+                        <thead>
+                            <tr>
+                                <th>Weeks</th>
+                                <th>Topics</th>
+                                <th>Key Concepts</th>
+                                <th>Projects/Activities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1-8</td>
+                                <td>Introduction to Python & Algorithms</td>
+                                <td>Variables, Data Types, Control Flow, Functions, Basic Algorithms</td>
+                                <td>Python Calculator, Number Guessing Game</td>
+                            </tr>
+                            <tr>
+                                <td>9-16</td>
+                                <td>Data Structures & Backend Programming</td>
+                                <td>Lists, Dictionaries, File I/O, Introduction to Flask</td>
+                                <td>Text-based Adventure Game, Simple Web App with Flask</td>
+                            </tr>
+                            <tr>
+                                <td>17-24</td>
+                                <td>UI/UX Design Fundamentals (Figma)</td>
+                                <td>Wireframing, Prototyping, User-Centered Design</td>
+                                <td>Emoticon Design League (Figma project)</td>
+                            </tr>
+                            <tr>
+                                <td>25-32</td>
+                                <td>Databases & SQL Basics</td>
+                                <td>Relational Databases, SQL Queries, Database Integration</td>
+                                <td>Queue Management System (Python + SQL)</td>
+                            </tr>
+                            <tr>
+                                <td>33-36</td>
+                                <td>Capstone Prep & Review</td>
+                                <td>Project Planning, Debugging, Code Optimization</td>
+                                <td>G4C Challenge preparation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>11th Grade: Game Development with Unity</h3>
+                    <table class="curriculum-table">
+                        <thead>
+                            <tr>
+                                <th>Weeks</th>
+                                <th>Topics</th>
+                                <th>Key Concepts</th>
+                                <th>Projects/Activities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1-8</td>
+                                <td>Introduction to Unity & C#</td>
+                                <td>Unity Interface, Scripting Basics, Game Objects, Components</td>
+                                <td>First 2D Game (basic movement, collisions)</td>
+                            </tr>
+                            <tr>
+                                <td>9-16</td>
+                                <td>2D Game Development</td>
+                                <td>Sprites, Animations, Tilemaps, Physics, UI Elements</td>
+                                <td>Platformer Game, Top-down Shooter</td>
+                            </tr>
+                            <tr>
+                                <td>17-24</td>
+                                <td>Game Debugging & Audio</td>
+                                <td>Debugging Tools, Error Handling, Sound Effects, Background Music</td>
+                                <td>Adding audio and debugging to existing games</td>
+                            </tr>
+                            <tr>
+                                <td>25-32</td>
+                                <td>Introduction to 3D Game Development</td>
+                                <td>3D Models, Lighting, Materials, Basic 3D Physics</td>
+                                <td>Simple 3D Maze Game</td>
+                            </tr>
+                            <tr>
+                                <td>33-36</td>
+                                <td>IT Specialist HTML5 Certification Prep & InfyApp Challenge</td>
+                                <td>Review HTML5 concepts, Project-based learning for InfyApp</td>
+                                <td>InfyApp Challenge participation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>12th Grade: Advanced Game & Web Development</h3>
+                    <table class="curriculum-table">
+                        <thead>
+                            <tr>
+                                <th>Weeks</th>
+                                <th>Topics</th>
+                                <th>Key Concepts</th>
+                                <th>Projects/Activities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1-8</td>
+                                <td>Advanced Web Development (HTML5, CSS3, JavaScript)</td>
+                                <td>Responsive Design, Flexbox, Grid, CSS Animations, DOM Manipulation</td>
+                                <td>Personal Portfolio Website, Interactive Web Application</td>
+                            </tr>
+                            <tr>
+                                <td>9-16</td>
+                                <td>Advanced Unity Features</td>
+                                <td>AI Pathfinding, Multiplayer Basics, Advanced Lighting & Shaders</td>
+                                <td>AI-driven Enemy Behavior, Simple Multiplayer Prototype</td>
+                            </tr>
+                            <tr>
+                                <td>17-36</td>
+                                <td>Capstone Project: Game Development & Publishing</td>
+                                <td>Full Game Development Cycle, Marketing, Publishing</td>
+                                <td>Develop, market, and publish an original game</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Integrated Career and Financial Management</h3>
+                    <p>Throughout the pathway, students will engage in modules focusing on:</p>
+                    <ul>
+                        <li>Career Planning & Exploration in Tech</li>
+                        <li>Budgeting & Financial Literacy</li>
+                        <li>Entrepreneurship & Business Basics</li>
+                        <li>Resume Building & Interview Skills</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Certifications Section -->
+        <section id="certifications" class="section">
+            <div class="container">
+                <h2 class="works__title animated" data-animation="fadeInUp">Student Certifications</h2>
+                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
+                    <p>Our program prepares students for industry-recognized certifications, enhancing their resumes and career prospects:</p>
+                    <ul>
+                        <li><strong>Unity Certified Programmer:</strong> Validates foundational C# scripting and Unity development skills.</li>
+                        <li><strong>Unity Certified Artist:</strong> Focuses on creating and optimizing art assets within Unity.</li>
+                        <li><strong>IT Specialist HTML5 Certification:</strong> Demonstrates proficiency in HTML5, CSS3, and JavaScript.</li>
+                        <li><strong>Python Certification:</strong> Confirms fundamental Python programming knowledge.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Annual Competitions Section -->
+        <section id="competitions" class="section">
+            <div class="container">
+                <h2 class="works__title animated" data-animation="fadeInUp">Annual Competitions</h2>
+                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
+                    <p>Students actively participate in various annual competitions, fostering creativity, teamwork, and problem-solving skills:</p>
+                    <ul>
+                        <li><strong>Emoticon Design League:</strong> A design competition focusing on UI/UX principles using Figma.</li>
+                        <li><strong>Games for Change (G4C) Challenge:</strong> Students design digital games that tackle real-world issues.</li>
+                        <li><strong>InfyApp Challenge:</strong> A national competition where students develop innovative mobile applications.</li>
+                        <li><strong>School Hackathons:</strong> Internal events promoting rapid prototyping and collaborative coding.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instructional Strategies Section -->
+        <section id="strategies" class="section">
+            <div class="container">
+                <h2 class="works__title animated" data-animation="fadeInUp">Instructional Strategies: Collaboration, Feedback & Iterative Design</h2>
+                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
+                    <p>Our teaching methodology emphasizes practical, hands-on learning and a collaborative environment:</p>
+                    <ul>
+                        <li><strong>Team-Based Projects:</strong> Students work in teams on major projects like the G4C Challenge and Capstone, mirroring industry practices.</li>
+                        <li><strong>Pair Programming:</strong> Encourages collaborative coding, knowledge sharing, and immediate feedback.</li>
+                        <li><strong>Hackathons:</strong> Intensive, short-term coding events to foster rapid development and problem-solving.</li>
+                        <li><strong>Peer Review and Critique:</strong> Students evaluate each other's work, including "Shark Tank" style presentations for game pitches.</li>
+                        <li><strong>Self-Reflection:</strong> Regular opportunities for students to assess their own learning and progress.</li>
+                        <li><strong>Digital Tools for Feedback:</strong> Utilizing platforms like FigJam for collaborative design and feedback.</li>
+                        <li><strong>Cyclical Iterative Design Process:</strong> Emphasis on prototyping, testing, refining, and version control (GitHub) for all projects.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Portfolios Section -->
+        <section id="portfolio" class="section">
+            <div class="container">
+                <h2 class="works__title animated" data-animation="fadeInUp">Student Portfolios</h2>
+                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
+                    <p>A key outcome of this pathway is the development of a professional web-based portfolio. This portfolio will showcase students' growth and achievements, including:</p>
+                    <ul>
+                        <li>Game designs and playable prototypes</li>
+                        <li>Coding projects (Python, C#, JavaScript)</li>
+                        <li>UI/UX design mockups</li>
+                        <li>Competition entries and awards</li>
+                        <li>Reflections on learning and project challenges</li>
+                    </ul>
+                    <p>These portfolios serve as a valuable asset for college applications and future career opportunities.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grading Policy & Expectations Section -->
+        <section id="grading" class="section">
+            <div class="container">
+                <h2 class="works__title animated" data-animation="fadeInUp">Grading Policy & Expectations</h2>
+                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
+                    <h3>Grading Breakdown:</h3>
+                    <ul>
+                        <li><strong>Projects & Labs:</strong> 50%</li>
+                        <li><strong>Quizzes & Assessments:</strong> 25%</li>
+                        <li><strong>Participation & Effort:</strong> 15%</li>
+                        <li><strong>Homework & Assignments:</strong> 10%</li>
+                    </ul>
+                    <h3>Classroom Expectations:</h3>
+                    <ul>
+                        <li>Be respectful to peers and instructors.</li>
+                        <li>Actively participate in discussions and group activities.</li>
+                        <li>Complete assignments on time.</li>
+                        <li>Seek help when needed and offer help to others.</li>
+                        <li>Maintain a positive and growth-oriented mindset.</li>
+                    </ul>
+                    <h3>Late Work Policy:</h3>
+                    <p>Late work will be accepted with a penalty. For every day an assignment is late, 10% will be deducted from the grade, up to a maximum of 50% deduction. Exceptions may be made for documented emergencies.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Resources & Tools Section -->
+        <section id="resources" class="section">
+            <div class="container">
+                <h2 class="works__title animated" data-animation="fadeInUp">Key Resources & Tools</h2>
+                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
+                    <p>Students will gain proficiency in a variety of industry-standard software, programming languages, and platforms:</p>
+                    <ul>
+                        <li><strong>Software:</strong> Unity 3D, Figma, Visual Studio Code</li>
+                        <li><strong>Programming Languages:</strong> Python, C#, HTML5, CSS3, JavaScript, SQL</li>
+                        <li><strong>Platforms & Concepts:</strong> GitHub (Version Control), Flask (Python Web Framework), p5.js, jQuery, APIs, WebSockets</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Mrs. Ramirez Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="works__title animated" data-animation="fadeInUp">Contact Mrs. Ramirez</h2>
+                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
+                    <p>If you have any questions or need further assistance, please don't hesitate to reach out:</p>
+                    <p><strong>Email:</strong> <a href="mailto:mramirez@example.com">mramirez@example.com</a></p>
+                    <p><strong>Office Hours:</strong> Monday & Wednesday, 3:00 PM - 4:00 PM</p>
+                    <p><strong>School Phone:</strong> (555) 123-4567</p>
+                    <p>I look forward to hearing from you!</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center foot">
+            <p>Made by Luna R. 2023 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"></a></p>
+        </div>
+    </footer>
+
+    <!-- Custom Modal for Alerts/Prompts -->
+    <div id="custom-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p id="modal-message"></p>
+            <input type="text" id="modal-input" style="display: none;">
+            <div class="modal-buttons">
+                <button id="modal-ok-button">OK</button>
+                <button id="modal-cancel-button" style="display: none;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.20/jquery.scrollify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>
