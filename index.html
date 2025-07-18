@@ -13,7 +13,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="TechTeach">
-    <link rel="apple-touch-icon" href="https://placehold.co/192x192/01627f/ffffff?text=TR">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.png">
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,8 +115,8 @@
                     <p class="hero__subtitle animated" data-animation="fadeInUp" data-delay="200ms">Game Design & Web Development Pathway</p>
                 </div>
                 <div class="person animated" data-animation="fadeInRight">
-                    <!-- Placeholder for Mrs. Ramirez's image/illustration -->
-                    <img src="https://placehold.co/400x600/01627f/ffffff?text=Mrs.+Ramirez" alt="Mrs. Ramirez" class="rounded-lg shadow-lg" loading="lazy" width="400" height="600">
+                    <!-- Mrs. Ramirez's image -->
+                    <img src="person.png" alt="Mrs. Ramirez" class="rounded-lg shadow-lg" loading="lazy" width="400" height="600">
                 </div>
                 <i class="fa fa-angle-down arrow animated" data-animation="bounce infinite" aria-hidden="true" onclick="$.scrollify.next()"></i>
             </div>
@@ -139,7 +141,10 @@
             <div class="container">
                 <h2 class="works__title animated" data-animation="fadeInUp">Our Curriculum: Courses & Focus Areas</h2>
                 <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
-                    <h3>10th Grade: CS Fundamentals with Python</h3>
+                    <div class="curriculum-header">
+                        <img src="python.png" alt="Python" class="curriculum-icon" width="40" height="40">
+                        <h3>10th Grade: CS Fundamentals with Python</h3>
+                    </div>
                     <div class="table-wrapper">
                         <table class="curriculum-table">
                             <thead>
@@ -185,7 +190,10 @@
                         </table>
                     </div>
 
-                    <h3>11th Grade: Game Development with Unity</h3>
+                    <div class="curriculum-header">
+                        <img src="courses.png" alt="Unity" class="curriculum-icon" width="40" height="40">
+                        <h3>11th Grade: Game Development with Unity</h3>
+                    </div>
                     <div class="table-wrapper">
                         <table class="curriculum-table">
                             <thead>
@@ -231,7 +239,10 @@
                         </table>
                     </div>
 
-                    <h3>12th Grade: Advanced Game & Web Development</h3>
+                    <div class="curriculum-header">
+                        <img src="courses.png" alt="Game Development" class="curriculum-icon" width="40" height="40">
+                        <h3>12th Grade: Advanced Game & Web Development</h3>
+                    </div>
                     <div class="table-wrapper">
                         <table class="curriculum-table">
                             <thead>
@@ -349,7 +360,10 @@
         <!-- Grading Policy & Expectations Section -->
         <section id="grading" class="section">
             <div class="container">
-                <h2 class="works__title animated" data-animation="fadeInUp">Grading Policy & Expectations</h2>
+                <div class="section-header">
+                    <img src="grades.png" alt="Grading" class="section-icon" width="50" height="50">
+                    <h2 class="works__title animated" data-animation="fadeInUp">Grading Policy & Expectations</h2>
+                </div>
                 <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
                     <h3>Grading Breakdown:</h3>
                     <ul>
@@ -378,11 +392,38 @@
                 <h2 class="works__title animated" data-animation="fadeInUp">Key Resources & Tools</h2>
                 <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
                     <p>Students will gain proficiency in a variety of industry-standard software, programming languages, and platforms:</p>
-                    <ul>
-                        <li><strong>Software:</strong> Unity 3D, Figma, Visual Studio Code</li>
-                        <li><strong>Programming Languages:</strong> Python, C#, HTML5, CSS3, JavaScript, SQL</li>
-                        <li><strong>Platforms & Concepts:</strong> GitHub (Version Control), Flask (Python Web Framework), p5.js, jQuery, APIs, WebSockets</li>
-                    </ul>
+                    <div class="resources-grid">
+                        <div class="resource-category">
+                            <h3>Software</h3>
+                            <ul>
+                                <li><img src="courses.png" alt="Unity" class="resource-icon" width="24" height="24"> Unity 3D</li>
+                                <li>Figma</li>
+                                <li>Visual Studio Code</li>
+                            </ul>
+                        </div>
+                        <div class="resource-category">
+                            <h3>Programming Languages</h3>
+                            <ul>
+                                <li><img src="python.png" alt="Python" class="resource-icon" width="24" height="24"> Python</li>
+                                <li>C#</li>
+                                <li><img src="html5.png" alt="HTML5" class="resource-icon" width="24" height="24"> HTML5</li>
+                                <li>CSS3</li>
+                                <li>JavaScript</li>
+                                <li>SQL</li>
+                            </ul>
+                        </div>
+                        <div class="resource-category">
+                            <h3>Platforms & Concepts</h3>
+                            <ul>
+                                <li>GitHub (Version Control)</li>
+                                <li>Flask (Python Web Framework)</li>
+                                <li>p5.js</li>
+                                <li>jQuery</li>
+                                <li>APIs</li>
+                                <li>WebSockets</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -390,12 +431,17 @@
         <!-- Contact Mrs. Ramirez Section -->
         <section id="contact" class="section">
             <div class="container">
-                <h2 class="works__title animated" data-animation="fadeInUp">Contact Mrs. Ramirez</h2>
+                <div class="section-header">
+                    <img src="contact.png" alt="Contact" class="section-icon" width="50" height="50">
+                    <h2 class="works__title animated" data-animation="fadeInUp">Contact Mrs. Ramirez</h2>
+                </div>
                 <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
                     <p>If you have any questions or need further assistance, please don't hesitate to reach out:</p>
-                    <p><strong>Email:</strong> <a href="mailto:mramirez@example.com">mramirez@example.com</a></p>
-                    <p><strong>Office Hours:</strong> Monday & Wednesday, 3:00 PM - 4:00 PM</p>
-                    <p><strong>School Phone:</strong> (555) 123-4567</p>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> <a href="mailto:mramirez@example.com">mramirez@example.com</a></p>
+                        <p><strong>Office Hours:</strong> Monday & Wednesday, 3:00 PM - 4:00 PM</p>
+                        <p><strong>School Phone:</strong> (555) 123-4567</p>
+                    </div>
                     <p>I look forward to hearing from you!</p>
                 </div>
             </div>

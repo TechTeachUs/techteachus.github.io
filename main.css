@@ -7,14 +7,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-f    animation: box1 1.5s infinite ease;
-}
-
-.box__2 {
-    animation: box2 1.5s infinite ease;
-}
-
-@keyframes box1 {smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
@@ -32,6 +25,172 @@
     --transition-fast: 0.2s ease;
     --transition-medium: 0.3s ease;
     --transition-slow: 0.5s ease;
+}
+
+/* SVG Icons and PNG Images - Visual Enhancements
+====================== */
+
+.curriculum-icon,
+.resource-icon,
+.section-icon {
+    margin-right: 10px;
+    vertical-align: middle;
+    transition: transform var(--transition-fast);
+    border-radius: 4px;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.curriculum-icon:hover,
+.resource-icon:hover,
+.section-icon:hover {
+    transform: scale(1.1);
+}
+
+.curriculum-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.curriculum-header h3 {
+    margin: 0;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    color: var(--accent-color);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.section-header h2 {
+    margin: 0;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.resource-category {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.resource-category:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.resource-category h3 {
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+}
+
+.resource-category ul {
+    list-style: none;
+}
+
+.resource-category li {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(1, 98, 127, 0.1);
+    transition: background-color var(--transition-fast);
+}
+
+.resource-category li:hover {
+    background-color: rgba(1, 98, 127, 0.05);
+    padding-left: 10px;
+}
+
+.resource-category li:last-child {
+    border-bottom: none;
+}
+
+.contact-info {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin: 20px 0;
+    box-shadow: var(--shadow-light);
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+}
+
+.contact-info a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.contact-info a:hover {
+    color: #0288d1;
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for icons */
+@media (max-width: 768px) {
+    .curriculum-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .resources-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .curriculum-icon,
+    .section-icon {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .resource-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Icon animation on page load */
+@keyframes iconFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.curriculum-icon,
+.resource-icon,
+.section-icon {
+    animation: iconFadeIn 0.6s ease-out;
 }
 
 /* Performance optimizations */
@@ -196,40 +355,167 @@ svg {
     0% { stroke-dashoffset: 600; }
     100% { stroke-dashoffset: 0; }
 }
-    animation: box1 1.5s infinite ease;
+
+/* SVG Icons and Visual Enhancements
+====================== */
+
+.curriculum-icon,
+.resource-icon,
+.section-icon {
+    margin-right: 10px;
+    vertical-align: middle;
+    transition: transform var(--transition-fast);
 }
 
-.box__2 {
-    animation: box2 1.5s infinite ease;
+.curriculum-icon:hover,
+.resource-icon:hover,
+.section-icon:hover {
+    transform: scale(1.1);
 }
 
-@keyframes box1 {
-    0% { top: 0; left: 0; width: 50%; height: 50%; }
-    12.5% { top: 0; left: 0; width: 100%; height: 50%; }
-    25% { top: 0; left: 0; width: 100%; height: 50%; }
-    37.5% { top: 0; left: 50%; width: 50%; height: 50%; }
-    50% { top: 0; left: 50%; width: 50%; height: 50%; }
-    62.5% { top: 0; left: 50%; width: 50%; height: 100%; }
-    75% { top: 0%; left: 50%; width: 50%; height: 100%; }
-    87.5% { top: 50%; left: 0; width: 50%; height: 50%; }
-    100% { top: 0; left: 0; width: 50%; height: 50%; }
+.curriculum-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-@keyframes box2 {
-    0% { bottom: 0; right: 0; width: 50%; height: 50%; }
-    12.5% { bottom: 0; right: 0; width: 100%; height: 50%; }
-    25% { bottom: 0; right: 0; width: 100%; height: 50%; }
-    37.5% { bottom: 0; right: 50%; width: 50%; height: 50%; }
-    50% { bottom: 0; right: 50%; width: 50%; height: 50%; }
-    62.5% { bottom: 0; right: 50%; width: 50%; height: 100%; }
-    75% { bottom: 0%; right: 50%; width: 50%; height: 100%; }
-    87.5% { bottom: 50%; right: 0; width: 50%; height: 50%; }
-    100% { bottom: 0; right: 0; width: 50%; height: 50%; }
+.curriculum-header h3 {
+    margin: 0;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    color: var(--accent-color);
 }
 
-@keyframes animate {
-    0% { stroke-dashoffset: 600; }
-    100% { stroke-dashoffset: 0; }
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.section-header h2 {
+    margin: 0;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.resource-category {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.resource-category:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.resource-category h3 {
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+}
+
+.resource-category ul {
+    list-style: none;
+}
+
+.resource-category li {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(1, 98, 127, 0.1);
+    transition: background-color var(--transition-fast);
+}
+
+.resource-category li:hover {
+    background-color: rgba(1, 98, 127, 0.05);
+    padding-left: 10px;
+}
+
+.resource-category li:last-child {
+    border-bottom: none;
+}
+
+.contact-info {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin: 20px 0;
+    box-shadow: var(--shadow-light);
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+}
+
+.contact-info a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.contact-info a:hover {
+    color: #0288d1;
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for icons */
+@media (max-width: 768px) {
+    .curriculum-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .resources-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .curriculum-icon,
+    .section-icon {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .resource-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Icon animation on page load */
+@keyframes iconFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.curriculum-icon,
+.resource-icon,
+.section-icon {
+    animation: iconFadeIn 0.6s ease-out;
 }
 
 /* Container Layout - Optimized
