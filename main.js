@@ -1,4 +1,63 @@
-// main.js
+// main.js - Optimized for Performance
+
+// Performance optimizations
+const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
+
+const throttle = (func, limit) => {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+};
+
+// Intersection Observer for animations
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
+
+const animationObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const element = entry.target;
+            element.classList.add('animating');
+            
+            // Add animation class based on data attribute
+            const animation = element.dataset.animation;
+            const delay = element.dataset.delay || '0ms';
+            
+            if (animation) {
+                element.style.animationDelay = delay;
+                element.style.animation = `${animation} 0.8s ease-out forwards`;
+            }
+            
+            // Remove will-change after animation
+            setTimeout(() => {
+                element.classList.remove('animating');
+                element.style.willChange = 'auto';
+            }, 1000);
+            
+            animationObserver.unobserve(element);
+        }
+    });
+}, observerOptions);
 
 // --- Loader Logic ---
 window.addEventListener('load', function() {
@@ -7,14 +66,130 @@ window.addEventListener('load', function() {
 
     // Hide loader and remove hidden class from body
     loader.style.opacity = '0';
+    
     setTimeout(() => {
         loader.style.display = 'none';
         body.classList.remove('hidden');
-        // Initialize Scrollify and Particles.js after loader is hidden
+        
+        // Initialize components after loader is hidden
+        initializeComponents();
+        
+        // Observe animated elements
+        document.querySelectorAll('.animated').forEach(el => {
+            animationObserver.observe(el);
+        });
+    }, 500);
+});
+
+// Initialize all components
+function initializeComponents() {
+    // Initialize components asynchronously for better performance
+    requestAnimationFrame(() => {
         initScrollify();
         initParticles();
-    }, 500); // Matches the opacity transition duration
-});
+        initPerformanceOptimizations();
+        initMobileNavigation();
+    });
+}
+
+// Mobile navigation functionality
+function initMobileNavigation() {
+    const navToggle = document.querySelector('.nav__toggle');
+    const navLinks = document.querySelector('.nav__links');
+    
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('nav__links--active');
+            navToggle.classList.toggle('nav__toggle--active');
+            
+            // Change icon
+            const icon = navToggle.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            }
+        });
+        
+        // Close menu when clicking on a link
+        navLinks.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                navLinks.classList.remove('nav__links--active');
+                navToggle.classList.remove('nav__toggle--active');
+                
+                const icon = navToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
+            }
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navLinks.classList.contains('nav__links--active')) {
+                navLinks.classList.remove('nav__links--active');
+                navToggle.classList.remove('nav__toggle--active');
+                
+                const icon = navToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
+            }
+        });
+    }
+}
+
+// Performance optimizations
+function initPerformanceOptimizations() {
+    // Lazy load images
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+                    }
+                }
+            });
+        });
+        
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
+    
+    // Optimize scroll performance
+    const scrollHandler = throttle(() => {
+        updateScrollProgress();
+    }, 16); // ~60fps
+    
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+    
+    // Optimize resize handling
+    const resizeHandler = debounce(() => {
+        if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS) {
+            window.pJSDom[0].pJS.fn.particlesRefresh();
+        }
+    }, 250);
+    
+    window.addEventListener('resize', resizeHandler, { passive: true });
+}
+
+// Update scroll progress
+function updateScrollProgress() {
+    const scrollLine = document.querySelector('.bar__line');
+    if (scrollLine) {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / scrollHeight) * 100;
+        scrollLine.style.height = `${Math.min(progress, 100)}%`;
+    }
+}
 
 // --- Custom Modal Implementation (for Alert/Prompt replacements) ---
 function showCustomModal(message, isPrompt = false, callback = null) {
@@ -164,122 +339,133 @@ function initScrollify() {
 }
 
 
-// --- Particles.js Initialization ---
+// --- Particles.js Initialization - Optimized ---
 function initParticles() {
-    if (typeof particlesJS !== 'undefined') {
-        particlesJS('particles-js', {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#ffffff"
-                },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    },
-                    "polygon": {
-                        "nb_sides": 5
-                    },
-                    "image": {
-                        "src": "img/github.svg",
-                        "width": 100,
-                        "height": 100
-                    }
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": false,
-                    "anim": {
-                        "enable": false,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": false,
-                        "speed": 40,
-                        "size_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#ffffff",
-                    "opacity": 0.4,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 6,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false,
-                        "rotateX": 600,
-                        "rotateY": 1200
-                    }
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 140,
-                        "line_linked": {
-                            "opacity": 1
-                        }
-                    },
-                    "bubble": {
-                        "distance": 400,
-                        "size": 40,
-                        "duration": 2,
-                        "opacity": 8,
-                        "speed": 3
-                    },
-                    "repulse": {
-                        "distance": 200,
-                        "duration": 0.4
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                    "remove": {
-                        "particles_nb": 2
-                    }
-                }
-            },
-            "retina_detect": true
-        });
-    } else {
-        console.error("particlesJS is not defined. Make sure particles.min.js is loaded.");
+    if (typeof particlesJS === 'undefined') {
+        console.warn("particlesJS is not defined. Make sure particles.min.js is loaded.");
+        return;
     }
+
+    // Check if device supports good performance
+    const isHighPerformance = window.navigator.hardwareConcurrency > 4 && 
+                             window.devicePixelRatio <= 2 && 
+                             window.innerWidth >= 768;
+
+    const particleConfig = {
+        "particles": {
+            "number": {
+                "value": isHighPerformance ? 80 : 40, // Reduce particles on low-performance devices
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#ffffff"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 40,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": isHighPerformance ? 6 : 3, // Reduce speed on low-performance devices
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": isHighPerformance, // Disable hover effects on low-performance devices
+                    "mode": "grab"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 140,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    };
+
+    particlesJS('particles-js', particleConfig);
+    
+    // Pause particles when page is not visible for better performance
+    document.addEventListener('visibilitychange', function() {
+        if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS) {
+            if (document.hidden) {
+                window.pJSDom[0].pJS.fn.particlesPause();
+            } else {
+                window.pJSDom[0].pJS.fn.particlesPlay();
+            }
+        }
+    });
 }
 
 // --- Original changeSlide function (if needed for a specific element, but Scrollify handles main sections) ---
