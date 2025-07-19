@@ -1,247 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mrs. Ramirez's Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="hidden">
+<body class="overflow-x-hidden font-inter">
     <!-- Loader -->
-    <div class="loader">
-        <div class="loader-container">
-            <svg width="200" height="200">
-                <rect class="animate" x="0" y="0" width="200" height="200" />
+    <div class="loader fixed inset-0 bg-gray-900 flex items-center justify-center z-[9999]">
+        <div class="loader-container flex flex-col items-center">
+            <svg width="200" height="200" class="mb-4">
+                <rect class="animate-loader-rect" x="0" y="0" width="200" height="200" fill="none" stroke="#6366F1" stroke-width="4" />
             </svg>
-            <div class="box">
-                <div class="box__1"></div>
-                <div class="box__2"></div>
+            <div class="box flex space-x-2">
+                <div class="box__1 w-8 h-8 bg-indigo-500 rounded-full animate-bounce-delay-1"></div>
+                <div class="box__2 w-8 h-8 bg-indigo-600 rounded-full animate-bounce-delay-2"></div>
             </div>
         </div>
     </div>
 
     <!-- Particles.js Background -->
-    <div id="particles-js" class="animated" data-animation="fadeIn"></div>
+    <div id="particles-js" class="animated fadeIn absolute inset-0 z-0"></div>
 
     <!-- Navigation Bar -->
-    <nav>
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-800 bg-opacity-90 shadow-lg py-4 px-6 md:px-12 flex justify-between items-center rounded-b-lg">
         <div class="nav__logo">
-            <h1 class="animated" data-animation="fadeInDown">Mrs. Ramirez</h1>
-            <p class="animated" data-animation="fadeInDown" data-delay="200ms">Game Dev & Web Design</p>
+            <h1 class="text-white text-3xl font-bold animated fadeInDown">Mrs. Ramirez</h1>
+            <p class="text-indigo-300 text-sm animated fadeInDown" data-delay="200ms">Game Dev & Web Design</p>
         </div>
-        <button class="nav__toggle" aria-label="Toggle navigation menu">
+        <button class="nav__toggle md:hidden text-white text-2xl focus:outline-none" aria-label="Toggle navigation menu">
             <i class="fa fa-bars"></i>
         </button>
-        <ul class="nav__links">
-            <li class="animated" data-animation="fadeInDown" data-delay="400ms"><a href="#home">Home</a></li>
-            <li class="animated" data-animation="fadeInDown" data-delay="500ms"><a href="#about">About</a></li>
-            <li class="animated" data-animation="fadeInDown" data-delay="600ms"><a href="#curriculum">Curriculum</a></li>
-            <li class="animated" data-animation="fadeInDown" data-delay="700ms"><a href="#certifications">Certifications</a></li>
-            <li class="animated" data-animation="fadeInDown" data-delay="800ms"><a href="#competitions">Competitions</a></li>
-            <li class="animated" data-animation="fadeInDown" data-delay="900ms"><a href="#strategies">Strategies</a></li>
-            <li class="animated" data-animation="fadeInDown" data-delay="1000ms"><a href="#portfolio">Portfolio</a></li>
-            <li class="animated" data-animation="fadeInDown" data-delay="1100ms"><a href="#grading">Grading</a></li>
-            <li class="animated" data-animation="fadeInDown" data-delay="1200ms"><a href="#resources">Resources</a></li>
-            <li class="animated" data-animation="fadeInDown" data-delay="1300ms"><a href="#contact">Contact</a></li>
+        <ul class="nav__links hidden md:flex space-x-8">
+            <li class="animated fadeInDown" data-delay="400ms"><a href="#home" class="text-white hover:text-indigo-400 transition-colors duration-300">Home</a></li>
+            <li class="animated fadeInDown" data-delay="500ms"><a href="#about" class="text-white hover:text-indigo-400 transition-colors duration-300">About</a></li>
+            <li class="animated fadeInDown" data-delay="600ms"><a href="#curriculum" class="text-white hover:text-indigo-400 transition-colors duration-300">Curriculum</a></li>
+            <li class="animated fadeInDown" data-delay="700ms"><a href="#certifications" class="text-white hover:text-indigo-400 transition-colors duration-300">Certifications</a></li>
+            <li class="animated fadeInDown" data-delay="800ms"><a href="#competitions" class="text-white hover:text-indigo-400 transition-colors duration-300">Competitions</a></li>
+            <li class="animated fadeInDown" data-delay="900ms"><a href="#strategies" class="text-white hover:text-indigo-400 transition-colors duration-300">Strategies</a></li>
+            <li class="animated fadeInDown" data-delay="1000ms"><a href="#portfolio" class="text-white hover:text-indigo-400 transition-colors duration-300">Portfolio</a></li>
+            <li class="animated fadeInDown" data-delay="1100ms"><a href="#grading" class="text-white hover:text-indigo-400 transition-colors duration-300">Grading</a></li>
+            <li class="animated fadeInDown" data-delay="1200ms"><a href="#resources" class="text-white hover:text-indigo-400 transition-colors duration-300">Resources</a></li>
+            <li class="animated fadeInDown" data-delay="1300ms"><a href="#contact" class="text-white hover:text-indigo-400 transition-colors duration-300">Contact</a></li>
         </ul>
     </nav>
 
+    <!-- Mobile Navigation Menu (hidden by default) -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-6 transform -translate-y-full transition-transform duration-500 ease-in-out">
+        <button class="absolute top-6 right-6 text-white text-3xl focus:outline-none" aria-label="Close navigation menu">
+            <i class="fa fa-times"></i>
+        </button>
+        <ul class="flex flex-col space-y-6 text-center">
+            <li><a href="#home" class="text-white text-2xl hover:text-indigo-400 transition-colors duration-300" data-section="home">Home</a></li>
+            <li><a href="#about" class="text-white text-2xl hover:text-indigo-400 transition-colors duration-300" data-section="about">About</a></li>
+            <li><a href="#curriculum" class="text-white text-2xl hover:text-indigo-400 transition-colors duration-300" data-section="curriculum">Curriculum</a></li>
+            <li><a href="#certifications" class="text-white text-2xl hover:text-indigo-400 transition-colors duration-300" data-section="certifications">Certifications</a></li>
+            <li><a href="#competitions" class="text-white text-2xl hover:text-indigo-400 transition-colors duration-300" data-section="competitions">Competitions</a></li>
+            <li><a href="#strategies" class="text-white text-2xl hover:text-indigo-400 transition-colors duration-300" data-section="strategies">Strategies</a></li>
+            <li><a href="#portfolio" class="text-white text-2xl hover:text-indigo-400 transition-colors duration-300" data-section="portfolio">Portfolio</a></li>
+            <li><a href="#grading" class="text-white text-2xl hover:text-indigo-400 transition-colors duration-300" data-section="grading">Grading</a></li>
+            <li><a href="#resources" class="text-white text-2xl hover:text-indigo-400 transition-colors duration-300" data-section="resources">Resources</a></li>
+            <li><a href="#contact" class="text-white text-2xl hover:text-indigo-400 transition-colors duration-300" data-section="contact">Contact</a></li>
+        </ul>
+    </div>
+
     <!-- Scroll Bar -->
-    <div class="scroll-bar animated" data-animation="fadeIn">
-        <div class="scroll-wrap">
-            <div class="bar__dots">
-                <span class="dots__circle"></span>
-                <span class="dots__circle"></span>
-                <span class="dots__circle"></span>
-                <span class="dots__circle"></span>
-                <span class="dots__circle"></span>
-                <span class="dots__circle"></span>
-                <span class="dots__circle"></span>
-                <span class="dots__circle"></span>
-                <span class="dots__circle"></span>
-                <span class="dots__circle"></span>
+    <div class="scroll-bar fixed right-4 top-1/2 -translate-y-1/2 z-50 hidden md:block animated fadeIn">
+        <div class="scroll-wrap flex flex-col items-center">
+            <div class="bar__dots flex flex-col space-y-2">
+                <span class="dots__circle w-3 h-3 bg-indigo-400 rounded-full transition-all duration-300"></span>
+                <span class="dots__circle w-3 h-3 bg-gray-600 rounded-full transition-all duration-300"></span>
+                <span class="dots__circle w-3 h-3 bg-gray-600 rounded-full transition-all duration-300"></span>
+                <span class="dots__circle w-3 h-3 bg-gray-600 rounded-full transition-all duration-300"></span>
+                <span class="dots__circle w-3 h-3 bg-gray-600 rounded-full transition-all duration-300"></span>
+                <span class="dots__circle w-3 h-3 bg-gray-600 rounded-full transition-all duration-300"></span>
+                <span class="dots__circle w-3 h-3 bg-gray-600 rounded-full transition-all duration-300"></span>
+                <span class="dots__circle w-3 h-3 bg-gray-600 rounded-full transition-all duration-300"></span>
+                <span class="dots__circle w-3 h-3 bg-gray-600 rounded-full transition-all duration-300"></span>
+                <span class="dots__circle w-3 h-3 bg-gray-600 rounded-full transition-all duration-300"></span>
             </div>
-            <div class="bar__line"></div>
+            <div class="bar__line w-0.5 h-32 bg-gray-700 mt-2 rounded-full"></div>
         </div>
     </div>
 
     <!-- Main Content Sections -->
     <div id="wrapper">
         <!-- Home Section -->
-        <section id="home" class="section">
-            <div class="container">
-                <div class="hero-text">
-                    <h1 class="hero__name">Welcome to Mrs. Ramirez's Hub!</h1>
-                    <p class="hero__subtitle">Game Design & Web Development Pathway</p>
+        <section id="home" class="section min-h-screen flex items-center justify-center bg-gray-900 text-white relative py-16">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-center text-center md:text-left z-10">
+                <div class="hero-text mb-8 md:mb-0 md:mr-12">
+                    <h1 class="hero__name text-5xl md:text-6xl font-extrabold leading-tight animated fadeInUp">Welcome to Mrs. Ramirez's Hub!</h1>
+                    <p class="hero__subtitle text-xl md:text-2xl text-indigo-300 mt-4 animated fadeInUp" data-delay="200ms">Game Design & Web Development Pathway</p>
                 </div>
-                <div class="person animated" data-animation="fadeInRight">
+                <div class="person animated fadeInRight">
                     <!-- Mrs. Ramirez's image -->
-                    <img data-src="person.png" alt="Mrs. Ramirez" class="rounded-lg shadow-lg lazy" width="400" height="600">
+                    <img data-src="https://placehold.co/400x600/6366F1/FFFFFF?text=Mrs.+Ramirez" alt="Mrs. Ramirez" class="rounded-lg shadow-lg lazy max-w-full h-auto object-cover" width="400" height="600" onerror="this.onerror=null;this.src='https://placehold.co/400x600/6366F1/FFFFFF?text=Image+Error';">
                 </div>
-                <i class="fa fa-angle-down arrow animated" data-animation="bounce infinite" aria-hidden="true" onclick="$.scrollify.next()"></i>
+                <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
             </div>
         </section>
 
         <!-- About Mrs. Ramirez Section -->
-        <section id="about" class="section">
-            <div class="container">
-                <h2 class="works__title animated" data-animation="fadeInUp">About Mrs. Ramirez</h2>
-                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
-                    <p>Hello! I'm Mrs. Ramirez, and I'm passionate about empowering students through technology. With years of experience in both education and the tech industry, I'm thrilled to guide you through the exciting world of game design and web development.</p>
-                    <p><strong>Email:</strong> mramirez@example.com</p>
-                    <p><strong>Office Hours:</strong> Monday & Wednesday, 3:00 PM - 4:00 PM</p>
-                    <p><strong>Phone:</strong> (555) 123-4567</p>
-                    <p>Outside of teaching, I enjoy playing strategy games, exploring new programming languages, and hiking with my family.</p>
+        <section id="about" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="works__title text-4xl font-bold mb-8 text-center animated fadeInUp">About Mrs. Ramirez</h2>
+                <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
+                    <p class="mb-4 text-lg leading-relaxed">Hello! I'm Mrs. Ramirez, and I'm passionate about empowering students through technology. With years of experience in both education and the tech industry, I'm thrilled to guide you through the exciting world of game design and web development.</p>
+                    <p class="mb-2 text-lg"><strong>Email:</strong> <a href="mailto:mramirez@example.com" class="text-indigo-300 hover:underline">mramirez@example.com</a></p>
+                    <p class="mb-2 text-lg"><strong>Office Hours:</strong> Monday & Wednesday, 3:00 PM - 4:00 PM</p>
+                    <p class="mb-4 text-lg"><strong>Phone:</strong> (555) 123-4567</p>
+                    <p class="text-lg leading-relaxed">Outside of teaching, I enjoy playing strategy games, exploring new programming languages, and hiking with my family.</p>
                 </div>
             </div>
         </section>
 
         <!-- Our Curriculum Section -->
-        <section id="curriculum" class="section">
-            <div class="container">
-                <h2 class="works__title animated" data-animation="fadeInUp">Our Curriculum: Courses & Focus Areas</h2>
-                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
-                    <div class="curriculum-header">
-                        <img src="images/python-logo.png" 
-                             alt="Python" 
-                             loading="lazy" 
-                             decoding="async"
-                             width="64" 
-                             height="64"
-                             style="aspect-ratio: 1/1;">
-                        <h3>10th Grade: CS Fundamentals with Python</h3>
-                    </div>
-                    <div class="table-wrapper">
-                        <table class="curriculum-table">
-                            <thead>
-                                <tr>
-                                    <th>Weeks</th>
-                                    <th>Topics</th>
-                                    <th>Key Concepts</th>
-                                    <th>Projects/Activities</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1-8</td>
-                                    <td>Introduction to Python & Algorithms</td>
-                                    <td>Variables, Data Types, Control Flow, Functions, Basic Algorithms</td>
-                                    <td>Python Calculator, Number Guessing Game</td>
-                                </tr>
-                                <tr>
-                                    <td>9-16</td>
-                                    <td>Data Structures & Backend Programming</td>
-                                    <td>Lists, Dictionaries, File I/O, Introduction to Flask</td>
-                                    <td>Text-based Adventure Game, Simple Web App with Flask</td>
-                                </tr>
-                                <tr>
-                                    <td>17-24</td>
-                                    <td>UI/UX Design Fundamentals (Figma)</td>
-                                    <td>Wireframing, Prototyping, User-Centered Design</td>
-                                    <td>Emoticon Design League (Figma project)</td>
-                                </tr>
-                                <tr>
-                                    <td>25-32</td>
-                                    <td>Databases & SQL Basics</td>
-                                    <td>Relational Databases, SQL Queries, Database Integration</td>
-                                    <td>Queue Management System (Python + SQL)</td>
-                                </tr>
-                                <tr>
-                                    <td>33-36</td>
-                                    <td>Capstone Prep & Review</td>
-                                    <td>Project Planning, Debugging, Code Optimization</td>
-                                    <td>G4C Challenge preparation</td>
-                                </tr>
-                            </tbody>
-                        </table>
+        <section id="curriculum" class="section min-h-screen flex items-center justify-center bg-gray-900 text-white py-16">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <h2 class="works__title text-4xl font-bold mb-8 text-center animated fadeInUp">Our Curriculum: Courses & Focus Areas</h2>
+                <div class="content-block bg-gray-800 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
+                    <div class="curriculum-section mb-10">
+                        <div class="curriculum-header flex items-center mb-4">
+                            <img data-src="https://placehold.co/64x64/6366F1/FFFFFF?text=Python" alt="Python Logo" class="lazy w-16 h-16 mr-4 rounded-full p-2 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/64x64/6366F1/FFFFFF?text=Error';">
+                            <h3 class="text-3xl font-semibold">10th Grade: CS Fundamentals with Python</h3>
+                        </div>
+                        <div class="table-wrapper overflow-x-auto">
+                            <table class="curriculum-table w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-700">
+                                        <th class="p-4 border-b border-gray-600 rounded-tl-lg">Weeks</th>
+                                        <th class="p-4 border-b border-gray-600">Topics</th>
+                                        <th class="p-4 border-b border-gray-600">Key Concepts</th>
+                                        <th class="p-4 border-b border-gray-600 rounded-tr-lg">Projects/Activities</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 border-b border-gray-600">1-8</td>
+                                        <td class="p-4 border-b border-gray-600">Introduction to Python & Algorithms</td>
+                                        <td class="p-4 border-b border-gray-600">Variables, Data Types, Control Flow, Functions, Basic Algorithms</td>
+                                        <td class="p-4 border-b border-gray-600">Python Calculator, Number Guessing Game</td>
+                                    </tr>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 border-b border-gray-600">9-16</td>
+                                        <td class="p-4 border-b border-gray-600">Data Structures & Backend Programming</td>
+                                        <td class="p-4 border-b border-gray-600">Lists, Dictionaries, File I/O, Introduction to Flask</td>
+                                        <td class="p-4 border-b border-gray-600">Text-based Adventure Game, Simple Web App with Flask</td>
+                                    </tr>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 border-b border-gray-600">17-24</td>
+                                        <td class="p-4 border-b border-gray-600">UI/UX Design Fundamentals (Figma)</td>
+                                        <td class="p-4 border-b border-gray-600">Wireframing, Prototyping, User-Centered Design</td>
+                                        <td class="p-4 border-b border-gray-600">Emoticon Design League (Figma project)</td>
+                                    </tr>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 border-b border-gray-600">25-32</td>
+                                        <td class="p-4 border-b border-gray-600">Databases & SQL Basics</td>
+                                        <td class="p-4 border-b border-gray-600">Relational Databases, SQL Queries, Database Integration</td>
+                                        <td class="p-4 border-b border-gray-600">Queue Management System (Python + SQL)</td>
+                                    </tr>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 rounded-bl-lg">33-36</td>
+                                        <td class="p-4">Capstone Prep & Review</td>
+                                        <td class="p-4">Project Planning, Debugging, Code Optimization</td>
+                                        <td class="p-4 rounded-br-lg">G4C Challenge preparation</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <div class="curriculum-header">
-                        <img src="courses.png" alt="Unity" class="curriculum-icon" width="40" height="40">
-                        <h3>11th Grade: Game Development with Unity</h3>
-                    </div>
-                    <div class="table-wrapper">
-                        <table class="curriculum-table">
-                            <thead>
-                                <tr>
-                                    <th>Weeks</th>
-                                    <th>Topics</th>
-                                    <th>Key Concepts</th>
-                                    <th>Projects/Activities</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1-8</td>
-                                    <td>Introduction to Unity & C#</td>
-                                    <td>Unity Interface, Scripting Basics, Game Objects, Components</td>
-                                    <td>First 2D Game (basic movement, collisions)</td>
-                                </tr>
-                                <tr>
-                                    <td>9-16</td>
-                                    <td>2D Game Development</td>
-                                    <td>Sprites, Animations, Tilemaps, Physics, UI Elements</td>
-                                    <td>Platformer Game, Top-down Shooter</td>
-                                </tr>
-                                <tr>
-                                    <td>17-24</td>
-                                    <td>Game Debugging & Audio</td>
-                                    <td>Debugging Tools, Error Handling, Sound Effects, Background Music</td>
-                                    <td>Adding audio and debugging to existing games</td>
-                                </tr>
-                                <tr>
-                                    <td>25-32</td>
-                                    <td>Introduction to 3D Game Development</td>
-                                    <td>3D Models, Lighting, Materials, Basic 3D Physics</td>
-                                    <td>Simple 3D Maze Game</td>
-                                </tr>
-                                <tr>
-                                    <td>33-36</td>
-                                    <td>IT Specialist HTML5 Certification Prep & InfyApp Challenge</td>
-                                    <td>Review HTML5 concepts, Project-based learning for InfyApp</td>
-                                    <td>InfyApp Challenge participation</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="curriculum-header">
-                        <img src="courses.png" alt="Game Development" class="curriculum-icon" width="40" height="40">
-                        <h3>12th Grade: Advanced Game & Web Development</h3>
-                    </div>
-                    <div class="table-wrapper">
-                        <table class="curriculum-table">
-                            <thead>
-                                <tr>
-                                    <th>Weeks</th>
-                                    <th>Topics</th>
-                                    <th>Key Concepts</th>
-                                    <th>Projects/Activities</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1-8</td>
-                                    <td>Advanced Web Development (HTML5, CSS3, JavaScript)</td>
-                                    <td>Responsive Design, Flexbox, Grid, CSS Animations, DOM Manipulation</td>
-                                    <td>Personal Portfolio Website, Interactive Web Application</td>
-                                </tr>
-                                <tr>
-                                    <td>9-16</td>
-                                    <td>Advanced Unity Features</td>
-                                    <td>AI Pathfinding, Multiplayer Basics, Advanced Lighting & Shaders</td>
-                                    <td>AI-driven Enemy Behavior, Simple Multiplayer Prototype</td>
-                                </tr>
-                                <tr>
-                                    <td>17-36</td>
-                                    <td>Capstone Project: Game Development & Publishing</td>
-                                    <td>Full Game Development Cycle, Marketing, Publishing</td>
-                                    <td>Develop, market, and publish an original game</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="curriculum-section mb-10">
+                        <div class="curriculum-header flex items-center mb-4">
+                            <img data-src="https://placehold.co/64x64/6366F1/FFFFFF?text=Unity" alt="Unity Logo" class="lazy w-16 h-16 mr-4 rounded-full p-2 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/64x64/6366F1/FFFFFF?text=Error';">
+                            <h3 class="text-3xl font-semibold">11th Grade: Game Development with Unity</h3>
+                        </div>
+                        <div class="table-wrapper overflow-x-auto">
+                            <table class="curriculum-table w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-700">
+                                        <th class="p-4 border-b border-gray-600 rounded-tl-lg">Weeks</th>
+                                        <th class="p-4 border-b border-gray-600">Topics</th>
+                                        <th class="p-4 border-b border-gray-600">Key Concepts</th>
+                                        <th class="p-4 border-b border-gray-600 rounded-tr-lg">Projects/Activities</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 border-b border-gray-600">1-8</td>
+                                        <td class="p-4 border-b border-gray-600">Introduction to Unity & C#</td>
+                                        <td class="p-4 border-b border-gray-600">Unity Interface, Scripting Basics, Game Objects, Components</td>
+                                        <td class="p-4 border-b border-gray-600">First 2D Game (basic movement, collisions)</td>
+                                    </tr>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 border-b border-gray-600">9-16</td>
+                                        <td class="p-4 border-b border-gray-600">2D Game Development</td>
+                                        <td class="p-4 border-b border-gray-600">Sprites, Animations, Tilemaps, Physics, UI Elements</td>
+                                        <td class="p-4 border-b border-gray-600">Platformer Game, Top-down Shooter</td>
+                                    </tr>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 border-b border-gray-600">17-24</td>
+                                        <td class="p-4 border-b border-gray-600">Game Debugging & Audio</td>
+                                        <td class="p-4 border-b border-gray-600">Debugging Tools, Error Handling, Sound Effects, Background Music</td>
+                                        <td class="p-4 border-b border-gray-600">Adding audio and debugging to existing games</td>
+                                    </tr>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 border-b border-gray-600">25-32</td>
+                                        <td class="p-4 border-b border-gray-600">Introduction to 3D Game Development</td>
+                                        <td class="p-4 border-b border-gray-600">3D Models, Lighting, Materials, Basic 3D Physics</td>
+                                        <td class="p-4 border-b border-gray-600">Simple 3D Maze Game</td>
+                                    </tr>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 rounded-bl-lg">33-36</td>
+                                        <td class="p-4">IT Specialist HTML5 Certification Prep & InfyApp Challenge</td>
+                                        <td class="p-4">Review HTML5 concepts, Project-based learning for InfyApp</td>
+                                        <td class="p-4 rounded-br-lg">InfyApp Challenge participation</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <h3>Integrated Career and Financial Management</h3>
-                    <p>Throughout the pathway, students will engage in modules focusing on:</p>
-                    <ul>
+                    <div class="curriculum-section mb-10">
+                        <div class="curriculum-header flex items-center mb-4">
+                            <img data-src="https://placehold.co/64x64/6366F1/FFFFFF?text=Advanced" alt="Advanced Dev Logo" class="lazy w-16 h-16 mr-4 rounded-full p-2 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/64x64/6366F1/FFFFFF?text=Error';">
+                            <h3 class="text-3xl font-semibold">12th Grade: Advanced Game & Web Development</h3>
+                        </div>
+                        <div class="table-wrapper overflow-x-auto">
+                            <table class="curriculum-table w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-700">
+                                        <th class="p-4 border-b border-gray-600 rounded-tl-lg">Weeks</th>
+                                        <th class="p-4 border-b border-gray-600">Topics</th>
+                                        <th class="p-4 border-b border-gray-600">Key Concepts</th>
+                                        <th class="p-4 border-b border-gray-600 rounded-tr-lg">Projects/Activities</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 border-b border-gray-600">1-8</td>
+                                        <td class="p-4 border-b border-gray-600">Advanced Web Development (HTML5, CSS3, JavaScript)</td>
+                                        <td class="p-4 border-b border-gray-600">Responsive Design, Flexbox, Grid, CSS Animations, DOM Manipulation</td>
+                                        <td class="p-4 border-b border-gray-600">Personal Portfolio Website, Interactive Web Application</td>
+                                    </tr>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 border-b border-gray-600">9-16</td>
+                                        <td class="p-4 border-b border-gray-600">Advanced Unity Features</td>
+                                        <td class="p-4 border-b border-gray-600">AI Pathfinding, Multiplayer Basics, Advanced Lighting & Shaders</td>
+                                        <td class="p-4 border-b border-gray-600">AI-driven Enemy Behavior, Simple Multiplayer Prototype</td>
+                                    </tr>
+                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                                        <td class="p-4 rounded-bl-lg">17-36</td>
+                                        <td class="p-4">Capstone Project: Game Development & Publishing</td>
+                                        <td class="p-4">Full Game Development Cycle, Marketing, Publishing</td>
+                                        <td class="p-4 rounded-br-lg">Develop, market, and publish an original game</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="text-3xl font-semibold mb-4 mt-8">Integrated Career and Financial Management</h3>
+                    <p class="mb-4 text-lg leading-relaxed">Throughout the pathway, students will engage in modules focusing on:</p>
+                    <ul class="list-disc list-inside space-y-2 text-lg pl-4">
                         <li>Career Planning & Exploration in Tech</li>
                         <li>Budgeting & Financial Literacy</li>
                         <li>Entrepreneurship & Business Basics</li>
@@ -252,12 +281,12 @@
         </section>
 
         <!-- Student Certifications Section -->
-        <section id="certifications" class="section">
-            <div class="container">
-                <h2 class="works__title animated" data-animation="fadeInUp">Student Certifications</h2>
-                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
-                    <p>Our program prepares students for industry-recognized certifications, enhancing their resumes and career prospects:</p>
-                    <ul>
+        <section id="certifications" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="works__title text-4xl font-bold mb-8 text-center animated fadeInUp">Student Certifications</h2>
+                <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
+                    <p class="mb-4 text-lg leading-relaxed">Our program prepares students for industry-recognized certifications, enhancing their resumes and career prospects:</p>
+                    <ul class="list-disc list-inside space-y-2 text-lg pl-4">
                         <li><strong>Unity Certified Programmer:</strong> Validates foundational C# scripting and Unity development skills.</li>
                         <li><strong>Unity Certified Artist:</strong> Focuses on creating and optimizing art assets within Unity.</li>
                         <li><strong>IT Specialist HTML5 Certification:</strong> Demonstrates proficiency in HTML5, CSS3, and JavaScript.</li>
@@ -268,12 +297,12 @@
         </section>
 
         <!-- Annual Competitions Section -->
-        <section id="competitions" class="section">
-            <div class="container">
-                <h2 class="works__title animated" data-animation="fadeInUp">Annual Competitions</h2>
-                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
-                    <p>Students actively participate in various annual competitions, fostering creativity, teamwork, and problem-solving skills:</p>
-                    <ul>
+        <section id="competitions" class="section min-h-screen flex items-center justify-center bg-gray-900 text-white py-16">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="works__title text-4xl font-bold mb-8 text-center animated fadeInUp">Annual Competitions</h2>
+                <div class="content-block bg-gray-800 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
+                    <p class="mb-4 text-lg leading-relaxed">Students actively participate in various annual competitions, fostering creativity, teamwork, and problem-solving skills:</p>
+                    <ul class="list-disc list-inside space-y-2 text-lg pl-4">
                         <li><strong>Emoticon Design League:</strong> A design competition focusing on UI/UX principles using Figma.</li>
                         <li><strong>Games for Change (G4C) Challenge:</strong> Students design digital games that tackle real-world issues.</li>
                         <li><strong>InfyApp Challenge:</strong> A national competition where students develop innovative mobile applications.</li>
@@ -284,12 +313,12 @@
         </section>
 
         <!-- Instructional Strategies Section -->
-        <section id="strategies" class="section">
-            <div class="container">
-                <h2 class="works__title animated" data-animation="fadeInUp">Instructional Strategies: Collaboration, Feedback & Iterative Design</h2>
-                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
-                    <p>Our teaching methodology emphasizes practical, hands-on learning and a collaborative environment:</p>
-                    <ul>
+        <section id="strategies" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="works__title text-4xl font-bold mb-8 text-center animated fadeInUp">Instructional Strategies: Collaboration, Feedback & Iterative Design</h2>
+                <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
+                    <p class="mb-4 text-lg leading-relaxed">Our teaching methodology emphasizes practical, hands-on learning and a collaborative environment:</p>
+                    <ul class="list-disc list-inside space-y-2 text-lg pl-4">
                         <li><strong>Team-Based Projects:</strong> Students work in teams on major projects like the G4C Challenge and Capstone, mirroring industry practices.</li>
                         <li><strong>Pair Programming:</strong> Encourages collaborative coding, knowledge sharing, and immediate feedback.</li>
                         <li><strong>Hackathons:</strong> Intensive, short-term coding events to foster rapid development and problem-solving.</li>
@@ -303,87 +332,87 @@
         </section>
 
         <!-- Student Portfolios Section -->
-        <section id="portfolio" class="section">
-            <div class="container">
-                <h2 class="works__title animated" data-animation="fadeInUp">Student Portfolios</h2>
-                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
-                    <p>A key outcome of this pathway is the development of a professional web-based portfolio. This portfolio will showcase students' growth and achievements, including:</p>
-                    <ul>
+        <section id="portfolio" class="section min-h-screen flex items-center justify-center bg-gray-900 text-white py-16">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="works__title text-4xl font-bold mb-8 text-center animated fadeInUp">Student Portfolios</h2>
+                <div class="content-block bg-gray-800 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
+                    <p class="mb-4 text-lg leading-relaxed">A key outcome of this pathway is the development of a professional web-based portfolio. This portfolio will showcase students' growth and achievements, including:</p>
+                    <ul class="list-disc list-inside space-y-2 text-lg pl-4">
                         <li>Game designs and playable prototypes</li>
                         <li>Coding projects (Python, C#, JavaScript)</li>
                         <li>UI/UX design mockups</li>
                         <li>Competition entries and awards</li>
                         <li>Reflections on learning and project challenges</li>
                     </ul>
-                    <p>These portfolios serve as a valuable asset for college applications and future career opportunities.</p>
+                    <p class="mt-4 text-lg leading-relaxed">These portfolios serve as a valuable asset for college applications and future career opportunities.</p>
                 </div>
             </div>
         </section>
 
         <!-- Grading Policy & Expectations Section -->
-        <section id="grading" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <img src="grades.png" alt="Grading" class="section-icon" width="50" height="50">
-                    <h2 class="works__title animated" data-animation="fadeInUp">Grading Policy & Expectations</h2>
+        <section id="grading" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="section-header flex items-center justify-center mb-8">
+                    <img data-src="https://placehold.co/50x50/6366F1/FFFFFF?text=Grades" alt="Grading Icon" class="lazy w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Error';">
+                    <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Grading Policy & Expectations</h2>
                 </div>
-                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
-                    <h3>Grading Breakdown:</h3>
-                    <ul>
+                <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
+                    <h3 class="text-2xl font-semibold mb-4">Grading Breakdown:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-lg pl-4 mb-6">
                         <li><strong>Projects & Labs:</strong> 50%</li>
                         <li><strong>Quizzes & Assessments:</strong> 25%</li>
                         <li><strong>Participation & Effort:</strong> 15%</li>
                         <li><strong>Homework & Assignments:</strong> 10%</li>
                     </ul>
-                    <h3>Classroom Expectations:</h3>
-                    <ul>
+                    <h3 class="text-2xl font-semibold mb-4">Classroom Expectations:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-lg pl-4 mb-6">
                         <li>Be respectful to peers and instructors.</li>
                         <li>Actively participate in discussions and group activities.</li>
                         <li>Complete assignments on time.</li>
                         <li>Seek help when needed and offer help to others.</li>
                         <li>Maintain a positive and growth-oriented mindset.</li>
                     </ul>
-                    <h3>Late Work Policy:</h3>
-                    <p>Late work will be accepted with a penalty. For every day an assignment is late, 10% will be deducted from the grade, up to a maximum of 50% deduction. Exceptions may be made for documented emergencies.</p>
+                    <h3 class="text-2xl font-semibold mb-4">Late Work Policy:</h3>
+                    <p class="text-lg leading-relaxed">Late work will be accepted with a penalty. For every day an assignment is late, 10% will be deducted from the grade, up to a maximum of 50% deduction. Exceptions may be made for documented emergencies.</p>
                 </div>
             </div>
         </section>
 
         <!-- Key Resources & Tools Section -->
-        <section id="resources" class="section">
-            <div class="container">
-                <h2 class="works__title animated" data-animation="fadeInUp">Key Resources & Tools</h2>
-                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
-                    <p>Students will gain proficiency in a variety of industry-standard software, programming languages, and platforms:</p>
-                    <div class="resources-grid">
-                        <div class="resource-category">
-                            <h3>Software</h3>
-                            <ul>
-                                <li><img src="courses.png" alt="Unity" class="resource-icon" width="24" height="24"> Unity 3D</li>
-                                <li>Figma</li>
-                                <li>Visual Studio Code</li>
+        <section id="resources" class="section min-h-screen flex items-center justify-center bg-gray-900 text-white py-16">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <h2 class="works__title text-4xl font-bold mb-8 text-center animated fadeInUp">Key Resources & Tools</h2>
+                <div class="content-block bg-gray-800 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
+                    <p class="mb-6 text-lg leading-relaxed">Students will gain proficiency in a variety of industry-standard software, programming languages, and platforms:</p>
+                    <div class="resources-grid grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="resource-category bg-gray-700 p-6 rounded-lg shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-indigo-300">Software</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=Unity" alt="Unity Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> Unity 3D</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=Figma" alt="Figma Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> Figma</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=VSCode" alt="VS Code Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> Visual Studio Code</li>
                             </ul>
                         </div>
-                        <div class="resource-category">
-                            <h3>Programming Languages</h3>
-                            <ul>
-                                <li><img src="python.png" alt="Python" class="resource-icon" width="24" height="24"> Python</li>
-                                <li>C#</li>
-                                <li><img src="html5.png" alt="HTML5" class="resource-icon" width="24" height="24"> HTML5</li>
-                                <li>CSS3</li>
-                                <li>JavaScript</li>
-                                <li>SQL</li>
+                        <div class="resource-category bg-gray-700 p-6 rounded-lg shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-indigo-300">Programming Languages</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=Python" alt="Python Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> Python</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=C%23" alt="C# Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> C#</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=HTML5" alt="HTML5 Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> HTML5</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=CSS3" alt="CSS3 Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> CSS3</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=JS" alt="JavaScript Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> JavaScript</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=SQL" alt="SQL Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> SQL</li>
                             </ul>
                         </div>
-                        <div class="resource-category">
-                            <h3>Platforms & Concepts</h3>
-                            <ul>
-                                <li>GitHub (Version Control)</li>
-                                <li>Flask (Python Web Framework)</li>
-                                <li>p5.js</li>
-                                <li>jQuery</li>
-                                <li>APIs</li>
-                                <li>WebSockets</li>
+                        <div class="resource-category bg-gray-700 p-6 rounded-lg shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-indigo-300">Platforms & Concepts</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=GitHub" alt="GitHub Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> GitHub (Version Control)</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=Flask" alt="Flask Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> Flask (Python Web Framework)</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=p5.js" alt="p5.js Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> p5.js</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=jQuery" alt="jQuery Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> jQuery</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=API" alt="API Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> APIs</li>
+                                <li class="flex items-center"><img data-src="https://placehold.co/24x24/6366F1/FFFFFF?text=WS" alt="WebSockets Icon" class="lazy w-6 h-6 mr-2 rounded-full p-0.5 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/24x24/6366F1/FFFFFF?text=Error';"> WebSockets</li>
                             </ul>
                         </div>
                     </div>
@@ -392,134 +421,47 @@
         </section>
 
         <!-- Contact Mrs. Ramirez Section -->
-        <section id="contact" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <img src="contact.png" alt="Contact" class="section-icon" width="50" height="50">
-                    <h2 class="works__title animated" data-animation="fadeInUp">Contact Mrs. Ramirez</h2>
+        <section id="contact" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="section-header flex items-center justify-center mb-8">
+                    <img data-src="https://placehold.co/50x50/6366F1/FFFFFF?text=Contact" alt="Contact Icon" class="lazy w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Error';">
+                    <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Contact Mrs. Ramirez</h2>
                 </div>
-                <div class="content-block animated" data-animation="fadeInUp" data-delay="200ms">
-                    <p>If you have any questions or need further assistance, please don't hesitate to reach out:</p>
-                    <div class="contact-info">
-                        <p><strong>Email:</strong> <a href="mailto:mramirez@example.com">mramirez@example.com</a></p>
+                <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
+                    <p class="mb-4 text-lg leading-relaxed">If you have any questions or need further assistance, please don't hesitate to reach out:</p>
+                    <div class="contact-info space-y-2 text-lg">
+                        <p><strong>Email:</strong> <a href="mailto:mramirez@example.com" class="text-indigo-300 hover:underline">mramirez@example.com</a></p>
                         <p><strong>Office Hours:</strong> Monday & Wednesday, 3:00 PM - 4:00 PM</p>
                         <p><strong>School Phone:</strong> (555) 123-4567</p>
                     </div>
-                    <p>I look forward to hearing from you!</p>
+                    <p class="mt-4 text-lg leading-relaxed">I look forward to hearing from you!</p>
                 </div>
             </div>
         </section>
     </div>
 
     <!-- Footer -->
-    <footer>
-        <div class="container text-center foot">
-            <p>Made by Luna R. 2023 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"></a></p>
+    <footer class="bg-gray-900 text-white py-6">
+        <div class="container mx-auto px-6 text-center text-sm foot">
+            <p>Made by Luna R. 2023 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="text-indigo-300 hover:underline" target="_blank">CC BY-NC-SA 4.0</a></p>
         </div>
     </footer>
 
     <!-- Custom Modal for Alerts/Prompts -->
-    <div id="custom-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <p id="modal-message"></p>
-            <input type="text" id="modal-input" style="display: none;">
-            <div class="modal-buttons">
-                <button id="modal-ok-button">OK</button>
-                <button id="modal-cancel-button" style="display: none;">Cancel</button>
+    <div id="custom-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[10000] hidden">
+        <div class="modal-content bg-gray-700 p-8 rounded-lg shadow-xl text-white max-w-sm w-full">
+            <p id="modal-message" class="text-lg mb-6 text-center"></p>
+            <input type="text" id="modal-input" class="w-full p-3 mb-6 rounded-md bg-gray-600 border border-gray-500 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 hidden">
+            <div class="modal-buttons flex justify-center space-x-4">
+                <button id="modal-ok-button" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-md transition-colors duration-300 shadow-md">OK</button>
+                <button id="modal-cancel-button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-md transition-colors duration-300 shadow-md hidden">Cancel</button>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Libraries - Load asynchronously -->
-    <script src="jqlibmin.js" defer></script>
-    <script src="cloudjq.js" defer></script>
-    <script src="particles.js" defer></script>
+    <!-- Particles.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <!-- Custom JavaScript -->
-    <script src="main.js" defer></script>
-    
-    <!-- Performance optimization script -->
-    <script>
-        // Register Service Worker for better performance
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then((registration) => {
-                    console.log('ServiceWorker registration successful:', registration);
-                })
-                .catch((error) => {
-                    console.error('ServiceWorker registration failed:', error);
-                });
-        } else {
-            console.warn('ServiceWorker not supported in this browser.');
-        }
-        
-        // Optimize images with Intersection Observer
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.classList.remove('lazy');
-                            img.classList.add('loaded');
-                            imageObserver.unobserve(img);
-                        }
-                    }
-                });
-            });
-            
-            document.addEventListener('DOMContentLoaded', function() {
-                document.querySelectorAll('img[data-src]').forEach(img => {
-                    imageObserver.observe(img);
-                });
-            });
-        }
-        
-        // Preload critical resources
-        const preloadLinks = [
-            { href: 'main.css', as: 'style' },
-            { href: 'main.js', as: 'script' },
-            { href: 'jqlibmin.js', as: 'script' }
-        ];
-        
-        preloadLinks.forEach(link => {
-            const preloadLink = document.createElement('link');
-            preloadLink.rel = 'preload';
-            preloadLink.href = link.href;
-            preloadLink.as = link.as;
-            document.head.appendChild(preloadLink);
-        });
-        
-        // Performance monitoring
-        if ('performance' in window) {
-            window.addEventListener('load', function() {
-                const timing = performance.timing;
-                const loadTime = timing.loadEventEnd - timing.navigationStart;
-                setTimeout(() => {
-                    console.log('Page load time:', loadTime + 'ms');
-                }, 0);
-            });
-        }
-        
-        // particles.js integration
-        if (typeof particlesJS !== 'undefined') {
-            particlesJS.load('particles-js', 'particles.json', function() {
-                console.log('callback - particles.js config loaded');
-            });
-        } else {
-            const script = document.createElement('script');
-            script.onload = function() {
-                particlesJS.load('particles-js', 'particles.json', function() {
-                    console.log('callback - particles.js config loaded');
-                });
-            };
-            script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
-            document.head.appendChild(script);
-        }
-    </script>
-    
-    <noscript>
-        <p>This site requires JavaScript to function properly. Please enable JavaScript in your browser settings.</p>
-    </noscript>
+    <script src="script.js" defer></script>
 </body>
 </html>
