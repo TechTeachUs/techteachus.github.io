@@ -128,28 +128,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Navigation Toggle for Mobile ---
+    // Hamburger menu logic
     const navToggle = document.querySelector('.nav__toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const closeMenuButton = mobileMenu.querySelector('.fa-times').closest('button');
     const mobileMenuLinks = mobileMenu.querySelectorAll('a');
 
+    // Open mobile menu
     navToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('-translate-y-full');
+        mobileMenu.classList.remove('-translate-y-full');
     });
 
+    // Close mobile menu
     closeMenuButton.addEventListener('click', () => {
         mobileMenu.classList.add('-translate-y-full');
     });
 
+    // Close menu when a link is clicked
     mobileMenuLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
+            // Optional: smooth scroll to section
             const targetId = link.getAttribute('href');
             const targetSection = document.querySelector(targetId);
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth' });
-                mobileMenu.classList.add('-translate-y-full'); // Close menu after clicking
             }
+            mobileMenu.classList.add('-translate-y-full');
         });
     });
 
