@@ -410,5 +410,73 @@ document.addEventListener('DOMContentLoaded', () => {
             darkIcon?.classList.remove('hidden');
         }
     }
+
+    // --- Animated Name Effect ---
+    function animatedName() {
+        const name = "Mrs. Luna Ramirez";
+        const numbers = document.querySelectorAll('.nbr');
+        const nameChars = name.split('');
+        
+        // Set CSS custom property for animation delay
+        numbers.forEach((num, index) => {
+            num.style.setProperty('--i', index);
+        });
+
+        let currentIndex = 0;
+        const animationSpeed = 100; // ms between character reveals
+        const scrambleSpeed = 50; // ms between number changes during scramble
+        
+        function scrambleNumbers() {
+            numbers.forEach((num, index) => {
+                if (index <= currentIndex) {
+                    // Show the actual character for revealed positions
+                    if (nameChars[index]) {
+                        num.textContent = nameChars[index];
+                        num.style.color = '#6366f1'; // Indigo for revealed chars
+                    }
+                } else {
+                    // Show random numbers for unrevealed positions
+                    const randomNum = Math.floor(Math.random() * 10);
+                    num.textContent = randomNum;
+                    num.style.color = '#9ca3af'; // Gray for scrambling numbers
+                }
+            });
+        }
+
+        function revealNextCharacter() {
+            if (currentIndex < nameChars.length && currentIndex < numbers.length) {
+                // Reveal the next character
+                if (nameChars[currentIndex]) {
+                    numbers[currentIndex].textContent = nameChars[currentIndex];
+                    numbers[currentIndex].style.color = '#6366f1';
+                    numbers[currentIndex].style.transform = 'scale(1.2)';
+                    
+                    // Reset scale after animation
+                    setTimeout(() => {
+                        if (numbers[currentIndex]) {
+                            numbers[currentIndex].style.transform = 'scale(1)';
+                        }
+                    }, 200);
+                }
+                currentIndex++;
+                
+                if (currentIndex < nameChars.length) {
+                    setTimeout(revealNextCharacter, animationSpeed);
+                } else {
+                    // Animation complete, stop scrambling
+                    clearInterval(scrambleInterval);
+                }
+            }
+        }
+
+        // Start the scrambling effect
+        const scrambleInterval = setInterval(scrambleNumbers, scrambleSpeed);
+        
+        // Start revealing characters after a short delay
+        setTimeout(revealNextCharacter, 500);
+    }
+
+    // Start the animated name effect when page loads
+    setTimeout(animatedName, 1500); // Wait for loader to finish
 });
 

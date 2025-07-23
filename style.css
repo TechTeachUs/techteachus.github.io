@@ -104,6 +104,55 @@ body {
     text-shadow: 0 0 10px rgba(99, 102, 241, 0.8);
 }
 
+/* Animated Name Effect */
+.random {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1.2;
+    color: #6366f1;
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    letter-spacing: 0.1em;
+}
+
+.nbr {
+    display: inline-block;
+    margin: 0 0.05em;
+    transition: all 0.3s ease;
+    animation: numberFlip 0.1s ease-in-out;
+}
+
+.ltr {
+    animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes numberFlip {
+    0% { 
+        transform: rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: rotateY(90deg) scale(0.8);
+        opacity: 0.5;
+    }
+    100% { 
+        transform: rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments for the animated name */
+@media (max-width: 768px) {
+    .random {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .random {
+        font-size: 2rem;
+    }
+}
+
 /* Photo spacing adjustments */
 .person {
     margin-right: 3rem; /* Additional right margin for photo container */
