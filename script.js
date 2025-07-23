@@ -378,5 +378,37 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // --- Theme Toggle Functionality ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const lightIcon = document.querySelector('.theme-icon-light');
+    const darkIcon = document.querySelector('.theme-icon-dark');
+    const body = document.body;
+
+    // Check for saved theme preference or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    body.setAttribute('data-theme', savedTheme);
+    updateThemeIcons(savedTheme);
+
+    // Theme toggle event listener
+    themeToggle?.addEventListener('click', () => {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcons(newTheme);
+    });
+
+    // Function to update theme icons
+    function updateThemeIcons(theme) {
+        if (theme === 'light') {
+            lightIcon?.classList.remove('hidden');
+            darkIcon?.classList.add('hidden');
+        } else {
+            lightIcon?.classList.add('hidden');
+            darkIcon?.classList.remove('hidden');
+        }
+    }
 });
 

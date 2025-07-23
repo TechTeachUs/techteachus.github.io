@@ -12,8 +12,105 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- Theme Variables -->
+    <style>
+        :root {
+            /* Light theme colors */
+            --bg-primary-light: #f8fafc;
+            --bg-secondary-light: #f1f5f9;
+            --bg-tertiary-light: #e2e8f0;
+            --text-primary-light: #1e293b;
+            --text-secondary-light: #475569;
+            --text-accent-light: #6366f1;
+            --border-light: #cbd5e1;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            
+            /* Dark theme colors (current) */
+            --bg-primary-dark: #111827;
+            --bg-secondary-dark: #1f2937;
+            --bg-tertiary-dark: #374151;
+            --text-primary-dark: #f9fafb;
+            --text-secondary-dark: #d1d5db;
+            --text-accent-dark: #818cf8;
+            --border-dark: #4b5563;
+            --shadow-dark: rgba(0, 0, 0, 0.25);
+        }
+
+        /* Default to dark theme */
+        [data-theme="dark"] {
+            --bg-primary: var(--bg-primary-dark);
+            --bg-secondary: var(--bg-secondary-dark);
+            --bg-tertiary: var(--bg-tertiary-dark);
+            --text-primary: var(--text-primary-dark);
+            --text-secondary: var(--text-secondary-dark);
+            --text-accent: var(--text-accent-dark);
+            --border-color: var(--border-dark);
+            --shadow-color: var(--shadow-dark);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: var(--bg-primary-light);
+            --bg-secondary: var(--bg-secondary-light);
+            --bg-tertiary: var(--bg-tertiary-light);
+            --text-primary: var(--text-primary-light);
+            --text-secondary: var(--text-secondary-light);
+            --text-accent: var(--text-accent-light);
+            --border-color: var(--border-light);
+            --shadow-color: var(--shadow-light);
+        }
+
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Light theme overrides */
+        [data-theme="light"] .bg-gray-900 {
+            background-color: var(--bg-primary) !important;
+        }
+        
+        [data-theme="light"] .bg-gray-800 {
+            background-color: var(--bg-secondary) !important;
+        }
+        
+        [data-theme="light"] .bg-gray-700 {
+            background-color: var(--bg-tertiary) !important;
+        }
+        
+        [data-theme="light"] .text-white {
+            color: var(--text-primary) !important;
+        }
+        
+        [data-theme="light"] .text-indigo-300 {
+            color: var(--text-accent) !important;
+        }
+        
+        [data-theme="light"] nav {
+            background-color: var(--bg-secondary) !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        [data-theme="light"] #particles-js {
+            opacity: 0.3;
+        }
+        
+        /* Theme toggle button styles */
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .theme-icon-light,
+        .theme-icon-dark {
+            font-size: 18px;
+            transition: opacity 0.3s ease;
+        }
+    </style>
 </head>
-<body class="overflow-x-hidden font-inter">
+<body class="overflow-x-hidden font-inter" data-theme="dark">
     <!-- Loader -->
     <div class="loader fixed inset-0 bg-gray-900 flex items-center justify-center z-[9999]">
         <div class="loader-container flex flex-col items-center">
@@ -36,10 +133,17 @@
             <h1 class="text-white text-3xl font-bold">Mrs. Ramirez</h1>
             <p class="text-indigo-300 text-sm" data-delay="200ms">Game Dev & Web Design</p>
         </div>
-        <!-- Hamburger icon: visible only on mobile -->
-        <button class="nav__toggle md:hidden text-white text-2xl focus:outline-none" aria-label="Toggle navigation menu">
-            <i class="fa fa-bars"></i>
-        </button>
+        <div class="flex items-center space-x-4">
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle" class="theme-toggle p-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-label="Toggle theme">
+                <i class="fas fa-sun theme-icon-light hidden"></i>
+                <i class="fas fa-moon theme-icon-dark"></i>
+            </button>
+            <!-- Hamburger icon: visible only on mobile -->
+            <button class="nav__toggle md:hidden text-white text-2xl focus:outline-none" aria-label="Toggle navigation menu">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
         <!-- Desktop menu: hidden on mobile -->
         <ul class="nav__links hidden md:flex space-x-8">
             <li class="animated fadeInDown" data-delay="400ms"><a href="#home" class="text-white hover:text-indigo-400 transition-colors duration-300">Home</a></li>
