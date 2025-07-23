@@ -12,6 +12,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- Additional Photo Styling -->
+    <style>
+        .photo-background-blend {
+            background: radial-gradient(circle at center, transparent 30%, rgba(17, 24, 39, 0.8) 70%);
+            mix-blend-mode: screen;
+            filter: contrast(1.1) brightness(1.05);
+        }
+        
+        .photo-container {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+        }
+    </style>
     <!-- Theme Variables -->
  
 </head>
@@ -117,8 +129,8 @@
                 </div>
                 <div class="person animated fadeInRight flex-shrink-0">
                     <!-- Mrs. Ramirez's image -->
-                    <div class="relative">
-                        <img loading="lazy" src="icons/lr1.png" alt="Mrs. Ramirez - Game Design & Web Development Teacher" class="rounded-2xl shadow-2xl max-w-full h-auto object-cover border-4 border-indigo-500/200" width="350" height="450" onerror="this.onerror=null;this.src='icons/lr2.png';">
+                    <div class="relative photo-container rounded-2xl">
+                        <img loading="lazy" src="icons/lr1.png" alt="Mrs. Ramirez - Game Design & Web Development Teacher" class="rounded-2xl shadow-2xl max-w-full h-auto object-cover border-4 border-indigo-500/20 photo-background-blend" width="350" height="450" onerror="this.onerror=null;this.src='icons/lr2.png';">
                         <!-- Decorative elements -->
                         <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-20"></div>
                     </div>
