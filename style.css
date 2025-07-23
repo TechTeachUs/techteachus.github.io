@@ -119,6 +119,32 @@ nav {
     text-shadow: 0 0 10px rgba(99, 102, 241, 0.8);
 }
 
+/* Photo spacing adjustments */
+.person {
+    margin-right: 3rem; /* Additional right margin for photo container */
+}
+
+@media (min-width: 768px) {
+    .person {
+        margin-right: 4rem; /* Even more space on larger screens */
+    }
+    
+    #home .container {
+        padding-right: 3rem; /* Extra right padding for the entire home section */
+        max-width: 1100px; /* Constrain container width for better spacing */
+    }
+}
+
+@media (min-width: 1024px) {
+    .person {
+        margin-right: 5rem; /* Maximum space on desktop */
+    }
+    
+    #home .container {
+        padding-right: 4rem; /* Extra right padding on desktop */
+    }
+}
+
 /* Content Blocks */
 .content-block {
     /* Tailwind classes handle background, padding, border-radius, shadow */
