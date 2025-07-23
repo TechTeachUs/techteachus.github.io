@@ -415,7 +415,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function animatedName() {
         const name = "Mrs. Luna Ramirez";
         const numbers = document.querySelectorAll('.nbr');
+        
+        // Check if elements exist
+        if (!numbers || numbers.length === 0) {
+            console.log('No .nbr elements found');
+            return;
+        }
+        
+        console.log(`Found ${numbers.length} number elements`);
+        
         const nameChars = name.split('');
+        
+        // Ensure we have enough number elements
+        if (numbers.length < nameChars.length) {
+            console.warn(`Not enough number elements. Need ${nameChars.length}, found ${numbers.length}`);
+        }
         
         // Set CSS custom property for animation delay
         numbers.forEach((num, index) => {
@@ -423,8 +437,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         let currentIndex = 0;
-        const animationSpeed = 100; // ms between character reveals
-        const scrambleSpeed = 50; // ms between number changes during scramble
+        const animationSpeed = 150; // ms between character reveals
+        const scrambleSpeed = 80; // ms between number changes during scramble
+        let scrambleInterval;
         
         function scrambleNumbers() {
             numbers.forEach((num, index) => {
@@ -433,12 +448,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (nameChars[index]) {
                         num.textContent = nameChars[index];
                         num.style.color = '#6366f1'; // Indigo for revealed chars
+                        num.style.fontWeight = 'bold';
                     }
                 } else {
                     // Show random numbers for unrevealed positions
                     const randomNum = Math.floor(Math.random() * 10);
                     num.textContent = randomNum;
                     num.style.color = '#9ca3af'; // Gray for scrambling numbers
+                    num.style.fontWeight = 'normal';
                 }
             });
         }
@@ -446,9 +463,10 @@ document.addEventListener('DOMContentLoaded', () => {
         function revealNextCharacter() {
             if (currentIndex < nameChars.length && currentIndex < numbers.length) {
                 // Reveal the next character
-                if (nameChars[currentIndex]) {
+                if (nameChars[currentIndex] && numbers[currentIndex]) {
                     numbers[currentIndex].textContent = nameChars[currentIndex];
                     numbers[currentIndex].style.color = '#6366f1';
+                    numbers[currentIndex].style.fontWeight = 'bold';
                     numbers[currentIndex].style.transform = 'scale(1.2)';
                     
                     // Reset scale after animation
@@ -464,19 +482,64 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(revealNextCharacter, animationSpeed);
                 } else {
                     // Animation complete, stop scrambling
-                    clearInterval(scrambleInterval);
+                    if (scrambleInterval) {
+                        clearInterval(scrambleInterval);
+                    }
+                    console.log('Animation complete');
                 }
             }
         }
 
         // Start the scrambling effect
-        const scrambleInterval = setInterval(scrambleNumbers, scrambleSpeed);
+        scrambleInterval = setInterval(scrambleNumbers, scrambleSpeed);
         
         // Start revealing characters after a short delay
-        setTimeout(revealNextCharacter, 500);
+        setTimeout(revealNextCharacter, 800);
+        
+        console.log('Animation started');
     }
 
-    // Start the animated name effect when page loads
-    setTimeout(animatedName, 1500); // Wait for loader to finish
+    // Multiple ways to ensure the animation starts
+    function startNameAnimation() {
+        // Wait for all content to be loaded
+        if (document.readyState === 'complete') {
+            setTimeout(animatedName, 1000);
+        } else {
+            window.addEventListener('load', () => {
+                setTimeout(animatedName, 1000);
+            });
+        }
+        
+        // Fallback - try again after a longer delay
+        setTimeout(() => {
+            const numbers = document.querySelectorAll('.nbr');
+            if (numbers.length > 0 && numbers[0].textContent === '0') {
+                console.log('Fallback animation trigger');
+                animatedName();
+            }
+        }, 3000);
+    }
+
+    // Manual trigger function for the fallback button
+    window.triggerNameAnimation = function() {
+        console.log('Manual trigger activated');
+        animatedName();
+    };
+
+    // Click anywhere on page as another fallback
+    let animationTriggered = false;
+    document.addEventListener('click', function() {
+        if (!animationTriggered) {
+            const numbers = document.querySelectorAll('.nbr');
+            if (numbers.length > 0 && numbers[0].textContent === '0') {
+                console.log('Click trigger activated');
+                animationTriggered = true;
+                animatedName();
+            }
+        }
+    });
+
+    // Start the animation
+    startNameAnimation();
 });
 
