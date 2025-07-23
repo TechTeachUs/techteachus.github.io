@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Animated Name Effect ---
     function animatedName() {
-        const name = "Mrs. Luna Ramirez";
+        const name = "Ramirez's Classes!";
         const numbers = document.querySelectorAll('.nbr');
         
         // Check if elements exist

@@ -106,26 +106,35 @@ body {
 
 /* Animated Name Effect */
 .random {
-    font-size: 4rem;
+    font-size: 2.5rem;
     font-weight: 900;
-    line-height: 1.2;
+    line-height: 1.1;
     color: #6366f1;
     text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
-    letter-spacing: 0.1em;
-    min-height: 4.8rem; /* Prevent layout shift */
+    letter-spacing: 0.05em;
+    min-height: 5.5rem; /* Prevent layout shift */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    max-width: 500px; /* Control line breaking */
+    margin: 0 auto;
 }
 
 .nbr {
     display: inline-block;
-    margin: 0 0.05em;
+    margin: 0 0.02em;
     transition: all 0.3s ease;
     animation: numberFlip 0.1s ease-in-out;
-    min-width: 0.5em;
+    min-width: 0.4em;
     text-align: center;
+}
+
+/* Force line break after "Ramirez's" (9th character including apostrophe and space) */
+.nbr:nth-child(9)::after {
+    content: "";
+    flex-basis: 100%;
+    height: 0;
 }
 
 .ltr {
@@ -170,15 +179,23 @@ body {
 /* Responsive adjustments for the animated name */
 @media (max-width: 768px) {
     .random {
-        font-size: 2.5rem;
-        min-height: 3rem;
+        font-size: 2rem;
+        min-height: 4.4rem;
+        max-width: 400px;
     }
 }
 
 @media (max-width: 480px) {
     .random {
-        font-size: 2rem;
-        min-height: 2.4rem;
+        font-size: 1.5rem;
+        min-height: 3.3rem;
+        max-width: 300px;
+        letter-spacing: 0.02em;
+    }
+    
+    .nbr {
+        margin: 0 0.01em;
+        min-width: 0.3em;
     }
 }
 
