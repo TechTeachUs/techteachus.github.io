@@ -74,21 +74,6 @@ body {
     z-index: 0; /* Ensure it's behind content */
 }
 
-/* Navigation Bar */
-nav {
-    /* Tailwind classes are used directly in HTML for nav */
-}
-
-/* Mobile Navigation Menu */
-#mobile-menu {
-    /* Tailwind classes are used directly in HTML for mobile-menu */
-}
-
-/* Scroll Bar */
-.scroll-bar {
-    /* Tailwind classes are used directly in HTML for scroll-bar */
-}
-
 .dots__circle.active {
     background-color: #6366F1; /* Indigo-500 for active dot */
     transform: scale(1.2); /* Slightly enlarge active dot */
@@ -191,11 +176,6 @@ nav {
     object-fit: contain;
 }
 
-/* Resources Grid */
-.resources-grid {
-    /* Tailwind classes handle grid layout */
-}
-
 .resource-category ul li img {
     object-fit: contain;
 }
@@ -203,23 +183,6 @@ nav {
 /* Footer */
 footer a {
     text-decoration: none;
-}
-
-/* Custom Modal Styles */
-.modal {
-    /* Tailwind classes handle fixed, inset, background, flex, items-center, justify-center, z-index, hidden */
-}
-
-.modal-content {
-    /* Tailwind classes handle background, padding, border-radius, shadow, text-color, max-width, width */
-}
-
-.modal-buttons button {
-    /* Tailwind classes handle background, hover, text-color, font-bold, padding, border-radius, transition, shadow */
-}
-
-.modal-input {
-    /* Tailwind classes handle width, padding, border-radius, background, border, text-color, placeholder, focus */
 }
 
 /* Animation Classes (replicated from original with CSS keyframes) */
