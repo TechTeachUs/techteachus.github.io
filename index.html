@@ -206,13 +206,17 @@
         <!-- Home Section -->
         <section id="home" class="section min-h-screen flex items-center justify-center bg-gray-900 text-white relative py-16">
             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-center text-center md:text-left z-10">
-                <div class="hero-text mb-8 md:mb-0 md:mr-12">
+                <div class="hero-text mb-8 md:mb-0 md:mr-12 flex-1">
                     <h1 class="hero__name text-5xl md:text-6xl font-extrabold leading-tight animated fadeInUp">Welcome to Mrs. Ramirez's Hub!</h1>
                     <p class="hero__subtitle text-xl md:text-2xl text-indigo-300 mt-4 animated fadeInUp" data-delay="200ms">Game Design & Web Development Pathway</p>
                 </div>
-                <div class="person animated fadeInRight">
+                <div class="person animated fadeInRight flex-shrink-0">
                     <!-- Mrs. Ramirez's image -->
-                    <img loading="lazy" data-src="https://placehold.co/400x600/6366F1/FFFFFF?text=Mrs.+Ramirez" alt="Mrs. Ramirez" class="rounded-lg shadow-lg lazy max-w-full h-auto object-cover" width="400" height="600" onerror="this.onerror=null;this.src='https://placehold.co/400x600/6366F1/FFFFFF?text=Image+Error';">
+                    <div class="relative">
+                        <img loading="lazy" src="https://placehold.co/350x450/6366F1/FFFFFF?text=Mrs.+Ramirez" alt="Mrs. Ramirez - Game Design & Web Development Teacher" class="rounded-2xl shadow-2xl max-w-full h-auto object-cover border-4 border-indigo-500/20" width="350" height="450" onerror="this.onerror=null;this.src='https://placehold.co/350x450/6366F1/FFFFFF?text=Add+Your+Photo';">
+                        <!-- Decorative elements -->
+                        <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-20"></div>
+                    </div>
                 </div>
                 <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
             </div>
