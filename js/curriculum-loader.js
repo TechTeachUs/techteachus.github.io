@@ -187,11 +187,39 @@ class CurriculumLoader {
 
         const carouselPrefix = curriculum.carouselId.replace('-cards', '');
 
+        // Determine logos based on curriculum grade/type
+        let leftLogo, leftAlt, leftError, rightLogo, rightAlt, rightError;
+        
+        if (curriculum.grade === "10th Grade") {
+            leftLogo = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg";
+            leftAlt = "Python Logo";
+            leftError = "https://placehold.co/48x48/6366F1/FFFFFF?text=Py";
+            rightLogo = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg";
+            rightAlt = "Unity Logo";
+            rightError = "https://placehold.co/48x48/6366F1/FFFFFF?text=U";
+        } else if (curriculum.grade === "11th Grade") {
+            leftLogo = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg";
+            leftAlt = "Unity Logo";
+            leftError = "https://placehold.co/48x48/6366F1/FFFFFF?text=U";
+            rightLogo = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg";
+            rightAlt = "Figma Logo";
+            rightError = "https://placehold.co/48x48/6366F1/FFFFFF?text=F";
+        } else {
+            // 12th Grade - Advanced
+            leftLogo = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg";
+            leftAlt = "HTML5 Logo";
+            leftError = "https://placehold.co/48x48/6366F1/FFFFFF?text=H5";
+            rightLogo = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg";
+            rightAlt = "JavaScript Logo";
+            rightError = "https://placehold.co/48x48/6366F1/FFFFFF?text=JS";
+        }
+
         return `
             <div class="curriculum-section mb-10">
-                <div class="curriculum-header flex items-center mb-4">
-                    <img loading="lazy" data-src="${curriculum.icon}" alt="${curriculum.iconAlt}" class="lazy w-16 h-16 mr-4 rounded-full p-2 bg-indigo-600" onerror="this.onerror=null;this.src='${curriculum.iconError}';">
-                    <h3 class="text-3xl font-semibold">${curriculum.grade}: ${curriculum.title}</h3>
+                <div class="curriculum-header flex items-center justify-center mb-4">
+                    <img loading="lazy" src="${leftLogo}" alt="${leftAlt}" class="w-12 h-12 mr-4 rounded-full p-2 bg-indigo-600" onerror="this.onerror=null;this.src='${leftError}';">
+                    <h3 class="text-3xl font-semibold text-center">${curriculum.grade}: ${curriculum.title}</h3>
+                    <img loading="lazy" src="${rightLogo}" alt="${rightAlt}" class="w-12 h-12 ml-4 rounded-full p-2 bg-indigo-600" onerror="this.onerror=null;this.src='${rightError}';">
                 </div>
                 <div class="table-wrapper overflow-x-auto">
                     <table class="curriculum-table w-full text-left border-collapse">
