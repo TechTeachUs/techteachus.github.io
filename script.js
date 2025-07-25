@@ -11,135 +11,82 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Particles.js Initialization ---
-    // Enhanced particles.js configuration for better visibility
     function initParticles() {
-        if (typeof particlesJS !== 'undefined') {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": ["#6366F1", "#8B5CF6", "#A78BFA"] // Various indigo/purple shades
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 4,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 3,
-                            "size_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
+        console.log('Initializing particles...');
+        
+        const container = document.getElementById('particles-js');
+        if (!container) {
+            console.error('Particles container not found!');
+            return;
+        }
+        
+        if (typeof particlesJS === 'undefined') {
+            console.error('Particles.js library not loaded!');
+            return;
+        }
+        
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
                         "enable": true,
-                        "distance": 150,
-                        "color": "#a78bfa",
-                        "opacity": 0.3,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 2,
-                        "direction": "none",
-                        "random": false,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": false,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                        }
+                        "value_area": 800
                     }
                 },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "bubble": {
-                            "distance": 400,
-                            "size": 40,
-                            "duration": 2,
-                            "opacity": 8,
-                            "speed": 3
-                        },
-                        "repulse": {
-                            "distance": 200,
-                            "duration": 0.4
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        },
-                        "remove": {
-                            "particles_nb": 2
-                        }
-                    }
+                "color": {
+                    "value": "#01627f"
                 },
-                "retina_detect": true
-            });
-            console.log('Particles.js initialized successfully');
-        } else {
-            console.warn("Particles.js library not loaded. Retrying...");
-            // Retry after a short delay with backoff
-            setTimeout(initParticles, 500);
-        }
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.8,
+                    "random": false
+                },
+                "size": {
+                    "value": 4,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#01627f",
+                    "opacity": 0.6,
+                    "width": 1.5
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                }
+            },
+            "retina_detect": true
+        });
+        
+        console.log('Particles initialized successfully!');
     }
 
-    // Initialize particles with robust loading
-    function startParticles() {
-        if (document.getElementById('particles-js')) {
-            initParticles();
-        } else {
-            console.warn('Particles container not found. Retrying...');
-            setTimeout(startParticles, 100);
-        }
-    }
-
-    // Initialize particles when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', startParticles);
-    } else {
-        startParticles();
-    }
+    // Initialize particles immediately
+    initParticles();
 
     // --- Navigation Toggle for Mobile ---
     // Hamburger menu logic
@@ -399,8 +346,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const darkIcon = document.querySelector('.theme-icon-dark');
     const body = document.body;
 
-    // Check for saved theme preference or default to dark
-    const savedTheme = localStorage.getItem('theme') || 'dark';
+    // Check for saved theme preference or default to light (since we redesigned for light theme)
+    const savedTheme = localStorage.getItem('theme') || 'light';
     body.setAttribute('data-theme', savedTheme);
     updateThemeIcons(savedTheme);
 
@@ -412,10 +359,13 @@ document.addEventListener('DOMContentLoaded', () => {
         body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeIcons(newTheme);
+        
+        console.log('Theme switched to:', newTheme); // Debug log
     });
 
     // Function to update theme icons
     function updateThemeIcons(theme) {
+        console.log('Updating theme icons for:', theme); // Debug log
         if (theme === 'light') {
             lightIcon?.classList.remove('hidden');
             darkIcon?.classList.add('hidden');
@@ -427,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Animated Name Effect ---
     function animatedName() {
-        const name = "Ramirez's Classes!";
+        const name = "Mrs. Ramirez's Classes!";
         const numbers = document.querySelectorAll('.nbr');
         
         // Check if elements exist
@@ -461,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Show the actual character for revealed positions
                     if (nameChars[index]) {
                         num.textContent = nameChars[index];
-                        num.style.color = '#6366f1'; // Indigo for revealed chars
+                        num.style.color = '#01627f'; // Teal for revealed chars
                         num.style.fontWeight = 'bold';
                     }
                 } else {
@@ -479,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Reveal the next character
                 if (nameChars[currentIndex] && numbers[currentIndex]) {
                     numbers[currentIndex].textContent = nameChars[currentIndex];
-                    numbers[currentIndex].style.color = '#6366f1';
+                    numbers[currentIndex].style.color = '#01627f';
                     numbers[currentIndex].style.fontWeight = 'bold';
                     numbers[currentIndex].style.transform = 'scale(1.2)';
                     
