@@ -1,0 +1,115 @@
+{
+  "curricula": [
+    {
+      "id": "python-curriculum",
+      "grade": "10th Grade",
+      "title": "CS Fundamentals with Python",
+      "icon": "https://placehold.co/64x64/6366F1/FFFFFF?text=Python",
+      "iconAlt": "Python Logo",
+      "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
+      "carouselId": "python-cards",
+      "weeks": [
+        {
+          "weekRange": "1-8",
+          "topic": "Introduction to Python & Algorithms",
+          "keyConcepts": "Variables, Data Types, Control Flow, Functions, Basic Algorithms",
+          "projects": "Python Calculator, Number Guessing Game"
+        },
+        {
+          "weekRange": "9-16",
+          "topic": "Data Structures & Backend Programming",
+          "keyConcepts": "Lists, Dictionaries, File I/O, Introduction to Flask",
+          "projects": "Text-based Adventure Game, Simple Web App with Flask"
+        },
+        {
+          "weekRange": "17-24",
+          "topic": "UI/UX Design Fundamentals (Figma)",
+          "keyConcepts": "Wireframing, Prototyping, User-Centered Design",
+          "projects": "Emoticon Design League (Figma project)"
+        },
+        {
+          "weekRange": "25-32",
+          "topic": "Databases & SQL Basics",
+          "keyConcepts": "Relational Databases, SQL Queries, Database Integration",
+          "projects": "Queue Management System (Python + SQL)"
+        },
+        {
+          "weekRange": "33-36",
+          "topic": "Capstone Prep & Review",
+          "keyConcepts": "Project Planning, Debugging, Code Optimization",
+          "projects": "G4C Challenge preparation"
+        }
+      ]
+    },
+    {
+      "id": "unity-curriculum",
+      "grade": "11th Grade",
+      "title": "Game Development with Unity",
+      "icon": "https://placehold.co/64x64/6366F1/FFFFFF?text=Unity",
+      "iconAlt": "Unity Logo",
+      "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
+      "carouselId": "unity-cards",
+      "weeks": [
+        {
+          "weekRange": "1-8",
+          "topic": "Introduction to Unity & C#",
+          "keyConcepts": "Unity Interface, Scripting Basics, Game Objects, Components",
+          "projects": "First 2D Game (basic movement, collisions)"
+        },
+        {
+          "weekRange": "9-16",
+          "topic": "2D Game Development",
+          "keyConcepts": "Sprites, Animations, Tilemaps, Physics, UI Elements",
+          "projects": "Platformer Game, Top-down Shooter"
+        },
+        {
+          "weekRange": "17-24",
+          "topic": "Game Debugging & Audio",
+          "keyConcepts": "Debugging Tools, Error Handling, Sound Effects, Background Music",
+          "projects": "Adding audio and debugging to existing games"
+        },
+        {
+          "weekRange": "25-32",
+          "topic": "Introduction to 3D Game Development",
+          "keyConcepts": "3D Models, Lighting, Materials, Basic 3D Physics",
+          "projects": "Simple 3D Maze Game"
+        },
+        {
+          "weekRange": "33-36",
+          "topic": "IT Specialist HTML5 Certification Prep & InfyApp Challenge",
+          "keyConcepts": "Review HTML5 concepts, Project-based learning for InfyApp",
+          "projects": "InfyApp Challenge participation"
+        }
+      ]
+    },
+    {
+      "id": "advanced-curriculum",
+      "grade": "12th Grade",
+      "title": "Advanced Game & Web Development",
+      "icon": "https://placehold.co/64x64/6366F1/FFFFFF?text=Advanced",
+      "iconAlt": "Advanced Dev Logo",
+      "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
+      "carouselId": "advanced-cards",
+      "weeks": [
+        {
+          "weekRange": "1-8",
+          "topic": "Advanced Web Development (HTML5, CSS3, JavaScript)",
+          "keyConcepts": "Responsive Design, Flexbox, Grid, CSS Animations, DOM Manipulation",
+          "projects": "Personal Portfolio Website, Interactive Web Application"
+        },
+        {
+          "weekRange": "9-16",
+          "topic": "Advanced Unity Features",
+          "keyConcepts": "AI Pathfinding, Multiplayer Basics, Advanced Lighting & Shaders",
+          "projects": "AI-driven Enemy Behavior, Simple Multiplayer Prototype"
+        },
+        {
+          "weekRange": "17-36",
+          "topic": "Capstone Project: Game Development & Publishing",
+          "keyConcepts": "Full Game Development Cycle, Marketing, Publishing",
+          "projects": "Develop, market, and publish an original game"
+        }
+      ]
+    }
+  ]
+}
