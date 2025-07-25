@@ -49,7 +49,22 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <!-- Logo -->
             <div class="nav__logo">
-                <h1 class="text-white text-2xl font-bold">🌜 Mrs. Ramirez</h1>
+                <h1 class="text-white text-2xl font-bold">
+                    🌜 <span class="nav-typing">
+                        <span class="nav-nbr">0</span>
+                        <span class="nav-nbr">0</span>
+                        <span class="nav-nbr">0</span>
+                        <span class="nav-nbr">0</span>
+                        <span class="nav-nbr">0</span>
+                        <span class="nav-nbr">0</span>
+                        <span class="nav-nbr">0</span>
+                        <span class="nav-nbr">0</span>
+                        <span class="nav-nbr">0</span>
+                        <span class="nav-nbr">0</span>
+                        <span class="nav-nbr">0</span>
+                        <span class="nav-nbr">0</span>
+                    </span>
+                </h1>
             </div>
             
             <!-- Desktop Navigation Links -->
@@ -123,7 +138,8 @@
         <!-- Home Section -->
         <section id="home" class="section min-h-screen flex items-center justify-center bg-gray-900 text-white relative py-16">
             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-center text-center md:text-left z-10 max-w-5xl">
-                <div class="hero-text mb-8 md:mb-0 md:mr-16 flex-1">
+                <!-- Hero Text Section - 90% width -->
+                <div class="hero-text-section w-[90%]">
                     <div class="random hero__name mb-4">
                         <span class="nbr ltr">0</span>
                         <span class="nbr ltr">0</span>
@@ -145,10 +161,10 @@
                         <span class="nbr ltr">0</span>
                         <span class="nbr ltr">0</span>
                         <span class="nbr ltr">0</span>
-                        <span class="nbr ltr">0</span>
                     </div>
-                    <p class="hero__subtitle text-xl md:text-2xl text-indigo-300 mt-4 animated fadeInUp" data-delay="200ms">Game Design & Web Development Pathway</p>
+                    <p class="hero__subtitle animated fadeInUp" data-delay="200ms">Game Design & Web Development Pathway</p>
                 </div>
+                
                 <div class="person animated fadeInRight flex-shrink-0 md:mr-8">
                     <!-- Mrs. Ramirez's image -->
                     <div class="relative photo-container rounded-2xl">
@@ -157,8 +173,8 @@
                         <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-20"></div>
                     </div>
                 </div>
-                <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
             </div>
+            <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
         </section>
 
         <!-- About Mrs. Ramirez Section -->
@@ -200,35 +216,101 @@
                                 </thead>
                                 <tbody>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 border-b border-gray-600">1-8</td>
-                                        <td class="p-4 border-b border-gray-600">Introduction to Python & Algorithms</td>
-                                        <td class="p-4 border-b border-gray-600">Variables, Data Types, Control Flow, Functions, Basic Algorithms</td>
-                                        <td class="p-4 border-b border-gray-600">Python Calculator, Number Guessing Game</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Weeks">1-8</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Topics">Introduction to Python & Algorithms</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Key Concepts">Variables, Data Types, Control Flow, Functions, Basic Algorithms</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Projects/Activities">Python Calculator, Number Guessing Game</td>
                                     </tr>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 border-b border-gray-600">9-16</td>
-                                        <td class="p-4 border-b border-gray-600">Data Structures & Backend Programming</td>
-                                        <td class="p-4 border-b border-gray-600">Lists, Dictionaries, File I/O, Introduction to Flask</td>
-                                        <td class="p-4 border-b border-gray-600">Text-based Adventure Game, Simple Web App with Flask</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Weeks">9-16</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Topics">Data Structures & Backend Programming</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Key Concepts">Lists, Dictionaries, File I/O, Introduction to Flask</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Projects/Activities">Text-based Adventure Game, Simple Web App with Flask</td>
                                     </tr>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 border-b border-gray-600">17-24</td>
-                                        <td class="p-4 border-b border-gray-600">UI/UX Design Fundamentals (Figma)</td>
-                                        <td class="p-4 border-b border-gray-600">Wireframing, Prototyping, User-Centered Design</td>
-                                        <td class="p-4 border-b border-gray-600">Emoticon Design League (Figma project)</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Weeks">25-32</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Topics">Databases & SQL Basics</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Key Concepts">Relational Databases, SQL Queries, Database Integration</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Projects/Activities">Queue Management System (Python + SQL)</td>
                                     </tr>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 border-b border-gray-600">25-32</td>
-                                        <td class="p-4 border-b border-gray-600">Databases & SQL Basics</td>
-                                        <td class="p-4 border-b border-gray-600">Relational Databases, SQL Queries, Database Integration</td>
-                                        <td class="p-4 border-b border-gray-600">Queue Management System (Python + SQL)</td>
+                                        <td class="p-4 rounded-bl-lg" data-label="Weeks">33-36</td>
+                                        <td class="p-4" data-label="Topics">Capstone Prep & Review</td>
+                                        <td class="p-4" data-label="Key Concepts">Project Planning, Debugging, Code Optimization</td>
+                                        <td class="p-4 rounded-br-lg" data-label="Projects/Activities">G4C Challenge preparation</td>
                                     </tr>
-                                    <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 rounded-bl-lg">33-36</td>
-                                        <td class="p-4">Capstone Prep & Review</td>
-                                        <td class="p-4">Project Planning, Debugging, Code Optimization</td>
-                                        <td class="p-4 rounded-br-lg">G4C Challenge preparation</td>
-                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <!-- Mobile Card Carousel -->
+                            <div class="mobile-cards">
+                                <div class="card-carousel">
+                                    <div class="cards-container" id="python-cards">
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 1-8: Introduction to Python & Algorithms</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">Variables, Data Types, Control Flow, Functions, Basic Algorithms</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">Python Calculator, Number Guessing Game</span>
+                                            </div>
+                                        </div>
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 9-16: Data Structures & Backend Programming</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">Lists, Dictionaries, File I/O, Introduction to Flask</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">Text-based Adventure Game, Simple Web App with Flask</span>
+                                            </div>
+                                        </div>
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 17-24: UI/UX Design Fundamentals (Figma)</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">Wireframing, Prototyping, User-Centered Design</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">Emoticon Design League (Figma project)</span>
+                                            </div>
+                                        </div>
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 25-32: Databases & SQL Basics</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">Relational Databases, SQL Queries, Database Integration</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">Queue Management System (Python + SQL)</span>
+                                            </div>
+                                        </div>
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 33-36: Capstone Prep & Review</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">Project Planning, Debugging, Code Optimization</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">G4C Challenge preparation</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-navigation">
+                                    <button class="card-nav-button" onclick="previousCard('python-cards')" id="python-prev">‹ Prev</button>
+                                    <div class="card-indicator">
+                                        <span class="card-counter"><span id="python-current">1</span> / <span id="python-total">5</span></span>
+                                    </div>
+                                    <button class="card-nav-button" onclick="nextCard('python-cards')" id="python-next">Next ›</button>
+                                </div>
+                            </div>
                                 </tbody>
                             </table>
                         </div>
@@ -251,37 +333,107 @@
                                 </thead>
                                 <tbody>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 border-b border-gray-600">1-8</td>
-                                        <td class="p-4 border-b border-gray-600">Introduction to Unity & C#</td>
-                                        <td class="p-4 border-b border-gray-600">Unity Interface, Scripting Basics, Game Objects, Components</td>
-                                        <td class="p-4 border-b border-gray-600">First 2D Game (basic movement, collisions)</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Weeks">1-8</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Topics">Introduction to Unity & C#</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Key Concepts">Unity Interface, Scripting Basics, Game Objects, Components</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Projects/Activities">First 2D Game (basic movement, collisions)</td>
                                     </tr>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 border-b border-gray-600">9-16</td>
-                                        <td class="p-4 border-b border-gray-600">2D Game Development</td>
-                                        <td class="p-4 border-b border-gray-600">Sprites, Animations, Tilemaps, Physics, UI Elements</td>
-                                        <td class="p-4 border-b border-gray-600">Platformer Game, Top-down Shooter</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Weeks">9-16</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Topics">2D Game Development</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Key Concepts">Sprites, Animations, Tilemaps, Physics, UI Elements</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Projects/Activities">Platformer Game, Top-down Shooter</td>
                                     </tr>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 border-b border-gray-600">17-24</td>
-                                        <td class="p-4 border-b border-gray-600">Game Debugging & Audio</td>
-                                        <td class="p-4 border-b border-gray-600">Debugging Tools, Error Handling, Sound Effects, Background Music</td>
-                                        <td class="p-4 border-b border-gray-600">Adding audio and debugging to existing games</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Weeks">17-24</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Topics">Game Debugging & Audio</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Key Concepts">Debugging Tools, Error Handling, Sound Effects, Background Music</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Projects/Activities">Adding audio and debugging to existing games</td>
                                     </tr>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 border-b border-gray-600">25-32</td>
-                                        <td class="p-4 border-b border-gray-600">Introduction to 3D Game Development</td>
-                                        <td class="p-4 border-b border-gray-600">3D Models, Lighting, Materials, Basic 3D Physics</td>
-                                        <td class="p-4 border-b border-gray-600">Simple 3D Maze Game</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Weeks">25-32</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Topics">Introduction to 3D Game Development</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Key Concepts">3D Models, Lighting, Materials, Basic 3D Physics</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Projects/Activities">Simple 3D Maze Game</td>
                                     </tr>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 rounded-bl-lg">33-36</td>
-                                        <td class="p-4">IT Specialist HTML5 Certification Prep & InfyApp Challenge</td>
-                                        <td class="p-4">Review HTML5 concepts, Project-based learning for InfyApp</td>
-                                        <td class="p-4 rounded-br-lg">InfyApp Challenge participation</td>
+                                        <td class="p-4 rounded-bl-lg" data-label="Weeks">33-36</td>
+                                        <td class="p-4" data-label="Topics">IT Specialist HTML5 Certification Prep & InfyApp Challenge</td>
+                                        <td class="p-4" data-label="Key Concepts">Review HTML5 concepts, Project-based learning for InfyApp</td>
+                                        <td class="p-4 rounded-br-lg" data-label="Projects/Activities">InfyApp Challenge participation</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            
+                            <!-- Mobile Card Carousel -->
+                            <div class="mobile-cards">
+                                <div class="card-carousel">
+                                    <div class="cards-container" id="unity-cards">
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 1-8: Introduction to Unity & C#</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">Unity Interface, Scripting Basics, Game Objects, Components</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">First 2D Game (basic movement, collisions)</span>
+                                            </div>
+                                        </div>
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 9-16: 2D Game Development</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">Sprites, Animations, Tilemaps, Physics, UI Elements</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">Platformer Game, Top-down Shooter</span>
+                                            </div>
+                                        </div>
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 17-24: Game Debugging & Audio</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">Debugging Tools, Error Handling, Sound Effects, Background Music</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">Adding audio and debugging to existing games</span>
+                                            </div>
+                                        </div>
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 25-32: Introduction to 3D Game Development</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">3D Models, Lighting, Materials, Basic 3D Physics</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">Simple 3D Maze Game</span>
+                                            </div>
+                                        </div>
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 33-36: IT Specialist HTML5 Certification Prep & InfyApp Challenge</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">Review HTML5 concepts, Project-based learning for InfyApp</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">InfyApp Challenge participation</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-navigation">
+                                    <button class="card-nav-button" onclick="previousCard('unity-cards')" id="unity-prev">‹ Prev</button>
+                                    <div class="card-indicator">
+                                        <span class="card-counter"><span id="unity-current">1</span> / <span id="unity-total">5</span></span>
+                                    </div>
+                                    <button class="card-nav-button" onclick="nextCard('unity-cards')" id="unity-next">Next ›</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -302,25 +454,73 @@
                                 </thead>
                                 <tbody>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 border-b border-gray-600">1-8</td>
-                                        <td class="p-4 border-b border-gray-600">Advanced Web Development (HTML5, CSS3, JavaScript)</td>
-                                        <td class="p-4 border-b border-gray-600">Responsive Design, Flexbox, Grid, CSS Animations, DOM Manipulation</td>
-                                        <td class="p-4 border-b border-gray-600">Personal Portfolio Website, Interactive Web Application</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Weeks">1-8</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Topics">Advanced Web Development (HTML5, CSS3, JavaScript)</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Key Concepts">Responsive Design, Flexbox, Grid, CSS Animations, DOM Manipulation</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Projects/Activities">Personal Portfolio Website, Interactive Web Application</td>
                                     </tr>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 border-b border-gray-600">9-16</td>
-                                        <td class="p-4 border-b border-gray-600">Advanced Unity Features</td>
-                                        <td class="p-4 border-b border-gray-600">AI Pathfinding, Multiplayer Basics, Advanced Lighting & Shaders</td>
-                                        <td class="p-4 border-b border-gray-600">AI-driven Enemy Behavior, Simple Multiplayer Prototype</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Weeks">9-16</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Topics">Advanced Unity Features</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Key Concepts">AI Pathfinding, Multiplayer Basics, Advanced Lighting & Shaders</td>
+                                        <td class="p-4 border-b border-gray-600" data-label="Projects/Activities">AI-driven Enemy Behavior, Simple Multiplayer Prototype</td>
                                     </tr>
                                     <tr class="bg-gray-700 hover:bg-gray-600 transition-colors duration-200">
-                                        <td class="p-4 rounded-bl-lg">17-36</td>
-                                        <td class="p-4">Capstone Project: Game Development & Publishing</td>
-                                        <td class="p-4">Full Game Development Cycle, Marketing, Publishing</td>
-                                        <td class="p-4 rounded-br-lg">Develop, market, and publish an original game</td>
+                                        <td class="p-4 rounded-bl-lg" data-label="Weeks">17-36</td>
+                                        <td class="p-4" data-label="Topics">Capstone Project: Game Development & Publishing</td>
+                                        <td class="p-4" data-label="Key Concepts">Full Game Development Cycle, Marketing, Publishing</td>
+                                        <td class="p-4 rounded-br-lg" data-label="Projects/Activities">Develop, market, and publish an original game</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            
+                            <!-- Mobile Card Carousel -->
+                            <div class="mobile-cards">
+                                <div class="card-carousel">
+                                    <div class="cards-container" id="advanced-cards">
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 1-8: Advanced Web Development (HTML5, CSS3, JavaScript)</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">Responsive Design, Flexbox, Grid, CSS Animations, DOM Manipulation</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">Personal Portfolio Website, Interactive Web Application</span>
+                                            </div>
+                                        </div>
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 9-16: Advanced Unity Features</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">AI Pathfinding, Multiplayer Basics, Advanced Lighting & Shaders</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">AI-driven Enemy Behavior, Simple Multiplayer Prototype</span>
+                                            </div>
+                                        </div>
+                                        <div class="curriculum-card">
+                                            <div class="card-header">Weeks 17-36: Capstone Project: Game Development & Publishing</div>
+                                            <div class="card-row">
+                                                <span class="card-label">Key Concepts:</span>
+                                                <span class="card-value">Full Game Development Cycle, Marketing, Publishing</span>
+                                            </div>
+                                            <div class="card-row">
+                                                <span class="card-label">Projects/Activities:</span>
+                                                <span class="card-value">Develop, market, and publish an original game</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-navigation">
+                                    <button class="card-nav-button" onclick="previousCard('advanced-cards')" id="advanced-prev">‹ Prev</button>
+                                    <div class="card-indicator">
+                                        <span class="card-counter"><span id="advanced-current">1</span> / <span id="advanced-total">3</span></span>
+                                    </div>
+                                    <button class="card-nav-button" onclick="nextCard('advanced-cards')" id="advanced-next">Next ›</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -373,7 +573,7 @@
             <div class="container mx-auto px-6 max-w-4xl">
                 <h2 class="works__title text-4xl font-bold mb-8 text-center animated fadeInUp">Instructional Strategies: Collaboration, Feedback & Iterative Design</h2>
                 <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
-                    <p class="mb-4 text-lg leading-relaxed">Our teaching methodology emphasizes practical, hands-on learning and a collaborative environment:</p>
+                    <p class="mb-4 text-lg leading-relaxed">Our learning methodology emphasizes practical, hands-on learning and a collaborative environment:</p>
                     <ul class="list-disc list-inside space-y-2 text-lg pl-4">
                         <li><strong>Team-Based Projects:</strong> Students work in teams on major projects like the G4C Challenge and Capstone, mirroring industry practices.</li>
                         <li><strong>Pair Programming:</strong> Encourages collaborative coding, knowledge sharing, and immediate feedback.</li>
@@ -415,10 +615,10 @@
                 <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
                     <h3 class="text-2xl font-semibold mb-4">Grading Breakdown:</h3>
                     <ul class="list-disc list-inside space-y-2 text-lg pl-4 mb-6">
-                        <li><strong>Projects & Labs:</strong> 50%</li>
-                        <li><strong>Quizzes & Assessments:</strong> 25%</li>
-                        <li><strong>Participation & Effort:</strong> 15%</li>
-                        <li><strong>Homework & Assignments:</strong> 10%</li>
+                        <li><strong>Portfolio / Tech Manual:</strong> 30%</li>
+                        <li><strong>Quizzes & Assessments:</strong> 30%</li>
+                        <li><strong>Assignments/Lab/Projects:</strong> 25%</li>
+                        <li><strong>Homework/Participation:</strong> 15%</li>
                     </ul>
                     <h3 class="text-2xl font-semibold mb-4">Classroom Expectations:</h3>
                     <ul class="list-disc list-inside space-y-2 text-lg pl-4 mb-6">

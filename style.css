@@ -48,6 +48,16 @@ body {
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
+/* Responsive title sizing to fit containers */
+.works__title {
+    font-size: clamp(1.5rem, 4vw, 4rem) !important;
+    line-height: 1.2 !important;
+    word-wrap: break-word !important;
+    hyphens: auto !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+}
+
 /* Loader Styles */
 .loader {
     transition: opacity 0.7s ease-out, visibility 0.7s ease-out;
@@ -145,18 +155,21 @@ body {
 }
 
 /* Hero Section Specifics */
-.hero-text .hero__name {
-    /* Tailwind classes handle sizing and weight */
-    font-family: var(--main-font);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    color: #222 !important; /* Dark text */
+/* Hero Text Section - 90% width, left aligned with responsive fonts */
+.hero-text-section {
+    width: 90%;
+    text-align: left;
+    padding-right: 1rem;
 }
 
-.hero-text .hero__subtitle {
-    /* Tailwind classes handle sizing and color */
+.hero__subtitle {
+    /* Responsive font sizing for subtitle */
+    font-size: clamp(1rem, 3vw, 2.5rem);
     font-family: var(--sub-font);
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
     color: var(--accent-color) !important; /* Teal accent for subtitle */
+    margin-top: 1rem;
+    line-height: 1.3;
 }
 
 .arrow {
@@ -165,38 +178,97 @@ body {
     color: #222 !important; /* Dark arrow */
 }
 
+/* Navigation Typing Effect */
+.nav-typing {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    color: white; /* Default white for dark theme */
+}
+
+.nav-nbr {
+    display: inline-block;
+    margin: 0 0.01em;
+    transition: all 0.2s ease;
+    min-width: 0.3em;
+    text-align: center;
+    color: #9ca3af; /* Gray for initial state */
+}
+
+.nav-nbr.revealed {
+    color: white !important; /* White for dark theme */
+}
+
+/* Light theme navigation colors */
+[data-theme="light"] .nav-typing {
+    color: #111 !important; /* Dark text for light theme */
+}
+
+[data-theme="light"] .nav-nbr.revealed {
+    color: #111 !important; /* Dark text for revealed characters in light theme */
+}
+
+[data-theme="light"] .nav__logo h1 {
+    color: #111 !important; /* Dark text for entire navigation in light theme */
+}
+
+/* Responsive navigation typing */
+@media (max-width: 768px) {
+    .nav-typing {
+        font-size: 1.2rem;
+    }
+    
+    .nav-nbr {
+        min-width: 0.25em;
+        margin: 0 0.005em;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-typing {
+        font-size: 1rem;
+    }
+    
+    .nav-nbr {
+        min-width: 0.2em;
+        margin: 0;
+    }
+}
+
 /* Animated Name Effect */
 .random {
     font-family: var(--main-font);
-    font-size: 3.5rem;
+    font-size: clamp(1.8rem, 8vw, 6rem); /* More responsive font sizing */
     font-weight: 900;
-    line-height: 1.1;
+    line-height: 1.2; /* Increased line height for better spacing */
     color: var(--accent-color); /* Updated to use accent color variable */
     text-shadow: 0 0 20px rgba(1, 98, 127, 0.5); /* Updated shadow to match */
     letter-spacing: 0.05em;
-    min-height: 7.7rem; /* Prevent layout shift */
+    min-height: clamp(6rem, 20vw, 18rem); /* Responsive height for two lines */
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    max-width: 420px; /* Smaller width to force line break */
-    margin: 0 auto;
+    justify-content: flex-start; /* Align to start for natural text flow */
+    align-items: flex-start; /* Align to top for multi-line */
+    align-content: flex-start; /* Align content to top */
+    width: 100%; /* Use full container width */
+    max-width: 100%; /* Remove width restriction */
+    margin: 0; /* Remove auto centering, align to left */
+    padding: 0; /* Remove padding for full stretch */
 }
 
 .nbr {
     display: inline-block;
-    margin: 0 0.02em;
+    margin: 0 0.1em; /* Small margin for character spacing */
     transition: all 0.3s ease;
     animation: numberFlip 0.1s ease-in-out;
-    min-width: 0.4em;
     text-align: center;
+    min-width: 0; /* Allow flexible shrinking */
+    flex-shrink: 0; /* Prevent shrinking for consistent character width */
 }
 
-/* Force line break after "Ramirez's" (9th character including apostrophe and space) */
-.nbr:nth-child(9)::after {
-    content: "";
-    flex-basis: 100%;
-    height: 0;
+/* Dynamic line breaks handled by JavaScript based on phrase content */
+.nbr::after {
+    content: none; /* No automatic line breaks */
 }
 
 .ltr {
@@ -239,21 +311,13 @@ body {
     background: #014c63; /* Darker teal on hover */
 }
 
-/* Responsive adjustments for the animated name */
+/* Responsive adjustments for the animated name - now handled by clamp() in main .random rule */
 @media (max-width: 1200px) {
-    .random {
-        font-size: 3.2rem;
-        min-height: 7.2rem;
-        max-width: 400px;
-    }
+    /* Font sizing now handled by clamp() for better responsiveness */
 }
 
 @media (max-width: 768px) {
-    .random {
-        font-size: 2.4rem;
-        min-height: 5.4rem;
-        max-width: 320px;
-    }
+    /* Font sizing now handled by clamp() for better responsiveness */
     
     /* Navigation adjustments */
     .nav__logo h1 {
@@ -279,12 +343,7 @@ body {
 }
 
 @media (max-width: 640px) {
-    .random {
-        font-size: 2rem;
-        min-height: 4.4rem;
-        max-width: 280px;
-        letter-spacing: 0.02em;
-    }
+    /* Font sizing now handled by clamp() for better responsiveness */
     
     .nbr {
         margin: 0 0.01em;
@@ -315,12 +374,7 @@ body {
 }
 
 @media (max-width: 480px) {
-    .random {
-        font-size: 1.6rem;
-        min-height: 3.6rem;
-        max-width: 240px;
-        letter-spacing: 0.01em;
-    }
+    /* Font sizing now handled by clamp() for better responsiveness */
     
     .nbr {
         margin: 0 0.005em;
@@ -345,21 +399,12 @@ body {
 
 /* Original tablet/small desktop responsive adjustments */
 @media (max-width: 768px) and (min-width: 641px) {
-    .random {
-        font-size: 2.8rem;
-        min-height: 6.2rem;
-        max-width: 350px;
-    }
+    /* Font sizing now handled by clamp() for better responsiveness */
 }
 
 /* Large mobile/small tablet specific */
 @media (max-width: 640px) and (min-width: 481px) {
-    .random {
-        font-size: 2.2rem;
-        min-height: 4.8rem;
-        max-width: 280px;
-        letter-spacing: 0.02em;
-    }
+    /* Font sizing now handled by clamp() for better responsiveness */
     
     .nbr {
         margin: 0 0.01em;
@@ -387,13 +432,9 @@ body {
     }
     
     /* Stack hero content vertically on mobile */
-    #home .container {
-        flex-direction: column;
+    .hero-text-section {
+        width: 100%;
         text-align: center;
-        padding: 1rem;
-    }
-    
-    .hero-text {
         margin-bottom: 2rem;
         margin-right: 0;
     }
@@ -404,11 +445,6 @@ body {
         margin-right: 4rem; /* Even more space on larger screens */
     }
     
-    #home .container {
-        padding-right: 3rem; /* Extra right padding for the entire home section */
-        max-width: 1100px; /* Constrain container width for better spacing */
-    }
-    
     .person img {
         max-width: 300px;
     }
@@ -417,10 +453,6 @@ body {
 @media (min-width: 1024px) {
     .person {
         margin-right: 5rem; /* Maximum space on desktop */
-    }
-    
-    #home .container {
-        padding-right: 4rem; /* Extra right padding on desktop */
     }
     
     .person img {
@@ -453,18 +485,57 @@ body {
 
 /* Curriculum Section Tables */
 .curriculum-table {
-    min-width: 700px; /* Ensure table is wide enough on smaller screens */
+    min-width: 100%; /* Full width */
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed; /* Enable fixed layout for better text control */
+    font-size: clamp(0.75rem, 2vw, 1rem); /* Responsive font size */
+}
+
+.table-wrapper {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    max-width: 100%;
+}
+
+/* Add scrollbar styling for better UX */
+.table-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #6366f1;
+    border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #4f46e5;
 }
 
 .curriculum-table th,
 .curriculum-table td {
-    padding: 1rem;
+    padding: clamp(0.5rem, 2vw, 1rem);
     border-bottom: 1px solid #4a5568; /* Gray-600 border */
+    font-size: clamp(0.75rem, 1.8vw, 1rem); /* Responsive text */
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    vertical-align: top;
 }
 
 .curriculum-table th {
     font-weight: 600;
     background-color: #4a5568; /* Gray-700 for header */
+    font-size: clamp(0.8rem, 2vw, 1.1rem); /* Slightly larger for headers */
 }
 
 .curriculum-table tbody tr:last-child td {
@@ -473,6 +544,27 @@ body {
 
 .curriculum-table tbody tr:nth-child(even) {
     background-color: #2d3748; /* Gray-800 for even rows */
+}
+
+/* Specific column widths for better text fitting */
+.curriculum-table th:nth-child(1),
+.curriculum-table td:nth-child(1) {
+    width: 15%; /* Weeks column */
+}
+
+.curriculum-table th:nth-child(2),
+.curriculum-table td:nth-child(2) {
+    width: 25%; /* Topics column */
+}
+
+.curriculum-table th:nth-child(3),
+.curriculum-table td:nth-child(3) {
+    width: 30%; /* Key Concepts column */
+}
+
+.curriculum-table th:nth-child(4),
+.curriculum-table td:nth-child(4) {
+    width: 30%; /* Projects/Activities column */
 }
 
 .curriculum-header img {
@@ -582,74 +674,284 @@ footer a {
 /* Responsive adjustments for tables */
 @media (max-width: 1024px) {
     .curriculum-table {
-        min-width: 600px; /* Slightly smaller minimum width for tablets */
-        font-size: 0.9rem;
+        font-size: clamp(0.7rem, 1.8vw, 0.9rem);
     }
     
     .curriculum-table th,
     .curriculum-table td {
-        padding: 0.75rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .curriculum-table thead {
-        display: none; /* Hide table headers on small screens */
-    }
-
-    .curriculum-table, .curriculum-table tbody, .curriculum-table tr, .curriculum-table td {
-        display: block; /* Make table elements behave like blocks */
-        width: 100%;
-    }
-
-    .curriculum-table tr {
-        margin-bottom: 1rem;
-        border: 1px solid #4a5568;
-        border-radius: 0.5rem;
-        overflow: hidden;
-        background: rgba(55, 65, 81, 0.9);
-    }
-
-    .curriculum-table td {
-        border-bottom: 1px solid #4a5568;
-        text-align: right;
-        padding: 0.75rem;
-        padding-left: 45%;
-        position: relative;
-        font-size: 0.9rem;
-    }
-
-    .curriculum-table td::before {
-        content: attr(data-label); /* Use data-label for pseudo-elements */
-        position: absolute;
-        left: 0;
-        width: 40%;
-        padding-left: 0.75rem;
-        font-weight: bold;
-        text-align: left;
-        color: var(--accent-color);
-    }
-
-    .curriculum-table tbody tr:last-child td {
-        border-bottom: 1px solid #4a5568; /* Re-add border for last row cells */
-    }
-
-    .curriculum-table tbody tr:last-child td:last-child {
-        border-bottom: none; /* Remove border for the very last cell */
-    }
-}
-
-@media (max-width: 480px) {
-    .curriculum-table td {
-        padding: 0.5rem;
-        padding-left: 40%;
-        font-size: 0.8rem;
+        padding: clamp(0.4rem, 1.5vw, 0.75rem);
+        font-size: clamp(0.7rem, 1.8vw, 0.9rem);
     }
     
-    .curriculum-table td::before {
-        width: 35%;
-        padding-left: 0.5rem;
-        font-size: 0.75rem;
+    .curriculum-table th {
+        font-size: clamp(0.75rem, 2vw, 1rem);
+    }
+}
+
+/* Tablet and mobile table adjustments */
+@media (max-width: 768px) {
+    .table-wrapper {
+        margin: 0;
+        border-radius: 0.5rem;
+        padding: 0;
+        overflow-x: auto; /* Keep horizontal scroll for tables */
+        background: rgba(55, 65, 81, 0.95);
+    }
+    
+    .curriculum-table {
+        display: table !important; /* Keep tables visible on mobile */
+        min-width: 600px; /* Minimum width for readability */
+        font-size: clamp(0.65rem, 1.8vw, 0.8rem);
+    }
+    
+    .curriculum-table th,
+    .curriculum-table td {
+        padding: clamp(0.3rem, 1.2vw, 0.6rem);
+        font-size: clamp(0.65rem, 1.8vw, 0.8rem);
+        line-height: 1.3;
+    }
+    
+    .curriculum-table th {
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
+        background-color: #4a5568; /* Preserve original color */
+    }
+    
+    .curriculum-table tbody tr:nth-child(even) {
+        background-color: #2d3748; /* Preserve original color */
+    }
+    
+    .curriculum-table tbody tr:hover {
+        background-color: #374151; /* Preserve hover color */
+    }
+    
+    /* Show mobile cards only as additional content, not replacement */
+    .mobile-cards {
+        display: none !important; /* Hide cards, keep tables */
+    }
+    
+    .curriculum-header h3 {
+        font-size: clamp(1.1rem, 3.5vw, 1.6rem) !important; /* Responsive header */
+    }
+    
+    .curriculum-header img {
+        width: clamp(35px, 7vw, 56px);
+        height: clamp(35px, 7vw, 56px);
+    }
+}
+
+/* Very small mobile screens */
+@media (max-width: 480px) {
+    .curriculum-table {
+        min-width: 500px; /* Smaller minimum for very small screens */
+        font-size: clamp(0.6rem, 2vw, 0.75rem);
+    }
+    
+    .curriculum-table th,
+    .curriculum-table td {
+        padding: clamp(0.25rem, 1vw, 0.5rem);
+        font-size: clamp(0.6rem, 2vw, 0.75rem);
+    }
+    
+    .curriculum-table th {
+        font-size: clamp(0.65rem, 2.2vw, 0.8rem);
+    }
+    
+    .curriculum-header h3 {
+        font-size: clamp(1rem, 4vw, 1.4rem) !important;
+    }
+    
+    .curriculum-header img {
+        width: clamp(30px, 6vw, 48px);
+        height: clamp(30px, 6vw, 48px);
+    }
+}
+
+/* Mobile card carousel styles - Hidden since tables remain visible */
+.mobile-cards {
+    display: none !important; /* Always hidden - tables are used instead */
+}
+
+.card-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: rgba(55, 65, 81, 0.9);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-height: 200px; /* Ensure minimum height */
+}
+
+.cards-container {
+    display: flex;
+    transition: transform 0.3s ease;
+    width: 100%;
+    position: relative;
+}
+
+.curriculum-card {
+    min-width: 100%;
+    padding: 1.5rem;
+    background: rgba(55, 65, 81, 0.95);
+    border: 1px solid #4a5568;
+    position: relative;
+    display: none; /* Initially hidden */
+}
+
+.curriculum-card:first-child {
+    display: block; /* Show first card by default */
+}
+
+.card-header {
+    background: #4a5568;
+    color: white;
+    padding: 0.75rem;
+    margin: -1.5rem -1.5rem 1rem -1.5rem;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    text-align: center;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+
+
+.card-row {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #4a5568;
+}
+
+.card-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.card-label {
+    font-weight: bold;
+    color: var(--accent-color);
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.card-value {
+    color: #f9fafb;
+    font-size: clamp(0.8rem, 3vw, 0.95rem);
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+/* Navigation controls for cards */
+.card-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 0 1rem;
+}
+
+.card-nav-button {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    min-width: 60px;
+}
+
+.card-nav-button:hover {
+    background: #014c63;
+}
+
+.card-nav-button:disabled {
+    background: #6b7280;
+    cursor: not-allowed;
+}
+
+.card-indicator {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.card-counter {
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    color: #d1d5db;
+    margin: 0 0.5rem;
+}
+
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #6b7280;
+    transition: background 0.2s ease;
+}
+
+.indicator-dot.active {
+    background: var(--accent-color);
+}
+
+/* Alternative stacked layout for very small screens */
+@media (max-width: 480px) {
+    .table-wrapper {
+        margin: 0 -0.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    .curriculum-card {
+        padding: 1rem;
+    }
+    
+    .card-header {
+        margin: -1rem -1rem 0.75rem -1rem;
+        padding: 0.6rem;
+        font-size: clamp(0.8rem, 3vw, 1rem);
+    }
+    
+    .card-row {
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    
+    .card-label {
+        font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+    }
+    
+    .card-value {
+        font-size: clamp(0.75rem, 3vw, 0.9rem);
+    }
+    
+    .card-nav-button {
+        padding: 0.4rem 0.8rem;
+        font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+        min-width: 50px;
+    }
+}
+
+/* Enhanced table responsiveness for very small screens */
+@media (max-width: 320px) {
+    .table-wrapper {
+        margin: 0 -0.5rem;
+        padding: 0.5rem;
+    }
+    
+    .curriculum-table {
+        min-width: 450px; /* Even smaller for tiny screens */
+        font-size: clamp(0.55rem, 2.5vw, 0.7rem);
+    }
+    
+    .curriculum-table th,
+    .curriculum-table td {
+        padding: clamp(0.2rem, 1vw, 0.4rem);
+        font-size: clamp(0.55rem, 2.5vw, 0.7rem);
+    }
+    
+    .curriculum-table th {
+        font-size: clamp(0.6rem, 2.8vw, 0.75rem);
     }
 }
 
@@ -820,11 +1122,6 @@ footer a {
         line-height: 1.5;
     }
     
-    .works__title {
-        font-size: 1.8rem !important;
-        margin-bottom: 1.5rem !important;
-    }
-    
     /* Improved navigation for mobile */
     nav {
         padding: 0.75rem 1rem;
@@ -852,10 +1149,6 @@ footer a {
         font-size: 15px;
     }
     
-    .works__title {
-        font-size: 2rem !important;
-    }
-    
     .nav__logo h1 {
         font-size: 1.1rem;
     }
@@ -877,10 +1170,6 @@ footer a {
         font-size: 16px;
     }
     
-    .works__title {
-        font-size: 2.2rem !important;
-    }
-    
     .nav__logo h1 {
         font-size: 1.2rem;
     }
@@ -898,11 +1187,6 @@ footer a {
 
 /* Tablets (768px and up) */
 @media (min-width: 768px) {
-    .works__title {
-        font-size: 2.5rem !important;
-        margin-bottom: 2rem !important;
-    }
-    
     .nav__logo h1 {
         font-size: 1.5rem;
     }
@@ -916,10 +1200,6 @@ footer a {
 
 /* Small laptops (1024px and up) */
 @media (min-width: 1024px) {
-    .works__title {
-        font-size: 3rem !important;
-    }
-    
     .nav__logo h1 {
         font-size: 1.75rem;
     }
@@ -931,10 +1211,6 @@ footer a {
 
 /* Large screens (1440px and up) */
 @media (min-width: 1440px) {
-    .works__title {
-        font-size: 3.5rem !important;
-    }
-    
     .nav__logo h1 {
         font-size: 2rem;
     }
@@ -951,10 +1227,7 @@ footer a {
         padding-bottom: 40px;
     }
     
-    .random {
-        font-size: 2rem;
-        min-height: 4rem;
-    }
+    /* Font sizing now handled by clamp() for better responsiveness */
     
     .hero__subtitle {
         font-size: 1rem !important;

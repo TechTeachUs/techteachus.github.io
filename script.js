@@ -10,6 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000); // Adjust delay as needed
     }
 
+    // --- Initialize Card Carousels ---
+    const carouselIds = ['python-cards', 'unity-cards', 'advanced-cards'];
+    carouselIds.forEach(id => {
+        if (document.getElementById(id)) {
+            initializeCarousel(id);
+        }
+    });
+
     // --- Particles.js Initialization ---
     function initParticles() {
         console.log('Initializing particles...');
@@ -373,45 +381,58 @@ document.addEventListener('DOMContentLoaded', () => {
             lightIcon?.classList.add('hidden');
             darkIcon?.classList.remove('hidden');
         }
+        
+        // Update navigation text colors for revealed characters
+        updateNavColors(theme);
+    }
+    
+    // Function to update navigation colors based on theme
+    function updateNavColors(theme) {
+        const navNumbers = document.querySelectorAll('.nav-nbr.revealed');
+        const newColor = theme === 'light' ? '#111' : '#ffffff';
+        
+        navNumbers.forEach(num => {
+            num.style.color = newColor;
+        });
     }
 
-    // --- Animated Name Effect ---
-    function animatedName() {
-        const name = "Mrs. Ramirez's Classes!";
-        const numbers = document.querySelectorAll('.nbr');
+    // --- Navigation Typing Effect ---
+    function animatedNavName() {
+        const navName = "Mrs. Ramirez";
+        const navNumbers = document.querySelectorAll('.nav-nbr');
         
         // Check if elements exist
-        if (!numbers || numbers.length === 0) {
-            console.log('No .nbr elements found');
+        if (!navNumbers || navNumbers.length === 0) {
+            console.log('No .nav-nbr elements found');
             return;
         }
         
-        console.log(`Found ${numbers.length} number elements`);
+        console.log(`Found ${navNumbers.length} nav number elements`);
         
-        const nameChars = name.split('');
+        const navNameChars = navName.split('');
         
         // Ensure we have enough number elements
-        if (numbers.length < nameChars.length) {
-            console.warn(`Not enough number elements. Need ${nameChars.length}, found ${numbers.length}`);
+        if (navNumbers.length < navNameChars.length) {
+            console.warn(`Not enough nav number elements. Need ${navNameChars.length}, found ${navNumbers.length}`);
         }
         
-        // Set CSS custom property for animation delay
-        numbers.forEach((num, index) => {
-            num.style.setProperty('--i', index);
-        });
-
+        // Get current theme for proper colors
+        const currentTheme = document.body.getAttribute('data-theme') || 'light';
+        const revealedColor = currentTheme === 'light' ? '#111' : '#ffffff';
+        
         let currentIndex = 0;
-        const animationSpeed = 150; // ms between character reveals
-        const scrambleSpeed = 80; // ms between number changes during scramble
+        const animationSpeed = 100; // Faster for navigation
+        const scrambleSpeed = 60; // Faster scramble
         let scrambleInterval;
         
-        function scrambleNumbers() {
-            numbers.forEach((num, index) => {
+        function scrambleNavNumbers() {
+            navNumbers.forEach((num, index) => {
                 if (index <= currentIndex) {
                     // Show the actual character for revealed positions
-                    if (nameChars[index]) {
-                        num.textContent = nameChars[index];
-                        num.style.color = '#01627f'; // Teal for revealed chars
+                    if (navNameChars[index]) {
+                        num.textContent = navNameChars[index];
+                        num.classList.add('revealed');
+                        num.style.color = revealedColor;
                         num.style.fontWeight = 'bold';
                     }
                 } else {
@@ -424,14 +445,258 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        function revealNextCharacter() {
-            if (currentIndex < nameChars.length && currentIndex < numbers.length) {
+        function revealNextNavCharacter() {
+            if (currentIndex < navNameChars.length && currentIndex < navNumbers.length) {
                 // Reveal the next character
-                if (nameChars[currentIndex] && numbers[currentIndex]) {
-                    numbers[currentIndex].textContent = nameChars[currentIndex];
+                if (navNameChars[currentIndex] && navNumbers[currentIndex]) {
+                    navNumbers[currentIndex].textContent = navNameChars[currentIndex];
+                    navNumbers[currentIndex].classList.add('revealed');
+                    navNumbers[currentIndex].style.color = revealedColor;
+                    navNumbers[currentIndex].style.fontWeight = 'bold';
+                    navNumbers[currentIndex].style.transform = 'scale(1.1)';
+                    
+                    // Reset scale after animation
+                    setTimeout(() => {
+                        if (navNumbers[currentIndex]) {
+                            navNumbers[currentIndex].style.transform = 'scale(1)';
+                        }
+                    }, 150);
+                }
+                currentIndex++;
+                
+                if (currentIndex < navNameChars.length) {
+                    setTimeout(revealNextNavCharacter, animationSpeed);
+                } else {
+                    // Animation complete, stop scrambling
+                    if (scrambleInterval) {
+                        clearInterval(scrambleInterval);
+                    }
+                    console.log('Navigation animation complete');
+                }
+            }
+        }
+
+        // Start the scrambling effect
+        scrambleInterval = setInterval(scrambleNavNumbers, scrambleSpeed);
+        
+        // Start revealing characters after a short delay
+        setTimeout(revealNextNavCharacter, 500);
+        
+        console.log('Navigation animation started');
+    }
+
+    // --- Animated Name Effect ---
+    function animatedName() {
+        const phrases = [
+            "Mrs. Ramirez...",
+            "Web_App Development!", 
+            "Game Design!.........",
+            "Software Engineering."
+        ];
+        const numbers = document.querySelectorAll('.nbr');
+        
+        // Check if elements exist
+        if (!numbers || numbers.length === 0) {
+            console.log('No .nbr elements found');
+            return;
+        }
+        
+        console.log(`Found ${numbers.length} number elements`);
+        
+        // Initialize all numbers with zeros
+        numbers.forEach((num, index) => {
+            if (index < 18) {
+                num.textContent = '0';
+                num.style.color = '#9ca3af'; // Gray for initial zeros
+                num.style.fontWeight = 'normal';
+                num.classList.remove('revealed');
+                num.style.display = 'inline-block';
+            } else {
+                num.textContent = '0';
+                num.style.color = '#9ca3af';
+                num.style.fontWeight = 'normal';
+                num.classList.remove('revealed');
+                num.style.display = 'inline-block';
+            }
+        });
+        
+        let currentPhraseIndex = 0;
+        let currentIndex = 0;
+        let isDeleting = false;
+        const typeSpeed = 120; // Speed for typing
+        const deleteSpeed = 80; // Speed for deleting
+        const phraseDelay = 2000; // Delay between phrases
+        const scrambleSpeed = 60;
+        let scrambleInterval;
+        
+        function getCurrentPhrase() {
+            return phrases[currentPhraseIndex];
+        }
+        
+        function clearAllNumbers() {
+            numbers.forEach((num, index) => {
+                if (index < 18) {
+                    num.textContent = ''; // Clear instead of dots
+                    num.style.color = 'transparent';
+                    num.style.fontWeight = 'normal';
+                    num.classList.remove('revealed');
+                } else {
+                    num.textContent = '';
+                    num.style.color = 'transparent';
+                    num.style.fontWeight = 'normal';
+                    num.classList.remove('revealed');
+                }
+            });
+        }
+        
+        function scrambleNumbers() {
+            const currentPhrase = getCurrentPhrase();
+            const words = currentPhrase.split(' ');
+            let charIndex = 0;
+            
+            // Create a display string with proper word spacing and line breaks
+            let displayText = '';
+            let wordsOnFirstLine = 0;
+            let firstLineLength = 0;
+            
+            // Determine how many words fit on first line (adjusted for specific phrases)
+            for (let word of words) {
+                // Special handling for "Mrs. Ramirez..." - only "Mrs." on first line
+                if (currentPhrase === "Mrs. Ramirez..." && wordsOnFirstLine === 1) {
+                    break;
+                }
+                // Special handling for "Web_App Development!" - only "Web_App" on first line
+                if (currentPhrase === "Web_App Development!" && wordsOnFirstLine === 1) {
+                    break;
+                }
+                // General rule for other phrases
+                if (firstLineLength + word.length + (wordsOnFirstLine > 0 ? 1 : 0) <= 9) {
+                    if (wordsOnFirstLine > 0) firstLineLength += 1; // space
+                    firstLineLength += word.length;
+                    wordsOnFirstLine++;
+                } else {
+                    break;
+                }
+            }
+            
+            // Build display text with line break
+            for (let i = 0; i < words.length; i++) {
+                if (i === wordsOnFirstLine) {
+                    displayText += '\n'; // Line break after first line words
+                }
+                if (i > 0 && i !== wordsOnFirstLine) {
+                    displayText += ' '; // Space between words (but not after line break)
+                }
+                displayText += words[i];
+            }
+            
+            numbers.forEach((num, index) => {
+                if (index < currentIndex) {
+                    // Show the actual character for revealed positions
+                    if (displayText[index]) {
+                        num.textContent = displayText[index];
+                        num.style.color = '#01627f'; // Teal for revealed chars
+                        num.style.fontWeight = 'bold';
+                        num.classList.add('revealed');
+                        
+                        // Add line break styling
+                        if (displayText[index] === '\n') {
+                            num.style.display = 'block';
+                            num.style.width = '100%';
+                            num.style.height = '0';
+                            num.textContent = '';
+                        } else {
+                            num.style.display = 'inline-block';
+                            num.style.width = 'auto';
+                            num.style.height = 'auto';
+                        }
+                    } else {
+                        // Fill with dots if no character at this position
+                        num.textContent = '·';
+                        num.style.color = '#9ca3af';
+                        num.style.fontWeight = 'normal';
+                        num.classList.remove('revealed');
+                        num.style.display = 'inline-block';
+                    }
+                } else if (index < 18) {
+                    // Show random numbers for unrevealed positions up to 18 characters
+                    const randomNum = Math.floor(Math.random() * 10);
+                    num.textContent = randomNum;
+                    num.style.color = '#9ca3af'; // Gray for scrambling numbers
+                    num.style.fontWeight = 'normal';
+                    num.classList.remove('revealed');
+                    num.style.display = 'inline-block';
+                } else {
+                    // Hide remaining positions
+                    num.textContent = '';
+                    num.style.color = 'transparent';
+                    num.style.fontWeight = 'normal';
+                    num.classList.remove('revealed');
+                    num.style.display = 'inline-block';
+                }
+            });
+        }
+        
+        function typePhrase() {
+            const currentPhrase = getCurrentPhrase();
+            const words = currentPhrase.split(' ');
+            
+            // Create display text with line breaks
+            let displayText = '';
+            let wordsOnFirstLine = 0;
+            let firstLineLength = 0;
+            
+            // Determine how many words fit on first line
+            for (let word of words) {
+                // Special handling for "Mrs. Ramirez..." - only "Mrs." on first line
+                if (currentPhrase === "Mrs. Ramirez..." && wordsOnFirstLine === 1) {
+                    break;
+                }
+                // Special handling for "Web_App Development!" - only "Web_App" on first line
+                if (currentPhrase === "Web_App Development!" && wordsOnFirstLine === 1) {
+                    break;
+                }
+                // General rule for other phrases
+                if (firstLineLength + word.length + (wordsOnFirstLine > 0 ? 1 : 0) <= 9) {
+                    if (wordsOnFirstLine > 0) firstLineLength += 1;
+                    firstLineLength += word.length;
+                    wordsOnFirstLine++;
+                } else {
+                    break;
+                }
+            }
+            
+            // Build display text
+            for (let i = 0; i < words.length; i++) {
+                if (i === wordsOnFirstLine) {
+                    displayText += '\n';
+                }
+                if (i > 0 && i !== wordsOnFirstLine) {
+                    displayText += ' ';
+                }
+                displayText += words[i];
+            }
+            
+            if (!isDeleting && currentIndex < displayText.length) {
+                // Typing forward
+                if (displayText[currentIndex] && numbers[currentIndex]) {
+                    numbers[currentIndex].textContent = displayText[currentIndex];
                     numbers[currentIndex].style.color = '#01627f';
                     numbers[currentIndex].style.fontWeight = 'bold';
                     numbers[currentIndex].style.transform = 'scale(1.2)';
+                    numbers[currentIndex].classList.add('revealed');
+                    
+                    // Handle line breaks
+                    if (displayText[currentIndex] === '\n') {
+                        numbers[currentIndex].style.display = 'block';
+                        numbers[currentIndex].style.width = '100%';
+                        numbers[currentIndex].style.height = '0';
+                        numbers[currentIndex].textContent = '';
+                    } else {
+                        numbers[currentIndex].style.display = 'inline-block';
+                        numbers[currentIndex].style.width = 'auto';
+                        numbers[currentIndex].style.height = 'auto';
+                    }
                     
                     // Reset scale after animation
                     setTimeout(() => {
@@ -442,25 +707,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 currentIndex++;
                 
-                if (currentIndex < nameChars.length) {
-                    setTimeout(revealNextCharacter, animationSpeed);
-                } else {
-                    // Animation complete, stop scrambling
-                    if (scrambleInterval) {
-                        clearInterval(scrambleInterval);
+                // Fill remaining positions with dots after typing the phrase
+                if (currentIndex === displayText.length) {
+                    for (let i = displayText.length; i < Math.min(18, numbers.length); i++) {
+                        if (numbers[i]) {
+                            numbers[i].textContent = '';
+                            numbers[i].style.color = 'transparent';
+                            numbers[i].style.fontWeight = 'normal';
+                            numbers[i].classList.remove('revealed');
+                            numbers[i].style.display = 'inline-block';
+                        }
                     }
-                    console.log('Animation complete');
                 }
+                
+                setTimeout(typePhrase, typeSpeed);
+                
+            } else if (!isDeleting && currentIndex >= displayText.length) {
+                // Finished typing, wait then start deleting
+                isDeleting = true;
+                setTimeout(typePhrase, phraseDelay);
+                
+            } else if (isDeleting && currentIndex > 0) {
+                // Deleting backward
+                currentIndex--;
+                if (numbers[currentIndex]) {
+                    const randomNum = Math.floor(Math.random() * 10);
+                    numbers[currentIndex].textContent = randomNum;
+                    numbers[currentIndex].style.color = '#9ca3af';
+                    numbers[currentIndex].style.fontWeight = 'normal';
+                    numbers[currentIndex].classList.remove('revealed');
+                    numbers[currentIndex].style.display = 'inline-block';
+                    numbers[currentIndex].style.width = 'auto';
+                    numbers[currentIndex].style.height = 'auto';
+                }
+                setTimeout(typePhrase, deleteSpeed);
+                
+            } else if (isDeleting && currentIndex === 0) {
+                // Finished deleting, move to next phrase
+                isDeleting = false;
+                currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+                setTimeout(typePhrase, 500);
             }
         }
-
+        
         // Start the scrambling effect
         scrambleInterval = setInterval(scrambleNumbers, scrambleSpeed);
         
-        // Start revealing characters after a short delay
-        setTimeout(revealNextCharacter, 800);
+        // Start typing after a short delay
+        setTimeout(() => {
+            if (scrambleInterval) {
+                clearInterval(scrambleInterval);
+            }
+            typePhrase();
+        }, 800);
         
-        console.log('Animation started');
+        console.log('Multi-phrase animation started');
     }
 
     // Multiple ways to ensure the animation starts
@@ -503,7 +804,124 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Start the animation
+    // Start the main name animation
     startNameAnimation();
+    
+    // Start navigation animation after a delay
+    setTimeout(() => {
+        animatedNavName();
+    }, 1500);
 });
+
+// Table layout toggle function for mobile
+function toggleTableLayout(button) {
+    const wrapper = button.closest('.table-wrapper');
+    const table = wrapper.querySelector('.curriculum-table');
+    const mobileCards = wrapper.querySelector('.mobile-cards');
+    
+    if (table.style.display === 'none') {
+        // Switch to table view
+        table.style.display = 'table';
+        mobileCards.style.display = 'none';
+        button.textContent = 'Switch to Card View';
+    } else {
+        // Switch to card view
+        table.style.display = 'none';
+        mobileCards.style.display = 'block';
+        button.textContent = 'Switch to Table View';
+    }
+}
+
+// Card carousel functionality
+let cardPositions = {};
+
+function initializeCarousel(containerId) {
+    console.log('Initializing carousel:', containerId);
+    
+    if (!cardPositions[containerId]) {
+        cardPositions[containerId] = 0;
+    }
+    
+    const container = document.getElementById(containerId);
+    if (!container) {
+        console.error('Container not found:', containerId);
+        return;
+    }
+    
+    const cards = container.querySelectorAll('.curriculum-card');
+    const totalElement = document.getElementById(containerId.replace('-cards', '-total'));
+    const currentElement = document.getElementById(containerId.replace('-cards', '-current'));
+    
+    console.log('Found cards:', cards.length, 'for container:', containerId);
+    
+    if (totalElement) totalElement.textContent = cards.length;
+    if (currentElement) currentElement.textContent = '1';
+    
+    // Show first card initially, hide others
+    cards.forEach((card, index) => {
+        if (index === 0) {
+            card.style.display = 'block';
+            card.style.visibility = 'visible';
+        } else {
+            card.style.display = 'none';
+            card.style.visibility = 'hidden';
+        }
+    });
+    
+    updateNavigationButtons(containerId);
+    console.log('Carousel initialized successfully:', containerId);
+}
+
+function nextCard(containerId) {
+    const container = document.getElementById(containerId);
+    const cards = container.querySelectorAll('.curriculum-card');
+    const currentPos = cardPositions[containerId] || 0;
+    
+    if (currentPos < cards.length - 1) {
+        cards[currentPos].style.display = 'none';
+        cardPositions[containerId] = currentPos + 1;
+        cards[cardPositions[containerId]].style.display = 'block';
+        
+        const currentElement = document.getElementById(containerId.replace('-cards', '-current'));
+        if (currentElement) currentElement.textContent = cardPositions[containerId] + 1;
+        
+        updateNavigationButtons(containerId);
+    }
+}
+
+function previousCard(containerId) {
+    const container = document.getElementById(containerId);
+    const cards = container.querySelectorAll('.curriculum-card');
+    const currentPos = cardPositions[containerId] || 0;
+    
+    if (currentPos > 0) {
+        cards[currentPos].style.display = 'none';
+        cardPositions[containerId] = currentPos - 1;
+        cards[cardPositions[containerId]].style.display = 'block';
+        
+        const currentElement = document.getElementById(containerId.replace('-cards', '-current'));
+        if (currentElement) currentElement.textContent = cardPositions[containerId] + 1;
+        
+        updateNavigationButtons(containerId);
+    }
+}
+
+function updateNavigationButtons(containerId) {
+    const currentPos = cardPositions[containerId] || 0;
+    const container = document.getElementById(containerId);
+    const cards = container.querySelectorAll('.curriculum-card');
+    
+    const prevButton = document.getElementById(containerId.replace('-cards', '-prev'));
+    const nextButton = document.getElementById(containerId.replace('-cards', '-next'));
+    
+    if (prevButton) {
+        prevButton.disabled = currentPos === 0;
+        prevButton.style.opacity = currentPos === 0 ? '0.5' : '1';
+    }
+    
+    if (nextButton) {
+        nextButton.disabled = currentPos === cards.length - 1;
+        nextButton.style.opacity = currentPos === cards.length - 1 ? '0.5' : '1';
+    }
+}
 
