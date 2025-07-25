@@ -155,21 +155,42 @@ body {
 }
 
 /* Hero Section Specifics */
-/* Hero Text Section - 90% width, left aligned with responsive fonts */
+/* Hero Text Section - responsive width and container-aware sizing */
 .hero-text-section {
-    width: 90%;
+    width: clamp(85%, 90%, 95%);
     text-align: left;
-    padding-right: 1rem;
+    padding-right: clamp(0.5rem, 2vw, 2rem);
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Hero main title (animated name) responsive container sizing */
+.hero__name {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(1.5rem, 6vw, 4.5rem) !important;
+    line-height: clamp(1.1, 1.2, 1.3) !important;
+    letter-spacing: clamp(-0.02em, 0.01em, 0.05em) !important;
+    word-spacing: clamp(-0.1em, 0, 0.1em) !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    hyphens: auto !important;
 }
 
 .hero__subtitle {
-    /* Responsive font sizing for subtitle */
-    font-size: clamp(1rem, 3vw, 2.5rem);
+    /* Enhanced responsive font sizing for subtitle */
+    font-size: clamp(0.875rem, 2.5vw, 1.8rem) !important;
     font-family: var(--sub-font);
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
     color: var(--accent-color) !important; /* Teal accent for subtitle */
-    margin-top: 1rem;
-    line-height: 1.3;
+    margin-top: clamp(0.5rem, 2vw, 1.5rem);
+    line-height: clamp(1.2, 1.3, 1.4) !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    hyphens: auto !important;
 }
 
 .arrow {
@@ -178,19 +199,131 @@ body {
     color: #222 !important; /* Dark arrow */
 }
 
+/* Navigation Responsive Font Sizing */
+.nav__logo h1 {
+    font-size: clamp(1rem, 3vw, 2xl) !important;
+    line-height: 1.2 !important;
+    word-wrap: break-word !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Navigation container responsive */
+nav .max-w-7xl {
+    padding: 0 clamp(0.5rem, 2vw, 1.5rem) !important;
+}
+
+/* Desktop Navigation Links */
+nav ul {
+    gap: clamp(0.5rem, 2vw, 1.5rem) !important;
+}
+
+nav ul li a {
+    font-size: clamp(0.875rem, 2vw, 1rem) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    padding: clamp(0.25rem, 1vw, 0.5rem) !important;
+}
+
+/* Mobile Navigation Menu */
+#mobile-menu {
+    background: rgba(0, 0, 0, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* Mobile menu in light theme */
+[data-theme="light"] #mobile-menu {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* Mobile menu close button */
+#mobile-menu button {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 8px !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    transition: background-color 0.3s ease !important;
+}
+
+#mobile-menu button:hover {
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Light theme mobile menu button */
+[data-theme="light"] #mobile-menu button {
+    background: rgba(255, 255, 255, 0.3) !important;
+    color: #111 !important;
+}
+
+[data-theme="light"] #mobile-menu button:hover {
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Mobile menu links styling */
+#mobile-menu ul li a {
+    font-size: clamp(1rem, 4vw, 1.25rem) !important;
+    line-height: 1.3 !important;
+    word-wrap: break-word !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.3s ease !important;
+}
+
+#mobile-menu ul li a:hover {
+    background: rgba(99, 102, 241, 0.8) !important;
+    border-color: rgba(99, 102, 241, 0.9) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Light theme mobile menu links */
+[data-theme="light"] #mobile-menu ul li a {
+    background: rgba(0, 0, 0, 0.1) !important;
+    color: #111 !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme="light"] #mobile-menu ul li a:hover {
+    background: rgba(99, 102, 241, 0.8) !important;
+    color: white !important;
+    border-color: rgba(99, 102, 241, 0.9) !important;
+}
+
+/* Navigation buttons responsive sizing */
+.nav__toggle,
+#theme-toggle {
+    font-size: clamp(0.875rem, 2.5vw, 1.25rem) !important;
+    padding: clamp(0.25rem, 1vw, 0.5rem) !important;
+}
+
+/* Right side controls spacing */
+nav .flex.items-center.space-x-3 {
+    gap: clamp(0.25rem, 1vw, 0.75rem) !important;
+}
+
 /* Navigation Typing Effect */
 .nav-typing {
     display: inline-flex;
     flex-wrap: nowrap;
     align-items: center;
     color: white; /* Default white for dark theme */
+    font-size: clamp(0.875rem, 2.5vw, 1.5rem) !important;
 }
 
 .nav-nbr {
     display: inline-block;
     margin: 0 0.01em;
     transition: all 0.2s ease;
-    min-width: 0.3em;
+    min-width: clamp(0.2em, 0.5vw, 0.3em);
     text-align: center;
     color: #9ca3af; /* Gray for initial state */
 }
@@ -212,58 +345,40 @@ body {
     color: #111 !important; /* Dark text for entire navigation in light theme */
 }
 
-/* Responsive navigation typing */
-@media (max-width: 768px) {
-    .nav-typing {
-        font-size: 1.2rem;
-    }
-    
-    .nav-nbr {
-        min-width: 0.25em;
-        margin: 0 0.005em;
-    }
-}
-
-@media (max-width: 480px) {
-    .nav-typing {
-        font-size: 1rem;
-    }
-    
-    .nav-nbr {
-        min-width: 0.2em;
-        margin: 0;
-    }
-}
-
-/* Animated Name Effect */
+/* Animated Name Effect - Enhanced container-aware responsive sizing */
 .random {
     font-family: var(--main-font);
-    font-size: clamp(1.8rem, 8vw, 6rem); /* More responsive font sizing */
+    font-size: clamp(1.5rem, 6vw, 4.5rem) !important; /* More conservative, container-aware sizing */
     font-weight: 900;
-    line-height: 1.2; /* Increased line height for better spacing */
+    line-height: clamp(1.1, 1.2, 1.3) !important; /* Responsive line height */
     color: var(--accent-color); /* Updated to use accent color variable */
     text-shadow: 0 0 20px rgba(1, 98, 127, 0.5); /* Updated shadow to match */
-    letter-spacing: 0.05em;
-    min-height: clamp(6rem, 20vw, 18rem); /* Responsive height for two lines */
+    letter-spacing: clamp(-0.02em, 0.01em, 0.05em) !important; /* Responsive letter spacing */
+    word-spacing: clamp(-0.1em, 0, 0.1em) !important; /* Responsive word spacing */
+    min-height: clamp(4rem, 12vw, 12rem) !important; /* More conservative height */
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start; /* Align to start for natural text flow */
     align-items: flex-start; /* Align to top for multi-line */
     align-content: flex-start; /* Align content to top */
     width: 100%; /* Use full container width */
-    max-width: 100%; /* Remove width restriction */
+    max-width: 100%; /* Ensure it fits container */
     margin: 0; /* Remove auto centering, align to left */
     padding: 0; /* Remove padding for full stretch */
+    overflow-wrap: break-word !important; /* Enhanced text wrapping */
+    word-wrap: break-word !important;
+    hyphens: auto !important; /* Allow hyphenation for long words */
 }
 
 .nbr {
     display: inline-block;
-    margin: 0 0.1em; /* Small margin for character spacing */
+    margin: 0 clamp(0.005em, 0.1em, 0.15em); /* Responsive character spacing */
     transition: all 0.3s ease;
     animation: numberFlip 0.1s ease-in-out;
     text-align: center;
-    min-width: 0; /* Allow flexible shrinking */
-    flex-shrink: 0; /* Prevent shrinking for consistent character width */
+    min-width: clamp(0.1em, 0.3em, 0.5em); /* Responsive minimum width */
+    flex-shrink: 1; /* Allow shrinking to fit container */
+    max-width: 100%; /* Ensure characters fit in container */
 }
 
 /* Dynamic line breaks handled by JavaScript based on phrase content */
@@ -319,11 +434,6 @@ body {
 @media (max-width: 768px) {
     /* Font sizing now handled by clamp() for better responsiveness */
     
-    /* Navigation adjustments */
-    .nav__logo h1 {
-        font-size: 1.4rem;
-    }
-    
     /* Hero section adjustments */
     .hero__subtitle {
         font-size: 1.1rem !important;
@@ -350,11 +460,6 @@ body {
         min-width: 0.25em;
     }
     
-    /* Navigation logo smaller on mobile */
-    .nav__logo h1 {
-        font-size: 1.2rem;
-    }
-    
     /* Hero section mobile layout */
     .hero__subtitle {
         font-size: 1rem !important;
@@ -379,11 +484,6 @@ body {
     .nbr {
         margin: 0 0.005em;
         min-width: 0.2em;
-    }
-    
-    /* Very small mobile adjustments */
-    .nav__logo h1 {
-        font-size: 1rem;
     }
     
     .hero__subtitle {
@@ -431,12 +531,29 @@ body {
         height: auto;
     }
     
-    /* Stack hero content vertically on mobile */
+    /* Stack hero content vertically on mobile with enhanced container fitting */
     .hero-text-section {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 2rem;
-        margin-right: 0;
+        width: 100% !important;
+        text-align: center !important;
+        margin-bottom: clamp(1rem, 4vw, 2rem) !important;
+        margin-right: 0 !important;
+        padding-right: 0 !important;
+        padding-left: clamp(0.5rem, 2vw, 1rem) !important;
+        padding-right: clamp(0.5rem, 2vw, 1rem) !important;
+    }
+    
+    /* Enhanced mobile sizing for hero elements */
+    .random {
+        font-size: clamp(1.2rem, 8vw, 3rem) !important;
+        min-height: clamp(3rem, 16vw, 8rem) !important;
+        justify-content: center !important; /* Center on mobile */
+        text-align: center !important;
+    }
+    
+    .hero__subtitle {
+        font-size: clamp(0.75rem, 4vw, 1.2rem) !important;
+        text-align: center !important;
+        margin-top: clamp(0.5rem, 3vw, 1rem) !important;
     }
 }
 
@@ -448,6 +565,25 @@ body {
     .person img {
         max-width: 300px;
     }
+    
+    /* Optimize hero text for medium to large screens */
+    .hero-text-section {
+        width: clamp(85%, 90%, 95%) !important;
+        text-align: left !important;
+        padding-right: clamp(1rem, 3vw, 2.5rem) !important;
+    }
+    
+    .random {
+        font-size: clamp(2rem, 6vw, 4.5rem) !important;
+        min-height: clamp(5rem, 12vw, 12rem) !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+    
+    .hero__subtitle {
+        font-size: clamp(1rem, 2.5vw, 1.8rem) !important;
+        text-align: left !important;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -457,6 +593,23 @@ body {
     
     .person img {
         max-width: 350px;
+    }
+}
+
+/* Extra large screens optimization */
+@media (min-width: 1200px) {
+    .hero-text-section {
+        width: 85% !important;
+        padding-right: 2rem !important;
+    }
+    
+    .random {
+        font-size: clamp(3rem, 5vw, 4.5rem) !important;
+        min-height: clamp(8rem, 10vw, 12rem) !important;
+    }
+    
+    .hero__subtitle {
+        font-size: clamp(1.2rem, 2vw, 1.8rem) !important;
     }
 }
 
