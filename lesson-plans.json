@@ -1,0 +1,344 @@
+{
+  "subjects": {
+    "python": {
+      "name": "Python Programming",
+      "lessons": {
+        "lesson1": {
+          "title": "Introduction to Python & Variables",
+          "duration": "50 minutes",
+          "difficulty": "Beginner",
+          "objectives": [
+            "Understand what Python is and its applications in technology careers",
+            "Learn to create and run basic Python programs using an IDE",
+            "Master variable creation and basic data types (string, int, float)",
+            "Practice basic input/output operations with print() and input()"
+          ],
+          "materials": [
+            "Python 3.8+ installed on all student computers",
+            "VS Code or Python IDLE text editor",
+            "Student handout with variable examples and exercises",
+            "Projector for live coding demonstrations",
+            "Access to online Python documentation"
+          ],
+          "tasks": [
+            "Introduction to Python (10 mins): History, real-world applications, career relevance in tech industry",
+            "Live Demo: Writing and running your first 'Hello World' program (10 mins)",
+            "Guided Practice: Variables, data types, and naming conventions (15 mins)",
+            "Independent Practice: Create a personal information program using variables (10 mins)",
+            "Wrap-up: Students share their programs and preview next lesson on conditionals (5 mins)"
+          ]
+        },
+        "lesson2": {
+          "title": "Control Flow - If Statements & Decision Making",
+          "duration": "50 minutes",
+          "difficulty": "Beginner",
+          "objectives": [
+            "Understand conditional logic and decision-making in programming",
+            "Learn proper syntax for if, elif, and else statements",
+            "Practice using comparison operators (==, !=, <, >, <=, >=)",
+            "Create programs that make decisions based on user input"
+          ],
+          "materials": [
+            "Python development environment from previous lesson",
+            "Code examples demonstrating conditional statements",
+            "Flowchart worksheet for planning logical flow",
+            "Assessment rubric for conditional logic programs",
+            "Reference sheet with comparison operators"
+          ],
+          "tasks": [
+            "Review: Quick quiz on variables and data types from last lesson (5 mins)",
+            "New Content: Introduction to conditionals with real-world examples (15 mins)",
+            "Guided Practice: Build an age verification program step-by-step (15 mins)",
+            "Independent Work: Create a grade calculator with letter grade assignment (10 mins)",
+            "Assessment: Peer code review and debugging practice (5 mins)"
+          ]
+        },
+        "lesson3": {
+          "title": "Loops - For and While Statements",
+          "duration": "50 minutes",
+          "difficulty": "Beginner",
+          "objectives": [
+            "Understand the concept of iteration and repetition in programming",
+            "Learn the difference between for loops and while loops",
+            "Practice using range() function with for loops",
+            "Create programs that efficiently repeat tasks"
+          ],
+          "materials": [
+            "Python IDE with previous lesson files available",
+            "Loop examples and templates for student reference",
+            "Worksheet with loop planning exercises",
+            "Timer for measuring program efficiency",
+            "Sample datasets for loop practice"
+          ],
+          "tasks": [
+            "Warm-up: Review conditionals with a quick coding challenge (5 mins)",
+            "Introduction: Why we need loops - efficiency and automation (10 mins)",
+            "Demo: For loops with range() and list iteration (15 mins)",
+            "Practice: Create a multiplication table generator (15 mins)",
+            "Challenge: Build a simple number guessing game using loops (5 mins)"
+          ]
+        }
+      }
+    },
+    "webdesign": {
+      "name": "Web Design & Development",
+      "lessons": {
+        "lesson1": {
+          "title": "HTML Fundamentals & Document Structure",
+          "duration": "50 minutes",
+          "difficulty": "Beginner",
+          "objectives": [
+            "Understand the structure and purpose of HTML in web development",
+            "Learn essential HTML tags and their semantic meaning",
+            "Create a well-structured webpage from scratch",
+            "Understand the relationship between HTML, CSS, and JavaScript in web development"
+          ],
+          "materials": [
+            "Text editor (VS Code with HTML extensions recommended)",
+            "Modern web browser (Chrome or Firefox) for testing",
+            "HTML5 reference sheet with common tags",
+            "Sample website examples showing good structure",
+            "File management folder structure template"
+          ],
+          "tasks": [
+            "Introduction: What is HTML and why is it important for web careers? (10 mins)",
+            "Live Demo: Basic HTML structure, DOCTYPE, head, and body elements (15 mins)",
+            "Guided Practice: Create a personal profile page with headings, paragraphs, and lists (20 mins)",
+            "Peer Review: Students view each other's pages and provide constructive feedback (5 mins)"
+          ]
+        },
+        "lesson2": {
+          "title": "CSS Styling Basics & Visual Design",
+          "duration": "50 minutes",
+          "difficulty": "Beginner",
+          "objectives": [
+            "Learn CSS syntax, selectors, and the cascade principle",
+            "Apply colors, fonts, and spacing to improve visual appeal",
+            "Understand the CSS box model and its impact on layout",
+            "Style the HTML page created in the previous lesson"
+          ],
+          "materials": [
+            "HTML file from previous lesson saved and accessible",
+            "CSS3 reference guide with property examples",
+            "Color palette tools and hex color codes",
+            "Google Fonts integration examples",
+            "CSS box model diagram for reference"
+          ],
+          "tasks": [
+            "Review: Quick assessment of HTML structure from previous class (5 mins)",
+            "Introduction: CSS basics, syntax, and how it enhances HTML (15 mins)",
+            "Hands-on Workshop: Adding colors, fonts, and spacing to personal profile (25 mins)",
+            "Gallery Walk: Students showcase their styled pages and discuss design choices (5 mins)"
+          ]
+        },
+        "lesson3": {
+          "title": "Responsive Design & CSS Flexbox",
+          "duration": "50 minutes",
+          "difficulty": "Intermediate",
+          "objectives": [
+            "Understand the importance of responsive design in modern web development",
+            "Learn CSS Flexbox properties for flexible layouts",
+            "Create layouts that adapt to different screen sizes",
+            "Use media queries to implement responsive breakpoints"
+          ],
+          "materials": [
+            "Previous HTML and CSS files from earlier lessons",
+            "Flexbox reference guide and cheat sheet",
+            "Device testing tools (browser developer tools)",
+            "Examples of responsive websites for inspiration",
+            "Media query breakpoint reference"
+          ],
+          "tasks": [
+            "Device Demo: Show how websites look on different screen sizes (5 mins)",
+            "Flexbox Introduction: Container and item properties (20 mins)",
+            "Guided Practice: Convert existing layout to use Flexbox (20 mins)",
+            "Testing: Use browser tools to test responsive behavior (5 mins)"
+          ]
+        }
+      }
+    },
+    "gamedev": {
+      "name": "Game Development with Unity",
+      "lessons": {
+        "lesson1": {
+          "title": "Introduction to Unity Interface & 3D Environment",
+          "duration": "50 minutes",
+          "difficulty": "Beginner",
+          "objectives": [
+            "Navigate the Unity editor interface confidently",
+            "Understand GameObjects, Components, and the Inspector panel",
+            "Create and manipulate basic 3D scenes with primitives",
+            "Learn the difference between Scene view and Game view"
+          ],
+          "materials": [
+            "Unity Hub and Unity 2022.3 LTS installed on all computers",
+            "Sample 3D assets and textures for experimentation",
+            "Unity interface diagram handout for reference",
+            "Quick reference cards with common shortcuts",
+            "Project folder template with organized structure"
+          ],
+          "tasks": [
+            "Unity Career Overview: Game industry roles and opportunities (10 mins)",
+            "Interface Tour: Windows, panels, toolbar, and navigation controls (15 mins)",
+            "Hands-on Practice: Create a 3D scene with terrain, objects, and lighting (20 mins)",
+            "Reflection Journal: Students document their learning and initial impressions (5 mins)"
+          ]
+        },
+        "lesson2": {
+          "title": "Basic Scripting with C# & Object Movement",
+          "duration": "50 minutes",
+          "difficulty": "Intermediate",
+          "objectives": [
+            "Write and attach basic C# scripts to GameObjects in Unity",
+            "Understand the MonoBehaviour lifecycle (Start, Update methods)",
+            "Create simple object movement using Transform component",
+            "Debug scripts effectively using Console.log and error messages"
+          ],
+          "materials": [
+            "Unity project from previous lesson with 3D scene",
+            "C# scripting reference guide for Unity",
+            "Pre-written movement script template for guidance",
+            "Debugging checklist and common error solutions",
+            "Input system documentation for key controls"
+          ],
+          "tasks": [
+            "Review: Unity interface quiz and GameObject manipulation (5 mins)",
+            "C# Introduction: Basic syntax, variables, and Unity-specific methods (15 mins)",
+            "Guided Coding: Create a player movement script step-by-step (25 mins)",
+            "Testing & Debug: Play test the game and fix any scripting errors (5 mins)"
+          ]
+        },
+        "lesson3": {
+          "title": "Physics & Collisions in Unity",
+          "duration": "50 minutes",
+          "difficulty": "Intermediate",
+          "objectives": [
+            "Understand Unity's physics system and Rigidbody components",
+            "Implement collision detection using Colliders",
+            "Create interactive game mechanics using physics",
+            "Distinguish between Trigger and Collision events"
+          ],
+          "materials": [
+            "Unity project with movement script from previous lesson",
+            "Physics materials for different surface types",
+            "Collision detection script templates",
+            "Reference guide for physics components",
+            "Sample game mechanics for inspiration"
+          ],
+          "tasks": [
+            "Physics Demo: Real-world physics vs. game physics concepts (10 mins)",
+            "Component Setup: Add Rigidbody and Colliders to game objects (15 mins)",
+            "Script Implementation: Create collision-based game mechanics (20 mins)",
+            "Game Testing: Playtest and refine physics interactions (5 mins)"
+          ]
+        }
+      }
+    },
+    "figma": {
+      "name": "UI/UX Design with Figma",
+      "lessons": {
+        "lesson1": {
+          "title": "Figma Interface & Basic Design Principles",
+          "duration": "50 minutes",
+          "difficulty": "Beginner",
+          "objectives": [
+            "Navigate Figma's web-based design interface effectively",
+            "Understand fundamental design principles: alignment, contrast, hierarchy",
+            "Create basic shapes, text, and layout elements",
+            "Learn about frames, layers, and the design canvas"
+          ],
+          "materials": [
+            "Figma account setup (free accounts for all students)",
+            "Design principles reference sheet",
+            "Color theory basics handout",
+            "Typography guidelines for UI design",
+            "Examples of well-designed user interfaces"
+          ],
+          "tasks": [
+            "Design Career Overview: UX/UI roles in tech companies (10 mins)",
+            "Figma Tour: Interface, tools, and basic navigation (15 mins)",
+            "First Design: Create a simple mobile app login screen (20 mins)",
+            "Peer Feedback: Share designs and discuss design choices (5 mins)"
+          ]
+        },
+        "lesson2": {
+          "title": "Prototyping & User Flow Design",
+          "duration": "50 minutes",
+          "difficulty": "Intermediate",
+          "objectives": [
+            "Create interactive prototypes using Figma's prototyping features",
+            "Understand user flow and navigation design",
+            "Link frames together to simulate app functionality",
+            "Test prototypes and gather user feedback"
+          ],
+          "materials": [
+            "Figma project from previous lesson",
+            "User flow diagram templates",
+            "Prototyping interaction reference guide",
+            "Mobile device for prototype testing",
+            "User testing feedback forms"
+          ],
+          "tasks": [
+            "User Experience Review: What makes a good user interface? (5 mins)",
+            "Prototyping Demo: Creating links and interactions between screens (20 mins)",
+            "Build Project: Expand login screen into a multi-screen app prototype (20 mins)",
+            "User Testing: Students test each other's prototypes and provide feedback (5 mins)"
+          ]
+        }
+      }
+    },
+    "database": {
+      "name": "Database Design & SQL",
+      "lessons": {
+        "lesson1": {
+          "title": "Introduction to Databases & SQL Basics",
+          "duration": "50 minutes",
+          "difficulty": "Beginner",
+          "objectives": [
+            "Understand what databases are and why they're important",
+            "Learn basic SQL syntax for querying data",
+            "Create simple SELECT statements with filtering",
+            "Understand database tables, rows, and columns"
+          ],
+          "materials": [
+            "SQLite browser or online SQL sandbox",
+            "Sample database with student-relevant data",
+            "SQL reference sheet with common commands",
+            "Database design examples from real applications",
+            "ER diagram template for planning"
+          ],
+          "tasks": [
+            "Database Everywhere: Examples of databases in daily life and apps (10 mins)",
+            "SQL Introduction: Basic query structure and syntax (15 mins)",
+            "Guided Practice: Write SELECT queries to find specific data (20 mins)",
+            "Mini Project: Design a simple database for a school system (5 mins)"
+          ]
+        },
+        "lesson2": {
+          "title": "Database Design & Relationships",
+          "duration": "50 minutes",
+          "difficulty": "Intermediate",
+          "objectives": [
+            "Design normalized database schemas",
+            "Understand primary keys and foreign keys",
+            "Create relationships between tables",
+            "Write JOIN queries to combine data from multiple tables"
+          ],
+          "materials": [
+            "Database design software or online ERD tool",
+            "Multi-table database example",
+            "Normalization rules reference",
+            "JOIN query examples and templates",
+            "Real-world database schema examples"
+          ],
+          "tasks": [
+            "Review: Quick SQL query challenge from previous lesson (5 mins)",
+            "Database Design: Entity-Relationship diagrams and normalization (20 mins)",
+            "JOIN Practice: Write queries combining data from multiple tables (20 mins)",
+            "Design Challenge: Create a database schema for a chosen application (5 mins)"
+          ]
+        }
+      }
+    }
+  }
+}

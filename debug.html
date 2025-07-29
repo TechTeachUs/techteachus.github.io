@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Lesson Plan Selector</title>
+</head>
+<body>
+    <h1>Debug Console</h1>
+    <p>Check the browser console for debug information.</p>
+    <div id="output"></div>
+
+    <script>
+        console.log('Starting debug...');
+        
+        async function debugLoad() {
+            try {
+                console.log('Attempting to fetch data/complete_lesson_plan.json');
+                const response = await fetch('data/complete_lesson_plan.json');
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Data loaded successfully:', data);
+                console.log('Course:', data.curriculum.course);
+                console.log('Units:', data.curriculum.units);
+                
+                // Display basic info on page
+                document.getElementById('output').innerHTML = `
+                    <h2>Data Loaded Successfully!</h2>
+                    <p><strong>Course:</strong> ${data.curriculum.course}</p>
+                    <p><strong>School Year:</strong> ${data.curriculum.schoolYear}</p>
+                    <p><strong>Number of Units:</strong> ${data.curriculum.units ? data.curriculum.units.length : 'None'}</p>
+                `;
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('output').innerHTML = `
+                    <h2>Error Loading Data</h2>
+                    <p style="color: red;">${error.message}</p>
+                `;
+            }
+        }
+        
+        debugLoad();
+    </script>
+</body>
+</html>

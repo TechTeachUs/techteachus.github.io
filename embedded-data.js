@@ -1,0 +1,3453 @@
+const EMBEDDED_LESSON_DATA = {
+  "curriculum": {
+    "course": "10th Grade Game Development",
+    "schoolYear": "2025-2026",
+    "units": [
+      {
+        "unitNumber": 1,
+        "unitTitle": "Introduction to Python & Computational Thinking",
+        "lessons": [
+          {
+            "day": 1,
+            "date": "Thu, 09 04, 25",
+            "lesson": "What is Computer Science?",
+            "enduringUnderstanding": "Precise, logical instructions are required to make a computer perform any task.",
+            "essentialQuestion": "How do we translate a human idea into a set of instructions a computer can understand?",
+            "objectives": [
+              "Write a clear definition of \"algorithm\"",
+              "Author a set of at least 5 sequential instructions for a real-world task",
+              "Log in to new Project STEM and GitHub accounts"
+            ],
+            "agenda": "(5m) Do Now: \"Think about your favorite game. Write down the steps a computer might need to follow to make one action happen.\"(20m) Activity: Human Robot(20m) Mini-Lesson: Connect activity to \"Algorithm\" & \"Computational Thinking\"; Intro \"Games for Change\".(40m) Guided Practice: Account Setup (Project STEM, GitHub), Install Python/VSCode.(5m) Exit Ticket: \"What is an algorithm?\"",
+            "materials": {
+              "teacher": "Projector, whiteboard, stacking cups, paper, pens.",
+              "student": "Computer, notebook/paper.",
+              "links": "Python: python.org/downloadsVSCode: code.visualstudio.comGitHub: github.comG4C: gamesforchange.org/studentchallenge"
+            },
+            "assessment": {
+              "formative": "Observe Human Robot activity; Review Exit Ticket definitions.",
+              "summative": "Successful creation of Project STEM and GitHub accounts is required for all future assignments."
+            },
+            "differentiation": "Support: Provide a printed checklist for account setup. Pair students for the activity.Challenge: Have advanced students write a more complex algorithm or help peers with installation."
+          },
+          {
+            "day": 2,
+            "date": "Fri, 09 05, 25",
+            "lesson": "Your First Program",
+            "enduringUnderstanding": "All programs are built from simple, specific commands executed in order.",
+            "essentialQuestion": "How do we write a command that a computer can understand and display output?",
+            "objectives": [
+              "Use the print() function to display a string",
+              "Identify and correct at least one simple syntax error",
+              "Save and run a Python file successfully"
+            ],
+            "agenda": "(5m) Do Now: \"What's the human equivalent of a computer 'error'?\"(15m) Mini-Lesson: Introduce print() and strings.<br>(45m) Guided Practice: \"Hello, World!\" lab in VSCode.(20m) Independent Practice: Experiment with printing different messages.(5m) Exit Ticket: \"Write the code to print your favorite food.\"",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer with Python/VSCode installed.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe students running code; Review exit tickets for correct syntax.",
+              "summative": "This lesson is the first step towards all future Python assignments."
+            },
+            "differentiation": "Support: Provide a \"common errors\" cheatsheet.Challenge: Have students print multi-line messages using multiple print() statements."
+          },
+          {
+            "day": 3,
+            "date": "Mon, 09 08, 25",
+            "lesson": "Introduction to GitHub",
+            "enduringUnderstanding": "Version control is a fundamental practice for tracking changes and collaborating.",
+            "essentialQuestion": "Why is it important to save and track different versions of our code?",
+            "objectives": [
+              "Create a new, public repository on GitHub",
+              "Use the git clone command to create a local copy",
+              "Define \"repository,\" \"commit,\" and \"push\""
+            ],
+            "agenda": "(5m) Do Now: \"Have you ever saved multiple versions of a school paper (e.g., Essay_v2)?\"(20m) Mini-Lesson: Introduce GitHub as \"Google Docs for code.\"(45m) Guided Practice: Create a new repo and git clone it.<br>(15m) Independent Practice: Move hello.py into the new local repo folder.<br>(5m) Exit Ticket: \"What's the command to copy a repo?\"",
+            "materials": {
+              "teacher": "Projector, GitHub.",
+              "student": "Computer, GitHub account.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Circulate and verify all students have successfully cloned their repository; Check exit tickets.",
+              "summative": "Successful creation of a repo is required for all project submissions."
+            },
+            "differentiation": "Challenge: Have students explore the GitHub interface (Settings, Insights)."
+          },
+          {
+            "day": 4,
+            "date": "Tue, 09 09, 25",
+            "lesson": "Committing and Pushing Code",
+            "enduringUnderstanding": "Version control allows developers to save \"snapshots\" and sync them to the cloud.",
+            "essentialQuestion": "How do we save our local work and upload it to GitHub?",
+            "objectives": [
+              "Use git add to stage a file",
+              "Use git commit -m \"message\" to create a commit",
+              "Use git push to upload commits"
+            ],
+            "agenda": "(5m) Do Now: \"What's a good, short message for saving your 'Hello, World!' program?\"(20m) Mini-Lesson: Introduce Add -> Commit -> Push workflow.(50m) Guided Practice: Students run the three commands to upload their hello.py file.<br>(10m) Discussion: \"What happens if two people push changes to the same file?\"(5m) Exit Ticket: \"List the 3 git commands, in order.\"",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer, local repository from Day 3.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Verify the hello.py file is visible on their online GitHub page.",
+              "summative": "This workflow is required for submitting all projects."
+            },
+            "differentiation": "Challenge: Have students make a small change to their file and complete the add/commit/push cycle a second time with a new message."
+          },
+          {
+            "day": 5,
+            "date": "Wed, 09 10, 25",
+            "lesson": "Week 1 Review & Exploration",
+            "enduringUnderstanding": "Reviewing foundational concepts is crucial for building complex knowledge.",
+            "essentialQuestion": "How do algorithms, programs, and version control fit together?",
+            "objectives": [
+              "Correctly define key terms in a quiz setting",
+              "Identify the correct sequence of GitHub commands",
+              "Navigate to a public repository on GitHub"
+            ],
+            "agenda": "(10m) Do Now: \"What's one question you still have?\"(30m) Activity: Kahoot! Review(40m) Guided Exploration: Students explore beginner-friendly open-source projects on GitHub.(10m) Discussion: \"What did you notice about the code you looked at?\"(5m) Exit Ticket: \"What topic do you need more practice with?\"",
+            "materials": {
+              "teacher": "Kahoot! quiz, list of GitHub repositories.",
+              "student": "Computer.",
+              "links": "A curated list of simple GitHub projects."
+            },
+            "assessment": {
+              "formative": "Kahoot! results provide instant feedback.",
+              "summative": "This review prepares students for the first graded assignments."
+            },
+            "differentiation": "Support: Provide specific links and guiding questions for the exploration.Challenge: Have students try to clone a repository they found."
+          },
+          {
+            "day": 6,
+            "date": "Thu, 09 11, 25",
+            "lesson": "Variables & Data Types",
+            "enduringUnderstanding": "Variables act as named containers for storing data.",
+            "essentialQuestion": "How do we store and reuse pieces of information in our code?",
+            "objectives": [
+              "Declare a variable and assign a string value",
+              "Use a variable inside a print() function",
+              "Combine (concatenate) two or more strings"
+            ],
+            "agenda": "(5m) Do Now: \"How would you print your name 100 times?\"(20m) Mini-Lesson: Introduce variables (labeled box analogy) and string concatenation.(45m) Guided Practice: \"Silly Sentences (Part 1)\" - create variables and combine them.(15m) Independent Practice: Begin Assignment 1.(5m) Exit Ticket: \"Write the code to create a variable school_name.\"",
+            "materials": {
+              "teacher": "Projector, Project STEM portal.",
+              "student": "Computer, Project STEM account.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": "Observe student code; Check for correct variable declaration and use.",
+              "summative": "Assignment 1: Silly Sentences (Project STEM)."
+            },
+            "differentiation": "Support: Provide sentence templates for the activity.Challenge: Have students create a multi-sentence story using at least five variables."
+          },
+          {
+            "day": 7,
+            "date": "Fri, 09 12, 25",
+            "lesson": "User Input & Numbers",
+            "enduringUnderstanding": "Programs can be made interactive by accepting user input.",
+            "essentialQuestion": "How can our programs get information from the user?",
+            "objectives": [
+              "Use the input() function to get user text",
+              "Define integer and float data types",
+              "Use int() and str() to convert data types"
+            ],
+            "agenda": "(5m) Do Now: \"What's an app that asks you for info?\"(20m) Mini-Lesson: Introduce input() and type casting.<br>(45m) Guided Practice: Create a \"Greeter\" program that asks for name and age, requiring type conversion.(15m) Independent Practice: Continue \"Silly Sentences\" or start \"Room Area.\"(5m) Exit Ticket: \"What is wrong with this code? age = input(); print(age + 1)\"",
+            "materials": {
+              "teacher": "Projector, Project STEM portal.",
+              "student": "Computer, Project STEM account.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": "Review exit tickets to check for understanding of type conversion.",
+              "summative": "This skill is required for Assignment 2: Room Area and Assignment 3: Chatbot."
+            },
+            "differentiation": "Support: Provide a visual chart showing how int(), float(), and str() work."
+          },
+          {
+            "day": 8,
+            "date": "Mon, 09 15, 25",
+            "lesson": "Number Calculations",
+            "enduringUnderstanding": "Computers can perform math using standard arithmetic operators.",
+            "essentialQuestion": "How do we perform math in Python?",
+            "objectives": [
+              "Use arithmetic operators +, -, *, /",
+              "Explain the difference between / and // division",
+              "Structure a program with numerical input and calculations"
+            ],
+            "agenda": "(5m) Do Now: \"Write a real-world math problem.\"(15m) Mini-Lesson: Review arithmetic operators.(50m) Guided Practice: Begin Assignment 2: Room Area.(15m) GitHub Workflow: add, commit, push recent work.<br>(5m) Exit Ticket: \"Write the code to calculate the area of a rectangle.\"",
+            "materials": {
+              "teacher": "Projector, Project STEM portal.",
+              "student": "Computer, Project STEM account.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": "Circulate and check that students convert input to numbers before calculations.",
+              "summative": "Assignment 2: Room Area (Project STEM)."
+            },
+            "differentiation": "Challenge: Have students also calculate and print the perimeter of the room."
+          },
+          {
+            "day": 9,
+            "date": "Tue, 09 16, 25",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "Applying new concepts to build a complete project is key to learning.",
+            "essentialQuestion": "How do I translate a project description into a working program?",
+            "objectives": [
+              "Make significant progress on \"Room Area\"",
+              "Debug at least one error in their code",
+              "Submit \"Silly Sentences\""
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What part of the assignments are you stuck on?\"(70m) Independent Work Time: Students work on Project STEM assignments.(10m) Teacher Check-ins: Circulate and provide individual support.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer, Project STEM account.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": "One-on-one check-ins with the teacher during work time.",
+              "summative": "Assignment 1: Silly Sentences (Submission).Progress on Assignment 2: Room Area."
+            },
+            "differentiation": "Support: Pair students who are struggling with those who understand a concept.Challenge: Encourage early finishers to begin the Chatbot assignment."
+          },
+          {
+            "day": 10,
+            "date": "Wed, 09 17, 25",
+            "lesson": "Project Work & Peer Review",
+            "enduringUnderstanding": "Explaining your work to others solidifies your own understanding.",
+            "essentialQuestion": "How can I clearly explain my code's logic to someone else?",
+            "objectives": [
+              "Complete and submit \"Room Area\"",
+              "Explain their program's logic to a peer"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What was the hardest part of the 'Room Area' assignment?\"(40m) Final Work Time: Final opportunity to complete assignments.(40m) Peer-to-Peer Share: Students demo their \"Room Area\" calculator to a partner.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer, Project STEM account.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": "Observe peer-to-peer sharing sessions to gauge understanding.",
+              "summative": "Assignment 2: Room Area (Submission)."
+            },
+            "differentiation": "Support: Provide a short script or checklist for the peer review process."
+          },
+          {
+            "day": 11,
+            "date": "Thu, 09 18, 25",
+            "lesson": "Making Decisions: if",
+            "enduringUnderstanding": "Conditional statements allow a program to execute different code based on a condition.",
+            "essentialQuestion": "How can a program make a choice?",
+            "objectives": [
+              "Use comparison operators (==, !=, >, <) to create a boolean expression",
+              "Construct a simple if statement"
+            ],
+            "agenda": "(5m) Do Now: \"Give an example of a choice you made today based on a condition (e.g., IF it's raining, THEN I'll take an umbrella).\"(20m) Mini-Lesson: Introduce Booleans (True/False) and if.<br>(60m) Guided Practice: Password Checker. Students write a program that prints \"Access granted\" only if a variable password matches a specific string.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Mini-challenge (\"Write an if statement that checks if x > 10\").",
+              "summative": "This skill is required for Assignment 3: Chatbot."
+            },
+            "differentiation": "Support: Use flowcharts to visually represent the logic of an if statement."
+          },
+          {
+            "day": 12,
+            "date": "Fri, 09 19, 25",
+            "lesson": "Making Decisions: if-else",
+            "enduringUnderstanding": "Programs can follow one of two paths based on a condition.",
+            "essentialQuestion": "How can a program choose between two different paths?",
+            "objectives": [
+              "Construct an if-else statement to create two distinct paths in a program"
+            ],
+            "agenda": "(5m) Do Now: \"What was the 'otherwise' or 'else' for the choice you wrote down yesterday?\"(15m) Mini-Lesson: Introduce the else keyword.<br>(60m) Guided Practice: Password Checker V2. Upgrade yesterday's program to include an else block that prints \"Access denied.\"<br>(10m) Chatbot Brainstorm: Begin brainstorming ideas for Chatbot.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Check that students can correctly structure an if-else block without syntax errors.",
+              "summative": "This skill is required for Assignment 3: Chatbot."
+            },
+            "differentiation": "Challenge: Have students create a \"coin flip\" program using if-else."
+          },
+          {
+            "day": 13,
+            "date": "Mon, 09 22, 25",
+            "lesson": "Making Decisions: elif",
+            "enduringUnderstanding": "Programs can choose between many different paths using chained conditions.",
+            "essentialQuestion": "How can a program choose between many different options?",
+            "objectives": [
+              "Construct an if-elif-else statement to handle multiple conditions"
+            ],
+            "agenda": "(5m) Do Now: \"How could a program decide between small, medium, and large?\"(20m) Mini-Lesson: Introduce the elif keyword for multiple checks.<br>(60m) Guided Practice: Chatbot Planning. Students plan their chatbot using a flowchart or outline, focusing on the decision tree. They begin coding the project.",
+            "materials": {
+              "teacher": "Projector, paper/digital tool for flowcharts.",
+              "student": "Computer, Project STEM account.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": "Review student flowcharts to see if their logic is sound before they begin coding.",
+              "summative": "Assignment 3: Chatbot (Project STEM)."
+            },
+            "differentiation": "Support: Provide a flowchart template for planning the chatbot."
+          },
+          {
+            "day": 14,
+            "date": "Thu, 09 25, 25",
+            "lesson": "Project Work: Chatbot",
+            "enduringUnderstanding": "Combining multiple conditional statements allows for complex, conversational programs.",
+            "essentialQuestion": "How can I combine multiple conditional statements to create a conversation?",
+            "objectives": [
+              "Write a program that uses at least three if/elif/else checks",
+              "Make significant progress on the Chatbot project"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's a feature of your chatbot you're excited about?\"(75m) Independent Work Time: Students build their Chatbot project.(5m) GitHub Push: Students save their work to GitHub.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer, Project STEM account.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": "Circulate and provide one-on-one support and debugging help.",
+              "summative": "Progress on Assignment 3: Chatbot."
+            },
+            "differentiation": "Challenge: Have students add nested conditionals (an if inside another if) to their chatbot for more complex conversations."
+          },
+          {
+            "day": 15,
+            "date": "Fri, 09 26, 25",
+            "lesson": "Project Work: Chatbot",
+            "enduringUnderstanding": "See Day 14.",
+            "essentialQuestion": "See Day 14.",
+            "objectives": [
+              "See Day 14",
+              "See Day 14"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's the hardest bug you've had to fix so far?\"(75m) Independent Work Time: Students continue building their Chatbot.(5m) GitHub Push: Students save their work to GitHub.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer, Project STEM account.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": "See Day 14.",
+              "summative": "Progress on Assignment 3: Chatbot."
+            },
+            "differentiation": "See Day 14."
+          },
+          {
+            "day": 16,
+            "date": "Mon, 09 29, 25",
+            "lesson": "Final Project Work Day",
+            "enduringUnderstanding": "Documenting and cleaning code is a critical final step before submission.",
+            "essentialQuestion": "How can I ensure my code is clean and meets all requirements?",
+            "objectives": [
+              "Add comments to their code to explain its function",
+              "Complete a final git add, commit, and push for their project"
+            ],
+            "agenda": "(10m) Mini-Lesson: What makes good code comments?(75m) Final Work & Polish: Last day for students to work on their Chatbot project and get help. Focus on adding comments and ensuring all requirements are met.(5m) Final Submission: Students submit their project via Project STEM portal.",
+            "materials": {
+              "teacher": "Projector.",
+              "student": "Computer, Project STEM account.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": "Check student code for the presence and quality of comments.",
+              "summative": "Assignment 3: Chatbot (Submission)."
+            },
+            "differentiation": "Support: Provide a submission checklist to ensure students don't miss any steps."
+          },
+          {
+            "day": 17,
+            "date": "Tue, 09 30, 25",
+            "lesson": "Project Showcase",
+            "enduringUnderstanding": "Sharing your work and seeing the work of others inspires new ideas and learning.",
+            "essentialQuestion": "How can sharing my work help me learn?",
+            "objectives": [
+              "Present their completed Chatbot project to peers",
+              "Provide constructive feedback on at least one other student's project"
+            ],
+            "agenda": "(5m) Setup: Students open their Chatbot project on their screen.(80m) \"Gallery Walk\": Students walk around the room, interacting with their peers' chatbots and leaving positive/constructive feedback notes.(5m) Clean-up.",
+            "materials": {
+              "teacher": "Post-it notes or digital feedback forms.",
+              "student": null,
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe peer interactions and the quality of feedback being given.",
+              "summative": null
+            },
+            "differentiation": "Support: Provide sentence starters for giving feedback (e.g., \"I really liked how you...\", \"One thing you could add is...\")."
+          },
+          {
+            "day": 18,
+            "date": "Wed, 10 01, 25",
+            "lesson": "Unit 1 Review",
+            "enduringUnderstanding": "Synthesizing and assessing knowledge is a critical final step in the learning cycle.",
+            "essentialQuestion": "How do all the concepts from Unit 1 work together in a program?",
+            "objectives": [
+              "Correctly answer questions related to variables, input, math, and conditionals",
+              "Identify and fix errors in sample blocks of code"
+            ],
+            "agenda": "(10m) Do Now: \"What topic from Unit 1 are you most confident in? Least confident?\"(40m) Review Game: Cumulative review Kahoot!.(40m) Study Guide: Students work on a study guide with practice problems.",
+            "materials": {
+              "teacher": "Kahoot! quiz, study guide handout.",
+              "student": "Computer, pen/paper.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review game score / study guide completion.",
+              "summative": "This is the final review before the first major quiz."
+            },
+            "differentiation": "Support: Work through the first few study guide problems as a class."
+          },
+          {
+            "day": 19,
+            "date": "Fri, 10 03, 25",
+            "lesson": "Unit 1 Assessment",
+            "enduringUnderstanding": "Formal assessment measures mastery of foundational concepts.",
+            "essentialQuestion": "Have I mastered the foundational concepts of Python programming?",
+            "objectives": [
+              "Achieve a passing score on the Unit 1 quiz"
+            ],
+            "agenda": "(5m) Settle In & Instructions(85m) Quiz Time: Students take the Project STEM: Quiz 1 & Quiz 2.",
+            "materials": {
+              "teacher": "Project STEM portal.",
+              "student": "Computer.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": null,
+              "summative": "Quiz 1 & Quiz 2 (Project STEM)."
+            },
+            "differentiation": null
+          }
+        ]
+      },
+      {
+        "unitNumber": 2,
+        "unitTitle": "Loops and Functions",
+        "lessons": [
+          {
+            "day": 20,
+            "date": "Mon, 10 06, 25",
+            "lesson": "Intro to Unit 2",
+            "enduringUnderstanding": "Programmers invent new techniques to solve problems that are tedious or repetitive.",
+            "essentialQuestion": "Why would a programmer want to repeat a block of code?",
+            "objectives": [
+              "Articulate a problem that would be difficult to solve without repeating code"
+            ],
+            "agenda": "(15m) Do Now & Discussion: \"How would you print the numbers from 1 to 1,000 using only the code you know now? How long would that take?\"(75m) Motivation for Loops: Teacher demonstrates a simple for loop to show how quickly the task can be done, motivating the need for the next unit.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": null,
+              "links": null
+            },
+            "assessment": {
+              "formative": "Class discussion and brainstorming.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 21,
+            "date": "Tue, 10 07, 25",
+            "lesson": "The for Loop",
+            "enduringUnderstanding": "Loops allow programmers to automate repetitive tasks by executing a block of code multiple times.",
+            "essentialQuestion": "How can we command a computer to repeat an action a specific number of times?",
+            "objectives": [
+              "Use a for loop with the range() function to repeat a print() statement a set number of times",
+              "Predict the output of a simple for loop before running it"
+            ],
+            "agenda": "(10m) Do Now: \"How many lines of code would it take to print 'Hello' 5 times? 100 times? Is there a better way?\"(20m) Mini-Lesson: Introduce the for loop and range() syntax.<br>(55m) Guided Practice: \"The Counter.\" Students write loops to count from 0 to 10, count by 2s, and print a message multiple times.(5m) Exit Ticket: \"Write a for loop that prints the numbers 0, 1, and 2.\"",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review student code during practice; Check exit tickets for correct for loop syntax.",
+              "summative": "Required for Assignment 4: Divisible by Three."
+            },
+            "differentiation": "Support: Provide code templates for the for loop structure.<br>Challenge: Ask students to write a loop that counts down from 10 to 1."
+          },
+          {
+            "day": 22,
+            "date": "Wed, 10 08, 25",
+            "lesson": "Looping & Intro to Lists",
+            "enduringUnderstanding": "Loops can iterate over collections of data, performing an action for each item in the collection.",
+            "essentialQuestion": "How can we process each item in a sequence one by one?",
+            "objectives": [
+              "Create a simple list of strings or numbers",
+              "Write a for loop that iterates over each element in a list and prints it"
+            ],
+            "agenda": "(10m) Do Now: \"If you had a list of 5 friends, how would you write code to greet each one by name?\"(20m) Mini-Lesson: Briefly introduce the list data type. Demonstrate looping directly over a list (for item in my_list:).<br>(55m) Guided Practice: \"Vowel Counter.\" Students write a program with a for loop to iterate through the letters in a word and count the number of vowels.<br>(5m) Exit Ticket: \"What would this code print? for x in [1, 5, 9]: print(x)\"",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe students' \"Vowel Counter\" programs. Check exit tickets.",
+              "summative": "Required for Assignment 8: Personal Organizer."
+            },
+            "differentiation": "Support: Start with a program that just prints each letter of a word before adding the counting logic."
+          },
+          {
+            "day": 23,
+            "date": "Thu, 10 09, 25",
+            "lesson": "The while Loop",
+            "enduringUnderstanding": "while loops repeat a block of code as long as a certain condition remains true.<br>",
+            "essentialQuestion": "How can we repeat an action an unknown number of times?",
+            "objectives": [
+              "Construct a while loop that continues as long as a condition is true",
+              "Identify and fix a simple infinite loop",
+              "Explain the difference between a for loop and a while loop"
+            ],
+            "agenda": "(10m) Do Now: \"Think of a video game. What's something that happens over and over until something else happens (e.g., the player's health runs out)?\"(20m) Mini-Lesson: Introduce while loop syntax. Emphasize the need for a condition that will eventually become false. Discuss infinite loops.<br>(55m) Guided Practice: Number Guessing Game V2. Students refactor their game from Unit 1 to use a while loop, allowing the user to guess until they get the correct answer.<br>(5m) Exit Ticket: \"When would you use a while loop instead of a for loop?\"",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Check that students' games don't have infinite loops. Review exit ticket responses.",
+              "summative": "Quiz 4 will cover while loops."
+            },
+            "differentiation": "Support: Use a flowchart to visualize the logic of a while loop.<br>Challenge: Have students add a guess counter to their game."
+          },
+          {
+            "day": 24,
+            "date": "Fri, 10 10, 25",
+            "lesson": "Project Kickoff: Adventure Game",
+            "enduringUnderstanding": "Planning a larger project before coding helps to organize ideas and prevent major structural problems.",
+            "essentialQuestion": "How do we plan a complex program?",
+            "objectives": [
+              "Create a design document or flowchart for a simple text-based adventure game",
+              "Identify at least three distinct \"rooms\" or states for the game",
+              "Outline the choices a player can make in each room"
+            ],
+            "agenda": "(10m) Do Now: \"What are the basic parts of an adventure story? (e.g., a starting point, a goal, obstacles).\"(30m) Group Brainstorm: As a class, brainstorm ideas and core mechanics for a text-based adventure game.(50m) Independent Planning: Students use a template or flowchart software to design their own simple adventure game with a start, a goal, and choices.",
+            "materials": {
+              "teacher": "Projector, whiteboard, design document template (digital or paper).",
+              "student": "Computer, notebook/paper.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review student design documents for clarity and logical flow.",
+              "summative": "This plan is the foundation for the final project of the first semester."
+            },
+            "differentiation": "Support: Provide a fill-in-the-blank design template.Challenge: Encourage students to design a simple puzzle for one of their rooms."
+          },
+          {
+            "day": 25,
+            "date": "Tue, 10 14, 25",
+            "lesson": "Repetition & Loops Review",
+            "enduringUnderstanding": "Different loop structures are suitable for solving different kinds of repetitive problems.",
+            "essentialQuestion": "How do I choose the right loop for the job?",
+            "objectives": [
+              "Correctly answer questions distinguishing between for and while loops",
+              "Complete the \"Divisible by Three\" assignment using a loop"
+            ],
+            "agenda": "(10m) Do Now: \"Write a for loop to solve one problem and a while loop to solve another. What's the difference?\"<br>(30m) Kahoot! Review: Quiz on loop syntax and use cases.(50m) Independent Practice: Students work on Project STEM: Assignment 4: Divisible by Three.",
+            "materials": {
+              "teacher": "Kahoot! quiz, Project STEM portal.",
+              "student": "Computer.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": "Kahoot! results. Observe student progress on the assignment.",
+              "summative": "Assignment 4: Divisible by Three (Submission).Quiz 4 (Project STEM)."
+            },
+            "differentiation": "Support: Work through the first part of the assignment as a class."
+          },
+          {
+            "day": 26,
+            "date": "Wed, 10 15, 25",
+            "lesson": "What is a Function?",
+            "enduringUnderstanding": "Functions are named, reusable blocks of code that perform a specific task.",
+            "essentialQuestion": "How can we organize and reuse our code to avoid repetition?",
+            "objectives": [
+              "Define a simple function using the def keyword",
+              "Call a function by its name to execute its code",
+              "Explain the \"Don't Repeat Yourself\" (DRY) principle"
+            ],
+            "agenda": "(10m) Do Now: \"If you had a block of 10 lines of code that you needed to use in 5 different places in your program, what would you have to do?\"(20m) Mini-Lesson: Introduce functions as a way to package code. Use the analogy of a recipe.(60m) Guided Practice: Adventure Game V1. Students create a new file for their game. They create a function called start_room() that prints the description of the first room. They then call that function to start the game.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Check student code for correct function definition and syntax.",
+              "summative": "Required for Assignment 7: Calendar."
+            },
+            "differentiation": "Support: Provide a template for function syntax.Challenge: Have students create a second function, show_instructions(), that is called at the beginning of the game."
+          },
+          {
+            "day": 27,
+            "date": "Thu, 10 16, 25",
+            "lesson": "Functions with Parameters",
+            "enduringUnderstanding": "Parameters allow us to pass data into a function, making it more flexible and powerful.",
+            "essentialQuestion": "How can we make our functions adaptable to different situations?",
+            "objectives": [
+              "Define a function that accepts at least one parameter",
+              "Call that function, passing an argument to the parameter",
+              "Use the parameter variable inside the function"
+            ],
+            "agenda": "(10m) Do Now: \"How could you write one greet() function that could say hello to any name you give it?\"<br>(20m) Mini-Lesson: Introduce parameters and arguments.(60m) Guided Practice: Students create a flexible greeting(player_name) function. They then create functions for different rooms in their adventure game, like go_to_cave(player_name), that use the parameter in their descriptions.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe how students are passing arguments to their functions.",
+              "summative": "Required for Assignment 7: Calendar."
+            },
+            "differentiation": "Challenge: Have students write a function that takes two parameters, like add_numbers(num1, num2)."
+          },
+          {
+            "day": 28,
+            "date": "Fri, 10 17, 25",
+            "lesson": "Return Values",
+            "enduringUnderstanding": "Functions can process data and send a result back to the part of the code that called it.",
+            "essentialQuestion": "How do we get a result out of a function?",
+            "objectives": [
+              "Use the return keyword to send a value back from a function",
+              "Store the returned value in a variable",
+              "Explain the difference between a function that prints a value and one that returns a value"
+            ],
+            "agenda": "(10m) Do Now: \"What's the difference between a calculator button that shows you the answer on its screen and one that gives the answer to another part of the calculator to use?\"(20m) Mini-Lesson: Introduce the return keyword.<br>(60m) Guided Practice: Students write a function get_player_choice() that uses input() and returns the user's choice as a string. The main part of their game will call this function and store the result in a variable.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Check that students are capturing the returned value in a variable.",
+              "summative": "Required for Assignment 7: Calendar."
+            },
+            "differentiation": "Challenge: Have students write a function calculate_damage(attack_power) that returns a random amount of damage."
+          },
+          {
+            "day": 29,
+            "date": "Tue, 10 21, 25",
+            "lesson": "Project Work: Functionalizing",
+            "enduringUnderstanding": "Decomposing a large problem into smaller functions makes the code more organized and easier to debug.",
+            "essentialQuestion": "How can I break my large game down into smaller, manageable pieces?",
+            "objectives": [
+              "Decompose their game logic into at least three separate functions",
+              "Create a main game loop that calls different functions based on player input"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"Look at your adventure game plan. What are the main 'verbs' or actions? These are good candidates for functions.\"(75m) Independent Work Time: Students refactor their adventure game, putting the logic for each room or major action into its own function.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review student code structure. Is it well-organized with functions?",
+              "summative": "This work directly supports the final project of the semester."
+            },
+            "differentiation": "Support: Provide a skeleton of the game structure with empty functions for students to fill in."
+          },
+          {
+            "day": 30,
+            "date": "Wed, 10 22, 25",
+            "lesson": "Code Tracing & Debugging",
+            "enduringUnderstanding": "Tracing the flow of execution through function calls is a critical skill for understanding and debugging programs.",
+            "essentialQuestion": "How can I predict what my code will do before I run it?",
+            "objectives": [
+              "Manually trace the flow of a program with at least two function calls",
+              "Predict the final output of the program by tracking variable values"
+            ],
+            "agenda": "(10m) Do Now: \"What's the hardest bug you've had to fix so far?\"(30m) Mini-Lesson: Teacher demonstrates how to trace code line-by-line on the whiteboard, tracking the \"call stack\" and variable values.(50m) Guided Practice: Students are given a worksheet with short programs and must trace them to predict the output before running the code to check their answers.",
+            "materials": {
+              "teacher": "Projector, whiteboard, code tracing worksheet.",
+              "student": "Paper and pen.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review worksheet answers to see if students can correctly trace the program flow.",
+              "summative": null
+            },
+            "differentiation": "Support: Work through the first tracing problem as a full class."
+          },
+          {
+            "day": 31,
+            "date": "Thu, 10 23, 25",
+            "lesson": "Project Work: Adventure Game",
+            "enduringUnderstanding": "Integrating all learned concepts (variables, input, conditionals, loops, functions) is required to build a complete application.",
+            "essentialQuestion": "How do all the pieces we've learned fit together?",
+            "objectives": [
+              "Implement a main game loop using a while loop",
+              "Use conditional statements inside the loop to call different functions based on user input",
+              "Create a 'win' and 'lose' state that ends the game"
+            ],
+            "agenda": "(10m) Do Now / Q&A: Focused on a specific aspect of the project (e.g., \"How will your game end?\").(75m) Independent Work Time: Students build the full logic for their adventure game.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Circulate and provide one-on-one debugging help.",
+              "summative": "This is the major summative project for the first half of the semester."
+            },
+            "differentiation": "Challenge: Have students add a simple \"inventory\" system using a list."
+          },
+          {
+            "day": 32,
+            "date": "Fri, 10 24, 25",
+            "lesson": "Project Work: Adventure Game",
+            "enduringUnderstanding": "See Day 31.",
+            "essentialQuestion": "See Day 31.",
+            "objectives": [
+              "See Day 31",
+              "See Day 31"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How do you handle invalid input from the user?\"(75m) Independent Work Time: Continue building adventure game.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 31.",
+              "summative": "See Day 31."
+            },
+            "differentiation": "See Day 31."
+          },
+          {
+            "day": 33,
+            "date": "Mon, 10 27, 25",
+            "lesson": "Project Work & Peer Feedback",
+            "enduringUnderstanding": "See Day 31.",
+            "essentialQuestion": "See Day 31.",
+            "objectives": [
+              "See Day 31",
+              "See Day 31"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What part of your game are you most proud of so far?\"(40m) Independent Work Time: Finalize a playable version of the game.(40m) Peer Feedback: Students playtest a partner's game and provide constructive feedback.",
+            "materials": {
+              "teacher": "Feedback forms.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe peer feedback sessions.",
+              "summative": "See Day 31."
+            },
+            "differentiation": "Support: Provide a feedback form with guiding questions."
+          },
+          {
+            "day": 34,
+            "date": "Tue, 10 28, 25",
+            "lesson": "Final Project Work Day",
+            "enduringUnderstanding": "Documenting and cleaning code is a critical final step.",
+            "essentialQuestion": "How can I make my code easy for others (and my future self) to understand?",
+            "objectives": [
+              "Add comments to each function in their game explaining its purpose",
+              "Write a README",
+              "md file for their GitHub repository explaining how to play the game"
+            ],
+            "agenda": "(15m) Mini-Lesson: What to include in a good README.md file.<br>(75m) Final Polish: Students add comments and write their README file.(5m) Final Submission Prep.",
+            "materials": {
+              "teacher": "Projector.",
+              "student": "Computer.",
+              "links": "A sample README.md file."
+            },
+            "assessment": {
+              "formative": "Review the README.md files on GitHub.",
+              "summative": "The final adventure game project."
+            },
+            "differentiation": "Support: Provide a template for the README file."
+          },
+          {
+            "day": 35,
+            "date": "Wed, 10 29, 25",
+            "lesson": "Project Showcase",
+            "enduringUnderstanding": "Sharing your work and seeing the work of others inspires new ideas and learning.",
+            "essentialQuestion": "How can sharing my work help me learn?",
+            "objectives": [
+              "Present their completed game to a small group of peers",
+              "Explain one piece of code they are particularly proud of"
+            ],
+            "agenda": "(5m) Setup.(80m) \"Arcade Day\": Students are in small groups and take turns playing each other's games.(5m) Clean-up.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe group presentations.",
+              "summative": "Final project grade."
+            },
+            "differentiation": null
+          },
+          {
+            "day": 36,
+            "date": "Thu, 10 30, 25",
+            "lesson": "Unit 2 Review",
+            "enduringUnderstanding": "Synthesizing and assessing knowledge is a critical final step in the learning cycle.",
+            "essentialQuestion": "How do loops and functions help us write better, more organized code?",
+            "objectives": [
+              "Correctly answer questions about for loops, while loops, functions, parameters, and return values"
+            ],
+            "agenda": "(10m) Do Now: \"What was the hardest part of making the adventure game?\"(40m) Review Game: Cumulative Kahoot! for Unit 2.(40m) Study Guide: Students work on a study guide with practice problems.",
+            "materials": {
+              "teacher": "Kahoot! quiz, study guide handout.",
+              "student": "Computer, pen/paper.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review game score / study guide completion.",
+              "summative": "This is the final review before Quiz 4 and Quiz 7."
+            },
+            "differentiation": "Support: Work through the first few study guide problems as a class."
+          },
+          {
+            "day": 37,
+            "date": "Fri, 10 31, 25",
+            "lesson": "Unit 2 Assessment",
+            "enduringUnderstanding": "Formal assessment measures mastery of foundational concepts.",
+            "essentialQuestion": "Have I mastered loops and functions?",
+            "objectives": [
+              "Achieve a passing score on the Unit 2 quizzes"
+            ],
+            "agenda": "(5m) Settle In.(85m) Quiz Time: Students take Project STEM: Quiz 3 & Quiz 4.",
+            "materials": {
+              "teacher": "Project STEM portal.",
+              "student": "Computer.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": null,
+              "summative": "Quiz 3 & Quiz 4 (Project STEM)."
+            },
+            "differentiation": null
+          }
+        ]
+      },
+      {
+        "unitNumber": 3,
+        "unitTitle": "Data Structures - Lists & Dictionaries",
+        "lessons": [
+          {
+            "day": 38,
+            "date": "Mon, 11 03, 25",
+            "lesson": "Intro to Unit 3",
+            "enduringUnderstanding": "As programs become more complex, we need more powerful ways to organize and structure our data.",
+            "essentialQuestion": "How would you store a player's inventory of 10 items? What about a map of 20 connected rooms?",
+            "objectives": [
+              "Articulate a problem that is difficult to solve with simple variables alone"
+            ],
+            "agenda": "(15m) Do Now & Discussion: \"How did you handle the player's items or the different rooms in your game? Was it clunky?\"(75m) Motivation for Data Structures: Teacher introduces the idea of lists and dictionaries as ways to solve these problems elegantly, motivating the need for the next unit.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": null,
+              "links": null
+            },
+            "assessment": {
+              "formative": "Class discussion and brainstorming.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 39,
+            "date": "Wed, 11 05, 25",
+            "lesson": "Deep Dive into Lists",
+            "enduringUnderstanding": "Lists are powerful, ordered collections that can grow and shrink as needed, making them ideal for managing dynamic data.",
+            "essentialQuestion": "How can we manage a collection of items that changes over time?",
+            "objectives": [
+              "Create a list and access an element by its index",
+              "Use list methods append() and pop() to add and remove items from a list"
+            ],
+            "agenda": "(10m) Do Now: \"In your adventure game, how did you manage the player's items? What was clumsy about it?\"(20m) Mini-Lesson: Deep dive into list syntax, indexing, and methods.(60m) Guided Practice: Inventory System V1. Students refactor their adventure game, replacing simple item variables with a list to represent the player's inventory. They write code to add and remove items.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe students using list methods. Can they correctly add and remove items from their inventory list?",
+              "summative": "Assignment 8: Personal Organizer will require these skills."
+            },
+            "differentiation": "Support: Provide a \"cheatsheet\" of common list methods.Challenge: Have students implement a check to see if an item is in the inventory before trying to remove it."
+          },
+          {
+            "day": 40,
+            "date": "Thu, 11 06, 25",
+            "lesson": "List Manipulation",
+            "enduringUnderstanding": "Combining loops and lists allows for powerful and efficient processing of large amounts of data.",
+            "essentialQuestion": "How do we perform an action on every single item in a list?",
+            "objectives": [
+              "Write a for loop to iterate over a list and print each element",
+              "Use an if statement inside the loop to check for a specific item"
+            ],
+            "agenda": "(10m) Do Now: \"How would you write code to display every item in your inventory list to the player?\"(20m) Mini-Lesson: Demonstrate looping through lists and using conditionals to find items.(60m) Guided Practice: show_inventory() function. Students write a new function that loops through their inventory list and prints it in a neat, player-friendly format.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Check that students' show_inventory() function correctly displays all items.",
+              "summative": "Assignment 8: Personal Organizer will require looping through lists."
+            },
+            "differentiation": "Support: Start by having them just print the list, then add the loop for formatting."
+          },
+          {
+            "day": 41,
+            "date": "Fri, 11 07, 25",
+            "lesson": "Project Work: Lists",
+            "enduringUnderstanding": "Applying new data structures to existing projects can make them more robust and scalable.",
+            "essentialQuestion": "How can I improve my old code with new tools?",
+            "objectives": [
+              "Complete and submit the Personal Organizer assignment",
+              "Fully integrate a list-based inventory system into the adventure game"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's the difference between list.pop() and list.remove()?\"<br>(75m) Independent Work Time: Students work on Project STEM: Assignment 8: Personal Organizer.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer, Project STEM portal.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": "One-on-one check-ins.",
+              "summative": "Assignment 8: Personal Organizer (Submission).Quiz 8 (Project STEM)."
+            },
+            "differentiation": "Challenge: Have students add a drop command that removes an item from inventory and places it in the current room."
+          },
+          {
+            "day": 42,
+            "date": "Mon, 11 10, 25",
+            "lesson": "Intro to Dictionaries",
+            "enduringUnderstanding": "Dictionaries store data as key-value pairs, allowing for fast lookups and the modeling of real-world objects with named attributes.",
+            "essentialQuestion": "How can we store data that has a clear name and an associated value?",
+            "objectives": [
+              "Create a dictionary with at least three key-value pairs",
+              "Access a value by using its corresponding key",
+              "Explain when to use a dictionary instead of a list"
+            ],
+            "agenda": "(10m) Do Now: \"How would you store a user's profile with a name, an age, and a hometown? What's clumsy about using three separate variables?\"(20m) Mini-Lesson: Introduce dictionary syntax ({}). Use the analogy of a real dictionary or a contact list.<br>(60m) Guided Practice: Character Sheet. Students create a dictionary to represent their game's player, with keys like 'name', 'health', 'hometown'.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Check student code for correct dictionary syntax.",
+              "summative": "Required for Assignment 12: Word Frequency Analysis."
+            },
+            "differentiation": "Support: Provide a template for dictionary creation."
+          },
+          {
+            "day": 43,
+            "date": "Wed, 11 12, 25",
+            "lesson": "Modifying Dictionaries",
+            "enduringUnderstanding": "Dictionaries are mutable, meaning their contents can be changed, added to, or removed after creation.",
+            "essentialQuestion": "How do we change the information stored in a dictionary?",
+            "objectives": [
+              "Add a new key-value pair to an existing dictionary",
+              "Update the value of an existing key",
+              "Use the pop() method to remove a key-value pair"
+            ],
+            "agenda": "(10m) Do Now: \"In a game, a player's health goes down. How would you update a 'health' value in your character dictionary?\"(20m) Mini-Lesson: Demonstrate how to add, update, and remove items from a dictionary.(60m) Guided Practice: Students write functions like take_damage(amount) or change_hometown(new_town) that modify their character dictionary.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Verify that students can correctly modify their dictionary values.",
+              "summative": "Required for Assignment 12: Word Frequency Analysis."
+            },
+            "differentiation": "Challenge: Have students add a key called 'inventory' to their character dictionary, with the value being their inventory list. This introduces nesting."
+          },
+          {
+            "day": 44,
+            "date": "Thu, 11 13, 25",
+            "lesson": "Project Kickoff: Refactoring",
+            "enduringUnderstanding": "Replacing simple variables and logic with advanced data structures can make code more organized and scalable.",
+            "essentialQuestion": "How can dictionaries simplify complex if/elif/else chains?",
+            "objectives": [
+              "Design a nested data structure to represent the game world (a dictionary of dictionaries)",
+              "Begin to refactor the adventure game's room logic to use the new data structure"
+            ],
+            "agenda": "(15m) Brainstorm: As a class, design a dictionary to hold all the game rooms. Each room is a dictionary itself, with keys like 'description' and 'exits'.<br>(75m) Independent Work: Students begin the large task of refactoring their adventure game's movement logic to use this new rooms dictionary instead of a long if/elif/else chain.",
+            "materials": {
+              "teacher": "Projector, whiteboard.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review students' data structure designs before they start coding.",
+              "summative": "This refactoring is the major project for this unit."
+            },
+            "differentiation": "Support: Provide the skeleton of the rooms dictionary for students to fill in."
+          },
+          {
+            "day": 45,
+            "date": "Fri, 11 14, 25",
+            "lesson": "Project Work: Refactoring",
+            "enduringUnderstanding": "Complex data structures are the backbone of most large-scale applications.",
+            "essentialQuestion": "How does a well-designed data structure improve a program?",
+            "objectives": [
+              "Complete the refactoring of the adventure game to use the nested dictionary",
+              "Explain the benefits of the new structure over the old one"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's the main benefit of using a dictionary for your rooms?\"(75m) Independent Work Time: Students work on refactoring their adventure game. This is a challenging, multi-day task.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "One-on-one check-ins. This is a difficult task, so individual support is key.",
+              "summative": "This is the final version of the semester-long adventure game project."
+            },
+            "differentiation": "Challenge: Have students add items to rooms within their data structure."
+          },
+          {
+            "day": 46,
+            "date": "Mon, 11 17, 25",
+            "lesson": "Project Work: Refactoring",
+            "enduringUnderstanding": "See Day 45.",
+            "essentialQuestion": "See Day 45.",
+            "objectives": [
+              "See Day 45",
+              "See Day 45"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's a bug you've run into during this refactor?\"(75m) Independent Work Time: Continue refactoring.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 45.",
+              "summative": "See Day 45."
+            },
+            "differentiation": "See Day 45."
+          },
+          {
+            "day": 47,
+            "date": "Tue, 11 18, 25",
+            "lesson": "Project Work: Refactoring",
+            "enduringUnderstanding": "See Day 45.",
+            "essentialQuestion": "See Day 45.",
+            "objectives": [
+              "See Day 45",
+              "See Day 45"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"Are there parts of your code you can delete now?\"(75m) Independent Work Time: Continue refactoring.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 45.",
+              "summative": "See Day 45."
+            },
+            "differentiation": "See Day 45."
+          },
+          {
+            "day": 48,
+            "date": "Wed, 11 19, 25",
+            "lesson": "Project Work: Refactoring",
+            "enduringUnderstanding": "See Day 45.",
+            "essentialQuestion": "See Day 45.",
+            "objectives": [
+              "See Day 45",
+              "See Day 45"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's the last piece you need to finish?\"(75m) Independent Work Time: Final day of refactoring.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 45.",
+              "summative": "See Day 45."
+            },
+            "differentiation": "See Day 45."
+          },
+          {
+            "day": 49,
+            "date": "Thu, 11 20, 25",
+            "lesson": "Unit 3 Review & Assessment",
+            "enduringUnderstanding": "Mastering data structures is a critical step towards writing professional-level code.",
+            "essentialQuestion": "How do I choose between a list and a dictionary?",
+            "objectives": [
+              "Achieve a passing score on the quizzes for lists and dictionaries",
+              "Submit a fully functional, refactored adventure game"
+            ],
+            "agenda": "(5m) Final Submission.(85m) Quiz Time: Students take Project STEM: Quiz 8 (Lists) and Quiz 9 (2D Lists).",
+            "materials": {
+              "teacher": "Project STEM portal.",
+              "student": "Computer.",
+              "links": "Project STEM course portal."
+            },
+            "assessment": {
+              "formative": null,
+              "summative": "Quiz 8 & Quiz 9 (Project STEM).Final Adventure Game Submission."
+            },
+            "differentiation": null
+          },
+          {
+            "day": 50,
+            "date": "Fri, 11 21, 25",
+            "lesson": "Hackathon Prep",
+            "enduringUnderstanding": "A \"game jam\" or \"hackathon\" is a collaborative, time-boxed event to create a new project from scratch.",
+            "essentialQuestion": "How can we apply all our Python skills to build a new game in a short amount of time?",
+            "objectives": [
+              "Brainstorm and scope a small, new game idea that is achievable in one day",
+              "Create a design document for the hackathon game",
+              "Assign roles if working in a team"
+            ],
+            "agenda": "(Full Period) Brainstorming & Planning: Students (individually or in small teams) plan a brand new, small game they will create during the hackathon. They must use concepts from all 3 units. The teacher acts as a project manager, helping them scope their ideas appropriately.",
+            "materials": {
+              "teacher": "Whiteboard, paper, design document templates.",
+              "student": "Computer, notebook/paper.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review design documents to ensure the scope is realistic for a one-day event.",
+              "summative": "The hackathon itself serves as a cumulative assessment for the semester."
+            },
+            "differentiation": "Support: Provide a list of simple game ideas (e.g., Rock Paper Scissors, a simple quiz game)."
+          },
+          {
+            "day": 51,
+            "date": "Mon, 11 24, 25",
+            "lesson": "Hackathon Prep",
+            "enduringUnderstanding": "See Day 50.",
+            "essentialQuestion": "See Day 50.",
+            "objectives": [
+              "See Day 50",
+              "See Day 50",
+              "See Day 50"
+            ],
+            "agenda": "(Full Period) Planning: Students finalize their hackathon plans and can start setting up their project files.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer, notebook/paper.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 50.",
+              "summative": "See Day 50."
+            },
+            "differentiation": "See Day 50."
+          },
+          {
+            "day": 52,
+            "date": "Tue, 11 25, 25",
+            "lesson": "Hackathon Prep",
+            "enduringUnderstanding": "See Day 50.",
+            "essentialQuestion": "See Day 50.",
+            "objectives": [
+              "See Day 50",
+              "See Day 50",
+              "See Day 50"
+            ],
+            "agenda": "(Full Period) Planning: Final day of planning.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer, notebook/paper.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 50.",
+              "summative": "See Day 50."
+            },
+            "differentiation": "See Day 50."
+          },
+          {
+            "day": 53,
+            "date": "Wed, 11 26, 25",
+            "lesson": "HACKATHON / GAME JAM",
+            "enduringUnderstanding": "Rapid prototyping is a key skill for quickly testing new ideas.",
+            "essentialQuestion": "What can I build in just one day?",
+            "objectives": [
+              "Create a working prototype of their planned game within the class period"
+            ],
+            "agenda": "(Full Day Event): Students work to build their game. The atmosphere should be high-energy and collaborative. Teacher provides debugging support and encouragement. At the end of the day, students do quick demos of what they created.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe the final demos.",
+              "summative": "The created prototype is the assessment."
+            },
+            "differentiation": null
+          },
+          {
+            "day": 54,
+            "date": "Mon, 12 01, 25",
+            "lesson": "Hackathon Showcase",
+            "enduringUnderstanding": "Presenting your work is a key part of the development process.",
+            "essentialQuestion": "How can I effectively demonstrate my hackathon project?",
+            "objectives": [
+              "Present their hackathon project to the class",
+              "Explain what went well and what was challenging"
+            ],
+            "agenda": "(Full Period) Demos: Each team or individual presents their hackathon game to the class.",
+            "materials": {
+              "teacher": "Projector.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe presentations.",
+              "summative": null
+            },
+            "differentiation": null
+          }
+        ]
+      },
+      {
+        "unitNumber": 4,
+        "unitTitle": "File I/O",
+        "lessons": [
+          {
+            "day": 55,
+            "date": "Tue, 12 02, 25",
+            "lesson": "Intro to Unit 4 & File I/O",
+            "enduringUnderstanding": "Making data persistent by saving it to files allows programs to remember information between sessions.",
+            "essentialQuestion": "How can a program save its state and load it later?",
+            "objectives": [
+              "Explain why saving data to a file is a necessary feature for most large games"
+            ],
+            "agenda": "(15m) Do Now & Discussion: \"Why can't our current games remember your progress after you close them?\"(75m) Motivation for File I/O: Teacher introduces the concept of saving data to a file, setting the stage for the final unit of the semester.",
+            "materials": {
+              "teacher": "Projector.",
+              "student": null,
+              "links": null
+            },
+            "assessment": {
+              "formative": "Class discussion.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 56,
+            "date": "Wed, 12 03, 25",
+            "lesson": "Reading from a File",
+            "enduringUnderstanding": "Programs can read data from external files, allowing them to load information that was saved previously.",
+            "essentialQuestion": "How can a program access information stored outside of the program itself?",
+            "objectives": [
+              "Use the with open() as f: syntax to open and read a plain text file",
+              "Store the contents of the file in a variable"
+            ],
+            "agenda": "(10m) Do Now: \"Where are game saves stored on your computer or console?\"(20m) Mini-Lesson: Intro to file paths and reading from .txt files.<br>(60m) Guided Practice: \"Story Time.\" Create a .txt file with a story and a Python script that reads and prints it.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Check that students' scripts successfully print the contents of their .txt file.",
+              "summative": "This is a foundational skill for the save/load feature."
+            },
+            "differentiation": "Support: Provide the text for the story file so students can focus on the Python code."
+          },
+          {
+            "day": 57,
+            "date": "Thu, 12 04, 25",
+            "lesson": "Writing and Appending",
+            "enduringUnderstanding": "Programs can write data to external files, allowing them to save progress or log events.",
+            "essentialQuestion": "How can a program save information for later use?",
+            "objectives": [
+              "Open a file in write mode ('w')",
+              "Open a file in append mode ('a')"
+            ],
+            "agenda": "(10m) Do Now: \"What's the difference between 'Save' and 'Save As'?\"(20m) Mini-Lesson: Explain write mode (overwrite) vs. append mode (add to end).(60m) Guided Practice: \"Game Log.\" Create a function that appends a message to gamelog.txt.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Check the gamelog.txt file to ensure new actions are being appended.",
+              "summative": "This is a foundational skill for the save/load feature."
+            },
+            "differentiation": "Challenge: Have students add a timestamp to each log entry."
+          },
+          {
+            "day": 58,
+            "date": "Fri, 12 05, 25",
+            "lesson": "Intro to JSON",
+            "enduringUnderstanding": "JSON is a standard format for saving structured data like lists and dictionaries.",
+            "essentialQuestion": "How can we save complex data structures to a file?",
+            "objectives": [
+              "Explain what JSON stands for and its purpose",
+              "Convert a Python dictionary into a JSON-formatted string"
+            ],
+            "agenda": "(10m) Do Now: \"How would you save your character dictionary to a .txt file? What problems might you run into?\"<br>(30m) Mini-Lesson: Intro to JSON syntax.(50m) Guided Practice: Manually convert a Python dictionary to a JSON string.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": "json.org"
+            },
+            "assessment": {
+              "formative": "Review the JSON strings students create for correct syntax.",
+              "summative": "Required for the final Save/Load feature."
+            },
+            "differentiation": "Support: Use an online \"JSON validator\" to help students check their syntax."
+          },
+          {
+            "day": 59,
+            "date": "Mon, 12 08, 25",
+            "lesson": "Saving with json.dump()",
+            "enduringUnderstanding": "Python's json library simplifies serializing data structures into a file.<br>",
+            "essentialQuestion": "How can we automate saving our dictionaries to a file?",
+            "objectives": [
+              "Import the json library",
+              "Use json",
+              "dump() to write a Python dictionary to a file"
+            ],
+            "agenda": "(10m) Do Now: \"What was hard about writing JSON by hand?\"(20m) Mini-Lesson: Intro json module and json.dump().<br>(60m) Guided Practice: save_game() function. Implement a function that gathers game data and saves it to save.json.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": "Python json module documentation."
+            },
+            "assessment": {
+              "formative": "Check the contents and formatting of the created save.json file.",
+              "summative": "The save_game() function is a key part of the final project feature."
+            },
+            "differentiation": "Challenge: Allow the player to name their save file."
+          },
+          {
+            "day": 60,
+            "date": "Tue, 12 09, 25",
+            "lesson": "Loading with json.load()",
+            "enduringUnderstanding": "Python's json library can deserialize JSON data from a file back into a Python object.<br>",
+            "essentialQuestion": "How do we load our saved dictionary back into our program?",
+            "objectives": [
+              "Use json",
+              "load() to read a",
+              "json file and convert it back into a Python dictionary"
+            ],
+            "agenda": "(10m) Do Now: \"What information does a game need to 'remember' to successfully load a saved game?\"(20m) Mini-Lesson: Introduce the json.load() method.<br>(60m) Guided Practice: load_game() function. Implement a function that reads the save.json file, restores the player's data from the loaded dictionary, and places them in the correct room.",
+            "materials": {
+              "teacher": "Projector, VSCode.",
+              "student": "Computer.",
+              "links": "Python json module documentation."
+            },
+            "assessment": {
+              "formative": "Check that variables in the program are correctly updated after the load_game() function is called.",
+              "summative": "The load_game() function is a key part of the final project feature."
+            },
+            "differentiation": "Support: Start by just loading the file and printing the dictionary before trying to assign the values back to game variables."
+          },
+          {
+            "day": 61,
+            "date": "Wed, 12 10, 25",
+            "lesson": "Project Integration",
+            "enduringUnderstanding": "Integrating a new feature into an existing codebase requires careful planning and testing.",
+            "essentialQuestion": "How do we connect our save/load functions to the main game?",
+            "objectives": [
+              "Integrate save_game() and load_game() into the main game loop",
+              "Add user prompts to ask the player if they want to save or load",
+              "Test and debug the full save/load cycle"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"Where in your game loop should you ask the player if they want to save?\"(75m) Independent Work Time: Students integrate their save/load functions into their main adventure game.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "One-on-one debugging. The most common check is \"Does the game successfully load to the state it was saved in?\"",
+              "summative": "This is the final feature for the semester-long Python project."
+            },
+            "differentiation": "Challenge: Handle the case where no save.json file exists to load."
+          },
+          {
+            "day": 62,
+            "date": "Thu, 12 11, 25",
+            "lesson": "Project Integration",
+            "enduringUnderstanding": "See Day 61.",
+            "essentialQuestion": "See Day 61.",
+            "objectives": [
+              "See Day 61",
+              "See Day 61",
+              "See Day 61"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's the hardest part about testing the save/load feature?\"(75m) Independent Work Time: Continue integration and testing.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 61.",
+              "summative": "See Day 61."
+            },
+            "differentiation": "See Day 61."
+          },
+          {
+            "day": 63,
+            "date": "Fri, 12 12, 25",
+            "lesson": "Semester 1 Showcase Prep",
+            "enduringUnderstanding": "Sharing a completed project demonstrates mastery and provides an opportunity for reflection.",
+            "essentialQuestion": "What did I accomplish this semester?",
+            "objectives": [
+              "Prepare a short presentation on their completed Python adventure game",
+              "Ensure the save/load feature is fully functional and demonstrable"
+            ],
+            "agenda": "(Full Period) Project Polish: Students finalize their games, create a presentation outline, and practice their demos.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review presentation outlines.",
+              "summative": "Final Adventure Game project submission."
+            },
+            "differentiation": "Support: Provide a presentation template."
+          },
+          {
+            "day": 64,
+            "date": "Mon, 12 15, 25",
+            "lesson": "Semester 1 Showcase",
+            "enduringUnderstanding": "See Day 63.",
+            "essentialQuestion": "See Day 63.",
+            "objectives": [
+              "Demonstrate a fully functional Python text-based adventure game with a working save/load feature"
+            ],
+            "agenda": "(Full Period) Final Demos: Students demo their completed Python games to the class, highlighting features and the save/load system.",
+            "materials": {
+              "teacher": "Projector.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe final project demos.",
+              "summative": "Final Adventure Game project submission."
+            },
+            "differentiation": null
+          },
+          {
+            "day": 65,
+            "date": "Tue, 12 16, 25",
+            "lesson": "Semester 1 Wrap-up",
+            "enduringUnderstanding": "Reflecting on a completed semester is key to identifying growth and setting future goals.",
+            "essentialQuestion": "What are the biggest lessons I learned in the first semester?",
+            "objectives": [
+              "Write a reflection on their progress and challenges during the first semester",
+              "Set a goal for the second semester"
+            ],
+            "agenda": "(Full Period) Reflection & Goal Setting: Students write a reflection on their journey through Python and set a goal for what they want to achieve with Unity and C#.",
+            "materials": {
+              "teacher": "Reflection template.",
+              "student": "Computer, notebook/paper.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review student reflections.",
+              "summative": null
+            },
+            "differentiation": "Support: Provide sentence starters for the reflection."
+          },
+          {
+            "day": 66,
+            "date": "Wed, 12 17, 25",
+            "lesson": "Unity & C# Pre-load",
+            "enduringUnderstanding": "Preparing for the next semester ensures a smooth transition to new tools and technologies.",
+            "essentialQuestion": "What do I need to do to be ready for the second semester?",
+            "objectives": [
+              "Install Unity Hub and the recommended version of the Unity Editor",
+              "Verify that Unity and VSCode are correctly linked"
+            ],
+            "agenda": "(Full Period) Installation Workshop: Teacher guides students through the installation process for Unity Hub and the Unity Editor, ensuring that VSCode is correctly configured as the external script editor.",
+            "materials": {
+              "teacher": "Projector, Unity Hub download page.",
+              "student": "Computer.",
+              "links": "unity.com/download"
+            },
+            "assessment": {
+              "formative": "Circulate and verify that all students have successfully installed and opened Unity.",
+              "summative": null
+            },
+            "differentiation": "Support: Have a \"buddy system\" where students who finish first can help those who are having trouble."
+          }
+        ]
+      },
+      {
+        "unitNumber": 5,
+        "unitTitle": "Intro to OOP with Unity & C#",
+        "lessons": [
+          {
+            "day": 67,
+            "date": "Mon, 01 05, 26",
+            "lesson": "Intro to Unit 5: Unity & C#",
+            "enduringUnderstanding": "Game engines like Unity provide a visual interface for creating interactive experiences.",
+            "essentialQuestion": "How do we go from text-based code to a visual game?",
+            "objectives": [
+              "Identify the Hierarchy, Scene, Game, and Inspector windows",
+              "Create a C# script, attach it, and use Debug",
+              "Log()"
+            ],
+            "agenda": "(10m) Do Now: \"What's the difference between 2D and 3D?\"(30m) Mini-Lesson: Guided tour of Unity. Bridge concepts: print() vs Debug.Log().<br>(50m) Guided Practice: \"Hello, Unity!\"",
+            "materials": {
+              "teacher": "Projector, Unity Hub.",
+              "student": "Computer with Unity.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Verify a message from each script appears in the Unity console.",
+              "summative": "First step toward all Unity projects."
+            },
+            "differentiation": "Support: Provide a pre-configured Unity project to avoid installation issues."
+          },
+          {
+            "day": 68,
+            "date": "Tue, 01 06, 26",
+            "lesson": "GameObjects & Components",
+            "enduringUnderstanding": "Everything in Unity is a GameObject, with behavior defined by its Components.",
+            "essentialQuestion": "What are the basic building blocks of a game in Unity?",
+            "objectives": [
+              "Create and position at least 3 GameObjects",
+              "Explain that Transform controls position, rotation, scale",
+              "Add a component (e",
+              "g",
+              ", Rigidbody 2D)"
+            ],
+            "agenda": "(10m) Do Now: \"List the things that make up a game character.\"(20m) Mini-Lesson: GameObject-Component relationship.(60m) Guided Practice: Start Solar System Assignment by creating and positioning GameObjects.",
+            "materials": {
+              "teacher": "Projector, Unity Editor.",
+              "student": "Computer.",
+              "links": "Link to Solar System Assignment."
+            },
+            "assessment": {
+              "formative": "Check student scenes for correctly created and positioned GameObjects.",
+              "summative": "Solar System Assignment."
+            },
+            "differentiation": "Support: Use simple shapes to keep the focus on components."
+          },
+          {
+            "day": 69,
+            "date": "Wed, 01 07, 26",
+            "lesson": "Intro to C# Scripts",
+            "enduringUnderstanding": "Every C# script in Unity is a Class, a blueprint for objects with properties and behaviors.",
+            "essentialQuestion": "How do we give GameObjects custom behaviors?",
+            "objectives": [
+              "Define a public variable that can be changed in the Inspector",
+              "Use the Update() method to change a transform every frame"
+            ],
+            "agenda": "(10m) Do Now: \"What does a blueprint for a house do?\"(20m) Mini-Lesson: A C# script is a class. Start() vs Update().<br>(60m) Guided Practice: Create a Rotate script with a public speed variable to make a planet orbit.",
+            "materials": {
+              "teacher": "Projector, Unity, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Check that students can change the public speed variable in the Inspector and see the effect.",
+              "summative": "Solar System Assignment."
+            },
+            "differentiation": "Challenge: Create a second script for the planet to rotate on its own axis."
+          },
+          {
+            "day": 70,
+            "date": "Thu, 01 08, 26",
+            "lesson": "Project Work: Solar System",
+            "enduringUnderstanding": "Combining multiple components and scripts creates complex, simulated systems.",
+            "essentialQuestion": "How can we model a simple system using GameObjects and scripts?",
+            "objectives": [
+              "Complete the Solar System by adding at least 3 planets",
+              "Apply different materials to the planets",
+              "Position a camera to frame the scene"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How do you change the color of a GameObject?\"(75m) Independent Work Time: Students follow the tutorial to complete the Solar System Assignment.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": "Link to Solar System Assignment."
+            },
+            "assessment": {
+              "formative": "Check projects for completion of all requirements.",
+              "summative": "Solar System Assignment (Submission to itch.io)."
+            },
+            "differentiation": "Support: Provide a \"starter\" project with the Sun already created."
+          },
+          {
+            "day": 71,
+            "date": "Fri, 01 09, 26",
+            "lesson": "Project Work: Solar System",
+            "enduringUnderstanding": "See Day 70.",
+            "essentialQuestion": "See Day 70.",
+            "objectives": [
+              "See Day 70",
+              "See Day 70",
+              "See Day 70"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's the difference between the Scene view and the Game view?\"(75m) Independent Work Time: Continue working on Solar System.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 70.",
+              "summative": "See Day 70."
+            },
+            "differentiation": "See Day 70."
+          },
+          {
+            "day": 72,
+            "date": "Mon, 01 12, 26",
+            "lesson": "User Input & Physics",
+            "enduringUnderstanding": "Games become interactive by responding to user input, and physics components create realistic movement.",
+            "essentialQuestion": "How do we make our game \"playable\"?",
+            "objectives": [
+              "Use Input",
+              "GetKey() to detect keyboard presses",
+              "Apply a force to a Rigidbody 2D to move a character",
+              "Explain kinematic vs",
+              "dynamic rigidbodies"
+            ],
+            "agenda": "(10m) Do Now: \"How does a game know when you press a key?\"(20m) Mini-Lesson: Intro to Input and Rigidbody 2D.<br>(60m) Guided Practice: Flappy Bird Clone (Part 1). Create the bird, add a Rigidbody, and write a script to apply force on key press.",
+            "materials": {
+              "teacher": "Projector, Unity, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Verify the \"bird\" moves up when the spacebar is pressed and falls due to gravity.",
+              "summative": "Flappy Bird Assignment."
+            },
+            "differentiation": "Support: Provide the bird sprite asset for students to use."
+          },
+          {
+            "day": 73,
+            "date": "Tue, 01 13, 26",
+            "lesson": "Project Work: Flappy Bird",
+            "enduringUnderstanding": "A complete game requires collision detection, a scoring system, and win/loss conditions.",
+            "essentialQuestion": "What makes a simple prototype into a full game loop?",
+            "objectives": [
+              "Add Collider 2D components to the bird and pipes",
+              "Use OnCollisionEnter2D() to trigger a \"game over\" state",
+              "Implement a simple UI Text to display the score"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How can the game detect when the bird hits a pipe?\"(75m) Independent Work Time: Students complete the Flappy Bird clone, adding pipes, collision detection, and a scoring system.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": "Link to Flappy Bird assignment."
+            },
+            "assessment": {
+              "formative": "Playtest student games. Does the game end on collision? Does the score update?",
+              "summative": "Flappy Bird Assignment (Submission to Unity Play)."
+            },
+            "differentiation": "Challenge: Add a \"high score\" feature that saves the score."
+          },
+          {
+            "day": 74,
+            "date": "Wed, 01 14, 26",
+            "lesson": "Project Work: Flappy Bird",
+            "enduringUnderstanding": "See Day 73.",
+            "essentialQuestion": "See Day 73.",
+            "objectives": [
+              "See Day 73",
+              "See Day 73",
+              "See Day 73"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How can we make the pipes move?\"(75m) Independent Work Time: Continue working on Flappy Bird.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 73.",
+              "summative": "See Day 73."
+            },
+            "differentiation": "See Day 73."
+          },
+          {
+            "day": 75,
+            "date": "Thu, 01 15, 26",
+            "lesson": "Project Work: Flappy Bird",
+            "enduringUnderstanding": "See Day 73.",
+            "essentialQuestion": "See Day 73.",
+            "objectives": [
+              "See Day 73",
+              "See Day 73",
+              "See Day 73"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How do we spawn new pipes as the old ones go off-screen?\"(75m) Independent Work Time: Final day for Flappy Bird.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 73.",
+              "summative": "See Day 73."
+            },
+            "differentiation": "See Day 73."
+          },
+          {
+            "day": 76,
+            "date": "Fri, 01 16, 26",
+            "lesson": "G4C Brainstorm & Planning",
+            "enduringUnderstanding": "A successful project begins with a clear vision and a well-defined plan.",
+            "essentialQuestion": "What kind of impactful game can I realistically create this semester?",
+            "objectives": [
+              "Select one of the \"Games for Change\" themes",
+              "Write a High Concept Document for their proposed game",
+              "Create a 30-second video pitch"
+            ],
+            "agenda": "(Full Period) G4C Intro & Brainstorm: Deep dive into G4C themes. Students brainstorm ideas for their final project.",
+            "materials": {
+              "teacher": "Projector, High Concept Document template.",
+              "student": "Computer, notebook.",
+              "links": "gamesforchange.org/studentchallenge"
+            },
+            "assessment": {
+              "formative": "Review brainstormed ideas for scope and connection to theme.",
+              "summative": "Game Pitch & High Concept Document (Submission)."
+            },
+            "differentiation": "Support: Provide examples of past winning G4C projects."
+          },
+          {
+            "day": 77,
+            "date": "Tue, 01 20, 26",
+            "lesson": "G4C Planning",
+            "enduringUnderstanding": "See Day 76.",
+            "essentialQuestion": "See Day 76.",
+            "objectives": [
+              "See Day 76",
+              "See Day 76",
+              "See Day 76"
+            ],
+            "agenda": "(Full Period) High Concept Document Workshop: Students work on their High Concept Document, defining their game's genre, mechanics, and social impact goals.",
+            "materials": {
+              "teacher": "High Concept Document template.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review High Concept Documents for clarity and feasibility.",
+              "summative": "See Day 76."
+            },
+            "differentiation": "Support: Provide a detailed template for the document."
+          },
+          {
+            "day": 78,
+            "date": "Wed, 01 21, 26",
+            "lesson": "G4C Planning",
+            "enduringUnderstanding": "See Day 76.",
+            "essentialQuestion": "See Day 76.",
+            "objectives": [
+              "See Day 76",
+              "See Day 76",
+              "See Day 76"
+            ],
+            "agenda": "(Full Period) Pitching Workshop: Students write the script for their 30-second video pitch and practice recording it.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer, video recording software.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review pitch scripts for clarity and impact.",
+              "summative": "See Day 76."
+            },
+            "differentiation": "Support: Provide a template for the pitch script."
+          },
+          {
+            "day": 79,
+            "date": "Thu, 01 22, 26",
+            "lesson": "Unit 5 Showcase: Pitch Fest",
+            "enduringUnderstanding": "Pitching an idea is a critical skill for getting buy-in and feedback.",
+            "essentialQuestion": "How can I effectively communicate my game's vision?",
+            "objectives": [
+              "Present their game pitch to the class",
+              "Submit their completed High Concept Document"
+            ],
+            "agenda": "(Full Period) Pitch Fest: Students present their 30-second video pitches to the class for warm feedback.",
+            "materials": {
+              "teacher": "Projector.",
+              "student": null,
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe student pitches.",
+              "summative": "Game Pitch & High Concept Document (Submission)."
+            },
+            "differentiation": null
+          }
+        ]
+      },
+      {
+        "unitNumber": 6,
+        "unitTitle": "Data Structures in C#",
+        "lessons": [
+          {
+            "day": 80,
+            "date": "Fri, 01 23, 26",
+            "lesson": "Intro to Unit 6: Data Structures in C#",
+            "enduringUnderstanding": "To build complex games, we need more advanced ways to manage our game data.",
+            "essentialQuestion": "How can we manage a collection of many similar items in Unity?",
+            "objectives": [
+              "Articulate a problem that is difficult to solve with simple variables alone (e",
+              "g",
+              ", a multi-level enemy wave spawner)"
+            ],
+            "agenda": "(Full Period) Motivation for Data Structures: Teacher introduces a complex game mechanic and asks students how they would build it with their current knowledge, leading to the need for arrays and lists.",
+            "materials": {
+              "teacher": "Projector, Unity.",
+              "student": null,
+              "links": null
+            },
+            "assessment": {
+              "formative": "Class discussion.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 81,
+            "date": "Mon, 01 26, 26",
+            "lesson": "C# Arrays",
+            "enduringUnderstanding": "Arrays are fixed-size collections that efficiently store data of the same type.",
+            "essentialQuestion": "How do we store a known quantity of similar items, like the days of the week or a set number of enemies?",
+            "objectives": [
+              "Declare and initialize a C# array of a specific size and type",
+              "Access and modify elements in the array using index notation",
+              "Use the",
+              "Length property to get the size of the array"
+            ],
+            "agenda": "(10m) Do Now: \"How would you store the names of 5 enemies in a script? What's inefficient about 5 separate variables?\"(20m) Mini-Lesson: Intro to C# array syntax. Compare to Python lists but emphasize the fixed-size nature.(60m) Guided Practice: Replicate3a. Students create a script that spawns a set number of enemy prefabs at positions defined in an array of Vector3.",
+            "materials": {
+              "teacher": "Projector, Unity, VSCode.",
+              "student": "Computer.",
+              "links": "GameOn Replicate3a guide."
+            },
+            "assessment": {
+              "formative": "Check if enemies spawn in correct locations.",
+              "summative": "Modify3 and Create3 build on this."
+            },
+            "differentiation": "Support: Provide code to spawn a single prefab, then guide them to use a loop."
+          },
+          {
+            "day": 82,
+            "date": "Tue, 01 27, 26",
+            "lesson": "Looping with foreach",
+            "enduringUnderstanding": "Loops provide a concise way to perform an action on every element in a collection.",
+            "essentialQuestion": "How can we efficiently process every item in an array?",
+            "objectives": [
+              "Write a foreach loop to iterate over an array",
+              "Explain the difference between a foreach and a for loop in C#"
+            ],
+            "agenda": "(10m) Do Now: \"Using a for loop and the .Length property, how would you print every enemy's name from an array?\"<br>(20m) Mini-Lesson: Introduce the foreach loop as a simpler, more readable way to iterate when you don't need the index.<br>(60m) Guided Practice: Use foreach to iterate through spawn points and instantiate enemies.",
+            "materials": {
+              "teacher": "Projector, Unity, VSCode.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe code. Are they correctly using foreach?",
+              "summative": "Modify3 and Create3 will use loops."
+            },
+            "differentiation": "Challenge: Use the loop to also assign a different color or speed to each enemy."
+          },
+          {
+            "day": 83,
+            "date": "Wed, 01 28, 26",
+            "lesson": "C# Lists",
+            "enduringUnderstanding": "Lists are dynamic collections that can grow and shrink, making them flexible for data of unknown size.",
+            "essentialQuestion": "How do we manage a collection when we don't know how many items we'll have?",
+            "objectives": [
+              "Declare a List<T> and add items with",
+              "Add()",
+              "Remove items using",
+              "Remove()",
+              "Use",
+              "Count"
+            ],
+            "agenda": "(10m) Do Now: \"What in your G4C game might change in quantity?\"(20m) Mini-Lesson: Introduce List<T>.<br>(60m) Guided Practice: Replicate3b. Create a simple inventory system using a List<string>.",
+            "materials": {
+              "teacher": "Projector, Unity, VSCode.",
+              "student": "Computer.",
+              "links": "GameOn Replicate3b guide."
+            },
+            "assessment": {
+              "formative": "Can they add items and see .Count increase?",
+              "summative": "Modify3 and Create3 will heavily use Lists."
+            },
+            "differentiation": "Support: Provide an Array vs. List cheatsheet."
+          },
+          {
+            "day": 84,
+            "date": "Thu, 01 29, 26",
+            "lesson": "Project Work: Modify3",
+            "enduringUnderstanding": "Modifying an existing project with new features is a core part of iterative development.",
+            "essentialQuestion": "How can I use data structures to add a new core feature?",
+            "objectives": [
+              "Implement a core game mechanic using a List or an Array",
+              "Document the design choice in their GDD"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What data structure is best for your core mechanic, and why?\"(75m) Independent Work Time: Students work on Modify3, adding a significant feature that relies on a data structure (e.g., quest log, wave spawner).(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": "GameOn Modify3 guide."
+            },
+            "assessment": {
+              "formative": "One-on-one check-ins. Review their chosen mechanic.",
+              "summative": "Modify3 serves as the major assessment."
+            },
+            "differentiation": "Support: Provide several example ideas for core mechanics."
+          },
+          {
+            "day": 85,
+            "date": "Fri, 01 30, 26",
+            "lesson": "Project Work: Modify3",
+            "enduringUnderstanding": "See Day 84.",
+            "essentialQuestion": "See Day 84.",
+            "objectives": [
+              "See Day 84",
+              "See Day 84"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's a bug you've run into with your list or array?\"(75m) Independent Work Time: Continue Modify3.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 84.",
+              "summative": "See Day 84."
+            },
+            "differentiation": "See Day 84."
+          },
+          {
+            "day": 86,
+            "date": "Mon, 02 09, 26",
+            "lesson": "Project Work: Modify3",
+            "enduringUnderstanding": "See Day 84.",
+            "essentialQuestion": "See Day 84.",
+            "objectives": [
+              "See Day 84",
+              "See Day 84"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's the last feature you need to implement for Modify3?\"(75m) Independent Work Time: Final day for Modify3.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 84.",
+              "summative": "See Day 84."
+            },
+            "differentiation": "See Day 84."
+          },
+          {
+            "day": 87,
+            "date": "Tue, 02 10, 26",
+            "lesson": "Unit 6 Assessment & G4C Prep",
+            "enduringUnderstanding": "A solid technical foundation is required before final production.",
+            "essentialQuestion": "Are my skills strong enough to build my G4C game?",
+            "objectives": [
+              "Submit a working build of their Modify3 project",
+              "Create a task list (backlog) for their G4C game",
+              "Estimate the time needed for tasks"
+            ],
+            "agenda": "(30m) Final Work: Polish and submit Modify3.(60m) Production Planning: Create a detailed task list for their G4C project in Trello, breaking down features.",
+            "materials": {
+              "teacher": "Trello, Google Sheets.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review Modify3 submissions. Review G4C task lists.",
+              "summative": "Modify3 submission. G4C task list is the first step of the final project."
+            },
+            "differentiation": "Support: As a class, model how to break down one sample feature into tasks."
+          }
+        ]
+      },
+      {
+        "unitNumber": 7,
+        "unitTitle": "G4C Final Production",
+        "lessons": [
+          {
+            "day": 88,
+            "date": "Wed, 02 11, 26",
+            "lesson": "Intro to Unit 7: Final Production",
+            "enduringUnderstanding": "Breaking a large project into small tasks is essential for completing it on time.",
+            "essentialQuestion": "How do we plan the work for a month-long project?",
+            "objectives": [
+              "Deconstruct their GDD into a list of at least 15 actionable tasks",
+              "Organize tasks on a Kanban board"
+            ],
+            "agenda": "(Full Period) Workshop: Students break down their game features into a task list on a Kanban board (Trello).",
+            "materials": {
+              "teacher": "Projector, Trello.",
+              "student": "Computer, G4C High Concept Document.",
+              "links": "trello.com"
+            },
+            "assessment": {
+              "formative": "Review Kanban boards. Are tasks specific?",
+              "summative": "The Kanban board tracks the final project grade."
+            },
+            "differentiation": "Support: Model breaking down one large feature into smaller tasks."
+          },
+          {
+            "day": 89,
+            "date": "Thu, 02 12, 26",
+            "lesson": "Alpha Phase: Feature Complete",
+            "enduringUnderstanding": "The \"Alpha\" stage focuses on implementing all core features, even if unpolished.",
+            "essentialQuestion": "What does it mean for a game to be \"feature complete\"?",
+            "objectives": [
+              "Move at least 75% of tasks from \"To Do\" to \"Done",
+              "\"2",
+              "Produce a game build with all core mechanics"
+            ],
+            "agenda": "(10m) Stand-up & Work Time: \"What did you complete yesterday? What will you do today? Any blockers?\"(80m) Independent Work: \"Heads-down\" production time. Students work through their Kanban boards.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer, Unity, VSCode.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Daily stand-up meetings; check-ins against the Kanban board.",
+              "summative": "Progress towards the final G4C submission."
+            },
+            "differentiation": "Support: Encourage \"time-boxing\" to prevent getting stuck."
+          },
+          {
+            "day": 90,
+            "date": "Fri, 02 13, 26",
+            "lesson": "Alpha Phase",
+            "enduringUnderstanding": "See Day 89.",
+            "essentialQuestion": "See Day 89.",
+            "objectives": [
+              "See Day 89",
+              "See Day 89"
+            ],
+            "agenda": "(10m) Stand-up.(80m) Work Time.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 89.",
+              "summative": "See Day 89."
+            },
+            "differentiation": "See Day 89."
+          },
+          {
+            "day": 91,
+            "date": "Mon, 02 23, 26",
+            "lesson": "Alpha Phase",
+            "enduringUnderstanding": "See Day 89.",
+            "essentialQuestion": "See Day 89.",
+            "objectives": [
+              "See Day 89",
+              "See Day 89"
+            ],
+            "agenda": "(10m) Stand-up.(80m) Work Time.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 89.",
+              "summative": "See Day 89."
+            },
+            "differentiation": "See Day 89."
+          },
+          {
+            "day": 92,
+            "date": "Tue, 02 24, 26",
+            "lesson": "Alpha Phase",
+            "enduringUnderstanding": "See Day 89.",
+            "essentialQuestion": "See Day 89.",
+            "objectives": [
+              "See Day 89",
+              "See Day 89"
+            ],
+            "agenda": "(10m) Stand-up.(80m) Work Time.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 89.",
+              "summative": "See Day 89."
+            },
+            "differentiation": "See Day 89."
+          },
+          {
+            "day": 93,
+            "date": "Wed, 02 25, 26",
+            "lesson": "Beta Phase: Playtesting",
+            "enduringUnderstanding": "External feedback is critical for improving the player experience.",
+            "essentialQuestion": "Why is it essential to watch someone else play your game?",
+            "objectives": [
+              "Run a playtesting session with at least one peer",
+              "Add at least 3 actionable feedback points to their Kanban board"
+            ],
+            "agenda": "(15m) Mini-Lesson: How to give/receive feedback.(75m) Playtesting Cycles: Students swap games, observe, take notes, and update their task lists.",
+            "materials": {
+              "teacher": "Feedback forms.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Observe playtesting; Review new tasks added to boards.",
+              "summative": "Iterating on feedback is key to the final grade."
+            },
+            "differentiation": "Support: Provide a feedback form with guiding questions."
+          },
+          {
+            "day": 94,
+            "date": "Thu, 02 26, 26",
+            "lesson": "Beta Phase",
+            "enduringUnderstanding": "See Day 93.",
+            "essentialQuestion": "See Day 93.",
+            "objectives": [
+              "See Day 93",
+              "See Day 93"
+            ],
+            "agenda": "(10m) Stand-up: \"What feedback are you implementing today?\"(80m) Work Time.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 93.",
+              "summative": "See Day 93."
+            },
+            "differentiation": "See Day 93."
+          },
+          {
+            "day": 95,
+            "date": "Fri, 02 27, 26",
+            "lesson": "Beta Phase",
+            "enduringUnderstanding": "See Day 93.",
+            "essentialQuestion": "See Day 93.",
+            "objectives": [
+              "See Day 93",
+              "See Day 93"
+            ],
+            "agenda": "(10m) Stand-up.(80m) Work Time.(5m) GitHub Push.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 93.",
+              "summative": "See Day 93."
+            },
+            "differentiation": "See Day 93."
+          },
+          {
+            "day": 96,
+            "date": "Mon, 03 02, 26",
+            "lesson": "Polish & Submission Prep",
+            "enduringUnderstanding": "\"Polish\" is the final layer that makes a game feel complete.",
+            "essentialQuestion": "What separates a good prototype from a great game?",
+            "objectives": [
+              "Add at least one sound effect and music track",
+              "Create a 30-60 second game trailer",
+              "Write a final game description"
+            ],
+            "agenda": "(15m) Mini-Lesson: Adding audio.(75m) Work Time: Students add sound and music to their games.",
+            "materials": {
+              "teacher": "Projector, Unity, VSCode.",
+              "student": "Computer.",
+              "links": "Freesound.org"
+            },
+            "assessment": {
+              "formative": "Listen for audio in student games.",
+              "summative": "The submission package is the project culmination."
+            },
+            "differentiation": "Challenge: Add screen shake or other \"juice\" effects."
+          },
+          {
+            "day": 97,
+            "date": "Tue, 03 03, 26",
+            "lesson": "Polish & Submission Prep",
+            "enduringUnderstanding": "See Day 96.",
+            "essentialQuestion": "See Day 96.",
+            "objectives": [
+              "See Day 96",
+              "See Day 96",
+              "See Day 96"
+            ],
+            "agenda": "(15m) Mini-Lesson: How to make a game trailer.(75m) Trailer Lab: Students use simple video editing tools to create their trailer.",
+            "materials": {
+              "teacher": "Video editing software.",
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review game trailers.",
+              "summative": "See Day 96."
+            },
+            "differentiation": "Support: Provide a template for the trailer storyboard."
+          },
+          {
+            "day": 98,
+            "date": "Wed, 03 04, 26",
+            "lesson": "Polish & Submission Prep",
+            "enduringUnderstanding": "See Day 96.",
+            "essentialQuestion": "See Day 96.",
+            "objectives": [
+              "See Day 96",
+              "See Day 96",
+              "See Day 96"
+            ],
+            "agenda": "(15m) Mini-Lesson: How to write a compelling game description.(75m) Submission Package Prep: Students write their game description and prepare their itch.io page.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review submission page drafts.",
+              "summative": "See Day 96."
+            },
+            "differentiation": "Support: Provide a template for the game description."
+          },
+          {
+            "day": 99,
+            "date": "Thu, 03 05, 26",
+            "lesson": "Polish & Submission Prep",
+            "enduringUnderstanding": "See Day 96.",
+            "essentialQuestion": "See Day 96.",
+            "objectives": [
+              "See Day 96",
+              "See Day 96",
+              "See Day 96"
+            ],
+            "agenda": "(Full Period) Final Polish & Buffer Day: Students finalize all assets and prepare for submission.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Final check of all submission materials.",
+              "summative": "See Day 96."
+            },
+            "differentiation": null
+          },
+          {
+            "day": 100,
+            "date": "Fri, 03 06, 26",
+            "lesson": "\"GAMES FOR CHANGE\" SUBMISSION DAY!",
+            "enduringUnderstanding": "Launching a project requires attention to detail and deadlines.",
+            "essentialQuestion": "How do we professionally present our finished work?",
+            "objectives": [
+              "Create a public project page on itch",
+              "io or Unity Play",
+              "Upload a working build, screenshots, and trailer",
+              "Complete the official G4C submission form"
+            ],
+            "agenda": "(Full Period) Submission Workshop: Students follow a checklist to submit their games. Celebrate success.",
+            "materials": {
+              "teacher": "G4C submission checklist.",
+              "student": "Computer.",
+              "links": "gamesforchange.org/studentchallenge, itch.io"
+            },
+            "assessment": {
+              "formative": "Teacher verification of each student's live submission page.",
+              "summative": "Final G4C Project Submission."
+            },
+            "differentiation": "Support: A detailed, step-by-step checklist."
+          }
+        ]
+      },
+      {
+        "unitNumber": 8,
+        "unitTitle": "Advanced Game Dev & Portfolio Polish",
+        "lessons": [
+          {
+            "day": 101,
+            "date": "Mon, 03 09, 26",
+            "lesson": "Intro to Unit 8 & Post-Mortem",
+            "enduringUnderstanding": "Reflecting on a completed project is key to learning from successes and failures.",
+            "essentialQuestion": "What went well, and what would I do differently next time?",
+            "objectives": [
+              "Write a reflection identifying at least one success, one challenge, and one key learning from their G4C project"
+            ],
+            "agenda": "(Full Period) Reflection & Discussion: Students write a \"post-mortem\" and share takeaways with the class.",
+            "materials": {
+              "teacher": "Post-mortem template.",
+              "student": "Computer, notebook.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "Review student reflections.",
+              "summative": "The post-mortem can be a final graded component of the G4C project."
+            },
+            "differentiation": "Support: Provide a template with guiding questions."
+          },
+          {
+            "day": 102,
+            "date": "Tue, 03 10, 26",
+            "lesson": "Advanced Project: 2D Platformer",
+            "enduringUnderstanding": "Different game genres rely on specific sets of mechanics and systems.",
+            "essentialQuestion": "What are the core mechanics of a 2D platformer?",
+            "objectives": [
+              "Implement a character controller for jumping and movement",
+              "Use Tilemaps to build a level",
+              "Create a \"collectible\" item"
+            ],
+            "agenda": "(15m) Mini-Lesson: Intro to 2D Platformer mechanics.(75m) Guided Tutorial: Students begin the 2D Platformer Assignment.",
+            "materials": {
+              "teacher": "Projector, Unity, VSCode.",
+              "student": "Computer.",
+              "links": "Link to 2D Platformer Assignment."
+            },
+            "assessment": {
+              "formative": "Check that characters can run and jump correctly.",
+              "summative": "2D Platformer Assignment (Submission to Unity Play)."
+            },
+            "differentiation": "Support: Provide a pre-built character with animations."
+          },
+          {
+            "day": 103,
+            "date": "Wed, 03 11, 26",
+            "lesson": "Advanced Project: 2D Platformer",
+            "enduringUnderstanding": "See Day 102.",
+            "essentialQuestion": "See Day 102.",
+            "objectives": [
+              "See Day 102",
+              "See Day 102",
+              "See Day 102"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How can we make the camera follow the player?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 102.",
+              "summative": "See Day 102."
+            },
+            "differentiation": "See Day 102."
+          },
+          {
+            "day": 104,
+            "date": "Thu, 03 12, 26",
+            "lesson": "Advanced Project: 2D Platformer",
+            "enduringUnderstanding": "See Day 102.",
+            "essentialQuestion": "See Day 102.",
+            "objectives": [
+              "See Day 102",
+              "See Day 102",
+              "See Day 102"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How do we make enemies?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 102.",
+              "summative": "See Day 102."
+            },
+            "differentiation": "See Day 102."
+          },
+          {
+            "day": 105,
+            "date": "Fri, 03 13, 26",
+            "lesson": "Advanced Project: 2D Platformer",
+            "enduringUnderstanding": "See Day 102.",
+            "essentialQuestion": "See Day 102.",
+            "objectives": [
+              "See Day 102",
+              "See Day 102",
+              "See Day 102"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How do we make a moving platform?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 102.",
+              "summative": "See Day 102."
+            },
+            "differentiation": "See Day 102."
+          },
+          {
+            "day": 106,
+            "date": "Mon, 03 16, 26",
+            "lesson": "Advanced Project: 2D Platformer",
+            "enduringUnderstanding": "See Day 102.",
+            "essentialQuestion": "See Day 102.",
+            "objectives": [
+              "See Day 102",
+              "See Day 102",
+              "See Day 102"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How do we add a lives system?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 102.",
+              "summative": "See Day 102."
+            },
+            "differentiation": "See Day 102."
+          },
+          {
+            "day": 107,
+            "date": "Tue, 03 17, 26",
+            "lesson": "Advanced Project: 2D Platformer",
+            "enduringUnderstanding": "See Day 102.",
+            "essentialQuestion": "See Day 102.",
+            "objectives": [
+              "See Day 102",
+              "See Day 102",
+              "See Day 102"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's the last feature you want to add?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 102.",
+              "summative": "See Day 102."
+            },
+            "differentiation": "See Day 102."
+          },
+          {
+            "day": 108,
+            "date": "Wed, 03 18, 26",
+            "lesson": "Advanced Project: 2D Shooter",
+            "enduringUnderstanding": "Instantiating prefabs at runtime allows for dynamic gameplay, like firing projectiles.",
+            "essentialQuestion": "How can we create new GameObjects while the game is running?",
+            "objectives": [
+              "Write a script to instantiate a \"bullet\" prefab",
+              "Apply a force to the bullet",
+              "Implement logic to destroy objects on hit"
+            ],
+            "agenda": "(15m) Mini-Lesson: Intro to 2D Shooter mechanics.(75m) Guided Tutorial: Students begin the 2D Shooter Assignment.",
+            "materials": {
+              "teacher": "Projector, Unity, VSCode.",
+              "student": "Computer.",
+              "links": "Link to 2D Shooter Assignment."
+            },
+            "assessment": {
+              "formative": "Verify that students can fire projectiles and destroy targets.",
+              "summative": "2D Shooter Assignment (Submission to Unity Play)."
+            },
+            "differentiation": "Challenge: Implement an enemy that also fires projectiles."
+          },
+          {
+            "day": 109,
+            "date": "Thu, 03 19, 26",
+            "lesson": "Advanced Project: 2D Shooter",
+            "enduringUnderstanding": "See Day 108.",
+            "essentialQuestion": "See Day 108.",
+            "objectives": [
+              "See Day 108",
+              "See Day 108",
+              "See Day 108"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How do we make the bullets disappear when they go off-screen?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 108.",
+              "summative": "See Day 108."
+            },
+            "differentiation": "See Day 108."
+          },
+          {
+            "day": 110,
+            "date": "Mon, 03 23, 26",
+            "lesson": "Advanced Project: 2D Shooter",
+            "enduringUnderstanding": "See Day 108.",
+            "essentialQuestion": "See Day 108.",
+            "objectives": [
+              "See Day 108",
+              "See Day 108",
+              "See Day 108"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How do we make a health system?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 108.",
+              "summative": "See Day 108."
+            },
+            "differentiation": "See Day 108."
+          },
+          {
+            "day": 111,
+            "date": "Tue, 03 24, 26",
+            "lesson": "Advanced Project: 2D Shooter",
+            "enduringUnderstanding": "See Day 108.",
+            "essentialQuestion": "See Day 108.",
+            "objectives": [
+              "See Day 108",
+              "See Day 108",
+              "See Day 108"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How can we add a score?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 108.",
+              "summative": "See Day 108."
+            },
+            "differentiation": "See Day 108."
+          },
+          {
+            "day": 112,
+            "date": "Wed, 03 25, 26",
+            "lesson": "Advanced Project: 2D Shooter",
+            "enduringUnderstanding": "See Day 108.",
+            "essentialQuestion": "See Day 108.",
+            "objectives": [
+              "See Day 108",
+              "See Day 108",
+              "See Day 108"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How can we add different enemy types?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 108.",
+              "summative": "See Day 108."
+            },
+            "differentiation": "See Day 108."
+          },
+          {
+            "day": 113,
+            "date": "Thu, 03 26, 26",
+            "lesson": "Advanced Project: 2D Shooter",
+            "enduringUnderstanding": "See Day 108.",
+            "essentialQuestion": "See Day 108.",
+            "objectives": [
+              "See Day 108",
+              "See Day 108",
+              "See Day 108"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What's the last feature you want to add?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 108.",
+              "summative": "See Day 108."
+            },
+            "differentiation": "See Day 108."
+          },
+          {
+            "day": 114,
+            "date": "Fri, 03 27, 26",
+            "lesson": "Final Project: Portfolio Polish",
+            "enduringUnderstanding": "A professional portfolio showcases your best work and is a key asset for future opportunities.",
+            "essentialQuestion": "How can I best present the work I've done this year?",
+            "objectives": [
+              "Create a personal portfolio page",
+              "Select their best 2-3 projects to feature",
+              "Write a professional description for each project"
+            ],
+            "agenda": "(15m) Mini-Lesson: What makes a good portfolio?(75m) Portfolio Workshop: Students design and build personal portfolio sites (Google Sites, etc.), embed their best games, and write descriptions.",
+            "materials": {
+              "teacher": "Google Sites or other portfolio builders.",
+              "student": "Computer.",
+              "links": "sites.google.com"
+            },
+            "assessment": {
+              "formative": "Review portfolio pages for professionalism and clarity.",
+              "summative": "The final portfolio is the summative assessment for the semester."
+            },
+            "differentiation": "Support: Provide a template and examples of professional developer portfolios."
+          },
+          {
+            "day": 115,
+            "date": "Mon, 03 30, 26",
+            "lesson": "Final Project: Portfolio Polish",
+            "enduringUnderstanding": "See Day 114.",
+            "essentialQuestion": "See Day 114.",
+            "objectives": [
+              "See Day 114",
+              "See Day 114",
+              "See Day 114"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What project are you most proud of?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 114.",
+              "summative": "See Day 114."
+            },
+            "differentiation": "See Day 114."
+          },
+          {
+            "day": 116,
+            "date": "Tue, 03 31, 26",
+            "lesson": "Final Project: Portfolio Polish",
+            "enduringUnderstanding": "See Day 114.",
+            "essentialQuestion": "See Day 114.",
+            "objectives": [
+              "See Day 114",
+              "See Day 114",
+              "See Day 114"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How can you make your portfolio stand out?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 114.",
+              "summative": "See Day 114."
+            },
+            "differentiation": "See Day 114."
+          },
+          {
+            "day": 117,
+            "date": "Mon, 04 13, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "Independent work time allows for creativity and self-directed learning.",
+            "essentialQuestion": "What do I want to build or improve today?",
+            "objectives": [
+              "Make progress on either the 2D Platformer, 2D Shooter, or Portfolio"
+            ],
+            "agenda": "(Full Period) Independent Work: Students choose which project they want to continue working on.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "One-on-one check-ins.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 118,
+            "date": "Tue, 04 14, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 119,
+            "date": "Wed, 04 15, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 120,
+            "date": "Thu, 04 16, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 121,
+            "date": "Fri, 04 17, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 122,
+            "date": "Mon, 04 20, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 123,
+            "date": "Tue, 04 21, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 124,
+            "date": "Wed, 04 22, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 125,
+            "date": "Thu, 04 23, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 126,
+            "date": "Fri, 04 24, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 127,
+            "date": "Mon, 04 27, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 128,
+            "date": "Tue, 04 28, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 129,
+            "date": "Wed, 04 29, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 130,
+            "date": "Thu, 04 30, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 131,
+            "date": "Fri, 05 01, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 132,
+            "date": "Mon, 05 04, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 133,
+            "date": "Tue, 05 05, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 134,
+            "date": "Wed, 05 06, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 135,
+            "date": "Thu, 05 07, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 136,
+            "date": "Fri, 05 08, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 137,
+            "date": "Mon, 05 11, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 138,
+            "date": "Tue, 05 12, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 139,
+            "date": "Wed, 05 13, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 140,
+            "date": "Thu, 05 14, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 141,
+            "date": "Fri, 05 15, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 142,
+            "date": "Mon, 05 18, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 143,
+            "date": "Tue, 05 19, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 144,
+            "date": "Wed, 05 20, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 145,
+            "date": "Thu, 05 21, 26",
+            "lesson": "Project Work Day",
+            "enduringUnderstanding": "See Day 117.",
+            "essentialQuestion": "See Day 117.",
+            "objectives": [
+              "See Day 117"
+            ],
+            "agenda": "(Full Period) Independent Work.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 117.",
+              "summative": null
+            },
+            "differentiation": null
+          },
+          {
+            "day": 146,
+            "date": "Fri, 05 22, 26",
+            "lesson": "Final Project: Portfolio Polish",
+            "enduringUnderstanding": "A professional portfolio showcases your best work and is a key asset for future opportunities.",
+            "essentialQuestion": "How can I best present the work I've done this year?",
+            "objectives": [
+              "Create a personal portfolio page",
+              "Select their best 2-3 projects to feature",
+              "Write a professional description for each project"
+            ],
+            "agenda": "(Full Period) Portfolio Workshop: Students design and build personal portfolio sites (Google Sites, etc.), embed their best games, and write descriptions.",
+            "materials": {
+              "teacher": "Google Sites or other portfolio builders.",
+              "student": "Computer.",
+              "links": "sites.google.com"
+            },
+            "assessment": {
+              "formative": "Review portfolio pages for professionalism and clarity.",
+              "summative": "The final portfolio is the summative assessment for the semester."
+            },
+            "differentiation": "Support: Provide a template and examples of professional developer portfolios."
+          },
+          {
+            "day": 147,
+            "date": "Tue, 05 26, 26",
+            "lesson": "Final Project: Portfolio Polish",
+            "enduringUnderstanding": "See Day 146.",
+            "essentialQuestion": "See Day 146.",
+            "objectives": [
+              "See Day 146",
+              "See Day 146",
+              "See Day 146"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"What project are you most proud of?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 146.",
+              "summative": "See Day 146."
+            },
+            "differentiation": "See Day 146."
+          },
+          {
+            "day": 148,
+            "date": "Thu, 05 28, 26",
+            "lesson": "Final Project: Portfolio Polish",
+            "enduringUnderstanding": "See Day 146.",
+            "essentialQuestion": "See Day 146.",
+            "objectives": [
+              "See Day 146",
+              "See Day 146",
+              "See Day 146"
+            ],
+            "agenda": "(10m) Do Now / Q&A: \"How can you make your portfolio stand out?\"(80m) Work Time.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 146.",
+              "summative": "See Day 146."
+            },
+            "differentiation": "See Day 146."
+          },
+          {
+            "day": 149,
+            "date": "Fri, 05 29, 26",
+            "lesson": "Final Project: Portfolio Polish",
+            "enduringUnderstanding": "See Day 146.",
+            "essentialQuestion": "See Day 146.",
+            "objectives": [
+              "See Day 146",
+              "See Day 146",
+              "See Day 146"
+            ],
+            "agenda": "(Full Period) Final Polish & Peer Review: Students get feedback on their portfolios from their peers.",
+            "materials": {
+              "teacher": null,
+              "student": "Computer.",
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 146.",
+              "summative": "See Day 146."
+            },
+            "differentiation": "See Day 146."
+          },
+          {
+            "day": 150,
+            "date": "Mon, 06 01, 26",
+            "lesson": "Year-End Showcase & Celebration",
+            "enduringUnderstanding": "See Day 146.",
+            "essentialQuestion": "See Day 146.",
+            "objectives": [
+              "Present their final portfolio to the class, walking through their featured projects"
+            ],
+            "agenda": "(Full Period) Portfolio Day: Students present their finished portfolios to the class, celebrating a full year of learning and creation.",
+            "materials": {
+              "teacher": "Projector.",
+              "student": null,
+              "links": null
+            },
+            "assessment": {
+              "formative": "Final presentations.",
+              "summative": "The final portfolio is the summative assessment for the semester."
+            },
+            "differentiation": null
+          },
+          {
+            "day": 151,
+            "date": "Tue, 06 02, 26",
+            "lesson": "Year-End Showcase & Celebration",
+            "enduringUnderstanding": "See Day 150.",
+            "essentialQuestion": "See Day 150.",
+            "objectives": [
+              "See Day 150"
+            ],
+            "agenda": "(Full Period) Portfolio Day.",
+            "materials": {
+              "teacher": "Projector.",
+              "student": null,
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 150.",
+              "summative": "See Day 150."
+            },
+            "differentiation": null
+          },
+          {
+            "day": 152,
+            "date": "Wed, 06 03, 26",
+            "lesson": "Year-End Showcase & Celebration",
+            "enduringUnderstanding": "See Day 150.",
+            "essentialQuestion": "See Day 150.",
+            "objectives": [
+              "See Day 150"
+            ],
+            "agenda": "(Full Period) Portfolio Day.",
+            "materials": {
+              "teacher": "Projector.",
+              "student": null,
+              "links": null
+            },
+            "assessment": {
+              "formative": "See Day 150.",
+              "summative": "See Day 150."
+            },
+            "differentiation": null
+          },
+          {
+            "day": 153,
+            "date": "Fri, 06 05, 26",
+            "lesson": "Final Day",
+            "enduringUnderstanding": "The end of the course is a celebration of a year of learning and creation.",
+            "essentialQuestion": "What have I accomplished this year?",
+            "objectives": [
+              "Provide feedback on the course",
+              "Celebrate a successful year"
+            ],
+            "agenda": "(Full Period) Final Celebration: Play games, share portfolios, and celebrate a successful year.",
+            "materials": {
+              "teacher": null,
+              "student": null,
+              "links": null
+            },
+            "assessment": {
+              "formative": "Course feedback survey.",
+              "summative": null
+            },
+            "differentiation": null
+          }
+        ]
+      }
+    ]
+  }
+};

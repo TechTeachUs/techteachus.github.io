@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mrs. Ramirez's Lesson Plan Selector</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .dropdown-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .dropdown-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dropdown-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #495057;
+            font-size: 1.1rem;
+        }
+
+        select {
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        select:hover {
+            border-color: #667eea;
+        }
+
+        .status {
+            text-align: center;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: 500;
+            color: #1976d2;
+        }
+
+        .lesson-content {
+            padding: 30px;
+            min-height: 400px;
+        }
+
+        .lesson-plan {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .lesson-plan.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lesson-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .lesson-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .lesson-header .meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .objectives-list, .materials-list, .tasks-list {
+            list-style: none;
+        }
+
+        .objectives-list li, .materials-list li, .tasks-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .objectives-list li:before {
+            content: "🎯";
+            position: absolute;
+            left: 0;
+        }
+
+        .materials-list li:before {
+            content: "📋";
+            position: absolute;
+            left: 0;
+        }
+
+        .tasks-list li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+
+        .objectives-list li:last-child,
+        .materials-list li:last-child,
+        .tasks-list li:last-child {
+            border-bottom: none;
+        }
+
+        .time-estimate {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .empty-state .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+
+        @media (max-width: 768px) {
+            .dropdown-container {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .lesson-header .meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .controls {
+                padding: 20px;
+            }
+
+            .lesson-content {
+                padding: 20px;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Lesson Plan Selector</h1>
+            <p>Choose your unit and day to view the complete lesson plan</p>
+        </div>
+
+        <div class="controls">
+            <div class="dropdown-container">
+                <div class="dropdown-group">
+                    <label for="unit-select">📖 Select Unit:</label>
+                    <select id="unit-select">
+                        <option value="">-- Choose a Unit --</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-group">
+                    <label for="day-select">📝 Select Day:</label>
+                    <select id="day-select" disabled>
+                        <option value="">-- Choose a Day --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="status" id="status">
+                Loading lesson plans...
+            </div>
+        </div>
+
+        <div class="lesson-content" id="lesson-content">
+            <div class="empty-state">
+                <div class="icon">🎓</div>
+                <h3>Welcome to the Lesson Plan Selector</h3>
+                <p>Select a unit and day from the dropdowns above to view the detailed lesson plan.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class LessonPlanSelector {
+            constructor() {
+                this.lessonData = null;
+                this.unitSelect = document.getElementById('unit-select');
+                this.daySelect = document.getElementById('day-select');
+                this.lessonContent = document.getElementById('lesson-content');
+                this.status = document.getElementById('status');
+
+                this.init();
+            }
+
+            async init() {
+                try {
+                    this.showStatus('Loading lesson plans...', 'loading');
+                    await this.loadLessonData();
+                    this.populateUnits();
+                    this.setupEventListeners();
+                    this.showStatus('Ready! Please select a unit to begin.');
+                } catch (error) {
+                    this.showError('Failed to load lesson plans. Please try again later.');
+                    console.error('Error initializing lesson plan selector:', error);
+                }
+            }
+
+            async loadLessonData() {
+                try {
+                    console.log('Attempting to load data/complete_lesson_plan.json');
+                    const response = await fetch('data/complete_lesson_plan.json');
+                    console.log('Response status:', response.status, 'Response ok:', response.ok);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    this.lessonData = await response.json();
+                    console.log('Lesson data loaded successfully:', this.lessonData);
+                    console.log('Number of units:', this.lessonData.curriculum.units?.length);
+                } catch (error) {
+                    // Fallback to embedded data if JSON file is not available
+                    console.warn('Could not load external JSON, using fallback data. Error:', error);
+                    this.lessonData = this.getFallbackData();
+                }
+            }
+
+            getFallbackData() {
+                return {
+                    "curriculum": {
+                        "course": "10th Grade Game Development",
+                        "schoolYear": "2025-2026",
+                        "units": [
+                            {
+                                "unitNumber": 1,
+                                "unitTitle": "Introduction to Python & Computational Thinking",
+                                "lessons": [
+                                    {
+                                        "day": 1,
+                                        "date": "Thu, 09 04, 25",
+                                        "lesson": "What is Computer Science?",
+                                        "enduringUnderstanding": "Precise, logical instructions are required to make a computer perform any task.",
+                                        "essentialQuestion": "How do we translate a human idea into a set of instructions a computer can understand?",
+                                        "objectives": [
+                                            "Write a clear definition of 'algorithm'",
+                                            "Author a set of at least 5 sequential instructions for a real-world task",
+                                            "Log in to new Project STEM and GitHub accounts"
+                                        ],
+                                        "agenda": "(5m) Do Now: Think about your favorite game. (20m) Activity: Human Robot (20m) Mini-Lesson: Algorithm & Computational Thinking (40m) Guided Practice: Account Setup (5m) Exit Ticket",
+                                        "materials": {
+                                            "teacher": "Projector, whiteboard, stacking cups, paper, pens.",
+                                            "student": "Computer, notebook/paper.",
+                                            "links": "Python: python.org/downloads"
+                                        },
+                                        "assessment": {
+                                            "formative": "Observe Human Robot activity; Review Exit Ticket definitions.",
+                                            "summative": "Successful creation of Project STEM and GitHub accounts is required for all future assignments."
+                                        },
+                                        "differentiation": "Support: Provide a printed checklist for account setup. Challenge: Have advanced students write a more complex algorithm."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                };
+            }
+
+            populateUnits() {
+                this.unitSelect.innerHTML = '<option value="">-- Choose a Unit --</option>';
+                
+                if (this.lessonData.curriculum.units) {
+                    console.log('Populating units:', this.lessonData.curriculum.units.length);
+                    
+                    this.lessonData.curriculum.units.forEach(unit => {
+                        const option = document.createElement('option');
+                        option.value = unit.unitNumber;
+                        option.textContent = `Unit ${unit.unitNumber}: ${unit.unitTitle}`;
+                        this.unitSelect.appendChild(option);
+                        console.log('Added unit:', unit.unitNumber, unit.unitTitle);
+                    });
+                } else {
+                    console.log('No units found in data');
+                }
+            }
+
+            populateDays(unitNumber) {
+                this.daySelect.innerHTML = '<option value="">-- Choose a Day --</option>';
+                
+                if (!unitNumber) {
+                    this.daySelect.disabled = true;
+                    return;
+                }
+
+                const unit = this.lessonData.curriculum.units.find(u => u.unitNumber == unitNumber);
+                console.log('Found unit for population:', unit);
+                
+                if (unit && unit.lessons) {
+                    this.daySelect.disabled = false;
+                    
+                    unit.lessons.forEach(lesson => {
+                        const option = document.createElement('option');
+                        option.value = lesson.day;
+                        option.textContent = `Day ${lesson.day} (${lesson.date}) - ${lesson.lesson}`;
+                        this.daySelect.appendChild(option);
+                    });
+                    console.log('Added', unit.lessons.length, 'lessons to day dropdown');
+                }
+            }
+
+            getUnit(unitNumber) {
+                return this.lessonData.curriculum.units.find(unit => unit.unitNumber == unitNumber);
+            }
+
+            getLesson(unitNumber, dayNumber) {
+                const unit = this.getUnit(unitNumber);
+                if (unit && unit.lessons) {
+                    return unit.lessons.find(lesson => lesson.day == dayNumber);
+                }
+                return null;
+            }
+
+            setupEventListeners() {
+                this.unitSelect.addEventListener('change', (e) => {
+                    const unitNumber = e.target.value;
+                    console.log('Unit selected:', unitNumber);
+                    this.populateDays(unitNumber);
+                    
+                    if (unitNumber) {
+                        this.showStatus('Now select a day.');
+                    } else {
+                        this.showStatus('Please select a unit.');
+                        this.daySelect.disabled = true;
+                        this.showEmptyState();
+                    }
+                });
+
+                this.daySelect.addEventListener('change', (e) => {
+                    const dayNumber = e.target.value;
+                    const unitNumber = this.unitSelect.value;
+                    console.log('Day selected:', dayNumber, 'for unit:', unitNumber);
+                    
+                    if (unitNumber && dayNumber) {
+                        this.displayLessonPlan(unitNumber, dayNumber);
+                    } else {
+                        this.showEmptyState();
+                    }
+                });
+            }
+
+            displayLessonPlan(unitNumber, dayNumber) {
+                const lesson = this.getLesson(unitNumber, dayNumber);
+                const unit = this.getUnit(unitNumber);
+                
+                if (!lesson || !unit) {
+                    this.showError('Lesson plan not found.');
+                    return;
+                }
+
+                this.showStatus(`Displaying: Unit ${unit.unitNumber} - Day ${lesson.day} - ${lesson.lesson}`);
+
+                const html = `
+                    <div class="lesson-plan active">
+                        <div class="lesson-header">
+                            <h2>${lesson.lesson}</h2>
+                            <div class="meta">
+                                <span class="time-estimate">📅 ${lesson.date}</span>
+                                <span>📖 Unit ${unit.unitNumber}</span>
+                                <span>📝 Day ${lesson.day}</span>
+                                <span>🎯 ${this.lessonData.curriculum.course}</span>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3>
+                                <span class="section-icon">🎯</span>
+                                Learning Objectives
+                            </h3>
+                            <ul class="objectives-list">
+                                ${lesson.objectives.map(obj => `<li>${obj}</li>`).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="section">
+                            <h3>
+                                <span class="section-icon">🧠</span>
+                                Enduring Understanding
+                            </h3>
+                            <p style="padding: 10px 0; font-style: italic;">${lesson.enduringUnderstanding}</p>
+                        </div>
+
+                        <div class="section">
+                            <h3>
+                                <span class="section-icon">❓</span>
+                                Essential Question
+                            </h3>
+                            <p style="padding: 10px 0; font-weight: 500; color: #495057;">${lesson.essentialQuestion}</p>
+                        </div>
+
+                        <div class="section">
+                            <h3>
+                                <span class="section-icon">📋</span>
+                                Materials
+                            </h3>
+                            <div style="display: grid; gap: 15px;">
+                                ${lesson.materials.teacher ? `
+                                    <div>
+                                        <strong>👩‍🏫 Teacher Materials:</strong>
+                                        <p style="margin-top: 5px;">${lesson.materials.teacher}</p>
+                                    </div>
+                                ` : ''}
+                                ${lesson.materials.student ? `
+                                    <div>
+                                        <strong>👨‍🎓 Student Materials:</strong>
+                                        <p style="margin-top: 5px;">${lesson.materials.student}</p>
+                                    </div>
+                                ` : ''}
+                                ${lesson.materials.links ? `
+                                    <div>
+                                        <strong>🔗 Links & Resources:</strong>
+                                        <p style="margin-top: 5px;">${lesson.materials.links}</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3>
+                                <span class="section-icon">✅</span>
+                                Lesson Agenda
+                            </h3>
+                            <div style="background: #fff; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                ${this.formatAgenda(lesson.agenda)}
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3>
+                                <span class="section-icon">📊</span>
+                                Assessment
+                            </h3>
+                            <div style="display: grid; gap: 15px;">
+                                ${lesson.assessment.formative ? `
+                                    <div>
+                                        <strong>📝 Formative Assessment:</strong>
+                                        <p style="margin-top: 5px;">${lesson.assessment.formative}</p>
+                                    </div>
+                                ` : ''}
+                                ${lesson.assessment.summative ? `
+                                    <div>
+                                        <strong>📋 Summative Assessment:</strong>
+                                        <p style="margin-top: 5px;">${lesson.assessment.summative}</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+
+                        ${lesson.differentiation ? `
+                            <div class="section">
+                                <h3>
+                                    <span class="section-icon">🎯</span>
+                                    Differentiation
+                                </h3>
+                                <div style="background: #fff; padding: 15px; border-radius: 8px; border-left: 4px solid #17a2b8;">
+                                    ${this.formatDifferentiation(lesson.differentiation)}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+
+                this.lessonContent.innerHTML = html;
+            }
+
+            formatAgenda(agenda) {
+                if (!agenda) return '';
+                
+                // Split by time markers and format
+                const timePattern = /\((\d+m)\)/g;
+                let formattedAgenda = agenda.replace(timePattern, '<span style="background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 12px; font-size: 0.9em; font-weight: 500;">⏱️ $1</span>');
+                
+                // Split by periods or line breaks and create a more structured format
+                const parts = formattedAgenda.split(/\.\s*(?=\(|\w)/);
+                if (parts.length > 1) {
+                    return '<ul style="list-style: none; padding: 0;">' + 
+                           parts.filter(part => part.trim()).map(part => 
+                               `<li style="margin-bottom: 10px; padding: 8px; background: #f8f9fa; border-radius: 4px;">• ${part.trim()}</li>`
+                           ).join('') + 
+                           '</ul>';
+                } else {
+                    return `<p>${formattedAgenda}</p>`;
+                }
+            }
+
+            formatDifferentiation(differentiation) {
+                if (!differentiation) return '';
+                
+                // Look for Support: and Challenge: patterns
+                let formatted = differentiation
+                    .replace(/Support:/g, '<strong style="color: #28a745;">🤝 Support:</strong>')
+                    .replace(/Challenge:/g, '<strong style="color: #dc3545;">🚀 Challenge:</strong>');
+                
+                return `<p>${formatted}</p>`;
+            }
+
+            showEmptyState() {
+                this.lessonContent.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">🎓</div>
+                        <h3>Select a Lesson Plan</h3>
+                        <p>Choose a unit and day from the dropdowns above to view the detailed lesson plan.</p>
+                    </div>
+                `;
+            }
+
+            showStatus(message, type = 'info') {
+                this.status.textContent = message;
+                this.status.className = `status ${type}`;
+            }
+
+            showError(message) {
+                this.lessonContent.innerHTML = `
+                    <div class="error">
+                        <strong>Error:</strong> ${message}
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the application when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new LessonPlanSelector();
+        });
+    </script>
+</body>
+</html>
