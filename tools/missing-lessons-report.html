@@ -104,7 +104,7 @@
     <script>
         async function loadAndAnalyze() {
             try {
-                const response = await fetch('data/complete_lesson_plan.json');
+                const response = await fetch('../data/complete_lesson_plan.json');
                 if (!response.ok) throw new Error('Failed to load data');
                 const data = await response.json();
                 

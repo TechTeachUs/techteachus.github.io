@@ -23,16 +23,17 @@ This project is **GitHub Pages compatible**! Here's what works and how to deploy
 
 ```
 TechTeach/
+├── index.html               # ✅ Landing page
 ├── LPS-github.html          # ✅ Main lesson selector (GitHub compatible)
 ├── LPS.html                 # ⚠️  Requires local server
-├── index.html               # ✅ Landing page
-├── embedded-data.js         # ✅ Lesson data for GitHub Pages
-├── validation-tool.html     # ⚠️  Requires local server
-├── missing-lessons-report.html # ⚠️  Requires local server
-├── lesson-template.json     # ✅ Reference template
-├── style.css               # ✅ Styles
-├── script.js               # ✅ Scripts
-└── icons/                  # ✅ All icon assets
+├── assets/                  # ✅ All static resources
+│   ├── css/                 # Stylesheets
+│   ├── js/                  # JavaScript files
+│   └── images/              # Icons and images
+├── data/                    # ✅ Lesson data
+├── tools/                   # ⚠️  Requires local server
+├── templates/               # ✅ Reference materials
+└── docs/                    # ✅ Documentation and archives
 ```
 
 ### 🔄 Local vs GitHub Pages Versions:
@@ -59,7 +60,8 @@ Your site will be available at: `https://[username].github.io/[repository-name]`
 
 - **Main Selector**: `/LPS-github.html`
 - **Landing Page**: `/index.html` 
-- **Template Reference**: `/lesson-template.json`
+- **Template Reference**: `/templates/lesson-template.json`
+- **Validation Tools**: `/tools/` (requires local server)
 
 ### 🔧 For Development:
 
