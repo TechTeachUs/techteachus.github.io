@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesson Data Editor - GitHub Pages</title>
+    <!-- PDF Export Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -109,6 +111,11 @@
         .btn-warning {
             background: #ffc107;
             color: #212529;
+        }
+
+        .btn-info {
+            background: #17a2b8;
+            color: white;
         }
 
         .btn-danger {
@@ -4089,10 +4096,12 @@
                     <textarea id="differentiation" placeholder="Support: How you'll help struggling students. Challenge: How you'll extend learning for advanced students.">${lesson.differentiation || ''}</textarea>
                 </div>
                 
-                <div style="margin-top: 30px; display: flex; gap: 15px;">
+                <div style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
                     <button class="btn btn-success" onclick="saveLesson()">💾 Save Lesson</button>
                     <button class="btn btn-primary" onclick="saveAndNext()">💾 Save & Next</button>
                     <button class="btn btn-warning" onclick="previewLesson()">👀 Preview</button>
+                    <button class="btn btn-info" onclick="exportToPDF()">📄 Export PDF</button>
+                    <button class="btn btn-info" onclick="printLesson()">🖨️ Print Lesson</button>
                 </div>
             `;
         }
@@ -4186,6 +4195,335 @@
             const status = getLessonStatus(currentLesson);
             
             alert(`Lesson Preview:\n\nTitle: ${currentLesson.lesson}\nCompletion: ${completionPercent}%\nStatus: ${status}\n\nSaved successfully!`);
+        }
+
+        function exportToPDF() {
+            if (!currentLesson || !currentUnit) {
+                showStatus('No lesson selected for PDF export', 'error');
+                return;
+            }
+
+            // Save current changes first
+            saveLesson();
+
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Set up the PDF styling
+                const pageWidth = 210; // A4 width in mm
+                const margin = 20;
+                const lineHeight = 6;
+                let yPosition = margin;
+                
+                // Helper function to add text with word wrapping
+                function addWrappedText(text, x, y, maxWidth, fontSize = 11) {
+                    doc.setFontSize(fontSize);
+                    const lines = doc.splitTextToSize(text, maxWidth);
+                    doc.text(lines, x, y);
+                    return y + (lines.length * lineHeight);
+                }
+                
+                // Helper function to add a section header
+                function addSectionHeader(title, y) {
+                    doc.setFontSize(14);
+                    doc.setFont(undefined, 'bold');
+                    doc.text(title, margin, y);
+                    doc.setFont(undefined, 'normal');
+                    return y + 8;
+                }
+                
+                // Header
+                doc.setFontSize(18);
+                doc.setFont(undefined, 'bold');
+                doc.text(`${currentUnit.unitTitle}`, margin, yPosition);
+                yPosition += 8;
+                
+                doc.setFontSize(16);
+                doc.text(`Day ${currentLesson.day || 'TBD'}: ${currentLesson.lesson || 'Untitled Lesson'}`, margin, yPosition);
+                yPosition += 10;
+                
+                doc.setFontSize(12);
+                doc.setFont(undefined, 'normal');
+                doc.text(`Date: ${currentLesson.date || 'TBD'}`, margin, yPosition);
+                yPosition += 8;
+                
+                // Course info
+                doc.text(`Course: ${lessonData.curriculum.course}`, margin, yPosition);
+                yPosition += 8;
+                doc.text(`School Year: ${lessonData.curriculum.schoolYear}`, margin, yPosition);
+                yPosition += 12;
+                
+                // Enduring Understanding
+                if (currentLesson.enduringUnderstanding) {
+                    yPosition = addSectionHeader('Enduring Understanding:', yPosition);
+                    yPosition = addWrappedText(currentLesson.enduringUnderstanding, margin, yPosition, pageWidth - 2 * margin);
+                    yPosition += 6;
+                }
+                
+                // Essential Question
+                if (currentLesson.essentialQuestion) {
+                    yPosition = addSectionHeader('Essential Question:', yPosition);
+                    yPosition = addWrappedText(currentLesson.essentialQuestion, margin, yPosition, pageWidth - 2 * margin);
+                    yPosition += 6;
+                }
+                
+                // Learning Objectives
+                if (currentLesson.objectives && currentLesson.objectives.length > 0) {
+                    yPosition = addSectionHeader('Learning Objectives:', yPosition);
+                    currentLesson.objectives.forEach((objective, index) => {
+                        if (objective.trim()) {
+                            yPosition = addWrappedText(`${index + 1}. ${objective}`, margin + 5, yPosition, pageWidth - 2 * margin - 10);
+                            yPosition += 2;
+                        }
+                    });
+                    yPosition += 6;
+                }
+                
+                // Check if we need a new page
+                if (yPosition > 250) {
+                    doc.addPage();
+                    yPosition = margin;
+                }
+                
+                // Agenda
+                if (currentLesson.agenda) {
+                    yPosition = addSectionHeader('Lesson Agenda:', yPosition);
+                    yPosition = addWrappedText(currentLesson.agenda, margin, yPosition, pageWidth - 2 * margin);
+                    yPosition += 6;
+                }
+                
+                // Materials
+                if (currentLesson.materials) {
+                    yPosition = addSectionHeader('Materials:', yPosition);
+                    if (currentLesson.materials.teacher) {
+                        yPosition = addWrappedText(`Teacher: ${currentLesson.materials.teacher}`, margin + 5, yPosition, pageWidth - 2 * margin - 10);
+                        yPosition += 2;
+                    }
+                    if (currentLesson.materials.student) {
+                        yPosition = addWrappedText(`Student: ${currentLesson.materials.student}`, margin + 5, yPosition, pageWidth - 2 * margin - 10);
+                        yPosition += 2;
+                    }
+                    if (currentLesson.materials.links) {
+                        yPosition = addWrappedText(`Links: ${currentLesson.materials.links}`, margin + 5, yPosition, pageWidth - 2 * margin - 10);
+                        yPosition += 2;
+                    }
+                    yPosition += 6;
+                }
+                
+                // Check if we need a new page
+                if (yPosition > 230) {
+                    doc.addPage();
+                    yPosition = margin;
+                }
+                
+                // Assessment
+                if (currentLesson.assessment) {
+                    yPosition = addSectionHeader('Assessment:', yPosition);
+                    if (currentLesson.assessment.formative) {
+                        yPosition = addWrappedText(`Formative: ${currentLesson.assessment.formative}`, margin + 5, yPosition, pageWidth - 2 * margin - 10);
+                        yPosition += 2;
+                    }
+                    if (currentLesson.assessment.summative) {
+                        yPosition = addWrappedText(`Summative: ${currentLesson.assessment.summative}`, margin + 5, yPosition, pageWidth - 2 * margin - 10);
+                        yPosition += 2;
+                    }
+                    yPosition += 6;
+                }
+                
+                // Differentiation
+                if (currentLesson.differentiation) {
+                    yPosition = addSectionHeader('Differentiation:', yPosition);
+                    yPosition = addWrappedText(currentLesson.differentiation, margin, yPosition, pageWidth - 2 * margin);
+                    yPosition += 6;
+                }
+                
+                // Footer
+                const pageCount = doc.getNumberOfPages();
+                for (let i = 1; i <= pageCount; i++) {
+                    doc.setPage(i);
+                    doc.setFontSize(9);
+                    doc.text(`Generated on ${new Date().toLocaleDateString()} - Page ${i} of ${pageCount}`, margin, 287);
+                }
+                
+                // Save the PDF
+                const fileName = `Unit_${currentUnit.unitNumber}_Day_${currentLesson.day || 'TBD'}_${(currentLesson.lesson || 'Lesson').replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
+                doc.save(fileName);
+                
+                showStatus('PDF exported successfully!', 'success');
+                
+            } catch (error) {
+                console.error('PDF Export Error:', error);
+                showStatus('Error creating PDF: ' + error.message, 'error');
+            }
+        }
+
+        function printLesson() {
+            if (!currentLesson || !currentUnit) {
+                showStatus('No lesson selected for printing', 'error');
+                return;
+            }
+
+            // Save current changes first
+            saveLesson();
+
+            // Create a new window with formatted lesson content
+            const printWindow = window.open('', '_blank');
+            
+            const printContent = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Unit ${currentUnit.unitNumber} Day ${currentLesson.day || 'TBD'} - ${currentLesson.lesson || 'Lesson Plan'}</title>
+                    <style>
+                        body {
+                            font-family: 'Times New Roman', serif;
+                            max-width: 8.5in;
+                            margin: 0 auto;
+                            padding: 1in;
+                            line-height: 1.6;
+                            color: #333;
+                        }
+                        h1 {
+                            color: #2c3e50;
+                            border-bottom: 3px solid #3498db;
+                            padding-bottom: 10px;
+                        }
+                        h2 {
+                            color: #34495e;
+                            border-bottom: 1px solid #bdc3c7;
+                            padding-bottom: 5px;
+                            margin-top: 25px;
+                        }
+                        .header-info {
+                            background: #ecf0f1;
+                            padding: 15px;
+                            border-radius: 5px;
+                            margin: 20px 0;
+                        }
+                        .objectives {
+                            background: #e8f5e8;
+                            padding: 15px;
+                            border-left: 4px solid #27ae60;
+                            margin: 15px 0;
+                        }
+                        .agenda {
+                            background: #fff3cd;
+                            padding: 15px;
+                            border-left: 4px solid #ffc107;
+                            margin: 15px 0;
+                        }
+                        .materials, .assessment {
+                            background: #f8f9fa;
+                            padding: 15px;
+                            border: 1px solid #dee2e6;
+                            margin: 15px 0;
+                        }
+                        .differentiation {
+                            background: #e1ecf4;
+                            padding: 15px;
+                            border-left: 4px solid #3498db;
+                            margin: 15px 0;
+                        }
+                        ul {
+                            margin: 10px 0;
+                            padding-left: 25px;
+                        }
+                        li {
+                            margin: 5px 0;
+                        }
+                        .footer {
+                            margin-top: 40px;
+                            text-align: center;
+                            font-size: 12px;
+                            color: #7f8c8d;
+                            border-top: 1px solid #bdc3c7;
+                            padding-top: 15px;
+                        }
+                        @media print {
+                            body { margin: 0.5in; }
+                            .footer { page-break-inside: avoid; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>${currentUnit.unitTitle}</h1>
+                    
+                    <div class="header-info">
+                        <strong>Day ${currentLesson.day || 'TBD'}:</strong> ${currentLesson.lesson || 'Untitled Lesson'}<br>
+                        <strong>Date:</strong> ${currentLesson.date || 'TBD'}<br>
+                        <strong>Course:</strong> ${lessonData.curriculum.course}<br>
+                        <strong>School Year:</strong> ${lessonData.curriculum.schoolYear}
+                    </div>
+                    
+                    ${currentLesson.enduringUnderstanding ? `
+                        <h2>Enduring Understanding</h2>
+                        <p>${currentLesson.enduringUnderstanding}</p>
+                    ` : ''}
+                    
+                    ${currentLesson.essentialQuestion ? `
+                        <h2>Essential Question</h2>
+                        <p>${currentLesson.essentialQuestion}</p>
+                    ` : ''}
+                    
+                    ${currentLesson.objectives && currentLesson.objectives.length > 0 ? `
+                        <h2>Learning Objectives</h2>
+                        <div class="objectives">
+                            <ul>
+                                ${currentLesson.objectives.filter(obj => obj.trim()).map(obj => `<li>${obj}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    
+                    ${currentLesson.agenda ? `
+                        <h2>Lesson Agenda</h2>
+                        <div class="agenda">
+                            <p>${currentLesson.agenda.replace(/\((\d+m)\)/g, '<strong>($1)</strong>')}</p>
+                        </div>
+                    ` : ''}
+                    
+                    ${currentLesson.materials ? `
+                        <h2>Materials</h2>
+                        <div class="materials">
+                            ${currentLesson.materials.teacher ? `<p><strong>Teacher:</strong> ${currentLesson.materials.teacher}</p>` : ''}
+                            ${currentLesson.materials.student ? `<p><strong>Student:</strong> ${currentLesson.materials.student}</p>` : ''}
+                            ${currentLesson.materials.links ? `<p><strong>Links & Resources:</strong> ${currentLesson.materials.links}</p>` : ''}
+                        </div>
+                    ` : ''}
+                    
+                    ${currentLesson.assessment ? `
+                        <h2>Assessment</h2>
+                        <div class="assessment">
+                            ${currentLesson.assessment.formative ? `<p><strong>Formative:</strong> ${currentLesson.assessment.formative}</p>` : ''}
+                            ${currentLesson.assessment.summative ? `<p><strong>Summative:</strong> ${currentLesson.assessment.summative}</p>` : ''}
+                        </div>
+                    ` : ''}
+                    
+                    ${currentLesson.differentiation ? `
+                        <h2>Differentiation</h2>
+                        <div class="differentiation">
+                            <p>${currentLesson.differentiation}</p>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="footer">
+                        Generated on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            printWindow.document.write(printContent);
+            printWindow.document.close();
+            
+            // Wait for content to load, then open print dialog
+            printWindow.onload = function() {
+                setTimeout(() => {
+                    printWindow.print();
+                }, 500);
+            };
+            
+            showStatus('Print preview opened in new window', 'success');
         }
 
         function resetFilters() {
