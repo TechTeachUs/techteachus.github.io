@@ -11,7 +11,7 @@
     <!-- Google Fonts - Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <!-- Additional Photo Styling -->
     <style>
         .photo-background-blend {
@@ -170,7 +170,7 @@
                 <div class="person animated fadeInRight flex-shrink-0 md:mr-8">
                     <!-- Mrs. Ramirez's image -->
                     <div class="relative photo-container rounded-2xl">
-                        <img loading="lazy" src="icons/lr4.jpeg" alt="Mrs. Ramirez - Game Design & Web Development Teacher" class="rounded-2xl shadow-2xl max-w-full h-auto object-cover border-4 border-indigo-500/20 photo-background-blend" width="350" height="450" onerror="this.onerror=null;this.src='icons/lr1.png';">
+                        <img loading="lazy" src="assets/images/lr4.jpeg" alt="Mrs. Ramirez - Game Design & Web Development Teacher" class="rounded-2xl shadow-2xl max-w-full h-auto object-cover border-4 border-indigo-500/20 photo-background-blend" width="350" height="450" onerror="this.onerror=null;this.src='assets/images/lr1.png';">
                         <!-- Decorative elements -->
                         <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-20"></div>
                     </div>
@@ -183,7 +183,7 @@
         <section id="about" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
             <div class="container mx-auto px-6 max-w-4xl">
                 <div class="section-header flex items-center justify-center mb-8">
-                    <img loading="lazy" src="icons/bitmogi.png" alt="Mrs. Ramirez Bitmoji" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=MR';">
+                    <img loading="lazy" src="assets/images/bitmogi.png" alt="Mrs. Ramirez Bitmoji" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=MR';">
                     <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">About Mrs. Ramirez</h2>
                 </div>
                 <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
@@ -206,7 +206,9 @@
                     <!-- Career and Financial Management section will be added after tables by JS -->
                     <div id="career-management-section">
                         <div class="section-header flex items-center justify-center mb-4 mt-8">
-                            <img loading="lazy" src="icons/money.png" alt="Money Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=$';">
+                            <div class="w-12 h-12 mr-4 rounded-full bg-indigo-600 flex items-center justify-center">
+                                <i class="fas fa-dollar-sign text-white text-xl"></i>
+                            </div>
                             <h3 class="text-3xl font-semibold text-center">Integrated Career and Financial Management</h3>
                         </div>
                         <p class="mb-4 text-lg leading-relaxed">Throughout the pathway, students will engage in modules focusing on:</p>
@@ -225,7 +227,7 @@
         <section id="teacher-tools" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="section-header flex items-center justify-center mb-8">
-                    <img loading="lazy" src="icons/html5-icon.svg" alt="Tools Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Tools';">
+                    <img loading="lazy" src="assets/images/html5-icon.svg" alt="Tools Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Tools';">
                     <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Teacher Tools & Resources</h2>
                 </div>
                 <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
@@ -348,7 +350,7 @@
         <section id="certifications" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
             <div class="container mx-auto px-6 max-w-4xl">
                 <div class="section-header flex items-center justify-center mb-8">
-                    <img loading="lazy" src="icons/web.png" alt="Certification Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Cert';">
+                    <img loading="lazy" src="assets/images/web.png" alt="Certification Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Cert';">
                     <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Student Certifications</h2>
                 </div>
                 <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
@@ -367,7 +369,7 @@
         <section id="competitions" class="section min-h-screen flex items-center justify-center bg-gray-900 text-white py-16">
             <div class="container mx-auto px-6 max-w-4xl">
                 <div class="section-header flex items-center justify-center mb-8">
-                    <img loading="lazy" src="icons/gamedev-icon.svg" alt="Competition Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Comp';">
+                    <img loading="lazy" src="assets/images/gamedev-icon.svg" alt="Competition Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Comp';">
                     <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Annual Competitions</h2>
                 </div>
                 <div class="content-block bg-gray-800 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
@@ -386,7 +388,7 @@
         <section id="strategies" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
             <div class="container mx-auto px-6 max-w-4xl">
                 <div class="section-header flex items-center justify-center mb-8">
-                    <img loading="lazy" src="icons/me.png" alt="Strategy Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Strat';">
+                    <img loading="lazy" src="assets/images/me.png" alt="Strategy Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Strat';">
                     <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Instructional Strategies: Collaboration, Feedback & Iterative Design</h2>
                 </div>
                 <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
@@ -408,7 +410,7 @@
         <section id="portfolio" class="section min-h-screen flex items-center justify-center bg-gray-900 text-white py-16">
             <div class="container mx-auto px-6 max-w-4xl">
                 <div class="section-header flex items-center justify-center mb-8">
-                    <img loading="lazy" src="icons/softEng.png" alt="Software Portfolio Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Portfolio';">
+                    <img loading="lazy" src="assets/images/softEng.png" alt="Software Portfolio Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Portfolio';">
                     <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Student Portfolios</h2>
                 </div>
                 <div class="content-block bg-gray-800 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
@@ -429,7 +431,7 @@
         <section id="grading" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
             <div class="container mx-auto px-6 max-w-4xl">
                 <div class="section-header flex items-center justify-center mb-8">
-                    <img loading="lazy" data-src="icons/grades.png" alt="Grading Icon" class="lazy w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Error';">
+                    <img loading="lazy" src="assets/images/grades.png" alt="Grading Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Grade';">
                     <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Grading Policy & Expectations</h2>
                 </div>
                 <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
@@ -458,7 +460,7 @@
         <section id="resources" class="section min-h-screen flex items-center justify-center bg-gray-900 text-white py-16">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="section-header flex items-center justify-center mb-8">
-                    <img loading="lazy" src="icons/html5-icon.svg" alt="Resources Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Tools';">
+                    <img loading="lazy" src="assets/images/html5-icon.svg" alt="Resources Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Tools';">
                     <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Key Resources & Tools</h2>
                 </div>
                 <div class="content-block bg-gray-800 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
@@ -584,7 +586,7 @@
         <section id="contact" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
             <div class="container mx-auto px-6 max-w-4xl">
                 <div class="section-header flex items-center justify-center mb-8">
-                    <img loading="lazy" src="icons/contact.png" alt="Contact Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Contact';">
+                    <img loading="lazy" src="assets/images/contact.png" alt="Contact Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Contact';">
                     <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Contact Mrs. Ramirez</h2>
                 </div>
                 <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
@@ -624,10 +626,10 @@
 
     <!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="js/jquery.js"></script>
-    <script src="js/scrollify.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/scrollify.js"></script>
     <!-- Curriculum Data Loader -->
-    <script src="js/curriculum-loader.js"></script>
+    <script src="assets/js/curriculum-loader.js"></script>
     <!-- Custom JavaScript -->
     <script src="script.js"></script>
 </body>
