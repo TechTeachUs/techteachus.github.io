@@ -927,8 +927,8 @@ function updateNavigationButtons(containerId) {
 
 // --- Enhanced Password Protection for Teacher Tools ---
 function accessTool(toolUrl) {
-    // Enhanced obfuscated password (multi-layer encoding)
-    const superObfuscatedPassword = "VmRXVmtGVU9EMUJNaFRVWldKaFZnM0Q=";
+    // Simple Base64 encoded password: "TechTeach2008!?"
+    const encryptedPassword = "VGVjaFRlYWNoMjAwOCE/";
     
     const password = prompt("🔒 Teacher Access Required\n\nPlease enter the teacher password:");
     
@@ -937,33 +937,16 @@ function accessTool(toolUrl) {
         return;
     }
     
-    // Enhanced verification with obfuscation
-    let decodedPassword = null;
-    try {
-        if (window.SecurityManager) {
-            decodedPassword = SecurityManager.deobfuscatePassword(superObfuscatedPassword);
-        } else {
-            // Fallback decoding
-            const step1 = atob(superObfuscatedPassword);
-            const step2 = step1.split('').reverse().join('');
-            decodedPassword = atob(step2);
-        }
-    } catch (e) {
-        console.warn('Security module error');
-        return;
-    }
+    // Simple Base64 comparison
+    const hashedInput = btoa(password);
     
-    if (password === decodedPassword) {
+    if (hashedInput === encryptedPassword) {
         // Add time-based verification to prevent replay attacks
         const currentHour = new Date().getHours();
-        if (currentHour >= 6 && currentHour <= 18) { // School hours: 6 AM to 6 PM
+        if (currentHour >= 6 && currentHour <= 20) { // School hours: 6 AM to 8 PM
             window.open(toolUrl, '_blank');
-            // Clear password from memory
-            setTimeout(() => {
-                decodedPassword = null;
-            }, 100);
         } else {
-            alert("🕒 Teacher tools are only accessible during school hours (6 AM - 6 PM).\n\nContact Mrs. Ramirez if you need after-hours access.");
+            alert("🕒 Teacher tools are only accessible during school hours (6 AM - 8 PM).\n\nContact Mrs. Ramirez if you need after-hours access.");
         }
     } else {
         // Incorrect password - add delay to prevent brute force
@@ -1032,8 +1015,8 @@ function showCustomModal(message, isPrompt = false, defaultValue = '') {
 
 // Enhanced password protection with better UX and security
 async function accessToolEnhanced(toolUrl) {
-    // Enhanced obfuscated password storage
-    const superObfuscatedPassword = "VmRXVmtGVU9EMUJNaFRVWldKaFZnM0Q=";
+    // Simple Base64 encoded password: "TechTeach2008!?"
+    const encryptedPassword = "VGVjaFRlYWNoMjAwOCE/";
     
     const password = await showCustomModal("🔒 Teacher Access Required\n\nPlease enter the teacher password:", true);
     
@@ -1046,29 +1029,16 @@ async function accessToolEnhanced(toolUrl) {
     await showCustomModal("🔍 Verifying credentials...");
     
     // Simulate server verification delay
-    await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Enhanced decoding
-    let decodedPassword = null;
-    try {
-        if (window.SecurityManager) {
-            decodedPassword = SecurityManager.deobfuscatePassword(superObfuscatedPassword);
-        } else {
-            const step1 = atob(superObfuscatedPassword);
-            const step2 = step1.split('').reverse().join('');
-            decodedPassword = atob(step2);
-        }
-    } catch (e) {
-        await showCustomModal("🚫 Security verification failed. Please refresh and try again.");
-        return;
-    }
+    const hashedInput = btoa(password);
     
-    if (password === decodedPassword) {
+    if (hashedInput === encryptedPassword) {
         // Time-based access control
         const currentHour = new Date().getHours();
         const currentDay = new Date().getDay(); // 0 = Sunday, 6 = Saturday
         
-        if ((currentDay >= 1 && currentDay <= 5) && (currentHour >= 6 && currentHour <= 18)) {
+        if ((currentDay >= 1 && currentDay <= 5) && (currentHour >= 6 && currentHour <= 20)) {
             // School days and hours
             await showCustomModal("✅ Access granted! Opening tool...");
             window.open(toolUrl, '_blank');
@@ -1077,7 +1047,7 @@ async function accessToolEnhanced(toolUrl) {
             await showCustomModal("🗓️ Weekend access requires special authorization.\n\nPlease contact Mrs. Ramirez for weekend access codes.");
         } else {
             // After hours
-            await showCustomModal("🕒 Teacher tools are only accessible during school hours (6 AM - 6 PM, Mon-Fri).\n\nContact Mrs. Ramirez for emergency access.");
+            await showCustomModal("🕒 Teacher tools are only accessible during school hours (6 AM - 8 PM, Mon-Fri).\n\nContact Mrs. Ramirez for emergency access.");
         }
     } else {
         // Incorrect password with progressive delays
@@ -1099,7 +1069,8 @@ async function accessToolEnhanced(toolUrl) {
 
 // --- Teacher Tools Page Access ---
 async function accessTeacherToolsPage() {
-    const superObfuscatedPassword = "VmRXVmtGVU9EMUJNaFRVWldKaFZnM0Q="; // Enhanced encoding
+    // Simple Base64 encoded password: "TechTeach2008!?"
+    const encryptedPassword = "VGVjaFRlYWNoMjAwOCE/";
     
     const password = await showCustomModal("🔒 Teacher Access Required\n\nPlease enter the teacher password to access curriculum tools:", true);
     
@@ -1110,24 +1081,11 @@ async function accessTeacherToolsPage() {
     
     // Add verification delay
     await showCustomModal("🔍 Authenticating...");
-    await new Promise(resolve => setTimeout(resolve, 1200 + Math.random() * 800));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Enhanced decoding
-    let decodedPassword = null;
-    try {
-        if (window.SecurityManager) {
-            decodedPassword = SecurityManager.deobfuscatePassword(superObfuscatedPassword);
-        } else {
-            const step1 = atob(superObfuscatedPassword);
-            const step2 = step1.split('').reverse().join('');
-            decodedPassword = atob(step2);
-        }
-    } catch (e) {
-        await showCustomModal("🚫 Authentication system error. Please refresh and try again.");
-        return;
-    }
+    const hashedInput = btoa(password);
     
-    if (password === decodedPassword) {
+    if (hashedInput === encryptedPassword) {
         // Correct password - check time restrictions
         const now = new Date();
         const currentHour = now.getHours();
@@ -1164,7 +1122,8 @@ async function accessTeacherToolsPage() {
 
 // --- Teacher Tools Section Access ---
 async function accessTeacherTools() {
-    const superObfuscatedPassword = "VmRXVmtGVU9EMUJNaFRVWldKaFZnM0Q="; // Enhanced encoding
+    // Simple Base64 encoded password: "TechTeach2008!?"
+    const encryptedPassword = "VGVjaFRlYWNoMjAwOCE/";
     
     const password = await showCustomModal("🔒 Teacher Access Required\n\nPlease enter the teacher password to access curriculum tools:", true);
     
@@ -1173,22 +1132,9 @@ async function accessTeacherTools() {
         return;
     }
     
-    // Enhanced decoding
-    let decodedPassword = null;
-    try {
-        if (window.SecurityManager) {
-            decodedPassword = SecurityManager.deobfuscatePassword(superObfuscatedPassword);
-        } else {
-            const step1 = atob(superObfuscatedPassword);
-            const step2 = step1.split('').reverse().join('');
-            decodedPassword = atob(step2);
-        }
-    } catch (e) {
-        await showCustomModal("🚫 Security verification failed. Please refresh and try again.");
-        return;
-    }
+    const hashedInput = btoa(password);
     
-    if (password === decodedPassword) {
+    if (hashedInput === encryptedPassword) {
         // Additional verification: Check for teacher browser fingerprint
         const browserInfo = {
             userAgent: navigator.userAgent.substring(0, 50), // Truncated for privacy
