@@ -1024,6 +1024,26 @@ async function accessToolEnhanced(toolUrl) {
     }
 }
 
+// --- Teacher Tools Page Access ---
+async function accessTeacherToolsPage() {
+    const teacherPassword = "TechTeach2025"; // Change this to your desired password
+    
+    const password = await showCustomModal("🔒 Teacher Access Required\n\nPlease enter the teacher password to access curriculum tools:", true);
+    
+    if (password === null) {
+        // User cancelled
+        return;
+    }
+    
+    if (password === teacherPassword) {
+        // Correct password - open the main lesson viewer
+        window.open('LPS-github.html', '_blank');
+    } else {
+        // Incorrect password
+        await showCustomModal("❌ Incorrect password. Access denied.\n\nPlease contact Mrs. Ramirez if you need access to teacher tools.");
+    }
+}
+
 // --- Teacher Tools Section Access ---
 async function accessTeacherTools() {
     const teacherPassword = "TechTeach2025"; // Change this to your desired password

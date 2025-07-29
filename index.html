@@ -483,42 +483,15 @@
     <footer class="bg-gray-900 text-white py-6">
         <div class="container mx-auto px-6 text-center text-sm">
             <small>Made by Luna R. 2023 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="text-indigo-300 hover:underline" target="_blank">CC BY-NC-SA 4.0</a></small>
+            
+            <!-- Teacher Tools Access Button -->
+            <div class="mt-4">
+                <button onclick="accessTeacherToolsPage()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md transition-colors duration-300 shadow-md text-sm">
+                    <i class="fas fa-tools mr-1"></i>Teacher Tools
+                </button>
+            </div>
         </div>
     </footer>
-
-    <!-- Teacher Tools & Resources Section (Hidden/Administrative) -->
-    <section id="teacher-tools" class="section min-h-screen flex items-center justify-center bg-gray-800 text-white py-16">
-        <div class="container mx-auto px-6 max-w-6xl">
-            <div class="section-header flex items-center justify-center mb-8">
-                <img loading="lazy" src="assets/images/html5-icon.svg" alt="Tools Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Tools';">
-                <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Teacher Tools & Resources</h2>
-            </div>
-            
-            <!-- Password Access Button -->
-            <div id="teacher-tools-access" class="text-center mb-8">
-                <div class="bg-gray-700 p-8 rounded-lg shadow-xl">
-                    <div class="flex items-center justify-center mb-6">
-                        <div class="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center mr-4">
-                            <i class="fas fa-lock text-white text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-semibold text-orange-300">Restricted Access</h3>
-                            <p class="text-gray-300">Teacher credentials required</p>
-                        </div>
-                    </div>
-                    <p class="text-lg text-gray-300 mb-6">This section contains curriculum management tools and resources for authorized educators only.</p>
-                    <button onclick="accessTeacherTools()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 shadow-lg">
-                        <i class="fas fa-unlock mr-2"></i>Access Teacher Tools
-                    </button>
-                </div>
-            </div>
-
-            <!-- Hidden Tools Content -->
-            <div id="teacher-tools-content" class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp hidden" data-delay="200ms">
-                <!-- Content will be loaded dynamically after password authentication -->
-            </div>
-        </div>
-    </section>
 
     <!-- Animation Trigger Button (fallback) -->
     <button id="animation-trigger" class="animation-trigger" onclick="triggerNameAnimation()">🎬 Play Name Animation</button>
