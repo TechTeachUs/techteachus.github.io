@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Pages - Lesson Plan Selector</title>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -276,6 +278,68 @@
             margin: 20px;
             border: 1px solid #bee5eb;
         }
+
+        /* Teacher Tools Navigation Styles */
+        .teacher-tools-nav {
+            background: #f8f9fa;
+            padding: 25px;
+            border-bottom: 2px solid #e9ecef;
+            margin: 0;
+        }
+
+        .teacher-tools-nav h3 {
+            color: #495057;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .teacher-tools-nav p {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tool-link:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .tool-link i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -283,6 +347,38 @@
         <div class="header">
             <h1>📚 Lesson Plan Selector</h1>
             <p>GitHub Pages Compatible Version - Choose your unit and day</p>
+        </div>
+
+        <!-- Teacher Tools & Resources Navigation -->
+        <div class="teacher-tools-nav">
+            <h3><i class="fas fa-tools"></i> Teacher Tools & Resources</h3>
+            <p>Access all curriculum management tools and resources from here:</p>
+            <div class="tools-grid">
+                <a href="tools/lesson-editor-github.html" class="tool-link" target="_blank">
+                    <i class="fas fa-edit"></i>
+                    <span>Lesson Editor</span>
+                </a>
+                <a href="tools/validation-tool.html" class="tool-link" target="_blank">
+                    <i class="fas fa-search"></i>
+                    <span>Data Validator</span>
+                </a>
+                <a href="tools/missing-lessons-report.html" class="tool-link" target="_blank">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Missing Lessons Report</span>
+                </a>
+                <a href="tools/lesson-editor.html" class="tool-link" target="_blank">
+                    <i class="fas fa-cog"></i>
+                    <span>Local Lesson Editor</span>
+                </a>
+                <a href="LPS.html" class="tool-link" target="_blank">
+                    <i class="fas fa-book"></i>
+                    <span>Local Lesson Viewer</span>
+                </a>
+                <a href="templates/" class="tool-link" target="_blank">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Templates & Docs</span>
+                </a>
+            </div>
         </div>
 
         <div class="github-note">
