@@ -230,118 +230,29 @@
                     <img loading="lazy" src="assets/images/html5-icon.svg" alt="Tools Icon" class="w-12 h-12 mr-4 rounded-full p-1 bg-indigo-600" onerror="this.onerror=null;this.src='https://placehold.co/50x50/6366F1/FFFFFF?text=Tools';">
                     <h2 class="works__title text-4xl font-bold text-center animated fadeInUp">Teacher Tools & Resources</h2>
                 </div>
-                <div class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp" data-delay="200ms">
-                    
-                    <!-- Public Tools Section -->
-                    <div class="public-tools mb-8">
-                        <h3 class="text-2xl font-semibold mb-6 text-green-300">📖 Student Access</h3>
-                        <div class="tools-grid grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="tool-card bg-gray-600 p-6 rounded-lg hover:bg-gray-500 transition-colors duration-300">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center mr-4">
-                                        <i class="fas fa-book-open text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="text-xl font-semibold">Lesson Plan Viewer</h4>
-                                </div>
-                                <p class="text-gray-300 mb-4">Browse and view lesson plans by unit and day. See daily agendas, objectives, and materials.</p>
-                                <a href="LPS-github.html" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
-                                    View Lessons →
-                                </a>
+                
+                <!-- Password Access Button -->
+                <div id="teacher-tools-access" class="text-center mb-8">
+                    <div class="bg-gray-700 p-8 rounded-lg shadow-xl">
+                        <div class="flex items-center justify-center mb-6">
+                            <div class="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center mr-4">
+                                <i class="fas fa-lock text-white text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-semibold text-orange-300">Restricted Access</h3>
+                                <p class="text-gray-300">Teacher credentials required</p>
                             </div>
                         </div>
+                        <p class="text-lg text-gray-300 mb-6">This section contains curriculum management tools and resources for authorized educators only.</p>
+                        <button onclick="accessTeacherTools()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 shadow-lg">
+                            <i class="fas fa-unlock mr-2"></i>Access Teacher Tools
+                        </button>
                     </div>
+                </div>
 
-                    <!-- Protected Tools Section -->
-                    <div class="protected-tools">
-                        <h3 class="text-2xl font-semibold mb-6 text-orange-300">🔒 Teacher Tools (Password Protected)</h3>
-                        <div class="tools-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            
-                            <div class="tool-card bg-gray-600 p-6 rounded-lg hover:bg-gray-500 transition-colors duration-300">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center mr-4">
-                                        <i class="fas fa-edit text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="text-xl font-semibold">Lesson Editor</h4>
-                                </div>
-                                <p class="text-gray-300 mb-4">Edit lesson plans, fill in missing data, export PDFs, and download updated curriculum files.</p>
-                                <button onclick="accessTool('tools/lesson-editor-github.html')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
-                                    🔒 Access Editor
-                                </button>
-                            </div>
-
-                            <div class="tool-card bg-gray-600 p-6 rounded-lg hover:bg-gray-500 transition-colors duration-300">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center mr-4">
-                                        <i class="fas fa-search text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="text-xl font-semibold">Data Validator</h4>
-                                </div>
-                                <p class="text-gray-300 mb-4">Validate lesson data completeness and generate templates for missing lessons.</p>
-                                <button onclick="accessTool('tools/validation-tool.html')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
-                                    🔒 Access Validator
-                                </button>
-                            </div>
-
-                            <div class="tool-card bg-gray-600 p-6 rounded-lg hover:bg-gray-500 transition-colors duration-300">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center mr-4">
-                                        <i class="fas fa-chart-bar text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="text-xl font-semibold">Missing Lessons Report</h4>
-                                </div>
-                                <p class="text-gray-300 mb-4">Visual report showing which lessons need completion and detailed missing data analysis.</p>
-                                <button onclick="accessTool('tools/missing-lessons-report.html')" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
-                                    🔒 Access Report
-                                </button>
-                            </div>
-
-                            <div class="tool-card bg-gray-600 p-6 rounded-lg hover:bg-gray-500 transition-colors duration-300">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center mr-4">
-                                        <i class="fas fa-cog text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="text-xl font-semibold">Local Lesson Editor</h4>
-                                </div>
-                                <p class="text-gray-300 mb-4">Local development version with external JSON file loading (requires server).</p>
-                                <button onclick="accessTool('tools/lesson-editor.html')" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
-                                    🔒 Access Local Editor
-                                </button>
-                            </div>
-
-                            <div class="tool-card bg-gray-600 p-6 rounded-lg hover:bg-gray-500 transition-colors duration-300">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-full bg-indigo-500 flex items-center justify-center mr-4">
-                                        <i class="fas fa-book text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="text-xl font-semibold">Local Lesson Viewer</h4>
-                                </div>
-                                <p class="text-gray-300 mb-4">Local development version of lesson plan selector (requires server).</p>
-                                <button onclick="accessTool('LPS.html')" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
-                                    🔒 Access Local Viewer
-                                </button>
-                            </div>
-
-                            <div class="tool-card bg-gray-600 p-6 rounded-lg hover:bg-gray-500 transition-colors duration-300">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-full bg-teal-500 flex items-center justify-center mr-4">
-                                        <i class="fas fa-file-alt text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="text-xl font-semibold">Templates & Docs</h4>
-                                </div>
-                                <p class="text-gray-300 mb-4">Access lesson templates, documentation, and reference materials.</p>
-                                <button onclick="accessTool('templates/')" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
-                                    🔒 Access Templates
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 p-4 bg-gray-800 rounded-lg border-l-4 border-blue-500">
-                        <p class="text-sm text-gray-300">
-                            <i class="fas fa-info-circle text-blue-400 mr-2"></i>
-                            <strong>Note:</strong> Protected tools require teacher access credentials. Students can freely access the Lesson Plan Viewer to follow along with daily curriculum.
-                        </p>
-                    </div>
+                <!-- Hidden Tools Content -->
+                <div id="teacher-tools-content" class="content-block bg-gray-700 p-8 rounded-lg shadow-xl animated fadeInUp hidden" data-delay="200ms">
+                    <!-- Content will be loaded dynamically after password authentication -->
                 </div>
             </div>
         </section>
