@@ -6,6 +6,8 @@
     <title>GitHub Pages - Lesson Plan Selector</title>
     <!-- Font Awesome CDN for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- HTML2PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -340,6 +342,94 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .container {
+                box-shadow: none !important;
+                max-width: none !important;
+                margin: 0 !important;
+            }
+            
+            .header, .controls, .teacher-tools-nav, .github-note {
+                display: none !important;
+            }
+            
+            .lesson-content {
+                padding: 0 !important;
+            }
+            
+            .lesson-plan {
+                display: block !important;
+            }
+            
+            .lesson-header {
+                background: #667eea !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            .section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+            
+            .action-buttons {
+                display: none !important;
+            }
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .action-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .print-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .print-btn:hover {
+            background: #218838;
+            transform: translateY(-1px);
+        }
+
+        .download-btn {
+            background: #007bff;
+            color: white;
+        }
+
+        .download-btn:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body>
@@ -373,10 +463,6 @@
                 <a href="LPS.html" class="tool-link" target="_blank">
                     <i class="fas fa-book"></i>
                     <span>Local Lesson Viewer</span>
-                </a>
-                <a href="templates/" class="tool-link" target="_blank">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Templates & Docs</span>
                 </a>
             </div>
         </div>
@@ -536,6 +622,17 @@
 
                 const html = `
                     <div class="lesson-plan active">
+                        <div class="action-buttons">
+                            <button class="action-btn print-btn" onclick="window.print()">
+                                <i class="fas fa-print"></i>
+                                Print Lesson Plan
+                            </button>
+                            <button class="action-btn download-btn" onclick="lessonSelector.downloadPDF()">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </button>
+                        </div>
+                        
                         <div class="lesson-header">
                             <h2>${lesson.lesson}</h2>
                             <div class="meta">
@@ -710,11 +807,70 @@
                     </div>
                 `;
             }
+
+            downloadPDF() {
+                const lesson = this.getCurrentDisplayedLesson();
+                if (!lesson) {
+                    alert('No lesson plan is currently displayed');
+                    return;
+                }
+
+                const unit = this.getUnit(this.unitSelect.value);
+                const filename = `Unit_${unit.unitNumber}_Day_${lesson.day}_${lesson.lesson.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
+                
+                // Get the lesson plan content
+                const element = document.querySelector('.lesson-plan.active');
+                if (!element) {
+                    alert('No lesson plan content found');
+                    return;
+                }
+
+                // Clone the element to avoid modifying the original
+                const clonedElement = element.cloneNode(true);
+                
+                // Remove action buttons from the cloned element
+                const actionButtons = clonedElement.querySelector('.action-buttons');
+                if (actionButtons) {
+                    actionButtons.remove();
+                }
+
+                // Configure PDF options
+                const opt = {
+                    margin: [10, 10, 10, 10],
+                    filename: filename,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { 
+                        scale: 2,
+                        useCORS: true,
+                        letterRendering: true
+                    },
+                    jsPDF: { 
+                        unit: 'mm', 
+                        format: 'a4', 
+                        orientation: 'portrait' 
+                    },
+                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                };
+
+                // Generate and download PDF
+                html2pdf().set(opt).from(clonedElement).save();
+            }
+
+            getCurrentDisplayedLesson() {
+                const unitNumber = this.unitSelect.value;
+                const dayNumber = this.daySelect.value;
+                
+                if (unitNumber && dayNumber) {
+                    return this.getLesson(unitNumber, dayNumber);
+                }
+                return null;
+            }
         }
 
         // Initialize the application when the page loads
+        let lessonSelector;
         document.addEventListener('DOMContentLoaded', () => {
-            new LessonPlanSelector();
+            lessonSelector = new LessonPlanSelector();
         });
     </script>
 </body>

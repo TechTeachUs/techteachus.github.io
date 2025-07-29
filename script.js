@@ -1158,19 +1158,6 @@ async function accessTeacherTools() {
                                     🔒 Access Local Viewer
                                 </button>
                             </div>
-
-                            <div class="tool-card bg-gray-600 p-6 rounded-lg hover:bg-gray-500 transition-colors duration-300">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-full bg-teal-500 flex items-center justify-center mr-4">
-                                        <i class="fas fa-file-alt text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="text-xl font-semibold">Templates & Docs</h4>
-                                </div>
-                                <p class="text-gray-300 mb-4">Access lesson templates, documentation, and reference materials.</p>
-                                <button onclick="accessTool('templates/')" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
-                                    🔒 Access Templates
-                                </button>
-                            </div>
                         </div>
                     </div>
 
