@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Data Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 20px;
+            align-items: end;
+        }
+
+        .dropdown-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dropdown-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+
+        select, input, textarea {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 30px;
+            font-weight: 500;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            height: calc(100vh - 300px);
+        }
+
+        .lesson-list {
+            background: #f8f9fa;
+            border-right: 1px solid #e9ecef;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .lesson-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .lesson-item:hover {
+            background: #e9ecef;
+        }
+
+        .lesson-item.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .lesson-item.incomplete {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .lesson-item.empty {
+            border-left-color: #ffc107;
+            background: #fff3cd;
+        }
+
+        .lesson-item.complete {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+
+        .lesson-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .lesson-meta {
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+
+        .editor-form {
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .objectives-container {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .objective-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .objective-item input {
+            flex: 1;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .empty-state .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #28a745;
+            transition: width 0.3s ease;
+        }
+
+        .download-section {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .editor-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .lesson-list {
+                height: 300px;
+            }
+            
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .assessment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 Lesson Data Editor</h1>
+            <p>Fill in missing lesson information directly through the web interface</p>
+        </div>
+
+        <div class="controls">
+            <div class="dropdown-group">
+                <label for="unit-filter">Filter by Unit:</label>
+                <select id="unit-filter">
+                    <option value="">All Units</option>
+                </select>
+            </div>
+            
+            <div class="dropdown-group">
+                <label for="status-filter">Filter by Status:</label>
+                <select id="status-filter">
+                    <option value="">All Lessons</option>
+                    <option value="incomplete">Incomplete Only</option>
+                    <option value="empty">Empty Only</option>
+                    <option value="complete">Complete Only</option>
+                </select>
+            </div>
+            
+            <div class="dropdown-group">
+                <label>&nbsp;</label>
+                <button class="btn btn-warning" onclick="resetFilters()">Reset Filters</button>
+            </div>
+            
+            <div class="dropdown-group">
+                <label>&nbsp;</label>
+                <button class="btn btn-success" onclick="validateData()">Validate All</button>
+            </div>
+        </div>
+
+        <div id="status" class="status" style="display: none;"></div>
+
+        <div class="editor-container">
+            <div class="lesson-list" id="lesson-list">
+                <div class="empty-state">
+                    <div class="icon">📚</div>
+                    <h3>Loading Lessons...</h3>
+                </div>
+            </div>
+
+            <div class="editor-form" id="editor-form">
+                <div class="empty-state">
+                    <div class="icon">👈</div>
+                    <h3>Select a Lesson to Edit</h3>
+                    <p>Choose a lesson from the list to start editing its content.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <div>
+                <strong>Progress:</strong> <span id="progress-text">0 of 0 lessons complete</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" onclick="downloadJSON()">📥 Download Updated JSON</button>
+                <button class="btn btn-success" onclick="exportAsTemplate()">📋 Export as Template</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let lessonData = null;
+        let currentUnit = null;
+        let currentLesson = null;
+        let filteredLessons = [];
+
+        const REQUIRED_FIELDS = [
+            'day', 'date', 'lesson', 'enduringUnderstanding', 'essentialQuestion',
+            'objectives', 'agenda', 'materials', 'assessment', 'differentiation'
+        ];
+
+        async function loadData() {
+            try {
+                const response = await fetch('../data/complete_lesson_plan.json');
+                if (!response.ok) throw new Error('Failed to load data');
+                lessonData = await response.json();
+                
+                populateUnitFilter();
+                populateLessonList();
+                updateProgress();
+                showStatus('Data loaded successfully!', 'success');
+            } catch (error) {
+                showStatus('Error loading data: ' + error.message, 'error');
+                console.error('Error loading data:', error);
+            }
+        }
+
+        function populateUnitFilter() {
+            const unitFilter = document.getElementById('unit-filter');
+            unitFilter.innerHTML = '<option value="">All Units</option>';
+            
+            lessonData.curriculum.units.forEach(unit => {
+                const option = document.createElement('option');
+                option.value = unit.unitNumber;
+                option.textContent = `Unit ${unit.unitNumber}: ${unit.unitTitle}`;
+                unitFilter.appendChild(option);
+            });
+        }
+
+        function populateLessonList() {
+            const lessonList = document.getElementById('lesson-list');
+            const unitFilter = document.getElementById('unit-filter').value;
+            const statusFilter = document.getElementById('status-filter').value;
+            
+            filteredLessons = [];
+            let html = '';
+
+            lessonData.curriculum.units.forEach(unit => {
+                if (unitFilter && unit.unitNumber != unitFilter) return;
+                
+                unit.lessons.forEach((lesson, index) => {
+                    const status = getLessonStatus(lesson);
+                    if (statusFilter && status !== statusFilter) return;
+                    
+                    const lessonInfo = {
+                        unit: unit,
+                        lesson: lesson,
+                        index: index,
+                        status: status
+                    };
+                    
+                    filteredLessons.push(lessonInfo);
+                    
+                    const completionPercent = getCompletionPercent(lesson);
+                    
+                    html += `
+                        <div class="lesson-item ${status}" onclick="selectLesson(${filteredLessons.length - 1})">
+                            <div class="lesson-title">
+                                Unit ${unit.unitNumber} - Day ${lesson.day || index + 1}
+                            </div>
+                            <div class="lesson-meta">
+                                ${lesson.lesson || 'No title'}
+                            </div>
+                            <div class="lesson-meta">
+                                ${completionPercent}% complete
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+
+            if (html) {
+                lessonList.innerHTML = html;
+            } else {
+                lessonList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">🔍</div>
+                        <h3>No Lessons Found</h3>
+                        <p>Try adjusting your filters.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function getLessonStatus(lesson) {
+            const missingFields = REQUIRED_FIELDS.filter(field => 
+                !lesson || !lesson[field] || lesson[field] === null || lesson[field] === ''
+            );
+            
+            if (missingFields.length === 0) return 'complete';
+            if (missingFields.length >= REQUIRED_FIELDS.length - 1) return 'empty';
+            return 'incomplete';
+        }
+
+        function getCompletionPercent(lesson) {
+            const presentFields = REQUIRED_FIELDS.filter(field => 
+                lesson && lesson[field] && lesson[field] !== null && lesson[field] !== ''
+            );
+            return Math.round((presentFields.length / REQUIRED_FIELDS.length) * 100);
+        }
+
+        function selectLesson(index) {
+            if (index >= filteredLessons.length) return;
+            
+            // Remove active class from all lessons
+            document.querySelectorAll('.lesson-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to selected lesson
+            document.querySelectorAll('.lesson-item')[index].classList.add('active');
+            
+            const lessonInfo = filteredLessons[index];
+            currentUnit = lessonInfo.unit;
+            currentLesson = lessonInfo.lesson;
+            
+            populateEditor(lessonInfo.lesson);
+        }
+
+        function populateEditor(lesson) {
+            const editorForm = document.getElementById('editor-form');
+            
+            const objectives = lesson.objectives || ['', '', ''];
+            const materials = lesson.materials || { teacher: '', student: '', links: '' };
+            const assessment = lesson.assessment || { formative: '', summative: '' };
+            
+            editorForm.innerHTML = `
+                <h2>Editing: Unit ${currentUnit.unitNumber} - Day ${lesson.day || 'TBD'}</h2>
+                
+                <div class="form-group">
+                    <label for="lesson-day">Day Number:</label>
+                    <input type="number" id="lesson-day" value="${lesson.day || ''}" placeholder="e.g., 1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="lesson-date">Date:</label>
+                    <input type="text" id="lesson-date" value="${lesson.date || ''}" placeholder="e.g., Mon, 09 08, 25">
+                </div>
+                
+                <div class="form-group">
+                    <label for="lesson-title">Lesson Title:</label>
+                    <input type="text" id="lesson-title" value="${lesson.lesson || ''}" placeholder="Enter lesson title">
+                </div>
+                
+                <div class="form-group">
+                    <label for="enduring-understanding">Enduring Understanding:</label>
+                    <textarea id="enduring-understanding" placeholder="Core concept students should remember long-term">${lesson.enduringUnderstanding || ''}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="essential-question">Essential Question:</label>
+                    <textarea id="essential-question" placeholder="Thought-provoking question that guides the lesson">${lesson.essentialQuestion || ''}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Learning Objectives:</label>
+                    <div class="objectives-container">
+                        <div class="objective-item">
+                            <input type="text" id="objective-1" value="${objectives[0] || ''}" placeholder="Learning objective 1">
+                            <button type="button" class="btn btn-primary" onclick="addObjective()">+</button>
+                        </div>
+                        <div class="objective-item">
+                            <input type="text" id="objective-2" value="${objectives[1] || ''}" placeholder="Learning objective 2">
+                        </div>
+                        <div class="objective-item">
+                            <input type="text" id="objective-3" value="${objectives[2] || ''}" placeholder="Learning objective 3">
+                        </div>
+                        ${objectives.slice(3).map((obj, i) => `
+                            <div class="objective-item">
+                                <input type="text" id="objective-${i + 4}" value="${obj}" placeholder="Learning objective ${i + 4}">
+                                <button type="button" class="btn btn-danger" onclick="removeObjective(${i + 4})">×</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="agenda">Lesson Agenda:</label>
+                    <textarea id="agenda" placeholder="Time-based agenda (e.g., '(5m) Do Now: Activity (20m) Mini-Lesson: Topic')">${lesson.agenda || ''}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Materials:</label>
+                    <div class="materials-grid">
+                        <div>
+                            <label for="materials-teacher">Teacher Materials:</label>
+                            <textarea id="materials-teacher" placeholder="What the teacher needs">${materials.teacher || ''}</textarea>
+                        </div>
+                        <div>
+                            <label for="materials-student">Student Materials:</label>
+                            <textarea id="materials-student" placeholder="What students need">${materials.student || ''}</textarea>
+                        </div>
+                        <div>
+                            <label for="materials-links">Links & Resources:</label>
+                            <textarea id="materials-links" placeholder="Online resources, websites">${materials.links || ''}</textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Assessment:</label>
+                    <div class="assessment-grid">
+                        <div>
+                            <label for="assessment-formative">Formative Assessment:</label>
+                            <textarea id="assessment-formative" placeholder="How you'll check understanding during lesson">${assessment.formative || ''}</textarea>
+                        </div>
+                        <div>
+                            <label for="assessment-summative">Summative Assessment:</label>
+                            <textarea id="assessment-summative" placeholder="How you'll evaluate learning at the end">${assessment.summative || ''}</textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="differentiation">Differentiation:</label>
+                    <textarea id="differentiation" placeholder="Support: How you'll help struggling students. Challenge: How you'll extend learning for advanced students.">${lesson.differentiation || ''}</textarea>
+                </div>
+                
+                <div style="margin-top: 30px; display: flex; gap: 15px;">
+                    <button class="btn btn-success" onclick="saveLesson()">💾 Save Lesson</button>
+                    <button class="btn btn-primary" onclick="saveAndNext()">💾 Save & Next</button>
+                    <button class="btn btn-warning" onclick="previewLesson()">👀 Preview</button>
+                </div>
+            `;
+        }
+
+        function addObjective() {
+            const container = document.querySelector('.objectives-container');
+            const objectiveCount = container.querySelectorAll('.objective-item').length + 1;
+            
+            const newObjective = document.createElement('div');
+            newObjective.className = 'objective-item';
+            newObjective.innerHTML = `
+                <input type="text" id="objective-${objectiveCount}" placeholder="Learning objective ${objectiveCount}">
+                <button type="button" class="btn btn-danger" onclick="removeObjective(${objectiveCount})">×</button>
+            `;
+            
+            container.appendChild(newObjective);
+        }
+
+        function removeObjective(index) {
+            const objective = document.getElementById(`objective-${index}`);
+            if (objective) {
+                objective.parentElement.remove();
+            }
+        }
+
+        function saveLesson() {
+            if (!currentLesson || !currentUnit) {
+                showStatus('No lesson selected', 'error');
+                return;
+            }
+
+            // Collect all form data
+            currentLesson.day = parseInt(document.getElementById('lesson-day').value) || null;
+            currentLesson.date = document.getElementById('lesson-date').value;
+            currentLesson.lesson = document.getElementById('lesson-title').value;
+            currentLesson.enduringUnderstanding = document.getElementById('enduring-understanding').value;
+            currentLesson.essentialQuestion = document.getElementById('essential-question').value;
+            currentLesson.agenda = document.getElementById('agenda').value;
+            currentLesson.differentiation = document.getElementById('differentiation').value;
+            
+            // Collect objectives
+            const objectives = [];
+            let i = 1;
+            while (document.getElementById(`objective-${i}`)) {
+                const value = document.getElementById(`objective-${i}`).value.trim();
+                if (value) objectives.push(value);
+                i++;
+            }
+            currentLesson.objectives = objectives;
+            
+            // Collect materials
+            currentLesson.materials = {
+                teacher: document.getElementById('materials-teacher').value,
+                student: document.getElementById('materials-student').value,
+                links: document.getElementById('materials-links').value
+            };
+            
+            // Collect assessment
+            currentLesson.assessment = {
+                formative: document.getElementById('assessment-formative').value,
+                summative: document.getElementById('assessment-summative').value
+            };
+
+            showStatus('Lesson saved successfully!', 'success');
+            populateLessonList(); // Refresh the list to show updated status
+            updateProgress();
+        }
+
+        function saveAndNext() {
+            saveLesson();
+            
+            // Find next incomplete lesson
+            const currentIndex = filteredLessons.findIndex(item => item.lesson === currentLesson);
+            let nextIndex = currentIndex + 1;
+            
+            // Look for next incomplete lesson
+            while (nextIndex < filteredLessons.length) {
+                if (filteredLessons[nextIndex].status !== 'complete') {
+                    selectLesson(nextIndex);
+                    return;
+                }
+                nextIndex++;
+            }
+            
+            showStatus('No more incomplete lessons in current filter!', 'warning');
+        }
+
+        function previewLesson() {
+            saveLesson();
+            const completionPercent = getCompletionPercent(currentLesson);
+            const status = getLessonStatus(currentLesson);
+            
+            alert(`Lesson Preview:\n\nTitle: ${currentLesson.lesson}\nCompletion: ${completionPercent}%\nStatus: ${status}\n\nSaved successfully!`);
+        }
+
+        function resetFilters() {
+            document.getElementById('unit-filter').value = '';
+            document.getElementById('status-filter').value = '';
+            populateLessonList();
+        }
+
+        function validateData() {
+            let totalLessons = 0;
+            let completeLessons = 0;
+            let issues = [];
+
+            lessonData.curriculum.units.forEach(unit => {
+                unit.lessons.forEach((lesson, index) => {
+                    totalLessons++;
+                    const status = getLessonStatus(lesson);
+                    if (status === 'complete') {
+                        completeLessons++;
+                    } else {
+                        const missingFields = REQUIRED_FIELDS.filter(field => 
+                            !lesson || !lesson[field] || lesson[field] === null || lesson[field] === ''
+                        );
+                        issues.push(`Unit ${unit.unitNumber} Day ${lesson.day || index + 1}: Missing ${missingFields.join(', ')}`);
+                    }
+                });
+            });
+
+            const message = `Validation Complete!\n\n${completeLessons}/${totalLessons} lessons are complete.\n\n${issues.length > 0 ? 'Issues found:\n' + issues.slice(0, 5).join('\n') + (issues.length > 5 ? '\n...and ' + (issues.length - 5) + ' more' : '') : 'All lessons are complete!'}`;
+            
+            alert(message);
+            updateProgress();
+        }
+
+        function updateProgress() {
+            let totalLessons = 0;
+            let completeLessons = 0;
+
+            lessonData.curriculum.units.forEach(unit => {
+                unit.lessons.forEach(lesson => {
+                    totalLessons++;
+                    if (getLessonStatus(lesson) === 'complete') {
+                        completeLessons++;
+                    }
+                });
+            });
+
+            const progressPercent = totalLessons > 0 ? Math.round((completeLessons / totalLessons) * 100) : 0;
+            
+            document.getElementById('progress-text').textContent = `${completeLessons} of ${totalLessons} lessons complete (${progressPercent}%)`;
+            document.getElementById('progress-fill').style.width = progressPercent + '%';
+        }
+
+        function downloadJSON() {
+            const dataStr = JSON.stringify(lessonData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = 'updated_lesson_plan.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showStatus('JSON file downloaded successfully!', 'success');
+        }
+
+        function exportAsTemplate() {
+            // Create a template with only complete lessons
+            const templateData = {
+                curriculum: {
+                    course: lessonData.curriculum.course,
+                    schoolYear: lessonData.curriculum.schoolYear,
+                    units: lessonData.curriculum.units.map(unit => ({
+                        unitNumber: unit.unitNumber,
+                        unitTitle: unit.unitTitle,
+                        lessons: unit.lessons.filter(lesson => getLessonStatus(lesson) === 'complete')
+                    })).filter(unit => unit.lessons.length > 0)
+                }
+            };
+            
+            const dataStr = JSON.stringify(templateData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = 'complete_lessons_template.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showStatus('Template exported successfully!', 'success');
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+            
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 5000);
+        }
+
+        // Event listeners
+        document.getElementById('unit-filter').addEventListener('change', populateLessonList);
+        document.getElementById('status-filter').addEventListener('change', populateLessonList);
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>

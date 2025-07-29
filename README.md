@@ -9,8 +9,9 @@ This project is **GitHub Pages compatible**! Here's what works and how to deploy
 ### ✅ What Works on GitHub Pages:
 
 1. **LPS-github.html** - Main lesson plan selector (fully functional)
-2. **index.html** - Landing page
-3. **All static assets** (CSS, JS, icons)
+2. **lesson-editor-github.html** - Lesson data editor (fully functional)
+3. **index.html** - Landing page
+4. **All static assets** (CSS, JS, icons)
 
 ### 🛠️ How to Deploy:
 
@@ -31,7 +32,11 @@ TechTeach/
 │   ├── js/                  # JavaScript files
 │   └── images/              # Icons and images
 ├── data/                    # ✅ Lesson data
-├── tools/                   # ⚠️  Requires local server
+├── tools/                   # ✅ lesson-editor-github.html works on GitHub Pages
+│   ├── lesson-editor-github.html  # ✅ GitHub Pages compatible
+│   ├── lesson-editor.html         # ⚠️  Requires local server
+│   ├── validation-tool.html       # ⚠️  Requires local server
+│   └── missing-lessons-report.html # ⚠️  Requires local server
 ├── templates/               # ✅ Reference materials
 └── docs/                    # ✅ Documentation and archives
 ```
@@ -43,6 +48,7 @@ TechTeach/
 | Lesson Plan Selector | ✅ | ✅ |
 | Dynamic Data Loading | ✅ | ✅ (embedded) |
 | All Lesson Content | ✅ | ✅ |
+| Lesson Data Editor | ✅ | ✅ (lesson-editor-github.html) |
 | Validation Tools | ✅ | ❌ (requires server) |
 | JSON File Updates | ✅ | ❌ (data is embedded) |
 
