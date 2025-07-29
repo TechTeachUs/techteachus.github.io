@@ -928,7 +928,7 @@ function updateNavigationButtons(containerId) {
 // --- Password Protection for Teacher Tools ---
 function accessTool(toolUrl) {
     // Simple password protection
-    const teacherPassword = "TechTeach2025"; // Change this to your desired password
+    const teacherPassword = "/"; // Change this to your desired password
     
     const password = prompt("🔒 Teacher Access Required\n\nPlease enter the teacher password:");
     
@@ -1005,7 +1005,7 @@ function showCustomModal(message, isPrompt = false, defaultValue = '') {
 
 // Enhanced password protection with better UX
 async function accessToolEnhanced(toolUrl) {
-    const teacherPassword = "TechTeach2025"; // Change this to your desired password
+    const teacherPassword = "/"; // Change this to your desired password
     
     const password = await showCustomModal("🔒 Teacher Access Required\n\nPlease enter the teacher password:", true);
     
@@ -1026,7 +1026,7 @@ async function accessToolEnhanced(toolUrl) {
 
 // --- Teacher Tools Page Access ---
 async function accessTeacherToolsPage() {
-    const teacherPassword = "TechTeach2025"; // Change this to your desired password
+    const teacherPassword = "TechTeach2008!?"; // Change this to your desired password
     
     const password = await showCustomModal("🔒 Teacher Access Required\n\nPlease enter the teacher password to access curriculum tools:", true);
     
@@ -1046,7 +1046,7 @@ async function accessTeacherToolsPage() {
 
 // --- Teacher Tools Section Access ---
 async function accessTeacherTools() {
-    const teacherPassword = "TechTeach2025"; // Change this to your desired password
+    const teacherPassword = "TechTeach2008!?"; // Change this to your desired password
     
     const password = await showCustomModal("🔒 Teacher Access Required\n\nPlease enter the teacher password to access curriculum tools:", true);
     
