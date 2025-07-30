@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Access Counters</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .success {
+            background: rgba(76, 175, 80, 0.3);
+        }
+        .info {
+            background: rgba(33, 150, 243, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Teacher Tools - Reset Access</h1>
+        <p>This tool will reset all failed attempt counters and temporary blocks.</p>
+        
+        <button onclick="resetAccess()">Reset Access Counters</button>
+        <button onclick="showCurrentStatus()">Show Current Status</button>
+        
+        <div id="status"></div>
+        
+        <hr style="margin: 30px 0; opacity: 0.3;">
+        
+        <h3>Quick Access</h3>
+        <p>After resetting, you can go back to:</p>
+        <button onclick="goToMain()">Main Site</button>
+        <button onclick="goToLessons()">Lesson Selector</button>
+    </div>
+
+    <script>
+        function resetAccess() {
+            try {
+                // Clear all security-related localStorage items
+                localStorage.removeItem('teacherToolsAccess');
+                localStorage.removeItem('teacherSession');
+                localStorage.removeItem('failedAttempts');
+                localStorage.removeItem('lastFailedAttempt');
+                localStorage.removeItem('blockUntil');
+                localStorage.removeItem('securityLog');
+                localStorage.removeItem('browserFingerprint');
+                localStorage.removeItem('accessTime');
+                localStorage.removeItem('sessionStartTime');
+                
+                // Clear any session storage items too
+                sessionStorage.clear();
+                
+                document.getElementById('status').innerHTML = `
+                    <div class="status success">
+                        ✅ Success! All access counters have been reset.<br>
+                        You can now try accessing the teacher tools again.<br>
+                        <strong>Password reminder: TechTeach2008!?</strong>
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('status').innerHTML = `
+                    <div class="status error">
+                        ❌ Error: ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        function showCurrentStatus() {
+            const failedAttempts = localStorage.getItem('failedAttempts') || '0';
+            const blockUntil = localStorage.getItem('blockUntil');
+            const hasSession = localStorage.getItem('teacherSession');
+            
+            let statusText = `
+                <div class="status info">
+                    <strong>Current Status:</strong><br>
+                    Failed Attempts: ${failedAttempts}<br>
+                    Active Session: ${hasSession ? 'Yes' : 'No'}<br>
+                    Block Status: ${blockUntil && parseInt(blockUntil) > Date.now() ? 'Blocked until ' + new Date(parseInt(blockUntil)).toLocaleTimeString() : 'Not blocked'}
+                </div>
+            `;
+            
+            document.getElementById('status').innerHTML = statusText;
+        }
+        
+        function goToMain() {
+            window.location.href = 'index.html';
+        }
+        
+        function goToLessons() {
+            window.location.href = 'LPS-github.html';
+        }
+        
+        // Show current status on page load
+        window.onload = function() {
+            showCurrentStatus();
+        };
+    </script>
+</body>
+</html>
