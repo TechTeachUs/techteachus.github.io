@@ -217,9 +217,9 @@ class CurriculumLoader {
         return `
             <div class="curriculum-section mb-10">
                 <div class="curriculum-header flex items-center justify-center mb-4">
-                    <img loading="lazy" src="${leftLogo}" alt="${leftAlt}" class="w-12 h-12 mr-4 rounded-full p-2 bg-indigo-600" onerror="this.onerror=null;this.src='${leftError}';">
+                    <img loading="lazy" src="${leftLogo}" alt="${leftAlt}" class="w-12 h-12 mr-4 rounded-full p-2 bg-purple-100" onerror="this.onerror=null;this.src='${leftError}';">
                     <h3 class="text-3xl font-semibold text-center">${curriculum.grade}: ${curriculum.title}</h3>
-                    <img loading="lazy" src="${rightLogo}" alt="${rightAlt}" class="w-12 h-12 ml-4 rounded-full p-2 bg-indigo-600" onerror="this.onerror=null;this.src='${rightError}';">
+                    <img loading="lazy" src="${rightLogo}" alt="${rightAlt}" class="w-12 h-12 ml-4 rounded-full p-2 bg-pink-100" onerror="this.onerror=null;this.src='${rightError}';">
                 </div>
                 <div class="table-wrapper overflow-x-auto">
                     <table class="curriculum-table w-full text-left border-collapse">
