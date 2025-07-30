@@ -1025,12 +1025,6 @@ async function accessToolEnhanced(toolUrl) {
         return;
     }
     
-    // Add loading delay to prevent rapid attempts
-    await showCustomModal("🔍 Verifying credentials...");
-    
-    // Simulate server verification delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
     const hashedInput = btoa(password);
     
     if (hashedInput === encryptedPassword) {
@@ -1050,20 +1044,8 @@ async function accessToolEnhanced(toolUrl) {
             await showCustomModal("🕒 Teacher tools are only accessible during school hours (6 AM - 8 PM, Mon-Fri).\n\nContact Mrs. Ramirez for emergency access.");
         }
     } else {
-        // Incorrect password with progressive delays
-        const attempts = parseInt(localStorage.getItem('teacherAccessAttempts') || '0') + 1;
-        localStorage.setItem('teacherAccessAttempts', attempts.toString());
-        
-        const delay = Math.min(attempts * 2000, 10000); // Max 10 second delay
-        
-        setTimeout(async () => {
-            await showCustomModal(`❌ Incorrect password. Access denied.\n\nAttempt ${attempts}/5. ${attempts >= 5 ? 'Further attempts will be logged.' : ''}\n\nPlease contact Mrs. Ramirez if you need access to teacher tools.`);
-            
-            if (attempts >= 5) {
-                // Log suspicious activity (in a real app, this would go to a server)
-                console.warn(`Suspicious activity: ${attempts} failed teacher access attempts`);
-            }
-        }, delay);
+        // Incorrect password - immediate feedback
+        await showCustomModal("❌ Incorrect password. Access denied.\n\nPlease contact Mrs. Ramirez if you need access to teacher tools.");
     }
 }
 
@@ -1078,10 +1060,6 @@ async function accessTeacherToolsPage() {
         // User cancelled
         return;
     }
-    
-    // Add verification delay
-    await showCustomModal("🔍 Authenticating...");
-    await new Promise(resolve => setTimeout(resolve, 1000));
     
     const hashedInput = btoa(password);
     
