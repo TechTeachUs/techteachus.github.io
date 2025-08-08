@@ -11,6 +11,7 @@ class CurriculumLoader {
         "iconAlt": "Python Logo",
         "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
         "carouselId": "python-cards",
+        "courseDescription":"Course Description:'This yearlong, project-based course expands students' understanding of algorithms, data structures, and backend programming through hands-on development using Python. Students will deepen their computational thinking skills, exploring algorithmic problem-solving, efficiency, and data management while working with real-world applications. The course includes participation in the Emoticon Design League and G4C Challenge, where students apply their technical knowledge to design innovative app solutions. Emphasizing competition readiness and collaborative problem-solving, students will also prepare for advanced coursework and technical careers in computer science and software development. By the end of the course, students will have a portfolio of projects demonstrating their ability to work with backend systems, build applications, and solve complex problems.",
         "weeks": [
           {
             "weekRange": "1-2",
@@ -95,49 +96,50 @@ class CurriculumLoader {
                     "iconAlt": "Unity Logo",
                     "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
                     "carouselId": "unity-cards",
+                    "courseDescription":"This yearlong, project-based curriculum focuses on the development of both video games and innovative applications, combining creativity with programming and design principles. Students will learn industry-standard tools such as Unity, C#, and backend systems to build 2D and 3D games, as well as design app solutions for real-world challenges. The course emphasizes critical thinking, problem-solving, competition readiness, and collaboration, preparing students for careers in game development, software development, and computer science. Throughout the course, students will participate in the InfyAPP Challenge, applying their technical knowledge to create app solutions, while also developing a portfolio of projects that showcases their ability to work with both game engines and backend systems. By the end of the course, students will have a portfolio-ready project and the opportunity to earn Unity Associate certifications, with the skills necessary to pursue advanced coursework or enter technical careers.",
                     "weeks": [
                       
   {
     weekRange: "1-2",
     topic: "Introduction to 3D Game Development & Unity Basics",
     keyConcepts: "Course overview, Unity basics, setting up the 3D workspace",
-    projects: "Lab: Unity setup and first 3D scene"
+    projects: "Replicate #1, Modify #1, Project Clock (3D Clock), Quiz: Unity Basics"
   },
   {
     weekRange: "3-4",
     topic: "Game Design Principles & Design Thinking",
     keyConcepts: "Design Thinking process, game mechanics, player engagement, storytelling",
-    projects: "Project: Game pitch document using design thinking principles"
+    projects: "Replicate #2, Modify #2, Project: Game pitch document using design thinking principles, Assignment: Game analysis, Quiz: Game design principles"
   },
   {
     weekRange: "5-6",
     topic: "3D Unity Basics",
     keyConcepts: "3D environment setup, importing assets, transforms, game objects, components",
-    projects: "Lab: Create an interactive 3D scene with objects"
+    projects: " Replicate #3, Modify #3, Project Roll a Ball, Quiz: C# Basics"
   },
   {
     weekRange: "7-8",
     topic: "Programming Fundamentals in C# (Part 1)",
     keyConcepts: "Variables, loops, conditionals for 3D game interactions",
-    projects: "Lab: Simple interaction with C# scripts in a 3D space"
+    projects: "Replicate #4, Modify #4,Lab: Simple interaction with C# scripts in a 3D space"
   },
   {
     weekRange: "9",
     topic: "Programming Fundamentals in C# (Part 2)",
     keyConcepts: "Functions, classes, and Object-Oriented Programming (OOP)",
-    projects: "Quiz: C# basics"
+    projects: "Project Tank, Quiz: C# Fundamentals"
   },
   {
     weekRange: "10-11",
     topic: "3D Game Physics & Materials",
     keyConcepts: "Physics, lighting, materials, and rendering in a 3D environment",
-    projects: "Lab: Add physics and custom materials to a 3D object"
+    projects: "Project: G4C, Table Top, Character, Video Game"
   },
   {
     weekRange: "12-13",
     topic: "AI, Pathfinding & Audio for 3D Games",
     keyConcepts: "Basic AI for enemies, pathfinding algorithms, adding sound FX",
-    projects: "Project: Basic AI and audio integration. Lab: Audio integration"
+    projects: "Project: Basic AI, SFX, VFX, UI,. Lab: Implementing AI and audio "
   },
   {
     weekRange: "14-15",
@@ -147,37 +149,37 @@ class CurriculumLoader {
   },
   {
     weekRange: "16-17",
-    topic: "3D Game Development (Part 1)",
+    topic: "3D Game/App Development",
     keyConcepts: "3D environment setup, importing assets",
-    projects: "Lab: Create a 3D scene"
+    projects: "Project: G4C, Table Top, Character, Video Game"
   },
   {
     weekRange: "18-19",
-    topic: "3D Game Development (Part 2)",
-    keyConcepts: "Physics, lighting, and materials",
-    projects: "Lab: Add physics to a 3D object"
+    topic: "Design Thinking",
+    keyConcepts: "Human Centered Design, Empathy Mapping, Ideation, Prototyping, Testing, Implementation and Iteration",
+    projects: "Lab: 5W+H, Lab Personas, Flow Chart  ,  Infy APP Wireframe"
   },
   {
     weekRange: "20-21",
-    topic: "Advanced Programming in C#",
-    keyConcepts: "Object-oriented programming concepts",
-    projects: "Quiz: Advanced C#"
+    topic: "Advanced Prototyping",
+    keyConcepts: "Wireframes, Mockups, Coding for Accessibility",
+    projects: "Infy APP Prototype, Website and presentation"
   },
   {
     weekRange: "22",
-    topic: "AI and Pathfinding",
-    keyConcepts: "Basic AI for enemies and pathfinding algorithms",
-    projects: "Project: AI implementation"
+    topic: "Pitching your Product",
+    keyConcepts: "Audience Research, Value proposition, Problem Solving, Compelling Storytelling, engagement & Follow-up",
+    projects: "Presentation: Infy APP Pitch"
   },
   {
     weekRange: "23",
-    topic: "Game UI Design",
-    keyConcepts: "Menus, health bars, and HUDs",
-    projects: "Lab: Interactive UI"
+    topic: "AI Implementation",
+    keyConcepts: "Understanding AI concepts and their application in games",
+    projects: "Code.org Unit"
   },
   {
     weekRange: "24-26",
-    topic: "Multiplayer Basics",
+    topic: "Multiplayer Basics ",
     keyConcepts: "Introduction to networking concepts",
     projects: "Lab: Local multiplayer"
   },
@@ -191,7 +193,7 @@ class CurriculumLoader {
     weekRange: "28",
     topic: "Polishing and Publishing",
     keyConcepts: "Optimization, polishing, and building a game",
-    projects: "Lab: Build and export a game"
+    projects: "Lab: Build and export a game/app for web or mobile"
   },
   {
     weekRange: "29",
@@ -202,8 +204,8 @@ class CurriculumLoader {
   {
     weekRange: "30",
     topic: "Spring Semester Review and Final Presentation",
-    keyConcepts: "",
-    projects: "Presentation: 3D or multiplayer game"
+    keyConcepts: " Certification Exam",
+    projects: "Certification Exam, Presentation: 3D or multiplayer game"
   }
 ]
 
@@ -216,6 +218,7 @@ class CurriculumLoader {
   "iconAlt": "Advanced Dev Logo",
   "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
   "carouselId": "advanced-cards",
+  "courseDescription":"This yearlong course focuses on advanced web development and game development, culminating in a Capstone Project where students showcase their technical and creative abilities. Students will refine their HTML5, CSS3, and Unity development skills to create professional-grade websites and games. Emphasis is placed on portfolio building, with students crafting a fully functional, marketable game as their final project. The Capstone Project simulates real-world entrepreneurship, allowing students to develop, market, and publish their work, preparing them for both academic and professional futures in tech. By the end of the course, students will graduate with a polished portfolio and a strong foundation for careers in software development, game design, or related fields.",
   "weeks": [
     {
       "weekRange": "1-2",
@@ -415,6 +418,9 @@ class CurriculumLoader {
             <img loading="lazy" src="${leftLogo}" alt="${leftAlt}" class="w-12 h-12 mr-4 rounded-full p-2 bg-purple-100" onerror="this.onerror=null;this.src='${leftError}';">
             <h3 class="text-3xl font-semibold text-center">${curriculum.grade}: ${curriculum.title}</h3>
             <img loading="lazy" src="${rightLogo}" alt="${rightAlt}" class="w-12 h-12 ml-4 rounded-full p-2 bg-pink-100" onerror="this.onerror=null;this.src='${rightError}';">
+        </div>
+        <div class="curriculum-description mb-4 text-lg leading-relaxed text-center">
+            ${curriculum.courseDescription ? curriculum.courseDescription.replace(/^Course Description:?['"]?/, '') : ''}
         </div>
         <div class="table-wrapper overflow-x-auto">
             <table class="curriculum-table w-full text-left border-collapse">
