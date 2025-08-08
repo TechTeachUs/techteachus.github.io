@@ -503,12 +503,13 @@
     </div>
 
     <script src="assets/js/embedded-data.js"></script>
+    <script src="assets/js/YearLongLPs.js"></script>
     <!-- Enhanced Security Module -->
     <script src="assets/js/security.js"></script>
     <script>
         class LessonPlanSelector {
             constructor() {
-                this.lessonData = EMBEDDED_LESSON_DATA;
+                this.lessonData = COMBINED_CURRICULUM;
                 this.unitSelect = document.getElementById('unit-select');
                 this.daySelect = document.getElementById('day-select');
                 this.lessonContent = document.getElementById('lesson-content');

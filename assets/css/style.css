@@ -1420,3 +1420,23 @@ footer a {
         --default-theme: light;
     }
 }
+
+/* Hide curriculum table rows by default */
+.curriculum-table tbody {
+    display: none;
+}
+/* Show rows when parent section is hovered */
+.curriculum-section:hover .curriculum-table tbody,
+.curriculum-section:focus-within .curriculum-table tbody {
+    display: table-row-group;
+}
+/* Make the header look like a button on hover/focus */
+.curriculum-header {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.curriculum-header:focus,
+.curriculum-header:hover {
+    background: rgba(99,102,241,0.08);
+    outline: 2px solid #6366F1;
+}

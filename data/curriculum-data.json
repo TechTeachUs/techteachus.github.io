@@ -1,115 +1,238 @@
-{
-  "curricula": [
-    {
-      "id": "python-curriculum",
-      "grade": "10th Grade",
-      "title": "CS Fundamentals with Python",
-      "icon": "https://placehold.co/64x64/6366F1/FFFFFF?text=Python",
-      "iconAlt": "Python Logo",
-      "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
-      "carouselId": "python-cards",
-      "weeks": [
-        {
-          "weekRange": "1-8",
-          "topic": "Introduction to Python & Algorithms",
-          "keyConcepts": "Variables, Data Types, Control Flow, Functions, Basic Algorithms",
-          "projects": "Python Calculator, Number Guessing Game"
-        },
-        {
-          "weekRange": "9-16",
-          "topic": "Data Structures & Backend Programming",
-          "keyConcepts": "Lists, Dictionaries, File I/O, Introduction to Flask",
-          "projects": "Text-based Adventure Game, Simple Web App with Flask"
-        },
-        {
-          "weekRange": "17-24",
-          "topic": "UI/UX Design Fundamentals (Figma)",
-          "keyConcepts": "Wireframing, Prototyping, User-Centered Design",
-          "projects": "Emoticon Design League (Figma project)"
-        },
-        {
-          "weekRange": "25-32",
-          "topic": "Databases & SQL Basics",
-          "keyConcepts": "Relational Databases, SQL Queries, Database Integration",
-          "projects": "Queue Management System (Python + SQL)"
-        },
-        {
-          "weekRange": "33-36",
-          "topic": "Capstone Prep & Review",
-          "keyConcepts": "Project Planning, Debugging, Code Optimization",
-          "projects": "G4C Challenge preparation"
-        }
-      ]
-    },
-    {
-      "id": "unity-curriculum",
-      "grade": "11th Grade",
-      "title": "Game Development with Unity",
-      "icon": "https://placehold.co/64x64/6366F1/FFFFFF?text=Unity",
-      "iconAlt": "Unity Logo",
-      "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
-      "carouselId": "unity-cards",
-      "weeks": [
-        {
-          "weekRange": "1-8",
-          "topic": "Introduction to Unity & C#",
-          "keyConcepts": "Unity Interface, Scripting Basics, Game Objects, Components",
-          "projects": "First 2D Game (basic movement, collisions)"
-        },
-        {
-          "weekRange": "9-16",
-          "topic": "2D Game Development",
-          "keyConcepts": "Sprites, Animations, Tilemaps, Physics, UI Elements",
-          "projects": "Platformer Game, Top-down Shooter"
-        },
-        {
-          "weekRange": "17-24",
-          "topic": "Game Debugging & Audio",
-          "keyConcepts": "Debugging Tools, Error Handling, Sound Effects, Background Music",
-          "projects": "Adding audio and debugging to existing games"
-        },
-        {
-          "weekRange": "25-32",
-          "topic": "Introduction to 3D Game Development",
-          "keyConcepts": "3D Models, Lighting, Materials, Basic 3D Physics",
-          "projects": "Simple 3D Maze Game"
-        },
-        {
-          "weekRange": "33-36",
-          "topic": "IT Specialist HTML5 Certification Prep & InfyApp Challenge",
-          "keyConcepts": "Review HTML5 concepts, Project-based learning for InfyApp",
-          "projects": "InfyApp Challenge participation"
-        }
-      ]
-    },
-    {
-      "id": "advanced-curriculum",
-      "grade": "12th Grade",
-      "title": "Advanced Game & Web Development",
-      "icon": "https://placehold.co/64x64/6366F1/FFFFFF?text=Advanced",
-      "iconAlt": "Advanced Dev Logo",
-      "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
-      "carouselId": "advanced-cards",
-      "weeks": [
-        {
-          "weekRange": "1-8",
-          "topic": "Advanced Web Development (HTML5, CSS3, JavaScript)",
-          "keyConcepts": "Responsive Design, Flexbox, Grid, CSS Animations, DOM Manipulation",
-          "projects": "Personal Portfolio Website, Interactive Web Application"
-        },
-        {
-          "weekRange": "9-16",
-          "topic": "Advanced Unity Features",
-          "keyConcepts": "AI Pathfinding, Multiplayer Basics, Advanced Lighting & Shaders",
-          "projects": "AI-driven Enemy Behavior, Simple Multiplayer Prototype"
-        },
-        {
-          "weekRange": "17-36",
-          "topic": "Capstone Project: Game Development & Publishing",
-          "keyConcepts": "Full Game Development Cycle, Marketing, Publishing",
-          "projects": "Develop, market, and publish an original game"
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "curricula": [
+      {
+        "id": "python-curriculum",
+        "grade": "10th Grade",
+        "title": "CS Fundamentals with Python",
+        "icon": "https://placehold.co/64x64/6366F1/FFFFFF?text=Python",
+        "iconAlt": "Python Logo",
+        "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
+        "carouselId": "python-cards",
+        "weeks": [
+          {
+            "weekRange": "1-2",
+            "topic": "Introduction to Computational Thinking",
+            "keyConcepts": "Course overview, problem-solving strategies, introduction to Python",
+            "projects": "Lab: Python syntax and basic algorithms"
+          },
+          {
+            "weekRange": "3-4",
+            "topic": "Variables and Data Types",
+            "keyConcepts": "Exploring variables, data types, and input/output in Python",
+            "projects": "Project: Python Calculator"
+          },
+          {
+            "weekRange": "5-6",
+            "topic": "Control Flow: Conditionals and Loops",
+            "keyConcepts": "If statements, loops, while loops, and for loops in Python",
+            "projects": "Lab: Build a number guessing game"
+          },
+          {
+            "weekRange": "7-8",
+            "topic": "Functions and Modular Programming",
+            "keyConcepts": "Writing functions, passing arguments, and return values in Python",
+            "projects": "Project: Create a text-based adventure game"
+          },
+          {
+            "weekRange": "9",
+            "topic": "Data Structures: Lists and Dictionaries",
+            "keyConcepts": "Introduction to lists, dictionaries, and sets in Python",
+            "projects": "Quiz: Data structures in Python"
+          },
+          {
+            "weekRange": "10-11",
+            "topic": "Algorithms and Problem Solving",
+            "keyConcepts": "Sorting algorithms, searching algorithms, and time complexity",
+            "projects": "Lab: Sorting algorithm visualizations"
+          },
+          {
+            "weekRange": "12-13",
+            "topic": "Intermediate Data Structures",
+            "keyConcepts": "Stacks, queues, and linked lists in Python",
+            "projects": "Project: Implement a queue system in Python"
+          },
+          {
+            "weekRange": "14-15",
+            "topic": "Backend Development: Introduction to Databases",
+            "keyConcepts": "SQL basics, SQLite database operations",
+            "projects": "Lab: Create a basic database system"
+          },
+          {
+            "weekRange": "16-17",
+            "topic": "G4C Challenge Preparation",
+            "keyConcepts": "Understanding the app development process, project planning",
+            "projects": "Group: Plan and prototype app for Design League & G4C"
+          },
+          {
+            "weekRange": "18-19",
+            "topic": "Advanced Python Programming",
+            "keyConcepts": "File handling, regular expressions, and error handling",
+            "projects": "Lab: Build a file management system"
+          },
+          {
+            "weekRange": "20-21",
+            "topic": "Web Development Basics",
+            "keyConcepts": "Introduction to HTML, CSS, and Flask for web development",
+            "projects": "Project: Build a simple web app with Flask"
+          },
+          {
+            "weekRange": "22-23",
+            "topic": "Debugging and Optimization",
+            "keyConcepts": "Debugging strategies, performance optimization in Python",
+            "projects": "Lab: Optimize and debug an existing project"
+          },
+          {
+            "weekRange": "24-25",
+            "topic": "User Interface and Experience Design",
+            "keyConcepts": "UI/UX principles using Figma",
+            "projects": "Lab: Design an app prototype for Design League and G4C"
+          },
+          {
+            "weekRange": "26-28",
+            "topic": "Advanced Data Structures",
+            "keyConcepts": "Trees, graphs, and algorithms for traversing data structures",
+            "projects": "Project: Implement a tree structure in Python"
+          },
+          {
+            "weekRange": "29-30",
+            "topic": "Competition Preparation and Final Review",
+            "keyConcepts": "Building final project & portfolio / presentations",
+            "projects": "Final Project Presentation, Sophomore Portfolio"
+          }
+        ]
+      },
+      {
+        "id": "unity-curriculum",
+        "grade": "11th Grade",
+        "title": "Game Development with Unity",
+        "icon": "https://placehold.co/64x64/6366F1/FFFFFF?text=Unity",
+        "iconAlt": "Unity Logo",
+        "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
+        "carouselId": "unity-cards",
+        "weeks": [
+          {
+            "weekRange": "1-2",
+            "topic": "Introduction to Game Development",
+            "keyConcepts": "Course overview, Unity basics, setting up the workspace",
+            "projects": "Lab: Unity setup and first scene"
+          },
+          {
+            "weekRange": "3-4",
+            "topic": "Game Design Principles",
+            "keyConcepts": "Game mechanics, player engagement, and storytelling",
+            "projects": "Project: Game pitch document"
+          },
+          {
+            "weekRange": "5-6",
+            "topic": "Unity Basics",
+            "keyConcepts": "Game objects, components, and transforms",
+            "projects": "Lab: Interactive scene with objects"
+          },
+          {
+            "weekRange": "7-8",
+            "topic": "Programming Fundamentals in C# (Part 1)",
+            "keyConcepts": "Variables, loops, conditionals",
+            "projects": "Lab: Simple interaction with scripts"
+          },
+          {
+            "weekRange": "9",
+            "topic": "Programming Fundamentals in C# (Part 2)",
+            "keyConcepts": "Functions and classes",
+            "projects": "Quiz: C# basics"
+          },
+          {
+            "weekRange": "10",
+            "topic": "2D Game Development (Part 1)",
+            "keyConcepts": "Sprites, animations, and physics",
+            "projects": "Lab: Basic 2D platformer"
+          },
+          {
+            "weekRange": "11",
+            "topic": "2D Game Development (Part 2)",
+            "keyConcepts": "Player input and UI",
+            "projects": "Project: 2D game prototype"
+          },
+          {
+            "weekRange": "12",
+            "topic": "Debugging and Optimization",
+            "keyConcepts": "Debugging tools and performance tips",
+            "projects": "Lab: Debugging challenges"
+          },
+          {
+            "weekRange": "13",
+            "topic": "Intro to Game Audio",
+            "keyConcepts": "Adding sound effects and music",
+            "projects": "Lab: Audio integration"
+          },
+          {
+            "weekRange": "14-15",
+            "topic": "Fall Semester Review and Project Presentation",
+            "keyConcepts": "Consolidation of concepts learned so far",
+            "projects": "Presentation: 2D game"
+          },
+          {
+            "weekRange": "16-17",
+            "topic": "3D Game Development (Part 1)",
+            "keyConcepts": "3D environment setup, importing assets",
+            "projects": "Lab: Create a 3D scene"
+          },
+          {
+            "weekRange": "18-19",
+            "topic": "3D Game Development (Part 2)",
+            "keyConcepts": "Physics, lighting, and materials",
+            "projects": "Lab: Add physics to a 3D object"
+          },
+          {
+            "weekRange": "20-21",
+            "topic": "Advanced Programming in C#",
+            "keyConcepts": "Object-oriented programming concepts",
+            "projects": "Quiz: Advanced C#"
+          },
+          {
+            "weekRange": "22",
+            "topic": "AI and Pathfinding",
+            "keyConcepts": "Basic AI for enemies and pathfinding algorithms",
+            "projects": "Project: AI implementation"
+          },
+          {
+            "weekRange": "23",
+            "topic": "Game UI Design",
+            "keyConcepts": "Menus, health bars, and HUDs",
+            "projects": "Lab: Interactive UI"
+          },
+          {
+            "weekRange": "24-26",
+            "topic": "Multiplayer Basics",
+            "keyConcepts": "Introduction to networking concepts",
+            "projects": "Lab: Local multiplayer"
+          },
+          {
+            "weekRange": "27",
+            "topic": "Game Testing and Feedback",
+            "keyConcepts": "Playtesting techniques and incorporating feedback",
+            "projects": "Lab: Peer game testing"
+          },
+          {
+            "weekRange": "28",
+            "topic": "Polishing and Publishing",
+            "keyConcepts": "Optimization, polishing, and building a game",
+            "projects": "Lab: Build and export a game"
+          },
+          {
+            "weekRange": "29",
+            "topic": "Portfolio Preparation",
+            "keyConcepts": "Preparing a game development portfolio",
+            "projects": "Assignment: Final portfolio submission"
+          },
+          {
+            "weekRange": "30",
+            "topic": "Spring Semester Review and Final Presentation",
+            "keyConcepts": "Presenting final projects",
+            "projects": "Presentation: 3D or multiplayer game"
+          }
+        ]
+      }
+    ]
+  }
+]
