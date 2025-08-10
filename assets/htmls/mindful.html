@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mindful Fractal</title>
+  <style>
+    :root{
+      --bg:#0b1020; --panel:rgba(255,255,255,0.06);
+      --accent:#7ab7ff; --muted:rgba(255,255,255,0.65);
+      --glass: rgba(255,255,255,0.04);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);color:#eef}
+    /* Default: two columns */
+.app {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 18px;
+  height: 100vh;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* Responsive: single column on small screens */
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    height: auto;
+    min-height: 100vh;
+    padding: 8px;
+  }
+  .panel {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+  .canvas-wrap {
+    height: 50vh !important;
+    min-height: 220px;
+    max-height: 60vh;
+  }
+}
+
+/* Extra small screens: make controls and canvas fill width */
+@media (max-width: 600px) {
+  .app {
+    padding: 2px;
+    gap: 6px;
+  }
+  .panel {
+    padding: 6px;
+  }
+  .canvas-wrap {
+    height: 38vh !important;
+    min-height: 120px;
+    max-height: 45vh;
+  }
+  .big-timer {
+    font-size: 28px;
+  }
+  .circle {
+    width: 56px !important;
+    height: 56px !important;
+  }
+}
+
+/* Make canvas always fill its container */
+.canvas-wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  max-height: 80vh;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+}
+
+    .app{display:grid;grid-template-columns:360px 1fr;gap:18px;height:100vh;padding:18px;box-sizing:border-box}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px);border-radius:14px;padding:18px;box-shadow:0 6px 30px rgba(0,0,0,0.5)}
+    header h1{margin:0;font-size:18px}
+    .controls{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+    label{font-size:13px;color:var(--muted)}
+    input[type=range]{width:100%}
+    .row{display:flex;gap:8px;align-items:center}
+    .button{background:linear-gradient(90deg,var(--accent),#a3ffcf);border:none;padding:10px 14px;border-radius:10px;color:#062;cursor:pointer;font-weight:700}
+    .button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
+    .small{font-size:13px}
+    .muted{color:var(--muted)}
+    .meter{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
+    .meter > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#a3ffcf);width:0%}
+    .big-timer{font-size:40px;font-weight:700}
+    .breath-visual{display:flex;justify-content:center;align-items:center;height:120px}
+    .circle{width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;transition:all 0.35s ease}
+    .circle .text{font-weight:700;font-size:1.2em}
+    /* Canvas area */
+    .canvas-wrap{position:relative;border-radius:14px;overflow:hidden}
+    canvas{display:block;width:100%;height:100%}
+    .overlay-ui{position:absolute;left:18px;top:18px;z-index:8}
+    .bottom-ui{position:absolute;left:18px;bottom:18px;z-index:8}
+    footer{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
+    @media (max-width:900px){.app{grid-template-columns:1fr;grid-template-rows:auto 1fr;padding:12px}.panel{padding:12px}.canvas-wrap{height:60vh}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section class="panel" aria-labelledby="title">
+      <header>
+        <h1 id="title">Mindful Fractal Breathing</h1>
+         </header>
+
+      <div class="controls" role="region" aria-label="controls">
+        <div>
+          <label for="sessionMin">Session length (minutes): <span id="sessionLabel">5</span></label>
+          <input id="sessionMin" type="range" min="1" max="60" value="5" />
+        </div>
+
+        <div>
+          <label>Breathing cycle (seconds)</label>
+          <div class="row small">
+            <div style="flex:1">
+              <label for="inhale">Inhale <span id="inhaleVal">4</span>s</label>
+              <input id="inhale" type="range" min="1" max="8" value="4">
+            </div>
+            <div style="flex:1">
+              <label for="hold1">Hold <span id="hold1Val">2</span>s</label>
+              <input id="hold1" type="range" min="0" max="8" value="2">
+            </div>
+          </div>
+          <div class="row small" style="margin-top:6px">
+            <div style="flex:1">
+              <label for="exhale">Exhale <span id="exhaleVal">6</span>s</label>
+              <input id="exhale" type="range" min="1" max="10" value="6">
+            </div>
+            <div style="flex:1">
+              <label for="hold2">Hold <span id="hold2Val">0</span>s</label>
+              <input id="hold2" type="range" min="0" max="8" value="0">
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="justify-content:space-between;align-items:center">
+          <div>
+            <button id="generateBtn" class="button secondary">Generate</button>
+            <button id="startBtn" class="button">Start</button>
+            <button id="pauseBtn" class="button secondary">Pause</button>
+            <button id="exportBtn" class="button secondary">Export PNG</button>
+          </div>
+          <div style="text-align:right">
+            <div class="muted small">Progress</div>
+            <div class="meter" style="width:140px"><i id="progressBar"></i></div>
+          </div>
+        </div>
+<div class="small muted">Sound
+<label class="small muted" style="margin-right:8px">Voice</label>
+            <input id="voiceToggle" type="checkbox" checked>
+            <label class="small muted" style="margin-left:12px">Ambient</label>
+            <input id="toneToggle" type="checkbox" checked></div>
+        <div class="row" style="justify-content:space-between;align-items:center">
+          
+          <div class="row" style="align-items:center;gap:6px">
+            
+            <label class="small muted" style="margin-left:12px">Type</label>
+            <select id="noiseType" class="small">
+              <option value="white">White</option>
+              <option value="brown">Brown</option>
+              <option value="green">Green</option>
+              <option value="nature">Nature (rain)</option>
+            </select>
+            <label class="small muted" style="margin-left:8px">Vol</label>
+            <input id="noiseVol" type="range" min="0" max="1" step="0.01" value="0.45" style="width:100px">
+          </div>
+        </div>
+
+        <!-- Fractal controls -->
+        <div class="muted small">Fractal controls</div>
+        <div class="row small" style="gap:8px;align-items:center">
+          <div style="flex:1">
+            <label for="scaleInput">Scale <span id="scaleLabel">1.00</span></label>
+            <input id="scaleInput" type="range" min="0.5" max="2" step="0.01" value="1.00">
+          </div>
+          <div style="width:120px">
+            <label for="seedInput">colorSeed</label>
+            <input id="seedInput" type="number" min="0" max="359" value="56" style="width:100%">
+          </div>
+          <div style="width:120px">
+            <label for="depthInput">depth</label>
+            <input id="depthInput" type="range" min="1" max="8" step="1" value="5" style="width:100%">
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button id="presetSleep" class="button secondary">Sleep</button>
+          <button id="presetFocus" class="button secondary">Focus</button>
+          <button id="presetCalm" class="button secondary">Relax</button>
+        </div>
+
+        
+
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="big-timer" id="timer">05:00</div>
+            <div class="muted small">Breaths: <span id="breathCount">0</span></div>
+          </div>
+          <div style="width:120px;text-align:right">
+            <button id="soundTest" class="button secondary small">Play chime</button>
+          </div>
+        </div>
+
+        <footer>
+          <div>Tip: set a comfortable breathing pattern — the fractal will gently shift with each inhale & exhale. Use <strong>Generate</strong> to create a new calm fractal palette and structure.</div>
+        </footer>
+      </div>
+    </section>
+
+    <section class="canvas-wrap" aria-hidden="false">
+      <canvas id="fractalCanvas"></canvas>
+      <div class="breath-visual" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;pointer-events:none;">
+        <div class="circle" id="breathCircle" style="width:80px;height:80px;display:flex;align-items:center;justify-content:center;">
+          <div class="text" id="breathLabel">Ready</div>
+        </div>
+      </div>
+      <div class="overlay-ui">
+        <div style="background:var(--glass);padding:8px;border-radius:10px;backdrop-filter: blur(4px);">
+          <div><strong id="phaseLabel">Ready</strong></div>
+          <div class="muted small">Session progress: <span id="percent">0%</span></div>
+        </div>
+      </div>
+      <div class="bottom-ui">
+        <div style="background:linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.15));padding:8px;border-radius:10px;backdrop-filter: blur(4px);">
+          <div class="muted small">Fractal parameters :</div>
+          <div class="muted small">scale: <span id="paramScale"></span> • colorSeed: <span id="paramColor"></span> • depth: <span id="paramDepth"></span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // ---- shared state (declare before any use) ----
+    let cw = 0, ch = 0;
+    const devicePixelRatioVal = window.devicePixelRatio || 1;
+    let t = 0;
+
+    // fractal defaults (declare early to avoid TDZ issues)
+    let colorSeed = Math.floor(Math.random() * 360);
+    let maxDepthGlobal = 5;
+    let baseScale = 1.0;
+
+    // ---- UI references ----
+    const sessionMin = document.getElementById('sessionMin');
+    const sessionLabel = document.getElementById('sessionLabel');
+    const inhale = document.getElementById('inhale');
+    const hold1 = document.getElementById('hold1');
+    const exhale = document.getElementById('exhale');
+    const hold2 = document.getElementById('hold2');
+    const inhaleVal = document.getElementById('inhaleVal');
+    const hold1Val = document.getElementById('hold1Val');
+    const exhaleVal = document.getElementById('exhaleVal');
+    const hold2Val = document.getElementById('hold2Val');
+    const generateBtn = document.getElementById('generateBtn');
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const breathCircle = document.getElementById('breathCircle');
+    const breathLabel = document.getElementById('breathLabel');
+    const timerEl = document.getElementById('timer');
+    const breathCountEl = document.getElementById('breathCount');
+    const progressBar = document.getElementById('progressBar');
+    const percentEl = document.getElementById('percent');
+    const phaseLabel = document.getElementById('phaseLabel');
+    const paramScale = document.getElementById('paramScale');
+    const paramColor = document.getElementById('paramColor');
+    const paramDepth = document.getElementById('paramDepth');
+    const voiceToggle = document.getElementById('voiceToggle');
+    const toneToggle = document.getElementById('toneToggle');
+    const soundTest = document.getElementById('soundTest');
+    const noiseType = document.getElementById('noiseType');
+    const noiseVol = document.getElementById('noiseVol');
+    // Fractal control inputs
+    const scaleInput = document.getElementById('scaleInput');
+    const scaleLabel = document.getElementById('scaleLabel');
+    const seedInput = document.getElementById('seedInput');
+    const depthInput = document.getElementById('depthInput');
+    // Preset buttons
+    const presetSleep = document.getElementById('presetSleep');
+    const presetFocus = document.getElementById('presetFocus');
+    const presetCalm = document.getElementById('presetCalm');
+
+    // ---- Canvas setup ----
+    const canvas = document.getElementById('fractalCanvas');
+    const ctx = canvas.getContext('2d');
+    function resize(){
+      cw = canvas.clientWidth; ch = canvas.clientHeight;
+      canvas.width = Math.max(300, Math.floor(cw * devicePixelRatioVal));
+      canvas.height = Math.max(200, Math.floor(ch * devicePixelRatioVal));
+      // set transform so drawing commands use CSS pixels
+      ctx.setTransform(devicePixelRatioVal,0,0,devicePixelRatioVal,0,0);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // ---- Fractal drawing (uses CSS pixel cw/ch and baseScale/colorSeed/maxDepthGlobal) ----
+    function drawFractal(breathPhase){
+      const cx = cw / 2;
+      const cy = ch / 2;
+
+      // slight trailing background
+      ctx.fillStyle = 'rgba(6,8,16,0.12)';
+      ctx.fillRect(0,0,cw,ch);
+
+      const colorShift = (Math.sin((t + colorSeed) * 0.012) + 1) / 2;
+      const baseRadius = Math.min(cw, ch) * 0.12 * baseScale * (0.75 + 0.45 * breathPhase);
+      const maxDepth = Math.max(1, Math.floor(maxDepthGlobal));
+      let calls = 0; const maxCalls = 2200;
+
+      function drawCircle(x,y,r,depth,angleOffset){
+        if (r < 0.6 || depth <= 0 || calls > maxCalls) return;
+        calls++;
+        const progress = depth / maxDepth;
+        const hue = (colorShift * 220 + progress * 140 + breathPhase * 80 + colorSeed) % 360;
+        const light = 38 + (1 - progress) * 18;
+        const alpha = 0.02 + 0.12 * progress;
+
+        ctx.beginPath();
+        ctx.arc(x,y,r,0,Math.PI*2);
+        ctx.fillStyle = `hsla(${hue},60%,${light}%,${alpha})`;
+        ctx.fill();
+
+        const branches = 2 + Math.floor(3 * (1 - progress));
+        for (let i=0;i<branches;i++){
+          const ang = angleOffset + (i/branches) * Math.PI*2 + t * 0.0015 * (1 + 0.12 * depth) * (breathPhase - 0.5);
+          const nr = r * (0.45 + 0.12 * Math.sin(t * 0.009 + i + colorSeed * 0.01));
+          const nx = x + Math.cos(ang) * (r * 0.88);
+          const ny = y + Math.sin(ang) * (r * 0.88);
+          drawCircle(nx, ny, nr, depth - 1, ang + 0.18 * (i % 2 ? 1 : -1));
+        }
+      }
+
+      drawCircle(cx, cy, baseRadius, maxDepth, t * 0.0009);
+
+      // subtle glow rings
+      ctx.globalCompositeOperation = 'lighter';
+      for (let i=0;i<3;i++){
+        ctx.beginPath();
+        const ringR = baseRadius * (1 + i * 1.6) * (1 + 0.03 * Math.sin(t * 0.01 + i));
+        ctx.arc(cx, cy, ringR, 0, Math.PI*2);
+        ctx.fillStyle = `hsla(${(colorShift * 220 + i * 40 + colorSeed) % 360},60%,55%,${0.008 * (3 - i)})`;
+        ctx.fill();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    // ---- UI helpers ----
+    function updateRangeLabels(){
+      inhaleVal.textContent = inhale.value;
+      hold1Val.textContent = hold1.value;
+      exhaleVal.textContent = exhale.value;
+      hold2Val.textContent = hold2.value;
+      sessionLabel.textContent = sessionMin.value;
+    }
+    [inhale,hold1,exhale,hold2,sessionMin].forEach(el=>el.addEventListener('input',updateRangeLabels));
+    updateRangeLabels();
+
+    function updateFractalParamsFromInputs(){
+      const s = parseFloat(scaleInput.value);
+      const seed = parseInt(seedInput.value,10);
+      const d = parseInt(depthInput.value,10);
+      if (!isNaN(s)) baseScale = s;
+      if (!isNaN(seed)) colorSeed = (seed + 360) % 360;
+      if (!isNaN(d)) maxDepthGlobal = Math.max(1, d);
+      scaleLabel.textContent = baseScale.toFixed(2);
+      paramScale.textContent = baseScale.toFixed(2);
+      paramColor.textContent = colorSeed.toString();
+      paramDepth.textContent = maxDepthGlobal.toString();
+      // draw a single frame so the change is visible
+      drawFractal((Math.sin(t * 0.008) + 1) / 2);
+    }
+
+    scaleInput.addEventListener('input', updateFractalParamsFromInputs);
+    seedInput.addEventListener('input', updateFractalParamsFromInputs);
+    depthInput.addEventListener('input', updateFractalParamsFromInputs);
+
+    // ensure UI inputs reflect initial values (these variables were declared above)
+    scaleInput.value = baseScale.toFixed(2);
+    seedInput.value = colorSeed.toString();
+    depthInput.value = String(maxDepthGlobal);
+    updateFractalParamsFromInputs();
+
+    // ---- Audio (ambient noise + chime + voice) ----
+    let audioCtx = null, masterGain = null, osc = null, oscGain = null;
+    let noiseSource = null, noiseGain = null, currentNoiseType = 'white';
+
+    function initAudio(){
+      if (audioCtx) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = audioCtx.createGain(); masterGain.gain.value = 0.0; masterGain.connect(audioCtx.destination);
+
+      // gentle tone oscillator (optional)
+      osc = audioCtx.createOscillator(); osc.type = 'sine'; osc.frequency.value = 220;
+      oscGain = audioCtx.createGain(); oscGain.gain.value = 0; osc.connect(oscGain); oscGain.connect(masterGain);
+      osc.start();
+
+      // noise layer gain
+      noiseGain = audioCtx.createGain(); noiseGain.gain.value = 0; noiseGain.connect(masterGain);
+    }
+
+    function createNoiseBuffer(durationSec = 2){
+      const sampleRate = audioCtx.sampleRate;
+      const length = Math.floor(sampleRate * durationSec);
+      const buffer = audioCtx.createBuffer(1, length, sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i=0;i<length;i++) data[i] = Math.random() * 2 - 1;
+      return buffer;
+    }
+
+    function startNoise(type){
+      if (!audioCtx) return;
+      stopNoise();
+      noiseSource = audioCtx.createBufferSource();
+      noiseSource.buffer = createNoiseBuffer(3);
+      noiseSource.loop = true;
+      let node = noiseSource;
+
+      if (type === 'brown'){
+        const low = audioCtx.createBiquadFilter(); low.type = 'lowpass'; low.frequency.value = 440; node.connect(low); node = low;
+      } else if (type === 'green'){
+        const band = audioCtx.createBiquadFilter(); band.type = 'bandpass'; band.frequency.value = 700; band.Q.value = 0.8; node.connect(band); node = band;
+        const shelf = audioCtx.createBiquadFilter(); shelf.type = 'lowshelf'; shelf.frequency.value = 300; shelf.gain.value = 2; node.connect(shelf); node = shelf;
+      } else if (type === 'nature'){
+        const high = audioCtx.createBiquadFilter(); high.type = 'highpass'; high.frequency.value = 600;
+        const low = audioCtx.createBiquadFilter(); low.type = 'lowpass'; low.frequency.value = 6000;
+        node.connect(high); high.connect(low); node = low;
+      }
+
+      node.connect(noiseGain);
+      noiseSource.start();
+      currentNoiseType = type;
+    }
+
+    function stopNoise(){
+      if (!noiseSource) return;
+      try{ noiseSource.stop(); }catch(e){}
+      try{ noiseSource.disconnect(); }catch(e){}
+      noiseSource = null;
+    }
+
+    function startAudio(){
+      if (!toneToggle.checked && !voiceToggle.checked) return;
+      initAudio();
+      if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+      masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+      masterGain.gain.linearRampToValueAtTime(1.0, audioCtx.currentTime + 0.8);
+      // start ambient noise
+      if (toneToggle.checked){
+        const type = (noiseType && noiseType.value) || currentNoiseType;
+        const vol = parseFloat((noiseVol && noiseVol.value) || 0.45);
+        startNoise(type);
+        if (noiseGain) noiseGain.gain.setValueAtTime(vol, audioCtx.currentTime);
+      }
+    }
+    function pauseAudio(){ if (!audioCtx) return; masterGain.gain.cancelScheduledValues(audioCtx.currentTime); masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.6); }
+    function resumeAudio(){ if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume(); }
+    function stopAudio(){ if (!audioCtx) return; try{ masterGain.gain.setValueAtTime(0, audioCtx.currentTime); }catch(e){} stopNoise(); }
+
+    function playChime(){
+      try{
+        initAudio();
+        const ct = audioCtx.currentTime;
+        const freqs = [880,660,990,1320];
+        freqs.forEach((f,i)=>{
+          const o = audioCtx.createOscillator(); o.type='sine'; o.frequency.value = f;
+          const g = audioCtx.createGain(); g.gain.value = 0;
+          o.connect(g); g.connect(masterGain);
+          o.start(ct + i * 0.02);
+          g.gain.setValueAtTime(0, ct + i * 0.02);
+          g.gain.linearRampToValueAtTime(0.16, ct + i * 0.02 + 0.01);
+          g.gain.exponentialRampToValueAtTime(0.0001, ct + i * 0.02 + 2.0);
+          o.stop(ct + i * 0.02 + 2.1);
+        });
+      }catch(e){console.warn('Chime failed', e);}    
+    }
+
+    function speak(text){
+      if (!voiceToggle.checked) return;
+      if ('speechSynthesis' in window){
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US'; u.rate = 0.95; u.pitch = 0.9; u.volume = 1.0;
+        speechSynthesis.cancel(); speechSynthesis.speak(u);
+      }
+    }
+
+    // ---- Randomize fractal (Generate) ----
+    function randomizeFractal(){
+      colorSeed = Math.floor(Math.random()*360);
+      maxDepthGlobal = 4 + Math.floor(Math.random()*4); // 4..7
+      baseScale = 0.8 + Math.random()*0.9; // 0.8..1.7
+      // update UI inputs and display
+      scaleInput.value = baseScale.toFixed(2);
+      seedInput.value = colorSeed.toString();
+      depthInput.value = maxDepthGlobal.toString();
+      paramScale.textContent = baseScale.toFixed(2);
+      paramColor.textContent = colorSeed.toString();
+      paramDepth.textContent = maxDepthGlobal.toString();
+      scaleLabel.textContent = baseScale.toFixed(2);
+      playChime(); speak('New fractal generated');
+      drawFractal((Math.sin(t * 0.008) + 1) / 2);
+    }
+
+    // ---- Presets ----
+    function applyPreset(p){
+      if (p === 'sleep'){
+        baseScale = 1.2; colorSeed = 210; maxDepthGlobal = 6;
+        noiseType.value = 'nature'; noiseVol.value = 0.35;
+        inhale.value = 3; exhale.value = 7; hold1.value = 1; hold2.value = 1; sessionMin.value = 15;
+      } else if (p === 'focus'){
+        baseScale = 0.9; colorSeed = 30; maxDepthGlobal = 4;
+        noiseType.value = 'green'; noiseVol.value = 0.22;
+        inhale.value = 4; exhale.value = 4; hold1.value = 0; hold2.value = 0; sessionMin.value = 10;
+      } else if (p === 'relax' || p === 'calm'){
+        baseScale = 1.0; colorSeed = 56; maxDepthGlobal = 5;
+        noiseType.value = 'brown'; noiseVol.value = 0.42;
+        inhale.value = 4; exhale.value = 6; hold1.value = 2; hold2.value = 0; sessionMin.value = 8;
+      }
+      // update inputs and UI
+      scaleInput.value = baseScale.toFixed(2);
+      seedInput.value = colorSeed.toString();
+      depthInput.value = String(maxDepthGlobal);
+      updateFractalParamsFromInputs();
+      updateRangeLabels();
+      // if ambient is on and audio initialized, switch noise
+      if (audioCtx && toneToggle.checked){ startNoise(noiseType.value); if (noiseGain) noiseGain.gain.setValueAtTime(parseFloat(noiseVol.value), audioCtx.currentTime); }
+      playChime(); speak('Preset applied');
+    }
+
+    presetSleep.addEventListener('click', ()=>applyPreset('sleep'));
+    presetFocus.addEventListener('click', ()=>applyPreset('focus'));
+    presetCalm.addEventListener('click', ()=>applyPreset('relax'));
+
+    // ---- Export PNG ----
+    function exportPNG(){
+      // ensure latest frame rendered
+      drawFractal((Math.sin(t * 0.008) + 1) / 2);
+      // use existing canvas (which is device-pixel scaled) for high-res PNG
+      try{
+        const dataURL = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = dataURL;
+        const now = new Date();
+        const stamp = now.toISOString().replace(/[:.]/g,'-');
+        a.download = `fractal-breathing-${stamp}.png`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }catch(e){ console.warn('Export failed', e); alert('Export failed: '+(e && e.message)); }
+    }
+    exportBtn.addEventListener('click', exportPNG);
+
+    // ---- Breathing / timer logic ----
+    let running = false; let paused = false;
+    let sessionSeconds = parseInt(sessionMin.value, 10) * 60;
+    let sessionStart = 0; let elapsedPause = 0; let pausedAt = 0; let breathCount = 0; let lastPhase = '';
+
+    function formatTime(s){ s = Math.max(0, Math.floor(s)); const m = Math.floor(s/60); const sec = s%60; return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`; }
+
+    function computePhaseRelative(nowSec){
+      const inh = parseFloat(inhale.value);
+      const h1 = parseFloat(hold1.value);
+      const exh = parseFloat(exhale.value);
+      const h2 = parseFloat(hold2.value);
+      const cycle = inh + h1 + exh + h2 || 1;
+      let pos = nowSec % cycle;
+      if (pos < inh) return {phase:'Inhale', progress: pos/inh, raw: pos/cycle};
+      pos -= inh;
+      if (pos < h1) return {phase:'Hold', progress: pos/Math.max(1,h1), raw: (inh+pos)/cycle};
+      pos -= h1;
+      if (pos < exh) return {phase:'Exhale', progress: pos/exh, raw: (inh+h1+pos)/cycle};
+      pos -= exh;
+      return {phase:'Hold', progress: pos/Math.max(1,h2), raw: (inh+h1+exh+pos)/cycle};
+    }
+
+    function startSession(){
+      if (running) return;
+      sessionSeconds = parseInt(sessionMin.value,10) * 60;
+      sessionStart = performance.now(); elapsedPause = 0; pausedAt = 0; paused = false; running = true; breathCount = 0; lastPhase = '';
+      startAudio(); playChime(); startBtn.textContent = 'Stop';
+    }
+    function pauseSession(){ if (!running) return; if (!paused){ paused = true; pausedAt = performance.now(); pauseAudio(); } else { paused = false; elapsedPause += (performance.now() - pausedAt); pausedAt = 0; resumeAudio(); } pauseBtn.textContent = paused ? 'Resume':'Pause'; }
+    function stopSession(){ running = false; paused = false; pauseAudio(); stopAudio(); startBtn.textContent = 'Start'; pauseBtn.textContent = 'Pause'; }
+
+    // ---- Events ----
+    generateBtn.addEventListener('click', randomizeFractal);
+    startBtn.addEventListener('click', ()=>{ if (!running) startSession(); else stopSession(); });
+    pauseBtn.addEventListener('click', ()=>{ if (running) pauseSession(); });
+    soundTest.addEventListener('click', ()=> playChime());
+
+    // ---- Animation loop ----
+    let breathPhaseIdle = 0;
+    function animate(){
+      requestAnimationFrame(animate);
+      t += 1;
+
+      if (!running){
+        breathPhaseIdle = (Math.sin(t * 0.008) + 1) / 2;
+        drawFractal(breathPhaseIdle);
+        paramScale.textContent = baseScale.toFixed(2);
+        paramColor.textContent = colorSeed.toString();
+        paramDepth.textContent = maxDepthGlobal.toString();
+        return;
+      }
+
+      if (paused){ drawFractal(breathPhaseIdle); return; }
+
+      const now = performance.now();
+      const elapsed = (now - sessionStart - elapsedPause) / 1000;
+      const remaining = Math.max(0, sessionSeconds - elapsed);
+      timerEl.textContent = formatTime(Math.ceil(remaining));
+
+      const progressPct = Math.min(1, elapsed / sessionSeconds);
+      progressBar.style.width = `${Math.floor(progressPct * 100)}%`;
+      percentEl.textContent = `${Math.floor(progressPct * 100)}%`;
+
+      const phase = computePhaseRelative(elapsed);
+      phaseLabel.textContent = phase.phase;
+      const breathPhase = phase.raw;
+
+      let radiusScale = 0.9 + 0.6 * Math.sin((phase.raw) * Math.PI * 2 + 0.5);
+      if (phase.phase === 'Inhale'){ const p = phase.progress; radiusScale = 0.7 + 0.9 * p; breathLabel.textContent = 'Inhale'; }
+      else if (phase.phase === 'Exhale'){ const p = phase.progress; radiusScale = 0.7 + 0.9 * (1 - p); breathLabel.textContent = 'Exhale'; }
+      else { breathLabel.textContent = 'Hold'; }
+      breathCircle.style.transform = `scale(${radiusScale})`;
+
+      // ambient volume breathing (subtle)
+      if (audioCtx && noiseGain){
+        try{
+          const volBase = parseFloat((noiseVol && noiseVol.value) || 0.45);
+          const breathMod = 0.15 * Math.sin(breathPhase * Math.PI * 2 - Math.PI/2) + 0.15; // 0..0.3
+          noiseGain.gain.setTargetAtTime(Math.max(0, volBase * (0.7 + breathMod)), audioCtx.currentTime, 0.05);
+        }catch(e){}
+      }
+
+      paramScale.textContent = (0.7 + 0.8 * Math.sin(phase.raw * Math.PI)).toFixed(2);
+      paramColor.textContent = Math.round(((Math.sin(t * 0.02) + 1) / 2) * 100).toString();
+
+      if (phase.phase === 'Inhale' && lastPhase === 'Exhale'){ breathCount += 1; breathCountEl.textContent = breathCount; playChime(); speak('Inhale'); }
+      else if (phase.phase === 'Hold' && (lastPhase === 'Inhale' || lastPhase === 'Exhale')){ speak('Hold'); }
+      else if (phase.phase === 'Exhale' && lastPhase !== 'Exhale'){ speak('Exhale'); }
+      lastPhase = phase.phase;
+
+      drawFractal(breathPhase);
+
+      if (elapsed >= sessionSeconds){ stopSession(); playChime(); speak('Session complete. Well done.'); progressBar.style.width = `100%`; percentEl.textContent = `100%`; timerEl.textContent = formatTime(0); }
+    }
+
+    requestAnimationFrame(animate);
+
+    // --- layout helpers & accessibility ---
+    (function fitCanvas(){
+      const wrap = document.querySelector('.canvas-wrap');
+      function updateSize(){
+        const rect = wrap.getBoundingClientRect();
+        canvas.style.width = rect.width + 'px';
+        canvas.style.height = rect.height + 'px';
+        resize();
+      }
+      wrap.style.height = '100%'; updateSize(); window.addEventListener('resize', updateSize);
+    })();
+
+    document.body.addEventListener('pointerdown', async ()=>{ try{ initAudio(); if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume(); }catch(e){} }, {once:true});
+
+    document.addEventListener('keydown', (e)=>{ if (e.key === ' ') { e.preventDefault(); startBtn.click(); } if (e.key === 'p') pauseBtn.click(); });
+
+    // initial fill
+    ctx.fillStyle = '#060814'; ctx.fillRect(0,0,cw,ch);
+
+  </script>
+</body>
+</html>

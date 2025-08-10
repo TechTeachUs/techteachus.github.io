@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pixel Art Editor</title>
+  <style>
+    :root{
+      --ui-bg:#212f4c; /* dark */
+      --panel:#162949;
+      --muted:#9ca3af;
+      --accent:#10b981;
+      --tool:#e5e7eb;
+    }
+    *{box-sizing:border-box;font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071b2f 0%, #071426 100%);color:var(--tool)}
+    .app{display:grid;grid-template-columns:320px 1fr;gap:16px;padding:16px;height:100vh}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:8px;box-shadow:0 6px 24px rgba(2,6,23,0.6)}
+    header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    header h1{font-size:16px;margin:0}
+
+    /* toolbar */
+    .tools{display:flex;flex-wrap:wrap;gap:8px}
+    .tool{display:flex;align-items:center;gap:8px;padding:8px 10px;background:transparent;border:1px solid rgba(255,255,255,0.04);border-radius:6px;cursor:pointer}
+    .tool.active{background:linear-gradient(90deg, rgba(16,185,129,0.12), rgba(6,95,70,0.06));border-color:rgba(16,185,129,0.18)}
+    .tool svg{width:18px;height:18px;opacity:0.95}
+
+    .controls{display:flex;flex-direction:column;gap:12px}
+    label{font-size:12px;color:var(--muted)}
+    .row{display:flex;gap:8px;align-items:center}
+
+    /* canvas area */
+    .stage{display:flex;align-items:center;justify-content:center;height:100%;}
+    .canvas-wrap{position:relative;border-radius:6px;padding:10px;background:linear-gradient(180deg,#0b1220,#071422);box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
+    .display{position:relative;display:inline-block;background:#4f5153;padding:8px;border-radius:4px}
+    canvas{display:block;image-rendering:pixelated;background:transparent;}
+    .overlay{position:absolute;left:8px;top:8px;pointer-events:none}
+
+    .palette{display:flex;flex-wrap:wrap;gap:6px}
+    .swatch{width:28px;height:20px;border-radius:4px;border:1px solid rgba(0,0,0,0.45);cursor:pointer}
+
+    .footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:13px;color:var(--muted)}
+
+    /* small helpers */
+    input[type=number]{width:80px;padding:6px;border-radius:6px;border:none;background:#06131f;color:var(--tool)}
+    input[type=color]{width:44px;height:36px;border:none;padding:0;background:transparent;cursor:pointer}
+    button{padding:8px 10px;border-radius:6px;border:none;background:transparent;color:var(--tool);cursor:pointer}
+
+    .top-actions{display:flex;gap:8px}
+    .kbd{padding:3px 6px;border-radius:4px;background:#0b1320;border:1px solid rgba(255,255,255,0.02);font-size:12px}
+
+    @media (max-width:900px){.app{grid-template-columns:1fr;grid-template-rows:auto 1fr}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="panel">
+      <header>
+        <div style="width:40px;height:40px;border-radius:6px;background:linear-gradient(135deg,var(--accent),#446282);display:flex;align-items:center;justify-content:center;font-weight:700">&#127912;</div>
+        <div>
+          <h1>PixelArt EasyTool</h1>
+          <div style="font-size:12px;color:var(--muted)">Standalone pixel art editor — export PNG, undo/redo, fill, shapes</div>
+        </div>
+      </header>
+
+      <div class="controls">
+        <div>
+          <label>Tools</label>
+          <div class="tools" id="tools"></div>
+        </div>
+
+        <div>
+          <label>Colors</label>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+            <input id="colorPicker" type="color" value="#ff0000">
+            <div style="display:flex;gap:6px;align-items:center">
+              <div id="currentColor" style="width:32px;height:32px;border-radius:6px;border:1px solid rgba(0,0,0,0.4)"></div>
+            </div>
+          </div>
+
+          <div class="palette" id="palette" style="margin-top:10px">
+            <!-- default swatches injected by JS -->
+          </div>
+          <div style="margin-top:8px;display:flex;gap:6px">
+            <button id="addSwatch">+ Add</button>
+            <button id="clearSwatches">Clear</button>
+          </div>
+        </div>
+
+        <div>
+          <label>Canvas</label>
+          <div class="row" style="margin-top:8px">
+            <input id="w" type="number" value="32" min="4" max="512"> x <input id="h" type="number" value="32" min="4" max="512">
+            <button id="resizeBtn" title="Resize (keeps image)">Resize</button>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+            <label class="row"><input type="checkbox" id="preserve"> Keep</label>
+            <button id="clearCanvas">Clear</button>
+          </div>
+        </div>
+
+        <div>
+          <label>View / Export</label>
+          <div class="row" style="margin-top:8px">
+            <label>Zoom</label>
+            <input id="zoom" type="range" min="4" max="32" value="16">
+            <span id="zoomVal">16x</span>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:8px">
+            <button id="toggleGrid">Toggle grid</button>
+            <button id="exportBtn">Export PNG</button>
+          </div>
+        </div>
+
+        <div>
+          <label>History</label>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button id="undoBtn">Undo</button>
+            <button id="redoBtn">Redo</button>
+          </div>
+        </div>
+
+        <div>
+          <label>Shortcuts</label>
+          <div style="margin-top:6px;color:var(--muted);font-size:13px">
+            B Brush • E Eraser • F Fill • I Eyedropper • Z Zoom • Ctrl+Z Undo
+          </div>
+        </div>
+
+        <div class="footer"> 
+          <div style="font-size:12px;color:var(--muted)">Made for easy pixel art </div>
+          <div style="font-size:12px;color:var(--muted)">Enjoy! 🎨</div>
+        </div>
+
+      </div>
+    </aside>
+
+    <main class="stage">
+      <div class="canvas-wrap panel" style="width:fit-content">
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+          <div style="color:var(--muted);font-size:13px">Canvas preview</div>
+          <div style="margin-left:6px;display:flex;gap:6px;align-items:center">
+            <div class="kbd">Hold Shift for straight lines</div>
+          </div>
+        </div>
+        <div class="display" id="displayWrap">
+          <canvas id="imageCanvas"></canvas>
+          <canvas id="gridCanvas" class="overlay"></canvas>
+        </div>
+      </div>
+    </main>
+  </div>
+
+<script>
+// Pixel Photoshop — single-file pixel editor
+(() => {
+  // UI elements
+  const toolsEl = document.getElementById('tools');
+  const colorPicker = document.getElementById('colorPicker');
+  const currentColorEl = document.getElementById('currentColor');
+  const paletteEl = document.getElementById('palette');
+  const addSwatchBtn = document.getElementById('addSwatch');
+  const clearSwatchesBtn = document.getElementById('clearSwatches');
+  const wInput = document.getElementById('w');
+  const hInput = document.getElementById('h');
+  const resizeBtn = document.getElementById('resizeBtn');
+  const preserveChk = document.getElementById('preserve');
+  const clearBtn = document.getElementById('clearCanvas');
+  const zoomInput = document.getElementById('zoom');
+  const zoomVal = document.getElementById('zoomVal');
+  const toggleGridBtn = document.getElementById('toggleGrid');
+  const exportBtn = document.getElementById('exportBtn');
+  const undoBtn = document.getElementById('undoBtn');
+  const redoBtn = document.getElementById('redoBtn');
+
+  // canvas
+  const imageCanvas = document.getElementById('imageCanvas');
+  const gridCanvas = document.getElementById('gridCanvas');
+  const displayWrap = document.getElementById('displayWrap');
+
+  let pixelW = parseInt(wInput.value,10) || 32;
+  let pixelH = parseInt(hInput.value,10) || 32;
+  let scale = parseInt(zoomInput.value,10) || 16;
+  let showGrid = true;
+
+  // tools: pencil, eraser, fill, line, rect, eyedropper
+  const Tools = {
+    BRUSH: 'brush',
+    ERASER: 'eraser',
+    FILL: 'fill',
+    LINE: 'line',
+    RECT: 'rect',
+    EYE: 'eye'
+  };
+  let currentTool = Tools.BRUSH;
+
+  // drawing state
+  let drawing = false;
+  let lastPos = null;
+  let startPos = null;
+  let color = colorPicker.value;
+  let brushSize = 1; // always 1 for pixel art
+
+  // history
+  const undoStack = [];
+  const redoStack = [];
+  const MAX_HISTORY = 60;
+
+  // contexts
+  let ctx = imageCanvas.getContext('2d');
+  let gctx = gridCanvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+
+  function setupCanvas() {
+    // logical pixel size
+    imageCanvas.width = pixelW;
+    imageCanvas.height = pixelH;
+    // display size in CSS pixels
+    imageCanvas.style.width = pixelW * scale + 'px';
+    imageCanvas.style.height = pixelH * scale + 'px';
+    // overlay grid scaled to match display
+    gridCanvas.width = pixelW * scale;
+    gridCanvas.height = pixelH * scale;
+    gridCanvas.style.left = imageCanvas.style.left;
+    gridCanvas.style.top = imageCanvas.style.top;
+
+    // reset contexts
+    ctx = imageCanvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+    gctx = gridCanvas.getContext('2d');
+
+    // ensure transparent background
+    ctx.clearRect(0,0,imageCanvas.width,imageCanvas.height);
+
+    drawGrid();
+    pushHistory();
+    refreshUI();
+  }
+
+  function drawGrid(){
+    gctx.clearRect(0,0,gridCanvas.width,gridCanvas.height);
+    if(!showGrid) return;
+    gctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    gctx.lineWidth = 1;
+    for(let x=0;x<=pixelW;x++){
+      gctx.beginPath();
+      gctx.moveTo(x*scale + 0.5, 0);
+      gctx.lineTo(x*scale + 0.5, pixelH*scale);
+      gctx.stroke();
+    }
+    for(let y=0;y<=pixelH;y++){
+      gctx.beginPath();
+      gctx.moveTo(0, y*scale + 0.5);
+      gctx.lineTo(pixelW*scale, y*scale + 0.5);
+      gctx.stroke();
+    }
+  }
+
+  // coordinate helpers
+  function getEventPos(evt){
+    const rect = imageCanvas.getBoundingClientRect();
+    const x = Math.floor((evt.clientX - rect.left) * imageCanvas.width / rect.width);
+    const y = Math.floor((evt.clientY - rect.top) * imageCanvas.height / rect.height);
+    return {x: clamp(x,0,imageCanvas.width-1), y: clamp(y,0,imageCanvas.height-1)};
+  }
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+
+  // drawing primitives
+  function setPixel(x,y,rgba){
+    const img = ctx.getImageData(0,0,imageCanvas.width,imageCanvas.height);
+    const i = (y * img.width + x) * 4;
+    img.data[i] = rgba[0];
+    img.data[i+1] = rgba[1];
+    img.data[i+2] = rgba[2];
+    img.data[i+3] = rgba[3];
+    ctx.putImageData(img,0,0);
+  }
+
+  function fastSetPixel(imgData,x,y,rgba){
+    const i = (y * imgData.width + x) * 4;
+    imgData.data[i] = rgba[0];
+    imgData.data[i+1] = rgba[1];
+    imgData.data[i+2] = rgba[2];
+    imgData.data[i+3] = rgba[3];
+  }
+
+  function colorToRGBA(hex){
+    // supports #rrggbb and #rgb
+    const c = hex.replace('#','');
+    if(c.length===3){
+      return [parseInt(c[0]+c[0],16),parseInt(c[1]+c[1],16),parseInt(c[2]+c[2],16),255];
+    }
+    return [parseInt(c.slice(0,2),16),parseInt(c.slice(2,4),16),parseInt(c.slice(4,6),16),255];
+  }
+
+  function getPixelRGBA(imgData,x,y){
+    const i = (y * imgData.width + x) * 4;
+    return [imgData.data[i], imgData.data[i+1], imgData.data[i+2], imgData.data[i+3]];
+  }
+
+  function rgbaEquals(a,b){
+    return a[0]===b[0] && a[1]===b[1] && a[2]===b[2] && a[3]===b[3];
+  }
+
+  // Bresenham line
+  function drawLinePixels(x0,y0,x1,y1,rgba,imgData=null){
+    let dx = Math.abs(x1-x0);
+    let dy = Math.abs(y1-y0);
+    let sx = (x0 < x1) ? 1 : -1;
+    let sy = (y0 < y1) ? 1 : -1;
+    let err = dx - dy;
+    while(true){
+      if(imgData) fastSetPixel(imgData,x0,y0,rgba); else setPixel(x0,y0,rgba);
+      if (x0 === x1 && y0 === y1) break;
+      let e2 = 2 * err;
+      if (e2 > -dy){ err -= dy; x0 += sx; }
+      if (e2 < dx){ err += dx; y0 += sy; }
+    }
+  }
+
+  // flood fill (iterative)
+  function floodFill(sx,sy,fillRGBA){
+    const img = ctx.getImageData(0,0,imageCanvas.width,imageCanvas.height);
+    const target = getPixelRGBA(img,sx,sy);
+    if(rgbaEquals(target,fillRGBA)) return;
+    const w = img.width, h = img.height;
+    const stack = [[sx,sy]];
+    while(stack.length){
+      const [x,y] = stack.pop();
+      const i = (y*w + x)*4;
+      const cur = [img.data[i],img.data[i+1],img.data[i+2],img.data[i+3]];
+      if(!rgbaEquals(cur,target)) continue;
+      fastSetPixel(img,x,y,fillRGBA);
+      if(x>0) stack.push([x-1,y]);
+      if(x<w-1) stack.push([x+1,y]);
+      if(y>0) stack.push([x,y-1]);
+      if(y<h-1) stack.push([x,y+1]);
+    }
+    ctx.putImageData(img,0,0);
+  }
+
+  // history
+  function pushHistory(){
+    const img = ctx.getImageData(0,0,imageCanvas.width,imageCanvas.height);
+    const snapshot = new Uint8ClampedArray(img.data); // clone
+    undoStack.push({data:snapshot,width:img.width,height:img.height});
+    if(undoStack.length>MAX_HISTORY) undoStack.shift();
+    // clear redo on new action
+    redoStack.length = 0;
+    refreshUI();
+  }
+  function applySnapshot(snapshot){
+    const img = new ImageData(new Uint8ClampedArray(snapshot.data), snapshot.width, snapshot.height);
+    ctx.putImageData(img,0,0);
+    drawGrid();
+  }
+  function undo(){
+    if(undoStack.length<=1) return; // keep the first state
+    const current = undoStack.pop();
+    redoStack.push(current);
+    const prev = undoStack[undoStack.length-1];
+    applySnapshot(prev);
+    refreshUI();
+  }
+  function redo(){
+    if(redoStack.length===0) return;
+    const snap = redoStack.pop();
+    undoStack.push(snap);
+    applySnapshot(snap);
+    refreshUI();
+  }
+
+  // export
+  function exportPNG(scaleFactor=16){
+    const exportCanvas = document.createElement('canvas');
+    exportCanvas.width = imageCanvas.width * scaleFactor;
+    exportCanvas.height = imageCanvas.height * scaleFactor;
+    const ectx = exportCanvas.getContext('2d');
+    ectx.imageSmoothingEnabled = false;
+    // draw the small image onto export canvas scaled up
+    // first draw the image data into a temporary canvas sized to pixel dims
+    const tmp = document.createElement('canvas');
+    tmp.width = imageCanvas.width;
+    tmp.height = imageCanvas.height;
+    const tctx = tmp.getContext('2d');
+    tctx.putImageData(ctx.getImageData(0,0,imageCanvas.width,imageCanvas.height),0,0);
+    ectx.drawImage(tmp,0,0,exportCanvas.width,exportCanvas.height);
+    const data = exportCanvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = data; a.download = 'pixel-art.png';
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  // UI building
+  function makeToolButton(id, title, svg){
+    const btn = document.createElement('button');
+    btn.className = 'tool';
+    btn.title = title;
+    btn.innerHTML = svg + '<span style="display:none">'+title+'</span>';
+    btn.onclick = () => selectTool(id);
+    return btn;
+  }
+
+  function selectTool(t){
+    currentTool = t;
+    for(const c of toolsEl.children) c.classList.remove('active');
+    const b = Array.from(toolsEl.children).find(n => n.title===toolTitles[t]);
+    if(b) b.classList.add('active');
+  }
+
+  const toolTitles = {
+    [Tools.BRUSH]:'Brush (B)',
+    [Tools.ERASER]:'Eraser (E)',
+    [Tools.FILL]:'Fill (F)',
+    [Tools.LINE]:'Line',
+    [Tools.RECT]:'Rect',
+    [Tools.EYE]:'Eyedropper (I)'
+  };
+
+  function buildTools(){
+    const svgs = {
+      brush: '&#128396;',
+      eraser: '&#128433;',
+      fill: '&#128166;',
+      line: '&#128207;',
+      rect: '&#128307;',
+      eye: '&#x1F308;'
+    };
+    toolsEl.appendChild(makeToolButton(Tools.BRUSH, toolTitles[Tools.BRUSH], svgs.brush));
+    toolsEl.appendChild(makeToolButton(Tools.ERASER, toolTitles[Tools.ERASER], svgs.eraser));
+    toolsEl.appendChild(makeToolButton(Tools.FILL, toolTitles[Tools.FILL], svgs.fill));
+    toolsEl.appendChild(makeToolButton(Tools.LINE, toolTitles[Tools.LINE], svgs.line));
+    toolsEl.appendChild(makeToolButton(Tools.RECT, toolTitles[Tools.RECT], svgs.rect));
+    toolsEl.appendChild(makeToolButton(Tools.EYE, toolTitles[Tools.EYE], svgs.eye));
+    // mark default
+    selectTool(Tools.BRUSH);
+  }
+
+  // palette
+  const defaultSwatches = ['#000000','#ffffff','#ff0000','#ffcc00','#00aaff','#10b981','#7c3aed','#f97316'];
+  function buildPalette(){
+    paletteEl.innerHTML = '';
+    const swatches = JSON.parse(localStorage.getItem('pixel_swatches') || 'null') || defaultSwatches;
+    for(const s of swatches){
+      const d = document.createElement('div');
+      d.className = 'swatch'; d.style.background = s; d.title = s;
+      d.onclick = () => { colorPicker.value = s; setColor(s); };
+      paletteEl.appendChild(d);
+    }
+  }
+  addSwatchBtn.onclick = ()=>{
+    const c = colorPicker.value;
+    const arr = JSON.parse(localStorage.getItem('pixel_swatches') || 'null') || defaultSwatches.slice();
+    arr.unshift(c);
+    while(arr.length>24) arr.pop();
+    localStorage.setItem('pixel_swatches', JSON.stringify(arr));
+    buildPalette();
+  };
+  clearSwatchesBtn.onclick = ()=>{ localStorage.removeItem('pixel_swatches'); buildPalette(); };
+
+  function setColor(c){ color = c; currentColorEl.style.background = c; }
+  colorPicker.oninput = (e)=> setColor(e.target.value);
+
+  // events for drawing
+  imageCanvas.addEventListener('pointerdown', (e)=>{
+    e.preventDefault();
+    imageCanvas.setPointerCapture(e.pointerId);
+    drawing = true;
+    lastPos = getEventPos(e);
+    startPos = lastPos;
+
+    if(currentTool === Tools.FILL){
+      pushHistory();
+      floodFill(lastPos.x,lastPos.y,colorToRGBA(color));
+      return;
+    }
+    if(currentTool === Tools.EYE){
+      // sample color
+      const data = ctx.getImageData(0,0,imageCanvas.width,imageCanvas.height);
+      const sampled = getPixelRGBA(data,lastPos.x,lastPos.y);
+      // convert to #rrggbb
+      const h = '#'+[0,1,2].map(i=>sampled[i].toString(16).padStart(2,'0')).join('');
+      colorPicker.value = h; setColor(h);
+      return;
+    }
+    // For brush/eraser/line/rect start drawing (preview)
+    if(currentTool === Tools.BRUSH || currentTool === Tools.ERASER){
+      pushHistory();
+      drawDot(lastPos.x,lastPos.y);
+    }
+
+  });
+
+  imageCanvas.addEventListener('pointermove',(e)=>{
+    if(!drawing) return;
+    const pos = getEventPos(e);
+    if(currentTool === Tools.BRUSH){
+      drawLinePixels(lastPos.x,lastPos.y,pos.x,pos.y,colorToRGBA(color));
+      lastPos = pos;
+    } else if(currentTool === Tools.ERASER){
+      drawLinePixels(lastPos.x,lastPos.y,pos.x,pos.y,[0,0,0,0]);
+      lastPos = pos;
+    } else {
+      // for line/rect we can preview by redrawing image from last history snapshot
+      // we will show preview by restoring last saved image and drawing temporary shape
+      const prev = undoStack[undoStack.length-1];
+      applySnapshot(prev);
+      if(currentTool === Tools.LINE){
+        drawLinePixels(startPos.x,startPos.y,pos.x,pos.y,colorToRGBA(color));
+      } else if(currentTool === Tools.RECT){
+        drawRect(startPos.x,startPos.y,pos.x,pos.y,colorToRGBA(color));
+      }
+    }
+  });
+
+  imageCanvas.addEventListener('pointerup',(e)=>{
+    if(!drawing) return;
+    drawing = false;
+    const pos = getEventPos(e);
+    if(currentTool === Tools.LINE){
+      pushHistory();
+      drawLinePixels(startPos.x,startPos.y,pos.x,pos.y,colorToRGBA(color));
+    } else if(currentTool === Tools.RECT){
+      pushHistory();
+      drawRect(startPos.x,startPos.y,pos.x,pos.y,colorToRGBA(color));
+    }
+    lastPos = null; startPos = null;
+    imageCanvas.releasePointerCapture(e.pointerId);
+  });
+
+  // helper to draw a single dot (1px)
+  function drawDot(x,y){
+    const rgba = colorToRGBA(color);
+    const img = ctx.getImageData(0,0,imageCanvas.width,imageCanvas.height);
+    fastSetPixel(img,x,y,rgba);
+    ctx.putImageData(img,0,0);
+  }
+
+  // draw rect filled
+  function drawRect(x0,y0,x1,y1,rgba,imgData=null){
+    const left = Math.min(x0,x1), right = Math.max(x0,x1);
+    const top = Math.min(y0,y1), bottom = Math.max(y0,y1);
+    if(imgData){
+      for(let yy=top;yy<=bottom;yy++) for(let xx=left;xx<=right;xx++) fastSetPixel(imgData,xx,yy,rgba);
+    } else {
+      const img = ctx.getImageData(0,0,imageCanvas.width,imageCanvas.height);
+      for(let yy=top;yy<=bottom;yy++) for(let xx=left;xx<=right;xx++) fastSetPixel(img,xx,yy,rgba);
+      ctx.putImageData(img,0,0);
+    }
+  }
+
+  // keyboard shortcuts
+  window.addEventListener('keydown',(e)=>{
+    if(e.ctrlKey && e.key.toLowerCase()==='z'){ e.preventDefault(); undo(); }
+    if(e.key.toLowerCase()==='b'){ selectTool(Tools.BRUSH); }
+    if(e.key.toLowerCase()==='e'){ selectTool(Tools.ERASER); }
+    if(e.key.toLowerCase()==='f'){ selectTool(Tools.FILL); }
+    if(e.key.toLowerCase()==='i'){ selectTool(Tools.EYE); }
+    if(e.key.toLowerCase()==='z'){ /* could change zoom but keep simple */ }
+  });
+
+  // UI controls
+  zoomInput.oninput = ()=>{ scale = parseInt(zoomInput.value,10); zoomVal.textContent = scale + 'x'; setupCanvas(); };
+  toggleGridBtn.onclick = ()=>{ showGrid = !showGrid; drawGrid(); };
+  clearBtn.onclick = ()=>{ if(confirm('Clear canvas?')){ pushHistory(); ctx.clearRect(0,0,imageCanvas.width,imageCanvas.height); drawGrid(); } };
+  exportBtn.onclick = ()=> exportPNG(16);
+  undoBtn.onclick = undo; redoBtn.onclick = redo;
+
+  resizeBtn.onclick = ()=>{
+    const nw = Math.max(1,parseInt(wInput.value,10)||32);
+    const nh = Math.max(1,parseInt(hInput.value,10)||32);
+    if(nw===pixelW && nh===pixelH) return;
+    const keep = preserveChk.checked;
+    if(keep){
+      // scale old canvas into new size (nearest)
+      const tmp = document.createElement('canvas');
+      tmp.width = pixelW; tmp.height = pixelH;
+      const tctx = tmp.getContext('2d');
+      tctx.putImageData(ctx.getImageData(0,0,pixelW,pixelH),0,0);
+
+      pixelW = nw; pixelH = nh;
+      setupCanvas();
+
+      // draw tmp scaled into new canvas with nearest neighbor
+      ctx.imageSmoothingEnabled = false;
+      ctx.clearRect(0,0,pixelW,pixelH);
+      ctx.drawImage(tmp,0,0, pixelW, pixelH);
+      pushHistory();
+    } else {
+      pixelW = nw; pixelH = nh; setupCanvas(); pushHistory();
+    }
+  };
+
+  // eyedropper from outside UI
+  imageCanvas.addEventListener('dblclick', (e)=>{
+    const pos = getEventPos(e);
+    const d = ctx.getImageData(0,0,imageCanvas.width,imageCanvas.height);
+    const s = getPixelRGBA(d,pos.x,pos.y);
+    const h = '#'+[0,1,2].map(i=>s[i].toString(16).padStart(2,'0')).join('');
+    colorPicker.value = h; setColor(h);
+  });
+
+  // utilities
+  function refreshUI(){
+    zoomVal.textContent = scale + 'x';
+    currentColorEl.style.background = color;
+    undoBtn.disabled = undoStack.length<=1;
+    redoBtn.disabled = redoStack.length===0;
+  }
+
+  // init
+  buildTools(); buildPalette(); setColor(colorPicker.value);
+  setupCanvas();
+
+  // initialize history with blank image
+  undoStack.length = 0; redoStack.length = 0; pushHistory();
+
+})();
+</script>
+</body>
+</html>
