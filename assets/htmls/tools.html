@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TechTeach Tools Suite</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts - Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- particles.js CDN -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      position: relative;
+      overflow-x: hidden;
+    }
+    #particles-js {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .frames-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: 1.5rem;
+      position:sticky;
+      z-index: 1;
+      max-width: 1100px;
+      max-height: 700px;
+      margin: 0 auto;
+    }
+    .frame-wrap {
+      
+      border-radius: 1rem;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      max-height: 350px;
+      border: 1.5px solid #c7d2fe44;
+    }
+    .frame-title {
+      background: linear-gradient(90deg, #a5b4fc 0%, #f1f5f9 100%);
+      color: #3730a3;
+      font-size: 1.15rem;
+      padding: 0.75rem 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      border-bottom: 1px solid #c7d2fe44;
+      text-shadow: 0 1px 8px #c7d2fe22;
+      cursor: pointer;
+      text-decoration: underline;
+      transition: background 0.2s, color 0.2s;
+      outline: none;
+      display: block;
+    }
+    .frame-title:focus,
+    .frame-title:hover {
+      background: #a5b4fc;
+      color: #312e81;
+    }
+    iframe {
+      flex: 1 1 0;
+      width: 200%;
+      height: 200%;
+      border: none;
+      min-height: 580px;
+      background: #0f172a;
+      transform: scale(0.5);
+      transform-origin: top left;
+      /* Prevent scrollbars from appearing due to scaling */
+      pointer-events: auto;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .frames-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .frame-wrap {
+        min-height: 120px;
+      }
+     
+    }
+    .frame-wrap:focus-within {
+      outline: 3px solid #a5b4fc;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-100 via-slate-100 to-slate-200 font-inter overflow-x-hidden">
+  <!-- Particles.js Background -->
+  <div id="particles-js"></div>
+  <!-- Heading styled like index.html -->
+  <header class="w-full flex justify-center mt-8 mb-6 z-10 relative">
+    <div class="flex items-center gap-4 bg-white/80 rounded-2xl shadow-lg px-8 py-4 border border-indigo-200 max-w-2xl w-full mx-4">
+      <img src="../images/favicon.png" alt="TechTeach Logo" class="w-14 h-14 rounded-full border-2 border-indigo-300 shadow" onerror="this.style.display='none'">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold text-indigo-700 drop-shadow-sm mb-1 tracking-tight">TechTeach Classroom Tools</h1>
+       
+      </div>
+    </div>
+  </header>
+  <div class="frames-grid">
+    <div class="frame-wrap">
+      <a class="frame-title" href="pixel.html" target="_blank" rel="noopener" tabindex="0">Pixel Art Editor</a>
+      <iframe src="pixel.html" title="Pixel Art Editor"></iframe>
+    </div>
+    <div class="frame-wrap">
+      <a class="frame-title" href="timer.html" target="_blank" rel="noopener" tabindex="0">Pomodoro Timer</a>
+      <iframe src="timer.html" title="Pomodoro Timer"></iframe>
+    </div>
+    <div class="frame-wrap">
+      <a class="frame-title" href="mindful.html" target="_blank" rel="noopener" tabindex="0">Mindful Fractal</a>
+      <iframe src="mindful.html" title="Mindful Fractal"></iframe>
+    </div>
+    
+  </div>
+  <script>
+    /* particles.js config for darker particles and connecting lines */
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 60,
+          "density": { "enable": true, "value_area": 800 }
+        },
+        "color": {
+          "value": ["#312e81", "#334155", "#64748b", "#6366f1"]
+        },
+        "shape": { "type": "circle" },
+        "opacity": {
+          "value": 0.45,
+          "random": true
+        },
+        "size": {
+          "value": 3,
+          "random": true
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#312e81",
+          "opacity": 0.5,
+          "width": 1.5
+        },
+        "move": {
+          "enable": true,
+          "speed": 0.7,
+          "direction": "none",
+          "random": true,
+          "straight": false,
+          "out_mode": "out"
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { "enable": false },
+          "onclick": { "enable": false }
+        }
+      },
+      "retina_detect": true
+    });
+
+    if (window.self !== window.top) {
+  // Only apply scaling if embedded in an iframe
+  document.documentElement.style.width = "200vw";
+  document.documentElement.style.height = "100vh";
+  document.body.style.width = "200vw";
+  document.body.style.height = "100vh";
+  document.body.style.transform = "scale(0.5)";
+  document.body.style.transformOrigin = "top left";
+  document.body.style.overflow = "hidden";
+}
+  </script>
+</body>
+</html>

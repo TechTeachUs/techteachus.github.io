@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pomodoro Timer — 4 Rounds with Long Break</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0f172a;
+      color: #fff;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    #currentTime {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    #currentDate {
+      font-size: 1rem;
+      color: #94a3b8;
+      margin-bottom: 2rem;
+    }
+    #displayTime {
+      font-size: 8rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    #modeLabel {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      color: #94a3b8;
+    }
+    .controls button {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      margin: 0.3rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .primary { background: #ff6b6b; color: #fff; }
+    .ghost { background: transparent; color: #fff; border: 1px solid #94a3b8; }
+    .settings {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      color: #cbd5e1;
+    }
+    .settings label {
+      margin: 0 0.5rem;
+    }
+    .settings input {
+      width: 4rem;
+      padding: 0.2rem;
+      text-align: center;
+      border-radius: 4px;
+      border: none;
+    }
+    @media (max-width: 600px) {
+      #displayTime {
+        font-size: 3.5rem;
+      }
+      #currentTime {
+        font-size: 1.2rem;
+      }
+      #modeLabel {
+        font-size: 1.1rem;
+      }
+      .settings {
+        font-size: 0.95rem;
+        margin-top: 1rem;
+      }
+      .controls button {
+        font-size: 1rem;
+        padding: 0.4rem 0.7rem;
+      }
+      main {
+        width: 98vw;
+        min-width: 0;
+        padding: 0 2vw;
+      }
+    }
+
+    @media (max-width: 400px) {
+      #displayTime {
+        font-size: 2.2rem;
+      }
+      main {
+        padding: 0 1vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Pomodoro Timer</h1>
+    <div id="currentTime">--:--:--</div>
+    <div id="currentDate">Loading date...</div>
+    <div id="displayTime" aria-live="polite">25:00</div>
+    <div id="modeLabel">Work Session</div>
+    <div class="controls">
+      <button id="startBtn" class="primary">Start</button>
+      <button id="pauseBtn">Pause</button>
+      <button id="resetBtn" class="ghost">Reset</button>
+    </div>
+    <div class="settings">
+      <label for="workInput">Work (min):</label>
+      <input id="workInput" type="number" value="25" min="1">
+      <label for="shortBreakInput">Short Break (min):</label>
+      <input id="shortBreakInput" type="number" value="5" min="1">
+      <label for="longBreakInput">Long Break (min):</label>
+      <input id="longBreakInput" type="number" value="15" min="1">
+    </div>
+  </main>
+<script>
+  function playChime() {
+    const ctx = window.audioCtx || (window.audioCtx = new (window.AudioContext || window.webkitAudioContext)());
+    const now = ctx.currentTime;
+
+    // Define a happy arpeggio (C major triad: C-E-G)
+    const notes = [
+      { freq: 523.25, delay: 0.00 }, // C5
+      { freq: 659.25, delay: 0.15 }, // E5
+      { freq: 783.99, delay: 0.30 }, // G5
+      { freq: 1046.50, delay: 0.45 } // C6 (octave up)
+    ];
+
+    notes.forEach(({ freq, delay }, i) => {
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'triangle';
+      o.frequency.value = freq;
+      g.gain.value = 0.13;
+      o.connect(g).connect(ctx.destination);
+      o.start(now + delay);
+      g.gain.setValueAtTime(0.13, now + delay);
+      g.gain.linearRampToValueAtTime(0, now + delay + 0.25);
+      o.stop(now + delay + 0.28);
+    });
+  }
+
+  const currentTimeEl = document.getElementById('currentTime');
+  const currentDateEl = document.getElementById('currentDate');
+  const displayTimeEl = document.getElementById('displayTime');
+  const modeLabelEl = document.getElementById('modeLabel');
+  const startBtn = document.getElementById('startBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const workInput = document.getElementById('workInput');
+  const shortBreakInput = document.getElementById('shortBreakInput');
+  const longBreakInput = document.getElementById('longBreakInput');
+
+  let timeRemaining = parseInt(workInput.value) * 60;
+  let timerInterval = null;
+  let mode = 'Work Session';
+  let roundCount = 0;
+  let breakCount = 0;
+
+  const audio = new Audio('https://cdn.pixabay.com/audio/2022/03/15/audio_5b8e0f2b79.mp3');
+
+  let audioUnlocked = false;
+
+  startBtn.addEventListener('click', () => {
+    if (!audioUnlocked) {
+      audio.play().then(() => {
+        audio.pause();
+        audio.currentTime = 0;
+        audioUnlocked = true;
+      }).catch(() => {});
+    }
+    startTimer();
+  });
+
+  function updateClock() {
+    const now = new Date();
+    currentTimeEl.textContent = now.toLocaleTimeString();
+    currentDateEl.textContent = now.toLocaleDateString(undefined, {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  function updateDisplay() {
+    const minutes = String(Math.floor(timeRemaining / 60)).padStart(2, '0');
+    const seconds = String(timeRemaining % 60).padStart(2, '0');
+    displayTimeEl.textContent = `${minutes}:${seconds}`;
+    if (mode === 'Work Session') {
+      modeLabelEl.textContent = `${mode} (Round ${roundCount})`;
+    } else {
+      modeLabelEl.textContent = `${mode} (Round ${breakCount})`;
+    }
+  }
+
+  function startTimer() {
+    if (timerInterval) return;
+    timerInterval = setInterval(() => {
+      if (timeRemaining > 0) {
+        timeRemaining--;
+        updateDisplay();
+      } else {
+        clearInterval(timerInterval);
+        timerInterval = null;
+
+        // Play chime on every session change
+        playChime();
+
+        if (mode === 'Work Session') {
+          roundCount++;
+          if (roundCount % 4 === 0) {
+            mode = 'Long Break';
+            timeRemaining = parseInt(longBreakInput.value) * 60;
+          } else {
+            mode = 'Short Break';
+            timeRemaining = parseInt(shortBreakInput.value) * 60;
+          }
+          // Do NOT increment breakCount here
+        } else {
+          // Just finished a break, so increment breakCount now
+          breakCount++;
+          mode = 'Work Session';
+          timeRemaining = parseInt(workInput.value) * 60;
+        }
+        updateDisplay();
+        startTimer(); // Auto-start next session
+      }
+    }, 1000);
+  }
+
+  function pauseTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  function resetTimer() {
+    pauseTimer();
+    if (mode === 'Work Session') {
+      timeRemaining = parseInt(workInput.value) * 60;
+    } else if (mode === 'Short Break') {
+      timeRemaining = parseInt(shortBreakInput.value) * 60;
+    } else {
+      timeRemaining = parseInt(longBreakInput.value) * 60;
+    }
+    updateDisplay();
+  }
+
+  pauseBtn.addEventListener('click', pauseTimer);
+  resetBtn.addEventListener('click', resetTimer);
+
+  workInput.addEventListener('change', () => {
+    if (mode === 'Work Session') resetTimer();
+  });
+  shortBreakInput.addEventListener('change', () => {
+    if (mode === 'Short Break') resetTimer();
+  });
+  longBreakInput.addEventListener('change', () => {
+    if (mode === 'Long Break') resetTimer();
+  });
+
+  updateDisplay();
+  playChime();
+</script>
+</body>
+</html>

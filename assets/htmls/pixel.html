@@ -49,6 +49,52 @@
     .top-actions{display:flex;gap:8px}
     .kbd{padding:3px 6px;border-radius:4px;background:#0b1320;border:1px solid rgba(255,255,255,0.02);font-size:12px}
 
+    @media (max-width:600px){
+      .app {
+        padding: 4px;
+        gap: 6px;
+        height: auto;
+        min-height: 100vh;
+      }
+      .panel {
+        padding: 6px;
+      }
+      header h1 {
+        font-size: 14px;
+      }
+      .footer {
+        flex-direction: column;
+        gap: 4px;
+        font-size: 11px;
+      }
+      .stage {
+        padding: 0;
+      }
+      .canvas-wrap {
+        padding: 4px;
+      }
+      .display {
+        padding: 2px;
+      }
+      .swatch {
+        width: 20px;
+        height: 16px;
+      }
+      input[type=number] {
+        width: 48px;
+        padding: 4px;
+        font-size: 12px;
+      }
+      input[type=color] {
+        width: 32px;
+        height: 24px;
+      }
+      button {
+        padding: 6px 8px;
+        font-size: 12px;
+      }
+    }
+
     @media (max-width:900px){.app{grid-template-columns:1fr;grid-template-rows:auto 1fr}}
   </style>
 </head>
