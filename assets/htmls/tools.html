@@ -1,206 +1,229 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>TechTeach Tools</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<style>
-body{min-height:100vh;margin:0;font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
-#particles-js{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
-.frames-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1.5rem;z-index:1;max-width:1100px;margin:0 auto;position:relative}
-.frame-wrap{border-radius:1rem;box-shadow:0 4px 18px rgba(0,0,0,.08);overflow:hidden;display:flex;flex-direction:column;min-width:0;border:1.5px solid #c7d2fe44;background:#f1f5f9;max-height:360px}
-.frame-title{background:linear-gradient(90deg,#a5b4fc 0%,#f1f5f9 100%);color:#3730a3;font-size:1.05rem;padding:.6rem 1rem;font-weight:600;border-bottom:1px solid #c7d2fe44;text-decoration:underline;cursor:pointer}
-.frame-title:hover,.frame-title:focus{background:#a5b4fc;color:#312e81}
-iframe{border:0;flex:1 1 auto;width:100%;height:100%;background:#0f172a}
-iframe.scaled{width:200%;height:200%;transform:scale(.5);transform-origin:top left}
-.fallback{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;text-align:center;font-size:.85rem;background:#ffffffee;color:#334155}
-.fallback button{margin-top:.5rem;background:#6366f1;color:#fff;border:0;padding:.5rem .9rem;border-radius:.5rem;font-weight:600;cursor:pointer}
-.fallback button:hover{background:#4f46e5}
-@media (max-width:900px){
-  .frames-grid{grid-template-columns:1fr}
-  .frame-wrap{max-height:300px}
-  iframe.scaled{width:170%;height:170%;transform:scale(.58)}
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TechTeach Tools</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts - Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- particles.js CDN -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      position: relative;
+      overflow-x: hidden;
+    }
+    #particles-js {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .frames-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: 1.5rem;
+      position:sticky;
+      z-index: 1;
+      max-width: 1100px;
+      max-height: 700px;
+      margin: 0 auto;
+    }
+    .frame-wrap {
+      
+      border-radius: 1rem;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      max-height: 350px;
+      border: 1.5px solid #c7d2fe44;
+    }
+    .frame-title {
+      background: linear-gradient(90deg, #a5b4fc 0%, #f1f5f9 100%);
+      color: #3730a3;
+      font-size: 1.15rem;
+      padding: 0.75rem 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      border-bottom: 1px solid #c7d2fe44;
+      text-shadow: 0 1px 8px #c7d2fe22;
+      cursor: pointer;
+      text-decoration: underline;
+      transition: background 0.2s, color 0.2s;
+      outline: none;
+      display: block;
+    }
+    .frame-title:focus,
+    .frame-title:hover {
+      background: #a5b4fc;
+      color: #312e81;
+    }
+    iframe {
+      flex: 1 1 0;
+      width: 200%;
+      height: 200%;
+      border: none;
+      min-height: 580px;
+      background: #0f172a;
+      transform: scale(0.5);
+      transform-origin: top left;
+      /* Prevent scrollbars from appearing due to scaling */
+      pointer-events: auto;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .frames-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .frame-wrap {
+        min-height: 120px;
+      }
+     
+    }
+    .frame-wrap:focus-within {
+      outline: 3px solid #a5b4fc;
+      outline-offset: 2px;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-indigo-100 via-slate-100 to-slate-200 font-inter">
-<div id="particles-js"></div>
-
-<header class="w-full flex justify-center mt-8 mb-4 z-10 relative">
-  <div class="flex items-center gap-4 bg-white/80 backdrop-blur rounded-2xl shadow-lg px-6 py-4 border border-indigo-200 max-w-2xl w-full mx-4">
-    <a href="../../index.html">
-      <img src="../images/favicon.png" alt="TechTeach Logo" class="w-14 h-14 rounded-full border-2 border-indigo-300 shadow" onerror="this.style.display='none'">
-    </a>
-    <div>
-      <h1 class="text-2xl md:text-3xl font-bold text-indigo-700 tracking-tight mb-1">TechTeach Tools</h1>
-      <p class="text-indigo-400 text-sm md:text-base font-medium">Quick access learning & creative apps</p>
+<body class="bg-gradient-to-br from-indigo-100 via-slate-100 to-slate-200 font-inter overflow-x-hidden">
+  <!-- Particles.js Background -->
+  <div id="particles-js"></div>
+  <!-- Heading styled like index.html -->
+  <header class="w-full flex justify-center mt-8 mb-6 z-10 relative">
+    <div class="flex items-center gap-4 bg-white/80 rounded-2xl shadow-lg px-8 py-4 border border-indigo-200 max-w-2xl w-full mx-4">
+      <a href="../../index.html"><img src="../images/favicon.png" alt="TechTeach Logo" class="w-14 h-14 rounded-full border-2 border-indigo-300 shadow" onerror="this.style.display='none'">
+      </a><div>
+        <h1 class="text-3xl md:text-4xl font-bold text-indigo-700 drop-shadow-sm mb-1 tracking-tight">TechTeach Tools</h1>
+       
+      </div>
     </div>
+  </header>
+  <div class="frames-grid">
+    <div class="frame-wrap">
+      <a class="frame-title" href="pixel.html" target="_blank" rel="noopener" tabindex="0">Pixel Art Editor</a>
+      <iframe src="pixel.html" title="Pixel Art Editor"></iframe>
+    </div>
+    <div class="frame-wrap">
+      <a class="frame-title" href="timer.html" target="_blank" rel="noopener" tabindex="0">Pomodoro Timer</a>
+      <iframe src="timer.html" title="Pomodoro Timer"></iframe>
+    </div>
+    <div class="frame-wrap">
+      <a class="frame-title" href="mindful.html" target="_blank" rel="noopener" tabindex="0">Mindful Fractal</a>
+      <iframe src="mindful.html" title="Mindful Fractal"></iframe>
+    </div>
+    <div class="frame-wrap">
+      <a class="frame-title" href="../../index.html" target="_blank" rel="noopener" tabindex="0">Syllabus</a>
+      <iframe src="../../index.html" title="Syllabus"></iframe>
+    </div>
+    <div class="frame-wrap">
+      <a class="frame-title" href="https://studio.code.org/" target="_blank" rel="noopener" tabindex="0">Code.org</a>
+      <iframe src="https://studio.code.org/" title="Code.org"></iframe>
+    </div>
+    <div class="frame-wrap">
+      <a class="frame-title" href="https://py3.codeskulptor.org" target="_blank" rel="noopener" tabindex="0">CodeSkulptor</a>
+      <iframe src="https://py3.codeskulptor.org" title="Code.org"></iframe>
+    </div>
+    <div class="frame-wrap">
+      <a class="frame-title" href="https://www.khanacademy.org/computing/computer-programming" target="_blank" rel="noopener" tabindex="0">Khan Academy</a>
+      <iframe src="https://www.khanacademy.org/computing/computer-programming" title="Khan Academy"></iframe>
   </div>
-</header>
-
-<div class="frames-grid" id="grid">
-  <!-- Internal (safe to scale) -->
   <div class="frame-wrap">
-    <a class="frame-title" href="pixel.html" target="_blank" rel="noopener">Pixel Art Editor</a>
-    <iframe class="scaled" src="pixel.html" title="Pixel Art Editor"></iframe>
+    <a class="frame-title" href="https://pythontutor.com/python-compiler.html#mode=edit" target="_blank" rel="noopener" tabindex="0">Python Tutor</a>
+    <iframe src="https://pythontutor.com/python-compiler.html#mode=edit" title="Python Tutor"></iframe>
   </div>
   <div class="frame-wrap">
-    <a class="frame-title" href="timer.html" target="_blank" rel="noopener">Pomodoro Timer</a>
-    <iframe class="scaled" src="timer.html" title="Pomodoro Timer"></iframe>
+    <a class="frame-title" href="https://projectstem.org/users/sign_in" target="_blank" rel="noopener" tabindex="0">Project STEM</a>
+    <iframe src="https://projectstem.org/users/sign_in" title="Project STEM"></iframe>
   </div>
   <div class="frame-wrap">
-    <a class="frame-title" href="mindful.html" target="_blank" rel="noopener">Mindful Fractal</a>
-    <iframe class="scaled" src="mindful.html" title="Mindful Fractal"></iframe>
+    <a class="frame-title" href="https://learn.unity.com" target="_blank" rel="noopener" tabindex="0">Unity Learn</a>
+    <iframe src="https://learn.unity.com" title="Unity Learn"></iframe>
   </div>
   <div class="frame-wrap">
-    <a class="frame-title" href="../../index.html" target="_blank" rel="noopener">Syllabus</a>
-    <iframe class="scaled" src="../../index.html" title="Syllabus"></iframe>
+    <a class="frame-title" href="https://padlet.com" target="_blank" rel="noopener" tabindex="0">Padlet</a>
+    <iframe src="https://padlet.com" title="Padlet"></iframe>
   </div>
-
-  <!-- External (no scaling) -->
-  <div class="frame-wrap" data-external="https://studio.code.org/">
-    <a class="frame-title" href="https://studio.code.org/" target="_blank" rel="noopener">Code.org</a>
-    <iframe title="Code.org"></iframe>
-    <div class="fallback hidden">
-      <div>Cannot display inside page (blocked by site). Open in new tab.</div>
-      <button data-open>Open</button>
-    </div>
+  <div class="frame-wrap">
+    <a class="frame-title" href="https://www.figma.com" target="_blank" rel="noopener" tabindex="0">Figma</a>
+    <iframe src="https://www.figma.com" title="Figma"></iframe>
   </div>
-
-  <div class="frame-wrap" data-external="https://py3.codeskulptor.org/">
-    <a class="frame-title" href="https://py3.codeskulptor.org/" target="_blank" rel="noopener">CodeSkulptor</a>
-    <iframe title="CodeSkulptor"></iframe>
-    <div class="fallback hidden">
-      <div>Embedding blocked. Use external window.</div>
-      <button data-open>Open</button>
-    </div>
+  <div class="frame-wrap">
+    <a class="frame-title" href="https://www.canva.com" target="_blank" rel="noopener" tabindex="0">Canva</a>
+    <iframe src="https://www.canva.com" title="Canva"></iframe>
   </div>
-
-  <div class="frame-wrap" data-external="https://www.khanacademy.org/computing/computer-programming">
-    <a class="frame-title" href="https://www.khanacademy.org/computing/computer-programming" target="_blank" rel="noopener">Khan Academy</a>
-    <iframe title="Khan Academy"></iframe>
-    <div class="fallback hidden">
-      <div>Embedding restricted. Open in new tab.</div>
-      <button data-open>Open</button>
-    </div>
+  <div class="frame-wrap">
+    <a class="frame-title" href="https://classroom.google.com" target="_blank" rel="noopener" tabindex="0">Google Classroom</a>
+    <iframe src="https://classroom.google.com" title="Google Classroom"></iframe>
   </div>
+  <script>
+    /* particles.js config for darker particles and connecting lines */
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 60,
+          "density": { "enable": true, "value_area": 800 }
+        },
+        "color": {
+          "value": ["#312e81", "#334155", "#64748b", "#6366f1"]
+        },
+        "shape": { "type": "circle" },
+        "opacity": {
+          "value": 0.45,
+          "random": true
+        },
+        "size": {
+          "value": 3,
+          "random": true
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#312e81",
+          "opacity": 0.5,
+          "width": 1.5
+        },
+        "move": {
+          "enable": true,
+          "speed": 0.7,
+          "direction": "none",
+          "random": true,
+          "straight": false,
+          "out_mode": "out"
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { "enable": false },
+          "onclick": { "enable": false }
+        }
+      },
+      "retina_detect": true
+    });
 
-  <div class="frame-wrap" data-external="https://pythontutor.com/python-compiler.html#mode=edit">
-    <a class="frame-title" href="https://pythontutor.com/python-compiler.html#mode=edit" target="_blank" rel="noopener">Python Tutor</a>
-    <iframe title="Python Tutor"></iframe>
-    <div class="fallback hidden">
-      <div>Could not load here. Open externally.</div>
-      <button data-open>Open</button>
-    </div>
-  </div>
-
-  <div class="frame-wrap" data-external="https://projectstem.org/users/sign_in">
-    <a class="frame-title" href="https://projectstem.org/users/sign_in" target="_blank" rel="noopener">Project STEM</a>
-    <iframe title="Project STEM"></iframe>
-    <div class="fallback hidden">
-      <div>Sign‑in page blocks iframe.</div>
-      <button data-open>Open</button>
-    </div>
-  </div>
-
-  <div class="frame-wrap" data-external="https://learn.unity.com/">
-    <a class="frame-title" href="https://learn.unity.com/" target="_blank" rel="noopener">Unity Learn</a>
-    <iframe title="Unity Learn"></iframe>
-    <div class="fallback hidden">
-      <div>Unity Learn blocks embedding.</div>
-      <button data-open>Open</button>
-    </div>
-  </div>
-
-  <div class="frame-wrap" data-external="https://padlet.com/">
-    <a class="frame-title" href="https://padlet.com/" target="_blank" rel="noopener">Padlet</a>
-    <iframe title="Padlet"></iframe>
-    <div class="fallback hidden">
-      <div>Padlet home won’t embed. Use the link.</div>
-      <button data-open>Open</button>
-    </div>
-  </div>
-
-  <div class="frame-wrap" data-external="https://www.figma.com/">
-    <a class="frame-title" href="https://www.figma.com/" target="_blank" rel="noopener">Figma</a>
-    <iframe title="Figma"></iframe>
-    <div class="fallback hidden">
-      <div>Figma app cannot load in iframe. Use new tab.</div>
-      <button data-open>Open</button>
-    </div>
-  </div>
-
-  <div class="frame-wrap" data-external="https://www.canva.com/">
-    <a class="frame-title" href="https://www.canva.com/" target="_blank" rel="noopener">Canva</a>
-    <iframe title="Canva"></iframe>
-    <div class="fallback hidden">
-      <div>Canva blocks embedding. Open externally.</div>
-      <button data-open>Open</button>
-    </div>
-  </div>
-
-  <div class="frame-wrap" data-external="https://classroom.google.com/">
-    <a class="frame-title" href="https://classroom.google.com/" target="_blank" rel="noopener">Google Classroom</a>
-    <iframe title="Google Classroom"></iframe>
-    <div class="fallback hidden">
-      <div>Google Classroom not embeddable.</div>
-      <button data-open>Open</button>
-    </div>
-  </div>
-</div>
-
-<script>
-/* particles */
-particlesJS("particles-js",{
-  particles:{ number:{value:60,density:{enable:true,value_area:800}},
-  color:{value:["#312e81","#334155","#64748b","#6366f1"]},
-  shape:{type:"circle"},
-  opacity:{value:0.45,random:true},
-  size:{value:3,random:true},
-  line_linked:{enable:true,distance:150,color:"#312e81",opacity:0.5,width:1.2},
-  move:{enable:true,speed:0.7,random:true,out_mode:"out"} },
-  interactivity:{events:{onhover:{enable:false},onclick:{enable:false}}},
-  retina_detect:true
-});
-
-/* Load external iframes and detect failures */
-const TIMEOUT_MS = 4000;
-document.querySelectorAll('[data-external]').forEach(box=>{
-  const url = box.getAttribute('data-external');
-  const iframe = box.querySelector('iframe');
-  const fb = box.querySelector('.fallback');
-  // Try to load
-  let done=false;
-  const timer=setTimeout(()=>{
-    if(!done){
-      showFallback();
-    }
-  },TIMEOUT_MS);
-  iframe.onload=()=>{ 
-    // If it loads but is blank (blocked), its contentWindow length may be 0 – still show fallback.
-    done=true;
-    try{
-      const blocked = !iframe.contentWindow || iframe.contentDocument?.body?.children.length===0;
-      if(blocked){ showFallback(); }
-    }catch(e){
-      // Cross-origin okay; if visually blank user will use link anyway.
-    }
-    clearTimeout(timer);
-  };
-  iframe.onerror=()=>{
-    done=true; clearTimeout(timer); showFallback();
-  };
-  iframe.src = url;
-
-  function showFallback(){
-    iframe.classList.add('hidden');
-    fb.classList.remove('hidden');
-  }
-  fb.querySelector('[data-open]').addEventListener('click',()=>window.open(url,'_blank','noopener'));
-});
-</script>
+    if (window.self !== window.top) {
+  // Only apply scaling if embedded in an iframe
+  document.documentElement.style.width = "200vw";
+  document.documentElement.style.height = "100vh";
+  document.body.style.width = "200vw";
+  document.body.style.height = "100vh";
+  document.body.style.transform = "scale(0.5)";
+  document.body.style.transformOrigin = "top left";
+  document.body.style.overflow = "hidden";
+}
+  </script>
 </body>
 </html>
