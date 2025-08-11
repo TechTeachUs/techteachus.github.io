@@ -96,6 +96,19 @@
       outline: 3px solid #a5b4fc;
       outline-offset: 2px;
     }
+    .ext-links a{
+    display:flex;
+    align-items:center;
+    gap:.45rem;
+    line-height:1.15;
+  }
+  .ext-links img{
+    width:20px;
+    height:20px;
+    border-radius:4px;
+    flex:0 0 20px;
+    box-shadow:0 0 0 1px #e2e8f0;
+  }
   </style>
 </head>
 <body class="bg-gradient-to-br from-indigo-100 via-slate-100 to-slate-200 font-inter overflow-x-hidden">
@@ -130,17 +143,57 @@
     </div>
     <div class="frame-wrap" style="max-height:unset;">
       <div class="frame-title" style="text-decoration:none;cursor:default;">External Resources</div>
-      <ul style="list-style:none;margin:0;padding:0.75rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;font-size:.95rem">
-        <li><a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://studio.code.org/" target="_blank" rel="noopener">Code.org</a></li>
-        <li><a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://py3.codeskulptor.org" target="_blank" rel="noopener">CodeSkulptor</a></li>
-        <li><a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://www.khanacademy.org/computing/computer-programming" target="_blank" rel="noopener">Khan Academy</a></li>
-        <li><a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://pythontutor.com/python-compiler.html#mode=edit" target="_blank" rel="noopener">Python Tutor</a></li>
-        <li><a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://projectstem.org/users/sign_in" target="_blank" rel="noopener">Project STEM</a></li>
-        <li><a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://learn.unity.com" target="_blank" rel="noopener">Unity Learn</a></li>
-        <li><a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://padlet.com" target="_blank" rel="noopener">Padlet</a></li>
-        <li><a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://www.figma.com" target="_blank" rel="noopener">Figma</a></li>
-        <li><a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://www.canva.com" target="_blank" rel="noopener">Canva</a></li>
-        <li><a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://classroom.google.com" target="_blank" rel="noopener">Google Classroom</a></li>
+      <ul class="ext-links" style="list-style:none;margin:0;padding:0.75rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;font-size:.95rem">
+        <li>
+          <a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://studio.code.org/" target="_blank" rel="noopener">
+            <img src="https://www.google.com/s2/favicons?sz=32&domain=studio.code.org" alt="" aria-hidden="true"> <span>Code.org</span>
+          </a>
+        </li>
+        <li>
+          <a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://py3.codeskulptor.org" target="_blank" rel="noopener">
+            <img src="https://www.google.com/s2/favicons?sz=32&domain=py3.codeskulptor.org" alt="" aria-hidden="true"> <span>CodeSkulptor</span>
+          </a>
+        </li>
+        <li>
+          <a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://www.khanacademy.org/computing/computer-programming" target="_blank" rel="noopener">
+            <img src="https://www.google.com/s2/favicons?sz=32&domain=khanacademy.org" alt="" aria-hidden="true"> <span>Khan Academy</span>
+          </a>
+        </li>
+        <li>
+          <a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://pythontutor.com/python-compiler.html#mode=edit" target="_blank" rel="noopener">
+            <img src="https://www.google.com/s2/favicons?sz=32&domain=pythontutor.com" alt="" aria-hidden="true"> <span>Python Tutor</span>
+          </a>
+        </li>
+        <li>
+          <a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://projectstem.org/users/sign_in" target="_blank" rel="noopener">
+            <img src="https://www.google.com/s2/favicons?sz=32&domain=projectstem.org" alt="" aria-hidden="true"> <span>Project STEM</span>
+          </a>
+        </li>
+        <li>
+          <a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://learn.unity.com" target="_blank" rel="noopener">
+            <img src="https://www.google.com/s2/favicons?sz=32&domain=unity.com" alt="" aria-hidden="true"> <span>Unity Learn</span>
+          </a>
+        </li>
+        <li>
+          <a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://padlet.com" target="_blank" rel="noopener">
+            <img src="https://www.google.com/s2/favicons?sz=32&domain=padlet.com" alt="" aria-hidden="true"> <span>Padlet</span>
+          </a>
+        </li>
+        <li>
+          <a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://www.figma.com" target="_blank" rel="noopener">
+            <img src="https://www.google.com/s2/favicons?sz=32&domain=figma.com" alt="" aria-hidden="true"> <span>Figma</span>
+          </a>
+        </li>
+        <li>
+          <a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://www.canva.com" target="_blank" rel="noopener">
+            <img src="https://www.google.com/s2/favicons?sz=32&domain=canva.com" alt="" aria-hidden="true"> <span>Canva</span>
+          </a>
+        </li>
+        <li>
+          <a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://classroom.google.com" target="_blank" rel="noopener">
+            <img src="https://www.google.com/s2/favicons?sz=32&domain=classroom.google.com" alt="" aria-hidden="true"> <span>Google Classroom</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
