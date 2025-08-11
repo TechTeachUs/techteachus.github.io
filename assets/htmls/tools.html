@@ -131,7 +131,7 @@
     </div>
     <div class="frame-wrap">
       <a class="frame-title" href="timer.html" target="_blank" rel="noopener" tabindex="0">Pomodoro Timer</a>
-      <iframe src="timer.html" title="Pomodoro Timer"></iframe>
+      <iframe src="timer.html" title="Pomodoro Timer" loading="lazy" referrerpolicy="no-referrer"></iframe>
     </div>
     <div class="frame-wrap">
       <a class="frame-title" href="mindful.html" target="_blank" rel="noopener" tabindex="0">Mindful Fractal</a>
@@ -145,7 +145,8 @@
   </div>
   <footer class="w-full text-center mt-8 mb-4">
       <div class="frame-title" style="text-decoration:none;cursor:default;">External Resources</div>
-      <ul class="ext-links" style="list-style:none;margin:0;padding:0.75rem 1.25rem;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:.5rem;font-size:.95rem">
+      <!-- External resources list -->
+      <ul class="ext-links" aria-label="External learning resources" style="list-style:none;margin:0;padding:0.75rem 1.25rem;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:.5rem;font-size:.95rem">
         <li>
           <a class="underline text-indigo-700 hover:text-indigo-500 font-semibold" href="https://studio.code.org/" target="_blank" rel="noopener">
             <img src="https://www.google.com/s2/favicons?sz=32&domain=studio.code.org" alt="" aria-hidden="true"> <span>Code.org</span>
@@ -248,6 +249,9 @@
         </li>
       </ul>
   </footer>
+  <!-- Particles script -->
+  <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"
+ integrity="sha384-xxxxxxxx" crossorigin="anonymous"></script>
   <script>
     /* particles.js config for darker particles and connecting lines */
     particlesJS("particles-js", {
