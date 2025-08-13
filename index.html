@@ -213,7 +213,10 @@
                     <p class="mb-4 text-lg leading-relaxed">I’m truly excited to share my passion for technology and engineering with you. I specialize in teaching subjects like Web/App/Game Design, Network Communications, Computer Repair, and Robotics. Some of my favorite things are: 🍱 🐶 🎮 👾 💙 💤 🔭 🌃 🗽 🌅 ⛄ 🚀 🛶 🛷 🌎</p>
                     <p class="mb-4 text-lg leading-relaxed">I can’t wait to get to know each of you and embark on this exciting learning journey together. Let’s dive into the world of software engineering with enthusiasm and curiosity!</p>
                 </div>
+
+            <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
             </div>
+            
         </section>
 
         <!-- Our Curriculum Section -->
@@ -241,6 +244,8 @@
                     </div>
                 </div>
             </div>
+
+            <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
         </section>
 
         <!-- Student Certifications Section -->
@@ -261,6 +266,8 @@
                     </ul>
                 </div>
             </div>
+
+            <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
         </section>
 
         <!-- Annual Competitions Section -->
@@ -279,6 +286,8 @@
                     </ul>
                 </div>
             </div>
+
+            <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
         </section>
 
         <!-- Instructional Strategies Section -->
@@ -300,6 +309,8 @@
                     </ul>
                 </div>
             </div>
+
+            <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
         </section>
 
         <!-- Student Portfolios Section -->
@@ -320,6 +331,8 @@
                     <p class="mt-4 text-lg leading-relaxed">These portfolios serve as a valuable asset for college applications and future career opportunities.</p>
                 </div>
             </div>
+
+            <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
         </section>
 
         <!-- Grading Policy & Expectations Section -->
@@ -348,6 +361,8 @@
                     <p class="text-lg leading-relaxed">Late work will be accepted with a penalty. For every day an assignment is late, 10% will be deducted from the grade, up to a maximum of 50% deduction. Exceptions may be made for documented emergencies.</p>
                 </div>
             </div>
+
+            <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
         </section>
 
         <!-- Key Resources & Tools Section -->
@@ -513,6 +528,8 @@
                     </div>
                 </div>
             </div>
+
+            <i class="fa fa-angle-down arrow absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-4xl cursor-pointer animated bounce infinite" aria-hidden="true" data-scroll-next></i>
         </section>
 
         <!-- Contact Mrs. Ramirez Section -->
@@ -561,5 +578,23 @@
     <script src="assets/js/curriculum-loader.js"></script>
     <script src="assets/js/security.js"></script>
     <script src="assets/js/scriptMain.js"></script>
-  </body>
+</script>
+<script>
+// Scroll to next section when clicking the down arrow
+document.querySelectorAll('[data-scroll-next]').forEach(function(arrow) {
+    arrow.addEventListener('click', function() {
+        // Find the closest section
+        var section = arrow.closest('section');
+        if (!section) return;
+        // Find all sections
+        var sections = Array.from(document.querySelectorAll('section'));
+        var idx = sections.indexOf(section);
+        if (idx !== -1 && idx < sections.length - 1) {
+            var nextSection = sections[idx + 1];
+            nextSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+</script>
+    </body>
 </html>
