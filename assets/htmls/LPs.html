@@ -158,6 +158,8 @@
     function getLessonPlans(grade, term) {
       if (grade === '10' && term === 'fall') return { fall: window.lessonPlans.fall10 };
       if (grade === '10' && term === 'spring') return { spring: window.lessonPlans.spring10 };
+      if (grade === '11' && term === 'fall') return { fall: window.lessonPlans.fall11 };
+      if (grade === '11' && term === 'spring') return { spring: window.lessonPlans.spring11 };
       // Add more grades/terms as needed
       return { fall: [], spring: [] };
     }
