@@ -120,194 +120,149 @@
   <!-- Controls -->
   <div class="flex flex-col md:flex-row gap-4 justify-center items-center mb-8">
     <div>
-      <label for="csv-select" class="font-semibold text-indigo-700 mr-2">Semester:</label>
-      <select id="csv-select" class="border border-indigo-300 rounded-lg px-3 py-2">
-        <option value="fall">Fall 2025</option>
-        <option value="spring">Spring 2026</option>
+      <label for="grade-select" class="font-semibold text-indigo-700 mr-2">Grade:</label>
+      <select id="grade-select" class="border border-indigo-300 rounded-lg px-3 py-2">
+        <option value="10">10th</option>
+        <option value="11">11th</option>
+        <option value="12">12th</option>
       </select>
     </div>
     <div>
-      <label for="filter-type" class="font-semibold text-indigo-700 mr-2">Filter by:</label>
-      <select id="filter-type" class="border border-indigo-300 rounded-lg px-3 py-2">
-        <option value="Day">Day</option>
-        <option value="Unit">Unit</option>
-        <option value="Standards">Standard</option>
+      <label for="term-select" class="font-semibold text-indigo-700 mr-2">Term:</label>
+      <select id="term-select" class="border border-indigo-300 rounded-lg px-3 py-2">
+        <option value="fall">Fall</option>
+        <option value="spring">Spring</option>
       </select>
     </div>
     <div>
-      <label for="filter-value" class="font-semibold text-indigo-700 mr-2">Choose:</label>
-      <select id="filter-value" class="border border-indigo-300 rounded-lg px-3 py-2">
-        <option value="">Select above</option>
+      <label for="day-select" class="font-semibold text-indigo-700 mr-2">Day:</label>
+      <select id="day-select" class="border border-indigo-300 rounded-lg px-3 py-2">
+        <option value="">All Days</option>
       </select>
+    </div>
+    <div>
+      <button id="filter-btn" class="bg-blue-500 text-white px-4 py-2 rounded">Filter</button>
     </div>
   </div>
 
   <!-- Results -->
-  <div id="lp-cards" class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 mb-12"></div>
+  <div id="lp-cards" class="container mx-auto w-full px-4 mb-12"></div>
+  <div id="lp-debug" class="text-xs text-red-600 px-6 mb-2"></div>
   <!-- PapaParse for CSV parsing -->
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  
-  
+  <script src="../js/lessonPlans.js"></script>
   <script>
-    /* particles.js config for darker particles and connecting lines */
-    particlesJS("particles-js", {
-      "particles": {
-        "number": {
-          "value": 60,
-          "density": { "enable": true, "value_area": 800 }
-        },
-        "color": {
-          "value": ["#312e81", "#334155", "#64748b", "#6366f1"]
-        },
-        "shape": { "type": "circle" },
-        "opacity": {
-          "value": 0.45,
-          "random": true
-        },
-        "size": {
-          "value": 3,
-          "random": true
-        },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#312e81",
-          "opacity": 0.5,
-          "width": 1.5
-        },
-        "move": {
-          "enable": true,
-          "speed": 0.7,
-          "direction": "none",
-          "random": true,
-          "straight": false,
-          "out_mode": "out"
-        }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-          "onhover": { "enable": false },
-          "onclick": { "enable": false }
-        }
-      },
-      "retina_detect": true
-    });
+  document.addEventListener('DOMContentLoaded', function() {
+    let lpData = [];
+    let currentIndex = 0;
 
-    if (window.self !== window.top) {
-// LPs CSV logic
-const csvFiles = {
-  fall: '../../assets/data/SY2025-26 LPs - Fall 10th .csv',
-  spring: '../../assets/data/SY2025-26 LPs - Sring 10th.csv'
-};
-let lpData = [];
+    function getLessonPlans(grade, term) {
+      if (grade === '10' && term === 'fall') return { fall: window.lessonPlans.fall10 };
+      if (grade === '10' && term === 'spring') return { spring: window.lessonPlans.spring10 };
+      // Add more grades/terms as needed
+      return { fall: [], spring: [] };
+    }
 
-function loadCSV(fileKey) {
-  Papa.parse(csvFiles[fileKey], {
-    download: true,
-    header: true,
-    skipEmptyLines: true,
-    complete: function(results) {
-      lpData = results.data.map(row => {
-        // Standards
-        row.Standards = row.Standards || row.Standard || row['Standards'] || row['Standard'] || '';
-        // Learning Objectives
-        row.LearningObjectives = row['Learning Objectives (SMART, quantifiable)'] || row['Learning Objectives (SMART, Quantifiable)'] || row['"Learning Objectives (SMART, Quantifiable)"'] || '';
-        // Essential Question
-        row.EssentialQuestion = row['Essential Question (Aim)'] || row['Essential Question'] || row['"Essential Question (Aim)"'] || '';
-        // Formative Assessment
-        row.FormativeAssessment = row['Formative Assessment'] || row['Formative Assessment (CFU)'] || row['"Formative Assessment (CFU)"'] || '';
-        // Summative Assessment
-        row.SummativeAssessment = row['Summative Assessment'] || '';
-        // Agenda & Pacing
-        row.AgendaPacing = row['Agenda & Pacing (90 min)'] || row['"Agenda & Pacing (90 min)"'] || '';
-        return row;
+    function parseDate(str) {
+      if (!str || str === '–') return null;
+      let d = str.includes('/') ? str.split('/') : str.split('-');
+      if (d.length === 3) {
+        if (d[2].length === 4) return new Date(`${d[2]}-${d[0].padStart(2,'0')}-${d[1].padStart(2,'0')}`);
+        return new Date(str);
+      }
+      return null;
+    }
+
+    function findClosestLessonIndex(plans) {
+      const today = new Date();
+      let minDiff = Infinity, closestIdx = 0;
+      plans.forEach((lp, i) => {
+        const lpDate = parseDate(lp.date);
+        if (!lpDate) return;
+        const diff = Math.abs(lpDate - today);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closestIdx = i;
+        }
       });
-      populateFilterValues(true);
+      return closestIdx;
+    }
+
+    function loadJSData(grade, term) {
+      let plans = [];
+      if (term === 'fall') plans = getLessonPlans(grade, term).fall || [];
+      if (term === 'spring') plans = getLessonPlans(grade, term).spring || [];
+      lpData = plans;
+      document.getElementById('lp-debug').textContent = `Loaded ${lpData.length} lesson plans for Grade ${grade} ${term}`;
+      populateDayDropdown(lpData);
       renderCards();
     }
-  });
-}
 
-function populateFilterValues() {
-  const filterType = document.getElementById('filter-type').value;
-  const filterValue = document.getElementById('filter-value');
-  let options = new Set();
-  if (filterType === 'Day') {
-    lpData.forEach(row => row.Day && options.add(row.Day));
-  } else if (filterType === 'Unit') {
-    lpData.forEach(row => row.Unit && options.add(row.Unit));
-  } else if (filterType === 'Standards' || filterType === 'Standard') {
-    lpData.forEach(row => {
-      if (row.Standards) {
-        row.Standards.split(/[;,]/).forEach(s => options.add(s.trim()));
-      }
-    });
-  }
-  filterValue.innerHTML = '<option value="">All</option>' + Array.from(options).map(opt => `<option value="${opt}">${opt}</option>`).join('');
-  filterValue.selectedIndex = 0;
-}
-
-function renderCards() {
-  const filterType = document.getElementById('filter-type').value;
-  const filterValue = document.getElementById('filter-value').value;
-  let filtered = lpData;
-  if (filterValue && filterValue !== '') {
-    if (filterType === 'Day') {
-      filtered = lpData.filter(row => row.Day === filterValue);
-    } else if (filterType === 'Unit') {
-      filtered = lpData.filter(row => row.Unit === filterValue);
-    } else if (filterType === 'Standards' || filterType === 'Standard') {
-      filtered = lpData.filter(row => row.Standards && row.Standards.split(/[;,]/).map(s => s.trim()).includes(filterValue));
+    function populateDayDropdown(plans) {
+      const daySelect = document.getElementById('day-select');
+      const days = [...new Set(plans.map(lp => lp.day).filter(d => d && !isNaN(d)))].sort((a,b) => Number(a)-Number(b));
+      daySelect.innerHTML = '<option value="">All Days</option>' + days.map(day => `<option value="${day}">Day ${day}</option>`).join('');
+      daySelect.selectedIndex = 0;
     }
-  }
-  const container = document.getElementById('lp-cards');
-  if (!filtered.length) {
-    container.innerHTML = '<div class="col-span-2 text-center text-gray-500">No lesson plans found.</div>';
-    return;
-  }
-  container.innerHTML = filtered.map(row => `
-    <div class="bg-white rounded-xl shadow-lg p-6 border border-indigo-200 flex flex-col gap-2">
-      <div class="flex justify-between items-center mb-2">
-        <span class="text-xs font-bold text-indigo-600">Day ${row.Day || ''} | ${row.Date || ''}</span>
-        <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">${row.Unit || ''}</span>
-      </div>
-      <h2 class="text-lg font-semibold text-indigo-800 mb-1">${row.Lesson || ''}</h2>
-      <div class="text-sm text-gray-700 mb-1"><strong>Enduring Understanding:</strong> ${row['Enduring Understanding'] || ''}</div>
-      <div class="text-sm text-gray-700 mb-1"><strong>Essential Question:</strong> ${row.EssentialQuestion || ''}</div>
-      <div class="text-sm text-gray-700 mb-1"><strong>Learning Objectives:</strong> ${row.LearningObjectives || ''}</div>
-      <div class="text-sm text-gray-700 mb-1"><strong>Agenda & Pacing:</strong> ${row.AgendaPacing || ''}</div>
-      <div class="text-sm text-gray-700 mb-1"><strong>Teacher Materials:</strong> ${row['Teacher Materials'] || ''}</div>
-      <div class="text-sm text-gray-700 mb-1"><strong>Student Materials:</strong> ${row['Student Materials'] || ''}</div>
-      <div class="text-sm text-gray-700 mb-1"><strong>Links:</strong> ${row['Links'] ? `<a href="${row['Links']}" target="_blank" class="text-indigo-500 underline">Resource</a>` : ''}</div>
-      <div class="text-xs text-gray-500 mt-2"><strong>Formative:</strong> ${row.FormativeAssessment || ''} | <strong>Summative:</strong> ${row.SummativeAssessment || ''}</div>
-      <div class="text-xs text-gray-500"><strong>Standards:</strong> ${row.Standards || ''}</div>
-    </div>
-  `).join('');
-}
 
-document.getElementById('csv-select').addEventListener('change', function() {
-  loadCSV(this.value);
-});
-document.getElementById('filter-type').addEventListener('change', function() {
-  populateFilterValues();
-  renderCards();
-});
-document.getElementById('filter-value').addEventListener('change', function() {
-  renderCards();
-});
+    function renderCards() {
+      const day = document.getElementById('day-select').value;
+      const container = document.getElementById('lp-cards');
+      if (!lpData.length) {
+        container.innerHTML = '<div class="w-full text-center text-gray-500">No lesson plans found.</div>';
+        return;
+      }
+      if (!day) {
+        // Show all lessons as cards, fill width
+        container.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">${lpData.map(lp => renderCard(lp)).join('')}</div>`;
+      } else {
+        // Show previous, current, next side by side, fill width
+        const idx = lpData.findIndex(lp => lp.day == day);
+        let cards = '';
+        if (idx > 0) cards += renderCard(lpData[idx-1], 'Previous');
+        cards += renderCard(lpData[idx], 'Current');
+        if (idx < lpData.length-1) cards += renderCard(lpData[idx+1], 'Next');
+        container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">${cards}</div>`;
+      }
+    }
 
-// Initial load
-loadCSV(document.getElementById('csv-select').value);
-  // Only apply scaling if embedded in an iframe
-  document.documentElement.style.width = "200vw";
-  document.documentElement.style.height = "100vh";
-  document.body.style.width = "200vw";
-  document.body.style.height = "100vh";
-  document.body.style.transform = "scale(0.5)";
-  document.body.style.transformOrigin = "top left";
-  document.body.style.overflow = "hidden";
-}
+    function renderCard(lp, label) {
+      if (!lp) return '';
+      return `
+        <div class="bg-white rounded-xl shadow-lg p-6 border border-indigo-200 flex flex-col gap-2">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-xs font-bold text-indigo-600">${label ? label+': ' : ''}Day ${lp.day || ''} | ${lp.date || ''}</span>
+            <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">${lp.unit || ''}</span>
+          </div>
+          <h2 class="text-lg font-semibold text-indigo-800 mb-1">${lp.lesson || ''}</h2>
+          <div class="text-sm text-gray-700 mb-1"><strong>Enduring Understanding:</strong> ${lp.enduringUnderstanding || ''}</div>
+          <div class="text-sm text-gray-700 mb-1"><strong>Essential Question:</strong> ${lp.essentialQuestion || ''}</div>
+          <div class="text-sm text-gray-700 mb-1"><strong>Learning Objectives:</strong> ${lp.learningObjectives || ''}</div>
+          <div class="text-sm text-gray-700 mb-1"><strong>Agenda & Pacing:</strong> ${lp.agendaPacing || ''}</div>
+          <div class="text-sm text-gray-700 mb-1"><strong>Teacher Materials:</strong> ${lp.teacherMaterials || ''}</div>
+          <div class="text-sm text-gray-700 mb-1"><strong>Student Materials:</strong> ${lp.studentMaterials || ''}</div>
+          <div class="text-sm text-gray-700 mb-1"><strong>Links:</strong> ${lp.links && lp.links !== '–' ? `<a href="${lp.links}" target="_blank" class="text-indigo-500 underline">Resource</a>` : ''}</div>
+          <div class="text-xs text-gray-500 mt-2"><strong>Formative:</strong> ${lp.formativeAssessment || ''} | <strong>Summative:</strong> ${lp.summativeAssessment || ''}</div>
+          <div class="text-xs text-gray-500"><strong>Standards:</strong> ${lp.standards || ''}</div>
+        </div>
+      `;
+    }
+
+    document.getElementById('grade-select').addEventListener('change', function() {
+      loadJSData(this.value, document.getElementById('term-select').value);
+    });
+    document.getElementById('term-select').addEventListener('change', function() {
+      loadJSData(document.getElementById('grade-select').value, this.value);
+    });
+    document.getElementById('day-select').addEventListener('change', function() {
+      renderCards();
+    });
+    document.getElementById('filter-btn').addEventListener('click', function() {
+      renderCards();
+    });
+
+    // Initial load
+    loadJSData(document.getElementById('grade-select').value, document.getElementById('term-select').value);
+  });
   </script>
 </body>
 </html>
