@@ -152,118 +152,140 @@
   <script src="../js/lessonPlans.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', function() {
-    let lpData = [];
-    let currentIndex = 0;
-
-    function getLessonPlans(grade, term) {
-      if (grade === '10' && term === 'fall') return { fall: window.lessonPlans.fall10 };
-      if (grade === '10' && term === 'spring') return { spring: window.lessonPlans.spring10 };
-      if (grade === '11' && term === 'fall') return { fall: window.lessonPlans.fall11 };
-      if (grade === '11' && term === 'spring') return { spring: window.lessonPlans.spring11 };
-      // Add more grades/terms as needed
-      return { fall: [], spring: [] };
-    }
-
-    function parseDate(str) {
-      if (!str || str === '–') return null;
-      let d = str.includes('/') ? str.split('/') : str.split('-');
-      if (d.length === 3) {
-        if (d[2].length === 4) return new Date(`${d[2]}-${d[0].padStart(2,'0')}-${d[1].padStart(2,'0')}`);
-        return new Date(str);
-      }
-      return null;
-    }
-
-    function findClosestLessonIndex(plans) {
-      const today = new Date();
-      let minDiff = Infinity, closestIdx = 0;
-      plans.forEach((lp, i) => {
-        const lpDate = parseDate(lp.date);
-        if (!lpDate) return;
-        const diff = Math.abs(lpDate - today);
-        if (diff < minDiff) {
-          minDiff = diff;
-          closestIdx = i;
-        }
-      });
-      return closestIdx;
-    }
-
-    function loadJSData(grade, term) {
-      let plans = [];
-      if (term === 'fall') plans = getLessonPlans(grade, term).fall || [];
-      if (term === 'spring') plans = getLessonPlans(grade, term).spring || [];
-      lpData = plans;
-      document.getElementById('lp-debug').textContent = `Loaded ${lpData.length} lesson plans for Grade ${grade} ${term}`;
-      populateDayDropdown(lpData);
-      renderCards();
-    }
-
-    function populateDayDropdown(plans) {
-      const daySelect = document.getElementById('day-select');
-      const days = [...new Set(plans.map(lp => lp.day).filter(d => d && !isNaN(d)))].sort((a,b) => Number(a)-Number(b));
-      daySelect.innerHTML = '<option value="">All Days</option>' + days.map(day => `<option value="${day}">Day ${day}</option>`).join('');
-      daySelect.selectedIndex = 0;
-    }
-
-    function renderCards() {
-      const day = document.getElementById('day-select').value;
-      const container = document.getElementById('lp-cards');
-      if (!lpData.length) {
-        container.innerHTML = '<div class="w-full text-center text-gray-500">No lesson plans found.</div>';
-        return;
-      }
-      if (!day) {
-        // Show all lessons as cards, fill width
-        container.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">${lpData.map(lp => renderCard(lp)).join('')}</div>`;
+    // Password protection
+    const password = 'teach2025!'; // Change this to your desired password
+    let attempts = 0;
+    function askPassword() {
+      const userInput = prompt('Enter teacher password to view lesson plans:');
+      if (userInput === password) {
+        showLessonPlans();
       } else {
-        // Show previous, current, next side by side, fill width
-        const idx = lpData.findIndex(lp => lp.day == day);
-        let cards = '';
-        if (idx > 0) cards += renderCard(lpData[idx-1], 'Previous');
-        cards += renderCard(lpData[idx], 'Current');
-        if (idx < lpData.length-1) cards += renderCard(lpData[idx+1], 'Next');
-        container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">${cards}</div>`;
+        attempts++;
+        if (attempts < 3) {
+          alert('Incorrect password. Try again.');
+          askPassword();
+        } else {
+          document.body.innerHTML = '<div class="flex items-center justify-center min-h-screen text-2xl text-red-700">Access denied.</div>';
+        }
       }
     }
 
-    function renderCard(lp, label) {
-      if (!lp) return '';
-      return `
-        <div class="bg-white rounded-xl shadow-lg p-6 border border-indigo-200 flex flex-col gap-2">
-          <div class="flex justify-between items-center mb-2">
-            <span class="text-xs font-bold text-indigo-600">${label ? label+': ' : ''}Day ${lp.day || ''} | ${lp.date || ''}</span>
-            <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">${lp.unit || ''}</span>
+    function showLessonPlans() {
+      let lpData = [];
+      let currentIndex = 0;
+
+      function getLessonPlans(grade, term) {
+        if (grade === '10' && term === 'fall') return { fall: window.lessonPlans.fall10 };
+        if (grade === '10' && term === 'spring') return { spring: window.lessonPlans.spring10 };
+        if (grade === '11' && term === 'fall') return { fall: window.lessonPlans.fall11 };
+        if (grade === '11' && term === 'spring') return { spring: window.lessonPlans.spring11 };
+        // Add more grades/terms as needed
+        return { fall: [], spring: [] };
+      }
+
+      function parseDate(str) {
+        if (!str || str === '–') return null;
+        let d = str.includes('/') ? str.split('/') : str.split('-');
+        if (d.length === 3) {
+          if (d[2].length === 4) return new Date(`${d[2]}-${d[0].padStart(2,'0')}-${d[1].padStart(2,'0')}`);
+          return new Date(str);
+        }
+        return null;
+      }
+
+      function findClosestLessonIndex(plans) {
+        const today = new Date();
+        let minDiff = Infinity, closestIdx = 0;
+        plans.forEach((lp, i) => {
+          const lpDate = parseDate(lp.date);
+          if (!lpDate) return;
+          const diff = Math.abs(lpDate - today);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIdx = i;
+          }
+        });
+        return closestIdx;
+      }
+
+      function loadJSData(grade, term) {
+        let plans = [];
+        if (term === 'fall') plans = getLessonPlans(grade, term).fall || [];
+        if (term === 'spring') plans = getLessonPlans(grade, term).spring || [];
+        lpData = plans;
+        document.getElementById('lp-debug').textContent = `Loaded ${lpData.length} lesson plans for Grade ${grade} ${term}`;
+        populateDayDropdown(lpData);
+        renderCards();
+      }
+
+      function populateDayDropdown(plans) {
+        const daySelect = document.getElementById('day-select');
+        const days = [...new Set(plans.map(lp => lp.day).filter(d => d && !isNaN(d)))].sort((a,b) => Number(a)-Number(b));
+        daySelect.innerHTML = '<option value="">All Days</option>' + days.map(day => `<option value="${day}">Day ${day}</option>`).join('');
+        daySelect.selectedIndex = 0;
+      }
+
+      function renderCards() {
+        const day = document.getElementById('day-select').value;
+        const container = document.getElementById('lp-cards');
+        if (!lpData.length) {
+          container.innerHTML = '<div class="w-full text-center text-gray-500">No lesson plans found.</div>';
+          return;
+        }
+        if (!day) {
+          // Show all lessons as cards, fill width
+          container.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">${lpData.map(lp => renderCard(lp)).join('')}</div>`;
+        } else {
+          // Show previous, current, next side by side, fill width
+          const idx = lpData.findIndex(lp => lp.day == day);
+          let cards = '';
+          if (idx > 0) cards += renderCard(lpData[idx-1], 'Previous');
+          cards += renderCard(lpData[idx], 'Current');
+          if (idx < lpData.length-1) cards += renderCard(lpData[idx+1], 'Next');
+          container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">${cards}</div>`;
+        }
+      }
+
+      function renderCard(lp, label) {
+        if (!lp) return '';
+        return `
+          <div class="bg-white rounded-xl shadow-lg p-6 border border-indigo-200 flex flex-col gap-2">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-bold text-indigo-600">${label ? label+': ' : ''}Day ${lp.day || ''} | ${lp.date || ''}</span>
+              <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">${lp.unit || ''}</span>
+            </div>
+            <h2 class="text-lg font-semibold text-indigo-800 mb-1">${lp.lesson || ''}</h2>
+            <div class="text-sm text-gray-700 mb-1"><strong>Enduring Understanding:</strong> ${lp.enduringUnderstanding || ''}</div>
+            <div class="text-sm text-gray-700 mb-1"><strong>Essential Question:</strong> ${lp.essentialQuestion || ''}</div>
+            <div class="text-sm text-gray-700 mb-1"><strong>Learning Objectives:</strong> ${lp.learningObjectives || ''}</div>
+            <div class="text-sm text-gray-700 mb-1"><strong>Agenda & Pacing:</strong> ${lp.agendaPacing || ''}</div>
+            <div class="text-sm text-gray-700 mb-1"><strong>Teacher Materials:</strong> ${lp.teacherMaterials || ''}</div>
+            <div class="text-sm text-gray-700 mb-1"><strong>Student Materials:</strong> ${lp.studentMaterials || ''}</div>
+            <div class="text-sm text-gray-700 mb-1"><strong>Links:</strong> ${lp.links && lp.links !== '–' ? `<a href="${lp.links}" target="_blank" class="text-indigo-500 underline">Resource</a>` : ''}</div>
+            <div class="text-xs text-gray-500 mt-2"><strong>Formative:</strong> ${lp.formativeAssessment || ''} | <strong>Summative:</strong> ${lp.summativeAssessment || ''}</div>
+            <div class="text-xs text-gray-500"><strong>Standards:</strong> ${lp.standards || ''}</div>
           </div>
-          <h2 class="text-lg font-semibold text-indigo-800 mb-1">${lp.lesson || ''}</h2>
-          <div class="text-sm text-gray-700 mb-1"><strong>Enduring Understanding:</strong> ${lp.enduringUnderstanding || ''}</div>
-          <div class="text-sm text-gray-700 mb-1"><strong>Essential Question:</strong> ${lp.essentialQuestion || ''}</div>
-          <div class="text-sm text-gray-700 mb-1"><strong>Learning Objectives:</strong> ${lp.learningObjectives || ''}</div>
-          <div class="text-sm text-gray-700 mb-1"><strong>Agenda & Pacing:</strong> ${lp.agendaPacing || ''}</div>
-          <div class="text-sm text-gray-700 mb-1"><strong>Teacher Materials:</strong> ${lp.teacherMaterials || ''}</div>
-          <div class="text-sm text-gray-700 mb-1"><strong>Student Materials:</strong> ${lp.studentMaterials || ''}</div>
-          <div class="text-sm text-gray-700 mb-1"><strong>Links:</strong> ${lp.links && lp.links !== '–' ? `<a href="${lp.links}" target="_blank" class="text-indigo-500 underline">Resource</a>` : ''}</div>
-          <div class="text-xs text-gray-500 mt-2"><strong>Formative:</strong> ${lp.formativeAssessment || ''} | <strong>Summative:</strong> ${lp.summativeAssessment || ''}</div>
-          <div class="text-xs text-gray-500"><strong>Standards:</strong> ${lp.standards || ''}</div>
-        </div>
-      `;
+        `;
+      }
+
+      document.getElementById('grade-select').addEventListener('change', function() {
+        loadJSData(this.value, document.getElementById('term-select').value);
+      });
+      document.getElementById('term-select').addEventListener('change', function() {
+        loadJSData(document.getElementById('grade-select').value, this.value);
+      });
+      document.getElementById('day-select').addEventListener('change', function() {
+        renderCards();
+      });
+      document.getElementById('filter-btn').addEventListener('click', function() {
+        renderCards();
+      });
+
+      // Initial load
+      loadJSData(document.getElementById('grade-select').value, document.getElementById('term-select').value);
     }
 
-    document.getElementById('grade-select').addEventListener('change', function() {
-      loadJSData(this.value, document.getElementById('term-select').value);
-    });
-    document.getElementById('term-select').addEventListener('change', function() {
-      loadJSData(document.getElementById('grade-select').value, this.value);
-    });
-    document.getElementById('day-select').addEventListener('change', function() {
-      renderCards();
-    });
-    document.getElementById('filter-btn').addEventListener('click', function() {
-      renderCards();
-    });
-
-    // Initial load
-    loadJSData(document.getElementById('grade-select').value, document.getElementById('term-select').value);
+    askPassword();
   });
   </script>
 </body>
