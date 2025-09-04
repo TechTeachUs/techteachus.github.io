@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      padding: 2rem 2.5rem;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    input[type="url"] {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid #a5b4fc;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    button {
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #4338ca;
+    }
+    #qr-canvas {
+      margin: 1rem auto;
+      display: block;
+      background: #f1f5f9;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+    }
+    .error {
+      color: #dc2626;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-2xl font-bold mb-4" style="color:#6366f1;">QR Code Generator</h1>
+    <form id="qr-form">
+      <input type="url" id="url-input" placeholder="Enter URL (https://...)" required>
+      <div style="margin: 0.5rem 0;">
+        <label for="color-input" style="font-size:1rem;font-weight:500;color:#6366f1;">QR Color:</label>
+        <input type="color" id="color-input" value="#6366f1" style="margin-left:0.5rem;width:2.5rem;height:2.5rem;border:none;cursor:pointer;">
+      </div>
+      <div id="error-msg" class="error"></div>
+      <button type="submit">Generate QR Code</button>
+    </form>
+    <canvas id="qr-canvas" width="240" height="240" style="display:none;"></canvas>
+    <div id="download-link" style="margin-top:1rem;"></div>
+  </div>
+  <script>
+    const form = document.getElementById('qr-form');
+    const urlInput = document.getElementById('url-input');
+    const colorInput = document.getElementById('color-input');
+    const errorMsg = document.getElementById('error-msg');
+    const qrCanvas = document.getElementById('qr-canvas');
+    const downloadLink = document.getElementById('download-link');
+    const qr = new QRious({
+      element: qrCanvas,
+      size: 240,
+      value: '',
+      foreground: colorInput.value
+    });
+
+    // Update QR color when color picker changes
+    colorInput.addEventListener('input', function() {
+      qr.foreground = colorInput.value;
+      if (qr.value) {
+        qr.value = qr.value; // re-render with new color
+      }
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const url = urlInput.value.trim();
+      if (!/^https?:\/\/.+\..+/.test(url)) {
+        errorMsg.textContent = 'Please enter a valid URL starting with http:// or https://';
+        qrCanvas.style.display = 'none';
+        downloadLink.innerHTML = '';
+        return;
+      }
+      errorMsg.textContent = '';
+      qr.value = url;
+      qr.foreground = colorInput.value;
+      qrCanvas.style.display = 'block';
+      // Download link
+      const dataURL = qrCanvas.toDataURL('image/png');
+      downloadLink.innerHTML = `<a href="${dataURL}" download="qr-code.png" style="color:${colorInput.value};text-decoration:underline;font-weight:600;">Download QR Code</a>`;
+    });
+  </script>
+</body>
+</html>
