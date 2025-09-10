@@ -88,6 +88,29 @@ class CurriculumLoader {
           }
         ]
       },
+      // ...existing curricula objects...
+      {
+        "id": "apcs-curriculum",
+        "grade": "Multiple Grades",
+        "title": "AP Computer Science Principles",
+        "icon": "https://codecombat.com/images/pages/apcsp/APCSP_ProviderBadge_lg.png",
+        "iconAlt": "APCS Logo",
+        "iconError": "https://placehold.co/64x64/6366F1/FFFFFF?text=Error",
+        "carouselId": "apcs-cards",
+        "courseDescription": "This yearlong AP Computer Science Principles course covers digital information, the Internet, app design, programming, data, algorithms, cybersecurity, and global impacts. Students engage in hands-on projects, simulations, and performance tasks to develop computational thinking and problem-solving skills, preparing for the AP exam and real-world technology challenges.",
+        "weeks": [
+          {"weekRange": "1-3", "topic": "Unit 1: Digital Information", "keyConcepts": "Representing info (numbers, text, images, sound), binary, overflow/rounding, lossless/lossy compression, intellectual property", "projects": "Digital Information Dilemmas Project, Circle-Square Pattern exercises, Intro coding tasks (Project STEM: variables, iterative development; GameOn: conditionals & pixel art)"},
+          {"weekRange": "4-5", "topic": "Unit 2: The Internet", "keyConcepts": "Networking, addressing, routers/redundancy, packets, HTTP/DNS, Internet protocols", "projects": "Internet Dilemmas Project, Network simulations (Project STEM: cloud computing, IoT; GameOn: computing systems & networks, algorithm design)"},
+          {"weekRange": "6-7", "topic": "Unit 3: Intro to App Design", "keyConcepts": "App design, programming basics, design mode, debugging, collaboration", "projects": "Designing an App Project (2 parts), Scratch/Block coding (Project STEM), Simulation & Collaboration activities (GameOn)"},
+          {"weekRange": "8-10", "topic": "Unit 4: Variables, Conditionals, Functions", "keyConcepts": "Variables, conditionals, functions, program logic", "projects": "Decision Maker App Project, Functions & Conditionals exercises (Project STEM: selection & iteration; GameOn: strings, debugging, algorithmic logic)"},
+          {"weekRange": "11-12", "topic": "Unit 5: Data", "keyConcepts": "Data exploration & cleaning, filtering, statistical analysis, machine learning, algorithmic bias", "projects": "Tell a Data Story Project, Data analysis labs (Project STEM: Big Data, collection, extraction; GameOn: ethical computing, bias in technology)"},
+          {"weekRange": "13-15", "topic": "Unit 6: Lists, Loops, Traversals", "keyConcepts": "Lists, loops, traversals, iterations, arrays", "projects": "Hackathon Project, Loops & Traversal exercises (Project STEM: processing/sorting lists; GameOn: iterations & collaboration)"},
+          {"weekRange": "16-17", "topic": "Unit 7: Parameters, Return, Libraries", "keyConcepts": "Functions with parameters, return values, reusable libraries", "projects": "Make a Library Project, Python coding exercises (Project STEM: procedural abstraction; GameOn: API, procedures & parameters review)"},
+          {"weekRange": "18", "topic": "Unit 8: Cybersecurity & Global Impacts", "keyConcepts": "Data privacy, security risks, protecting data, cybersecurity, ethics, global impacts", "projects": "Innovation Simulation Project, Security & Privacy Case Studies (Project STEM: ethics of autonomous tech; GameOn: PT review & performance task prep)"},
+          {"weekRange": "19", "topic": "Unit 9: Create Performance Task Prep", "keyConcepts": "Create PT planning, design, implementation, written responses", "projects": "Complete Create PT, Mock written responses, Peer review (Project STEM: PT milestones; GameOn: Create PT review)"},
+          {"weekRange": "20", "topic": "Unit 10: Algorithms", "keyConcepts": "Problem-solving, algorithm design, efficiency, limits, parallel & distributed algorithms", "projects": "Algorithm Analysis Exercises, Assessment, AP Exam Prep (Project STEM: algorithmic efficiency; GameOn: algorithms practice)"}
+        ]
+  },
                 {
                     "id": "unity-curriculum",
                     "grade": "11th Grade",
