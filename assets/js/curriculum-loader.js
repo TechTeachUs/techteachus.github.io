@@ -419,13 +419,20 @@ class CurriculumLoader {
             rightLogo = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg";
             rightAlt = "Unity Logo";
             rightError = "https://placehold.co/48x48/6366F1/FFFFFF?text=U";
-        } else if (curriculum.grade === "11th Grade") {
+    } else if (curriculum.grade === "11th Grade") {
             leftLogo = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg";
             leftAlt = "Unity Logo";
             leftError = "https://placehold.co/48x48/6366F1/FFFFFF?text=U";
             rightLogo = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg";
             rightAlt = "Figma Logo";
             rightError = "https://placehold.co/48x48/6366F1/FFFFFF?text=F";
+    } else if (curriculum.grade === "Multiple Grades" && curriculum.title === "AP Computer Science Principles") {
+      leftLogo = "https://codecombat.com/images/pages/apcsp/APCSP_ProviderBadge_lg.png";
+      leftAlt = "APCSP Logo";
+      leftError = "https://placehold.co/48x48/6366F1/FFFFFF?text=AP";
+      rightLogo = "https://codecombat.com/images/pages/apcsp/APCSP_ProviderBadge_lg.png";
+      rightAlt = "APCSP Logo";
+      rightError = "https://placehold.co/48x48/6366F1/FFFFFF?text=AP";
         } else {
             // 12th Grade - Advanced
             leftLogo = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg";
